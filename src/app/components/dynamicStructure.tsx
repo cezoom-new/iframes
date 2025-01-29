@@ -1,12 +1,12 @@
 import CampaignHeader from "@/app/components/CampaignHeader";
 import { PortableText } from "next-sanity";
 import React, { Children } from "react";
-import CTAButton from "./CTAButton";
-import SecondaryCTABtn from "./SecondaryCTABtn";
 import Image from "next/image";
 import urlBuilder from "@sanity/image-url";
 import { urlFor } from "@/sanity/lib/image";
 import { client } from "@/sanity/lib/client";
+import CTAButton from "@/components/common/CTAButton";
+import SecondaryCTABtn from "@/components/common/SecondaryCTABtn";
 const builder = urlBuilder(client);
 
 const DynamicComponents = ({
@@ -113,7 +113,10 @@ const DynamicComponents = ({
                     {campaign?.templateLogos?.components[0]?.templateLogos?.map(
                       (item: any, i: number) => {
                         return (
-                          <div key={item?.asset?._id} className="w-24 flex items-center">
+                          <div
+                            key={item?.asset?._id}
+                            className="w-24 flex items-center"
+                          >
                             <Image
                               className="w-full max-h-[100px] object-contain"
                               src={item?.asset?.url}
