@@ -6,7 +6,7 @@ import CampaignTextArea from "../../components/CampaignTextArea";
 import CampaignImageArea from "../../components/CampaignImageArea";
 import CookieShow from "@/components/common/cookieShow/cookieShow";
 import { Color } from "./RightImageLeftText";
-import DynamicStructure from "@/components/common/dynamicStructure";
+import DynamicStructure from "@/app/components/dynamicStructure";
 
 export default function LeftImageRightText({
   campaign,
