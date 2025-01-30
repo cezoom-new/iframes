@@ -19,6 +19,8 @@ export default function Section(props: Props) {
         ${props?.bgColor || ''} 
           no-repeat center/cover
         `.trim(),
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat"
       }}
       className={`w-full flex flex-col h-screen justify-center relative ${props.className}`}
     >
