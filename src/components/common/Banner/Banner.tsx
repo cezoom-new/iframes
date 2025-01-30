@@ -103,7 +103,7 @@ export default function Banner({ className, banner }: any) {
           backgroundColor: banner?.backgroundColorGradient,
           padding: banner?.sectionPadding,
         }}
-        className={`text-white px-12 py-8 ${banner?.isFullScreen ? "flex-1 w-5/6 " : "rounded-lg"}`}
+        className={`text-white w-full px-12 py-8 ${banner?.isFullScreen ? "flex-1 w-5/6 " : "rounded-lg"}`}
       >
         <div
           className="container mx-auto"
@@ -121,10 +121,12 @@ export default function Banner({ className, banner }: any) {
                     {item?.badgeTitle}
                   </span>
                 ))}
+                {banner?.eventLocation && 
                 <div className="flex gap-2">
                   <Image src={locIcon} alt="location" width={20} height={20} />
                   <span className="text-xs lg:text-lg font-medium">{banner?.eventLocation}</span>
                 </div>
+                }
               </div>
               <PortableText
                 value={banner?.bannerHeading}
