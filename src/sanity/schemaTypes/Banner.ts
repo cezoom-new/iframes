@@ -97,4 +97,9 @@ export const Banner = defineType({
       group: "template",
     }),
   ],
+  preview: {
+    select: {
+      title: "bannerHeading",
+    },
+  },
 });
