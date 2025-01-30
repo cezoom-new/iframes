@@ -45,7 +45,7 @@ const DynamicComponents = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.h1Color }}
-          className="text-3xl lg:text-5xl font-extrabold py-4 !leading-tight font-manrope"
+          className="text-3xl lg:text-5xl font-extrabold pt-3 !leading-tight font-manrope"
         >
           {children}
         </p>
@@ -63,7 +63,7 @@ const DynamicComponents = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.subtitleText }}
-          className="text-2xl lg:text-3xl font-semibold py-4 !leading-snug"
+          className="text-2xl lg:text-3xl font-semibold pb-3 !leading-snug"
         >
           {children}
         </p>
@@ -76,12 +76,36 @@ const DynamicComponents = ({
     },
   };
 
+  const noteComponents: any = {
+    block: {
+      normal: ({ children }: any) => (
+        <p
+          style={{ color: colors?.subtitleText }}
+          className="text-base font-semibold pb-3 !leading-snug"
+        >
+          {children}
+        </p>
+      ),
+    },
+    marks: {
+      highlight: ({ children }: any) => (
+        <span style={{ color: colors?.highlightColor }}>{children}</span>
+      ),
+      strong: ({ children }: any) => (
+        <span style={{ fontSize:"24px" }}>{children}</span>
+      ),
+      'strike-through': ({ children }: any) => (
+        <s >{children}</s>
+      ),
+    },
+  };
+
   const paragraphComponents: any = {
     block: {
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.paragraphColor }}
-          className="xl:text-lg pb-2 pt-1"
+          className="xl:text-lg pb-3"
         >
           {children}
         </p>
@@ -210,7 +234,7 @@ const DynamicComponents = ({
             return (
               <div
                 key={`buttonComponents-${index}`}
-                className="flex gap-6 mt-6 items-center"
+                className="flex gap-6 py-3 items-center"
               >
                 {component?.ctaBtn?.ctaBtnText && (
                   <CTAButton
@@ -235,12 +259,12 @@ const DynamicComponents = ({
                     }
                   />
                 )}
-                {component?.note && <PortableText value={component?.note} />}
+                {component?.note && <PortableText value={component?.note} components={noteComponents}/>}
               </div>
             );
           case "noteComponent":
             return (
-              <p className="mt-8 text-base" key={`disclaimer-${index}`}>
+              <p className="pt-3 text-base" key={`disclaimer-${index}`}>
                 {component?.disclaimer}
               </p>
             );
