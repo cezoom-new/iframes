@@ -36,11 +36,16 @@ body {
 }
 
 .swiper-wrapper {
-  padding-top: 20px;
+  padding-top: 30px;
 }
 
+.swiper-pagination-bullet {
+  opacity: 0.5 !important; 
+  background-color: #ffffff !important;
+}
 .swiper-pagination-bullet-active {
-  width: 29px !important;
+  width: 19px !important;
   border-radius: 11px !important;
-  background-color: rgb(23, 23, 24) !important;
+  background-color: #ffffff !important;
+  opacity: 1 !important;
 }
