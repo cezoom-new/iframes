@@ -47,15 +47,6 @@
       "subtitleText": ["", "red", "#CCFBF1"]
     },
     {
-      "title": "Electric Blue",
-      "id": "7",
-      "value": "linear-gradient(77deg, #3B82F6 0%, #111827 98.41%)",
-      "ParagraphColor": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
-      "highlightColor": ["", "yellow", "#EAB308", "#FFF", "#93C5FD"],
-      "h1Color": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
-      "subtitleText": ["", "red", "#EAB308", "#FFF", "#93C5FD"]
-    },
-    {
       "title": "Black Fade",
       "id": "8",
       "value": "linear-gradient(90deg,#000,transparent)",
@@ -113,10 +104,10 @@
       "title": "Blue Gradient Dark 2",
       "id": "13",
       "value": "linear-gradient(77deg, #3B82F6 0%, #111827 98.41%)",
-      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
-      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
-      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
-      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+      "ParagraphColor": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "highlightColor": ["", "yellow", "#EAB308", "#FFF", "#93C5FD"],
+      "h1Color": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "subtitleText": ["", "red", "#EAB308", "#FFF", "#93C5FD"]
     },
     {
       "title": "Blue Gradient Light",
