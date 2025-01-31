@@ -18,13 +18,18 @@ export const blockContent = defineType({
       title: 'Block',
       type: 'block',
       styles: [
-        { title: 'Normal', value: 'normal' }
+        { title: 'Normal', value: 'normal' },
       ],
       lists: [{ title: 'Bullet', value: 'bullet' }],
       marks: {
         decorators: [
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' },
+          { title: "Strike", value: "strike-through" },
+          {
+            title: 'Large Text',
+            value: 'large-text'
+          },
           {
             title: 'Highlight',
             value: 'highlight',

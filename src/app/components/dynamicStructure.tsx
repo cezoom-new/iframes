@@ -81,7 +81,7 @@ const DynamicComponents = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.paragraphColor }}
-          className="text-sm font-semibold pb-3 !leading-snug"
+          className="text-sm font-semibold !leading-snug"
         >
           {children}
         </p>
@@ -91,10 +91,10 @@ const DynamicComponents = ({
       highlight: ({ children }: any) => (
         <span style={{ color: colors?.highlightColor }}>{children}</span>
       ),
-      strong: ({ children }: any) => (
-        <span style={{ fontSize: "24px" }}>{children}</span>
+      'large-text': ({ children }: any) => (
+        <span className="text-2xl">{children}</span>
       ),
-      em: ({ children }: any) => (
+      'strike-through': ({ children }: any) => (
         <span className="text-sm ml-1 relative opacity-70">
           {" "}
           <span>{children}</span>
@@ -103,6 +103,7 @@ const DynamicComponents = ({
             style={{ transform: "rotate(-10deg)", transformOrigin: "center" }}
           ></span>
         </span>
+        
       ),
     },
   };
