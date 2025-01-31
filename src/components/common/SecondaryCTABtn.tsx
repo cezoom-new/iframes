@@ -32,7 +32,7 @@ export default function SecondaryCTABtn({
   return (
     <div>
       <button
-        className={`font-semibold text-center flex justify-center border items-center py-3 px-8 rounded-lg ${
+        className={`font-semibold text-center flex justify-center border items-center py-3 pl-3 pr-6 rounded-lg ${
           themeMode !== "darkMode"
             ? "text-black border-black"
             : "text-white border-white"
@@ -53,7 +53,7 @@ export default function SecondaryCTABtn({
         onClick={(e: React.SyntheticEvent) => setIsOpen(!isOpen)}
       >
         {isSecondaryBtn && (
-          <PlayButton className="mr-2" color={themeMode == "darkMode" ? "white" : "black"} />
+          <PlayButton className="mr-2" color={ctaBtnTextColor === "blackMode" ? "#000000"  : "#fff"}/>
         )}
         {ctaText}
       </button>
