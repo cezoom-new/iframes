@@ -98,6 +98,15 @@
         "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
         "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
         "subtitleText":["","red", "#09b895", "#0F172A", "#FFF"]
+      },
+      {
+        "title": "Electric Blue reverse",
+        "id": "12",
+        "value": "linear-gradient(63deg, rgb(15 19 96) 0%, rgb(49 162 226) 100%)",
+        "ParagraphColor": ["", "#fafbfc", "#EAB308","#FFF", "#93C5FD"],
+        "highlightColor": ["", "yellow", "#EAB308","#FFF", "#93C5FD"],
+        "h1Color": ["", "#fafbfc", "#EAB308","#FFF", "#93C5FD"],
+        "subtitleText":["","red", "#EAB308","#FFF", "#93C5FD"]
       }
   ]
 }
