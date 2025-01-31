@@ -7,16 +7,16 @@
       "ParagraphColor": ["", "black", "#0F172A", "#A16207"],
       "highlightColor": ["", "yellow", "#0F172A", "#A16207"],
       "h1Color": ["", "#black", "#0F172A", "#0F172A", "#A16207"],
-      "subtitleText":["","red", "#0F172A", "#A16207"]
+      "subtitleText": ["", "red", "#0F172A", "#A16207"]
     },
     {
       "title": "sky-200",
       "id": "2",
       "value": "#dbeafe",
-      "ParagraphColor": ["","#FFFFFF", "#0c0c0d", "#000000B2","#0F172A"],
-      "highlightColor": ["", "yellow","#FFFFFF", "#2563EB", "#0F172A"],
-      "h1Color": ["", "#FFFFFF","#0c0c0d","#3B82F6","#2563EB", "#0F172A"],
-      "subtitleText":["","red", "#EAB308","#FFF", "#93C5FD", "#3B82F6"]
+      "ParagraphColor": ["", "#FFFFFF", "#0c0c0d", "#000000B2", "#0F172A"],
+      "highlightColor": ["", "yellow", "#FFFFFF", "#2563EB", "#0F172A"],
+      "h1Color": ["", "#FFFFFF", "#0c0c0d", "#3B82F6", "#2563EB", "#0F172A"],
+      "subtitleText": ["", "red", "#EAB308", "#FFF", "#93C5FD", "#3B82F6"]
     },
 
     {
@@ -24,9 +24,9 @@
       "id": "4",
       "value": "#07447d",
       "ParagraphColor": ["", "#fafbfc"],
-      "highlightColor": ["", "yellow","#42BA78"],
+      "highlightColor": ["", "yellow", "#42BA78"],
       "h1Color": ["", "#fafbfc"],
-      "subtitleText":["","red"]
+      "subtitleText": ["", "red"]
     },
     {
       "title": "Aqua Jade",
@@ -34,79 +34,251 @@
       "value": "linear-gradient(63deg, #14B8A6 0%, #111827 100%)",
       "ParagraphColor": ["", "#fafbfc", "#FFF"],
       "highlightColor": ["", "yellow", "#FFF"],
-      "h1Color": ["", "#fafbfc","#FFF"],
-      "subtitleText":["","red", "#FFF"]
+      "h1Color": ["", "#fafbfc", "#FFF"],
+      "subtitleText": ["", "red", "#FFF"]
     },
     {
       "title": "Deep Teal",
       "id": "6",
       "value": "Linear-gradient(63deg, #0F766E 0%, #111827 100%)",
-      "ParagraphColor": ["", "#fafbfc","#CCFBF1"],
-      "highlightColor": ["", "yellow","#CCFBF1"],
-      "h1Color": ["", "#fafbfc","#CCFBF1"],
-      "subtitleText":["","red","#CCFBF1"]
-    },
-    {
-      "title": "Electric Blue",
-      "id": "7",
-      "value": "linear-gradient(77deg, #3B82F6 0%, #111827 98.41%)",
-      "ParagraphColor": ["", "#fafbfc", "#EAB308","#FFF", "#93C5FD"],
-      "highlightColor": ["", "yellow", "#EAB308","#FFF", "#93C5FD"],
-      "h1Color": ["", "#fafbfc", "#EAB308","#FFF", "#93C5FD"],
-      "subtitleText":["","red", "#EAB308","#FFF", "#93C5FD"]
+      "ParagraphColor": ["", "#fafbfc", "#CCFBF1"],
+      "highlightColor": ["", "yellow", "#CCFBF1"],
+      "h1Color": ["", "#fafbfc", "#CCFBF1"],
+      "subtitleText": ["", "red", "#CCFBF1"]
     },
     {
       "title": "Black Fade",
       "id": "8",
       "value": "linear-gradient(90deg,#000,transparent)",
-      "ParagraphColor": ["", "#fafbfc","#FFF"],
+      "ParagraphColor": ["", "#fafbfc", "#FFF"],
       "highlightColor": ["", "yellow", "#FFF"],
       "h1Color": ["", "#fafbfc", "#FFF"],
-      "subtitleText":["","red"]
+      "subtitleText": ["", "red"]
     },
     {
       "title": "Deep Blue",
       "id": "9",
       "value": "linear-gradient(296.33deg,#05406b 1.22%,#2f648a 150.5%)",
-      "ParagraphColor": ["", "#fafbfc","#FFF"],
+      "ParagraphColor": ["", "#fafbfc", "#FFF"],
       "highlightColor": ["", "yellow", "#FFF"],
       "h1Color": ["", "#fafbfc", "#FFF"],
-      "subtitleText":["","red"]
+      "subtitleText": ["", "red"]
     },
     {
-        "title": "Spring Glow",
-        "id": "9",
-        "value": "linear-gradient(77deg, #86EFAC 0%, #F0FDF4 98.41%)",
-        "ParagraphColor": ["", "#fafbfc", "#15803D", "#0F172A"],
-        "highlightColor": ["", "yellow", "#15803D", "#0F172A"],
-        "h1Color": ["", "#fafbfc", "#15803D", "#0F172A"],
-        "subtitleText":["","red", "#15803D", "#0F172A"]
-      },
-      {
-        "title": "light SkyBlue",
-        "id": "10",
-        "value": "linear-gradient(232deg, #00c3b8 -14.28%, #0e3c66 105.73%)",
-        "ParagraphColor": ["", "#fafbfc", "#15803D", "#0F172A", "#FFF"],
-        "highlightColor": ["", "yellow","#fafbfc", "#15803D", "#0F172A", "#FFF"],
-        "h1Color": ["", "#fafbfc", "#15803D", "#0F172A", "#FFF"],
-        "subtitleText":["","15803D", "#15803D","#fafbfc", "#0F172A", "#FFF"]
-      },
-        {"title": "Transparent",
-        "id": "11",
-        "value": "linear-gradient(25deg,#000,transparent)",
-        "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
-        "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
-        "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
-        "subtitleText":["","red", "#09b895", "#0F172A", "#FFF"]
-      },
-      {
-        "title": "Electric Blue reverse",
-        "id": "12",
-        "value": "linear-gradient(63deg, rgb(15 19 96) 0%, rgb(49 162 226) 100%)",
-        "ParagraphColor": ["", "#fafbfc", "#EAB308","#FFF", "#93C5FD"],
-        "highlightColor": ["", "yellow", "#EAB308","#FFF", "#93C5FD"],
-        "h1Color": ["", "#fafbfc", "#EAB308","#FFF", "#93C5FD"],
-        "subtitleText":["","red", "#EAB308","#FFF", "#93C5FD"]
-      }
+      "title": "Spring Glow",
+      "id": "9",
+      "value": "linear-gradient(77deg, #86EFAC 0%, #F0FDF4 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#15803D", "#0F172A"],
+      "highlightColor": ["", "yellow", "#15803D", "#0F172A"],
+      "h1Color": ["", "#fafbfc", "#15803D", "#0F172A"],
+      "subtitleText": ["", "red", "#15803D", "#0F172A"]
+    },
+    {
+      "title": "light SkyBlue",
+      "id": "10",
+      "value": "linear-gradient(232deg, #00c3b8 -14.28%, #0e3c66 105.73%)",
+      "ParagraphColor": ["", "#fafbfc", "#15803D", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#fafbfc", "#15803D", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#15803D", "#0F172A", "#FFF"],
+      "subtitleText": ["", "15803D", "#15803D", "#fafbfc", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Transparent",
+      "id": "11",
+      "value": "linear-gradient(25deg,#000,transparent)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Blue Gradient Dark 1",
+      "id": "12",
+      "value": "linear-gradient(77deg, #1D4ED8 0%, #111827 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Blue Gradient Dark 2",
+      "id": "13",
+      "value": "linear-gradient(77deg, #3B82F6 0%, #111827 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "highlightColor": ["", "yellow", "#EAB308", "#FFF", "#93C5FD"],
+      "h1Color": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "subtitleText": ["", "red", "#EAB308", "#FFF", "#93C5FD"]
+    },
+    {
+      "title": "Blue Gradient Light",
+      "id": "14",
+      "value": "linear-gradient(77deg, #93C5FD 0%, #DBEAFE 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Green Gradient Dark 1",
+      "id": "15",
+      "value": "linear-gradient(77deg, #15803D 0%, #111827 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Green Gradient Dark 2",
+      "id": "16",
+      "value": "linear-gradient(77deg, #22C55E 0%, #111827 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Green Gradient Light",
+      "id": "17",
+      "value": "linear-gradient(77deg, #86EFAC 0%, #F0FDF4 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Teal Gradient Dark 1",
+      "id": "18",
+      "value": "linear-gradient(63deg, #0F766E 0%, #111827 100%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Teal Gradient Dark 2",
+      "id": "19",
+      "value": "linear-gradient(63deg, #14B8A6 0%, #111827 100%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Teal Gradient Light",
+      "id": "20",
+      "value": "linear-gradient(63deg, #5EEAD4 0%, #F0FDFA 100%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Orange Gradient Dark 1",
+      "id": "21",
+      "value": "linear-gradient(77deg, #C2410C 0%, #111827 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Orange Gradient Dark 2",
+      "id": "22",
+      "value": "linear-gradient(77deg, #F97316 0%, #111827 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Orange Gradient Light",
+      "id": "23",
+      "value": "linear-gradient(77deg, #FDBA74 0%, #FFF7ED 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Purple Gradient Dark 1",
+      "id": "24",
+      "value": "linear-gradient(77deg, #7E22CE 0%, #111827 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Purple Gradient Dark 2",
+      "id": "25",
+      "value": "linear-gradient(77deg, #A855F7 0%, #111827 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Purple Gradient Light",
+      "id": "26",
+      "value": "linear-gradient(77deg, #D8B4FE 0%, #FAF5FF 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Yellow Gradient Dark 1",
+      "id": "27",
+      "value": "linear-gradient(77deg, #D8B4FE 0%, #FAF5FF 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Yellow Gradient Dark 2",
+      "id": "28",
+      "value": "linear-gradient(77deg, #EAB308 0%, #111827 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Yellow Gradient Light",
+      "id": "29",
+      "value": "linear-gradient(77deg, #FDE047 0%, #FEFCE8 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Gray Gradient Dark 1",
+      "id": "30",
+      "value": "linear-gradient(77deg, #334155 0%, #111827 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Gray Gradient Dark 2",
+      "id": "31",
+      "value": "linear-gradient(77deg, #CBD5E1 0%, #111827 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Gray Gradient Light",
+      "id": "32",
+      "value": "linear-gradient(77deg, #CBD5E1 0%, #F8FAFC 98.41%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    }
   ]
 }
