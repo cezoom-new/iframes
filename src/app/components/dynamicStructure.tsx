@@ -80,8 +80,8 @@ const DynamicComponents = ({
     block: {
       normal: ({ children }: any) => (
         <p
-          style={{ color: colors?.subtitleText }}
-          className="text-base font-semibold pb-3 !leading-snug"
+          style={{ color: colors?.paragraphColor }}
+          className="text-sm font-semibold pb-3 !leading-snug"
         >
           {children}
         </p>
@@ -92,10 +92,17 @@ const DynamicComponents = ({
         <span style={{ color: colors?.highlightColor }}>{children}</span>
       ),
       strong: ({ children }: any) => (
-        <span style={{ fontSize:"24px" }}>{children}</span>
+        <span style={{ fontSize: "24px" }}>{children}</span>
       ),
-      'strike-through': ({ children }: any) => (
-        <s >{children}</s>
+      em: ({ children }: any) => (
+        <span className="text-sm ml-1 relative opacity-70">
+          {" "}
+          <span>{children}</span>
+          <span
+            className="absolute inset-2 w-full h-0.5 bg-red-500"
+            style={{ transform: "rotate(-10deg)", transformOrigin: "center" }}
+          ></span>
+        </span>
       ),
     },
   };
@@ -259,7 +266,12 @@ const DynamicComponents = ({
                     }
                   />
                 )}
-                {component?.note && <PortableText value={component?.note} components={noteComponents}/>}
+                {component?.note && (
+                  <PortableText
+                    value={component?.note}
+                    components={noteComponents}
+                  />
+                )}
               </div>
             );
           case "noteComponent":
@@ -278,3 +290,6 @@ const DynamicComponents = ({
 };
 
 export default DynamicComponents;
+function rotate(arg0: number, deg: any) {
+  throw new Error("Function not implemented.");
+}
