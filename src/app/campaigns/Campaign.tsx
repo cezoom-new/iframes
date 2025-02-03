@@ -34,8 +34,6 @@ function Campaign({ campaigns, cookies, banner }: { campaigns: any; cookies: any
   if (!(campaignIdx || campaignIdx == 0))
     return <></>;
 
-  console.log(campaigns[campaignIdx]);
-  console.log(campaigns)
   if (campaigns[campaignIdx]?.selectedLayout == "rilt") {
     return (
       <RightImageLeftText 

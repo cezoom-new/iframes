@@ -32,9 +32,7 @@ export function SetAndPublishAction(props) {
 
       // Perform the publish operation
       publish.execute();
-      console.log("Triggering ISR")
       triggerISR(props)
-      console.log("ISR Triggered")
       // Signal that the action is complete
       props.onComplete();
     },

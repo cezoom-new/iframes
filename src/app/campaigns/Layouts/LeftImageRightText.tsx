@@ -19,7 +19,6 @@ export default function LeftImageRightText({
   banner: any;
   colors?: Color;
 }) {
-  console.log(colors);
   return (
     <Section
       bgColor={colors?.selectedBgColor}

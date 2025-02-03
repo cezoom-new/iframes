@@ -38,7 +38,6 @@ const customComponents: any = {
   types: {
     table: (props:any) => {
       const rows = props.value?.rows || [];      
-      console.log('Table Data:', props);  // Log node data for debugging
 
       return (
         <table className="table-auto w-full border-collapse">
