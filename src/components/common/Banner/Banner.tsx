@@ -75,7 +75,7 @@ export default function Banner({ className, banner }: any) {
   };
   return (
     <div
-      className={`flex text-white bottom-0 w-full flex-col xs:flex-row ${banner?.isFullScreen ? "" : "max-w-7xl m-auto rounded-lg"}`}
+      className={`flex text-white bottom-0 w-full flex-col xs:flex-row ${banner?.isFullScreen ? "" : "xl:max-w-7xl xl:m-auto xl:rounded-lg"}`}
       style={{
         backgroundColor: banner?.backgroundColorGradient,
       }}
