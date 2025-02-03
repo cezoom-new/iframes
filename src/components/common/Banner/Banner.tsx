@@ -26,13 +26,14 @@ const headingComponents: any = {
     highlightColor: ({ children, value }: any) => (
       <span style={{ background: value.value }}>{children}</span>
     ),
-  
   },
 };
 const descriptionComponents: any = {
   block: {
     normal: ({ children }: any) => (
-      <p className="pt-4 text-sm md:text-[16px] text-[#FFFFFFBF] font-normal">{children}</p>
+      <p className="text-sm md:text-[16px] text-[#FFFFFFBF] font-normal">
+        {children}
+      </p>
     ),
   },
   marks: {
@@ -42,7 +43,6 @@ const descriptionComponents: any = {
     highlightColor: ({ children, value }: any) => (
       <span style={{ background: value.value }}>{children}</span>
     ),
-  
   },
 };
 export default function Banner({ className, banner }: any) {
@@ -75,17 +75,17 @@ export default function Banner({ className, banner }: any) {
   };
   return (
     <div
-      className={`flex text-white bottom-0 w-full ${banner?.isFullScreen ? "" : "max-w-7xl m-auto rounded-lg"}`}
+      className={`flex text-white bottom-0 w-full flex-col xs:flex-row ${banner?.isFullScreen ? "" : "max-w-7xl m-auto rounded-lg"}`}
       style={{
         backgroundColor: banner?.backgroundColorGradient,
       }}
     >
       {banner?.isFullScreen ? (
-        <div className="w-1/6 bg-slate-800 text-teal-400 font-medium">
+        <div className="w-full xs:w-1/6 bg-slate-800 text-teal-400 font-medium">
           <div className="flex flex-col items-center h-full justify-center w-52 justify-self-center">
             <span className="md:font-medium text-base md:text-lg">
               {getMonths(banner?.eventStartingDate)}
-            </span> 
+            </span>
             <span className="text-2xl lg:text-4xl font-medium">
               {getDate(banner?.eventStartingDate)}-
               {getDate(banner?.eventEndingDate)}
@@ -109,47 +109,80 @@ export default function Banner({ className, banner }: any) {
           className="container mx-auto"
           style={{ padding: banner?.containerPadding }}
         >
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 lg:gap-4">
-            <div>
-              <div className="flex gap-2 items-center mb-4 pb-3 border-b-[0.5px] border-b-slate-700">
-                {banner?.eventLocationBadges?.map((item: any, i: number) => (
-                  <span
-                    key={i}
-                    style={{ backgroundColor: item?.badgeColor }}
-                    className={`text-xs font-semibold p-2 text-center uppercase rounded text-[#CBD5E1]`}
-                  >
-                    {item?.badgeTitle}
-                  </span>
-                ))}
-                {banner?.eventLocation && 
-                <div className="flex gap-2">
-                  <Image src={locIcon} alt="location" width={20} height={20} />
-                  <span className="text-xs lg:text-lg font-medium">{banner?.eventLocation}</span>
-                </div>
-                }
-              </div>
-              <PortableText
-                value={banner?.bannerHeading}
-                components={headingComponents}
-              />
-              <PortableText
-                value={banner?.eventDescription}
-                components={descriptionComponents}
-              />
-            </div>
-
-            <Link href={banner?.ctaBtnTextLink} target="_blank">
-              <button
-                style={{
-                  backgroundColor: banner?.ctaBtnColor,
-                  color: banner?.ctaBtnTextColor,
-                }}
-                className={` font-bold text-sm h-11 w-40 rounded bg-white text-[#1E293B]`}
-              >
-                {" "}
-                {banner?.ctaBtnTextForEvent}
-              </button>
-            </Link>
+          <div className="flex flex-col justify-between items-start gap-2 relative">
+            {banner?.banner?.map((component: any, index: number) => {
+              switch (component._type) {
+                case "bannerHeading":
+                  return (
+                    <PortableText
+                      key={`bannerHeading-${index}`}
+                      value={component?.bannerHeading}
+                      components={headingComponents}
+                    />
+                  );
+                case "eventDescription":
+                  return (
+                    <PortableText
+                      key={`eventDescription-${index}`}
+                      value={component?.eventDescription}
+                      components={descriptionComponents}
+                    />
+                  );
+                case "pillElement":
+                  return (
+                    <div
+                      className="flex gap-2 items-center py-3 "
+                      key={`pillElement-${index}`}
+                    >
+                      {component?.eventLocationBadges?.eventLocationBadges?.map(
+                        (item: any, i: number) => (
+                          <span
+                            key={i}
+                            style={{ backgroundColor: item?.badgeColor }}
+                            className="text-xs font-semibold p-2 text-center uppercase rounded text-[#CBD5E1]"
+                          >
+                            {item?.badgeTitle}
+                          </span>
+                        )
+                      )}
+                      {component?.eventLocation && (
+                        <div className="flex gap-2">
+                          <Image
+                            src={locIcon}
+                            alt="location"
+                            width={20}
+                            height={20}
+                          />
+                          <span className="text-xs lg:text-lg font-medium">
+                            {component?.eventLocation}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  );
+                case "buttonComponents":
+                  return (
+                    <div
+                      className="relative lg:absolute top-1/2 right-0 transform lg:-translate-y-1/2"
+                      key={`buttonComponents-${index}`}
+                    >
+                      <Link href={component?.ctaBtnTextLink} target="_blank">
+                        <button
+                          style={{
+                            backgroundColor: component?.ctaBtnColor,
+                            color: component?.ctaBtnTextColor,
+                          }}
+                          className="font-bold text-sm h-11 w-40 rounded bg-white text-[#1E293B]"
+                        >
+                          {component?.ctaBtnTextForEvent}
+                        </button>
+                      </Link>
+                    </div>
+                  );
+                default:
+                  return <div key={`unknown-${index}`}>Unknown component</div>;
+              }
+            })}
           </div>
         </div>
       </div>

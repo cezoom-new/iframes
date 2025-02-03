@@ -48,8 +48,6 @@ const convertToJson = () => {
       }
     })
     .on("end", () => {
-      // console.log(adjs);
-      // console.dir(results, { depth: 10 });
       console.log(JSON.stringify(results))
     });
 };

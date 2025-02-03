@@ -16,6 +16,9 @@ export default {
         sans: ['Inter', 'sans-serif'],
         manrope: ['Manrope', 'sans-serif'] // Add Manrope as the default sans font
       },
+      screens: {
+        'xs': '450px', // Custom screen size for 400px
+      }
     },
   },
   plugins: [],

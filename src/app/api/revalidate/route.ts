@@ -12,21 +12,15 @@ export async function POST(req: NextRequest) {
 
   try {
     if (res._type == "viewport" && res.dimensionValue) {
-      console.log(`Revalidating viewport ...  /${res.dimensionValue.current}/*`);
       await revalidatePath(`/${res.dimensionValue.current}/[customer]`, "page");
-      console.log(`Revalidated viewport ... /${res.dimensionValue.current}/*`);
     }
 
     if (res.type == "campaign" && res._id) {
-      console.log(`Revalidating campaign ...  /${res._id}/*`);
       await revalidateTag(res._id);
-      console.log(`Revalidated campaign ... /${res._id}/*`);
     }
 
     if (res.type == "banner" && res._id) {
-      console.log(`Revalidating banner ...  /${res._id}/*`);
       await revalidateTag(res._id);
-      console.log(`Revalidated banner ... /${res._id}/*`);
     }
 
     return new Response(JSON.stringify({ message: `` }), { status: 200 });
