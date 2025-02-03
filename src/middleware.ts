@@ -16,7 +16,6 @@ export async function middleware(request: NextRequest) {
     if (product && country && customer)
       url.pathname = `${product}-${country}/${customer}`;
 
-    console.log("[ Middleware " + url.pathname + " ]");
     return NextResponse.rewrite(url);
   } catch (error) {
     console.error("Error in middleware:", error);
