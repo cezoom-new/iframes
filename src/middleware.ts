@@ -11,7 +11,7 @@ export async function middleware(request: NextRequest) {
     const country = splitPath[splitPath.length - 1] ?? "us";
     const product = splitPath[splitPath.length - 2];
 
-    const customer = searchParams.get("domain");
+    const customer = searchParams.get("domain") ?? "unknown";
 
     if (product && country && customer)
       url.pathname = `${product}-${country}/${customer}`;
