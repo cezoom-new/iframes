@@ -9,6 +9,7 @@ import {
 import { getCampaigns } from "@/utils/getCampaigns";
 import Campaign from "../../campaigns/Campaign";
 import customerDB from "../../../../database.json";
+import NotFound from "@/app/not-found";
 
 export const revalidate: number = 86400  //  60 * 60 * 24 equals to one day
 
@@ -38,7 +39,7 @@ export default async function ViewPort({ params }: { params: any }) {
   });
 
   if (!viewportData) {
-    return <>Something went wrong ...</>;
+    return <NotFound/>;
   }
 
   const requiredCampaigns = await getCampaigns(customer, viewportData)
