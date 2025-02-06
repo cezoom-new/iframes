@@ -16,6 +16,7 @@
     "@sanity/structure": "^2.36.2",
     "@sanity/ui": "^2.11.2",
     "@sanity/vision": "^3.64.3",
+    "@supabase/supabase-js": "^2.48.1",
     "csv-parser": "^3.1.0",
     "lodash": "^4.17.21",
     "next": "15.0.3",

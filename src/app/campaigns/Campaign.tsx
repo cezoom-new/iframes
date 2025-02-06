@@ -5,6 +5,7 @@ import RightImageLeftText from "./Layouts/RightImageLeftText";
 import LeftImageRightText from "./Layouts/LeftImageRightText";
 import { useEffect, useState } from "react";
 import { cookies } from "next/headers";
+import { trackPageView } from "../api/supaBase/tracking";
 
 const setCookie = (name: string, value: number) => {
   document.cookie = `${name}=${value}; path=/; SameSite=None; Secure`;
@@ -30,6 +31,12 @@ function Campaign({ campaigns, cookies, banner }: { campaigns: any; cookies: any
     }
     selectedCampaignIdx(parseInt(getCookie("_csi_idx") ?? "0"));
   }, []);
+
+    useEffect(() => {
+
+      trackPageView(location.search.replace('?domain=',""), 'page_load');
+    }, []);
+    
 
   if (!(campaignIdx || campaignIdx == 0))
     return <></>;
