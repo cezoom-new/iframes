@@ -4,7 +4,7 @@ import { ipAddress } from "@vercel/edge";
 import countries from "@/components/countries.json";
 
 export const config = {
-  runtime: "edge", // Ensure it's running on Edge
+  runtime: "edge",
 };
 
 export async function GET(request: NextRequest) {
@@ -14,15 +14,12 @@ export async function GET(request: NextRequest) {
     const ip =
       ipAddress(request) || request.headers.get("x-forwarded-for") || "unknown";
 
-    const country = geo.country || "US";
-    const city = geo.city || "San Francisco";
-    const region = geo.region || "CA";
+    const country = geo.country
+    const city = geo.city 
+    const region = geo.region 
 
     const countryInfo = countries.find((x) => x.cca2 === country);
-    const currencyCode = countryInfo
-      ? Object.keys(countryInfo.currencies)[0]
-      : "USD";
-    // const currency = countryInfo ? countryInfo.currencies[currencyCode] : "Dollar";
+
     const languages = countryInfo
       ? Object.values(countryInfo.languages).join(", ")
       : "English";
