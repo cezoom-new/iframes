@@ -12,7 +12,8 @@ export async function GET(
 ) {
   try {
     const { nextUrl: url, geo }: any = request
-    console.log(geo)
+    console.log("Request Headers:", request);
+    console.log(geolocation(request),"hiii")
   if(!geo ){
   return new Response(JSON.stringify({request}))
   }
