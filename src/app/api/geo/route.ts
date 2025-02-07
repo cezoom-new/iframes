@@ -11,7 +11,6 @@ export const config = {
 
 export async function GET(
  request: NextRequest,
- context: NextFetchEvent,
 ) {
   try {
     const { nextUrl: url, geo }: any = request
