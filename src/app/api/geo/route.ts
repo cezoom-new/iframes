@@ -1,36 +1,14 @@
-import type { NextRequest } from 'next/server';
-// import { geolocation, ipAddress } from "@vercel/edge";
-import { geolocation } from '@vercel/functions';
-import countries from "@/components/countries.json"
+// // app/api/location/route.js
+// import { NextRequest } from 'next/server';
+// // import fetch from 'node-fetch';
 
-export const config = {
- runtime: 'edge',
-};
-
-export async function GET(
- request: NextRequest
-) {
-  try {
-    const { nextUrl: url, geo }: any = request
-    console.log("Request Headers:", request);
-    console.log(geolocation(request),"hiii")
-  if(!geo ){
-  return new Response(JSON.stringify({request}))
-  }
-  const country = geo.country || 'US'
-  const city = geo.city || 'San Francisco'
-  const region = geo.region || 'CA'
-  const ip = geolocation(request) || "unknown";
-
-  const countryInfo:any = countries.find((x) => x.cca2 === country)
-  const currencyCode = Object.keys(countryInfo.currencies)[0]
-  const currency = countryInfo.currencies[currencyCode]
-  const languages = Object.values(countryInfo.languages).join(', ')
-  return new Response(JSON.stringify({
-    country, city, region, currencyCode, currency, languages,ip
-  }));
-  } catch (error) {
-    return new Response(JSON.stringify(error))
-  }
+// export async function GET(request: NextRequest) {
+//   const ip = request.headers.get('x-forwarded-for');
   
-}
+//   const response = await fetch(`https://ipinfo.io/${ip}/json?token=YOUR_API_KEY`);
+//   const location = await response.json();
+
+//   return new Response(JSON.stringify(location), {
+//     headers: { 'Content-Type': 'application/json' }
+//   });
+// }
