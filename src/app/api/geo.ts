@@ -12,7 +12,6 @@ export const config = {
 
 export default function UserGeoLocation(
  request: NextRequest,
- context: NextFetchEvent,
 ) {
   const { nextUrl: url, geo }: any = request
   if(!geo ){
