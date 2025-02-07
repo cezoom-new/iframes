@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
   try {
     const { nextUrl: url, geo }: any = request;
     const ipa = request.headers.get("x-forwarded-for");
-    // console.log(geolocation(request),'geolocation12')
+    console.log(geolocation(request),'geolocation12')
     const geoLocation = geolocation(request);
 
     const country = geo.country || "US";
