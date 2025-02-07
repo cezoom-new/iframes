@@ -1,18 +1,10 @@
+import { geolocation } from "@vercel/edge";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
-import { geolocation } from '@vercel/edge';
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
-  
   try {
-    const { city, country, region, latitude, longitude } = geolocation(request);
-    
-    const location = { city, country, region, latitude, longitude };
-    console.log("res",location)
-    const response = NextResponse.next();
-    response.headers.set('x-location-data', JSON.stringify(location));
-    console.log("res",response)
     const { searchParams, pathname } = request.nextUrl;
 
     const splitPath = pathname.trim().split("/");
@@ -22,10 +14,21 @@ export async function middleware(request: NextRequest) {
 
     const customer = searchParams.get("domain") ?? "unknown";
 
-    if (product && countrys && customer)
+    if (product && countrys && customer) {
       url.pathname = `${product}-${countrys}/${customer}`;
+    }
 
-    return NextResponse.rewrite(url);
+    // Get geolocation data
+    const { city, country, region, latitude, longitude } = geolocation(request);
+
+    // Store the location data in a cookie or pass it to the response headers
+    const location = { city, country, region, latitude, longitude };
+  
+    // Create a response with the new URL and include the location data in the headers
+    const response = NextResponse.rewrite(url);
+    response.headers.set('x-location-data', JSON.stringify(location));
+   
+    return response;  // Return the rewritten response with location data in headers
   } catch (error) {
     console.error("Error in middleware:", error);
     return NextResponse.error();
