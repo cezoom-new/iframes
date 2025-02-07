@@ -32,6 +32,9 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.48.1
         version: 2.48.1
+      '@vercel/edge':
+        specifier: ^1.2.1
+        version: 1.2.1
       csv-parser:
         specifier: ^3.1.0
         version: 3.1.0
@@ -2477,6 +2480,9 @@ packages:
 
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
+
+  '@vercel/edge@1.2.1':
+    resolution: {integrity: sha512-1++yncEyIAi68D3UEOlytYb1IUcIulMWdoSzX2h9LuSeeyR7JtaIgR8DcTQ6+DmYOQn+5MCh6LY+UmK6QBByNA==}
 
   '@vercel/stega@0.1.2':
     resolution: {integrity: sha512-P7mafQXjkrsoyTRppnt0N21udKS9wUmLXHRyP9saLXLHw32j/FgUJ3FscSWgvSqRs4cj7wKZtwqJEvWJ2jbGmA==}
@@ -9208,6 +9214,8 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   '@ungap/structured-clone@1.2.0': {}
+
+  '@vercel/edge@1.2.1': {}
 
   '@vercel/stega@0.1.2': {}
 

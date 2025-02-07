@@ -3,16 +3,18 @@ import { createClient } from '@supabase/supabase-js';
 
 // Initialize Supabase client
 const supabaseUrl = 'https://wawdpbtjltsmfwtuhada.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indhd2RwYnRqbHRzbWZ3dHVoYWRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4NDQzODcsImV4cCI6MjA1NDQyMDM4N30.w3I9CojH947XCtOLX5o_SWSn-m-MRctDX7_rR0EtBdM'; // Replace with your Supabase key
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indhd2RwYnRqbHRzbWZ3dHVoYWRhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg4NDQzODcsImV4cCI6MjA1NDQyMDM4N30.w3I9CojH947XCtOLX5o_SWSn-m-MRctDX7_rR0EtBdM'; 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-export const trackPageView = async (url: string, eventType: string) => {
-  console.log(`Tracking ${eventType} for: ${url}`);
+export const trackPageView = async (loc: any, eventType: string) => {
+  const url = loc.href;
+  const customerValue = loc.search.replace("?domain=", "")
+  // console.log(`Tracking ${eventType} for: ${url} ${customerValue}`);
 
   try {
     const { data, error } = await supabase
       .from('page_views')
-      .insert([{ url, event_type: eventType }]);
+      .insert([{ url, event_type: eventType, customer: customerValue}]);
 
     if (error) {
       console.error('Error inserting page view:', error.message);

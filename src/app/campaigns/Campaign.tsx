@@ -4,7 +4,6 @@ import CenterText from "./Layouts/CenterText";
 import RightImageLeftText from "./Layouts/RightImageLeftText";
 import LeftImageRightText from "./Layouts/LeftImageRightText";
 import { useEffect, useState } from "react";
-import { cookies } from "next/headers";
 import { trackPageView } from "../api/supaBase/tracking";
 
 const setCookie = (name: string, value: number) => {
@@ -33,8 +32,8 @@ function Campaign({ campaigns, cookies, banner }: { campaigns: any; cookies: any
   }, []);
 
     useEffect(() => {
-
-      trackPageView(location.search.replace('?domain=',""), 'page_load');
+      // console.log(window.location,'yyyyyy')
+      trackPageView(window.location, 'page_load');
     }, []);
     
 

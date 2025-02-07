@@ -17,6 +17,7 @@
     "@sanity/ui": "^2.11.2",
     "@sanity/vision": "^3.64.3",
     "@supabase/supabase-js": "^2.48.1",
+    "@vercel/edge": "^1.2.1",
     "csv-parser": "^3.1.0",
     "lodash": "^4.17.21",
     "next": "15.0.3",
