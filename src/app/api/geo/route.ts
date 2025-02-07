@@ -1,19 +1,23 @@
+
 import { NextResponse } from 'next/server';
 import type { NextFetchEvent, NextRequest } from 'next/server';
 import { geolocation, ipAddress } from "@vercel/edge";
 import countries from "@/components/countries.json"
+import { NextURL } from 'next/dist/server/web/next-url';
 
 export const config = {
  runtime: 'edge',
 };
 
-export default function UserGeoLocation(
+export async function GET(
  request: NextRequest,
  context: NextFetchEvent,
 ) {
-  const { nextUrl: url, geo }: any = request
+  try {
+    const { nextUrl: url, geo }: any = request
+    console.log(geo)
   if(!geo ){
-    return
+  return new Response(JSON.stringify({request}))
   }
   const country = geo.country || 'US'
   const city = geo.city || 'San Francisco'
@@ -24,7 +28,11 @@ export default function UserGeoLocation(
   const currencyCode = Object.keys(countryInfo.currencies)[0]
   const currency = countryInfo.currencies[currencyCode]
   const languages = Object.values(countryInfo.languages).join(', ')
-  return NextResponse.json({
+  return new Response(JSON.stringify({
     country, city, region, currencyCode, currency, languages,ip
-  });
+  }));
+  } catch (error) {
+    return new Response(JSON.stringify(error))
+  }
+  
 }
