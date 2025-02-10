@@ -8,13 +8,14 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export const trackPageView = async (
   loc: any,
   location: any,
+  locationIpAddress: string,
   browseDatas: any,
   eventType: string
 ) => {
   const url = loc;
   const customerValue = loc.search.replace("?domain=", "");
 
-  console.log("location",location);
+  console.log("location",location,locationIpAddress);
 
   try {
     const { data, error } = await supabase
@@ -28,7 +29,8 @@ export const trackPageView = async (
           browser: browseDatas[0].browser,
           os: browseDatas[0].os,
           entrypath: browseDatas[1].entryPath,
-          referrer_url: browseDatas[2].referrer
+          referrer_url: browseDatas[2].referrer,
+          ip_address: locationIpAddress
         },
       ]);
 

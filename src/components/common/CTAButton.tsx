@@ -20,6 +20,7 @@ export default function CTAButton({
 }: CtaBtnProps) {
 
    const [location, setLocation] = useState(null);
+   const [locationIpAddress, setLocationIpAddress] = useState<any>("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -30,6 +31,7 @@ export default function CTAButton({
           const response = await fetch('/');
           const locationData = response.headers.get('x-location-data');
           const locationIp = response.headers.get('x-your-ip-address');
+          setLocationIpAddress(locationIp)
   console.log("loc",locationIp)
           if (locationData) {
             setLocation(JSON.parse(locationData));
@@ -68,7 +70,7 @@ export default function CTAButton({
                 ? "#ffffff"
                 : "",
         }}
-        onClick={() => trackPageView(window.location, location, browseDatas, 'click')}
+        onClick={() => trackPageView(window.location, location, locationIpAddress, browseDatas, 'click')}
       >
         {ctaText}
       </button>
