@@ -16,8 +16,6 @@ export const trackPageView = async (
   const url = loc;
   const customerValue = loc.search.replace("?domain=", "");
 
-  console.log("location",locations);
-
   try {
     const { data, error } = await supabase
       .from("page_views")
