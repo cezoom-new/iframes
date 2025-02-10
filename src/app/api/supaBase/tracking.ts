@@ -18,7 +18,7 @@ export const trackPageView = async (
 
   try {
     const { data, error } = await supabase
-      .from("page_views")
+      .from("event_rows")
       .insert([
         {
           current_path: url.href,
@@ -27,12 +27,12 @@ export const trackPageView = async (
           domain: url.origin,
           browser: browseDatas[0].browser,
           os: browseDatas[0].os,
+          platform: browseDatas[0].platform,
           referrer_url: browseDatas[2].referrer,
           ip_address: locationIpAddress,
           location: locations?.country,
           destination_url: ctaBtnLink,
           practice_name: customerValue,
-          platform: browseDatas[3].platform
         },
       ]);
 
