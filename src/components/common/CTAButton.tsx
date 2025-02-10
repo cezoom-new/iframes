@@ -1,5 +1,7 @@
+import { trackPageView } from "@/app/api/supaBase/tracking";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { GetUserDevice } from "./BrowseData/browseData";
 
 export interface CtaBtnProps {
   ctaText?: string;
@@ -16,6 +18,36 @@ export default function CTAButton({
   ctaBtnTextColor,
   ctaBtnLink
 }: CtaBtnProps) {
+
+   const [locations, setLocation] = useState(null);
+   const [locationIpAddress, setLocationIpAddress] = useState<any>("");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    const browseDatas =new GetUserDevice().getTrackData()
+   useEffect(() => {
+      const fetchLocation = async () => {
+        try {
+          const response = await fetch('/');
+          const locationData = response.headers.get('x-location-data');
+          const locationIp = response.headers.get('x-your-ip-address');
+          setLocationIpAddress(locationIp)
+          if (locationData) {
+            setLocation(JSON.parse(locationData));
+          } else {
+            setError("Location data not found");
+          }
+        } catch (err) {
+          setError('Failed to fetch location');
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchLocation();
+    }, []);
+  
+  
   return (
     <div>
       <Link href={ctaBtnLink ? ctaBtnLink : ""}  target="_blank" passHref>
@@ -37,6 +69,7 @@ export default function CTAButton({
                 ? "#ffffff"
                 : "",
         }}
+        onClick={() => trackPageView(window.location, locations, locationIpAddress, browseDatas, ctaBtnLink, 'click')}
       >
         {ctaText}
       </button>
