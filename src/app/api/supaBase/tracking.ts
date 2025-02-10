@@ -1,7 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-// packages/tracking/src/tracking.ts
 import { createClient } from "@supabase/supabase-js";
-import { useEffect, useState } from "react";
 
 // Initialize Supabase client
 const supabaseUrl: string = process.env.SUPABASE_URL || "";

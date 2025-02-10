@@ -29,7 +29,8 @@ export default function CTAButton({
         try {
           const response = await fetch('/');
           const locationData = response.headers.get('x-location-data');
-  console.log("loc",locationData)
+          const locationIp = response.headers.get('x-your-ip-address');
+  console.log("loc",locationIp)
           if (locationData) {
             setLocation(JSON.parse(locationData));
           } else {
