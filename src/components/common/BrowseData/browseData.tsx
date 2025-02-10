@@ -48,6 +48,12 @@ export class GetUserDevice {
     }
   
     public getTrackData() {
-      return [this.getBrowserDetails(), this.entryPath, this.referrerUrl];
+        const { os } = this.getBrowserDetails(); // Get the platform (os) directly from getBrowserDetails
+        return [
+          this.getBrowserDetails(), 
+          this.entryPath, 
+          this.referrerUrl, 
+          { platform: os } // Include platform in the data
+        ];
+      }
     }
-  }

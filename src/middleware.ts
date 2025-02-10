@@ -21,7 +21,6 @@ export async function middleware(request: NextRequest) {
     // Get geolocation data
     const { city, country, region, latitude, longitude } = geolocation(request);
     const ip = ipAddress(request)
-console.log("ipo",ip)
     // Store the location data in a cookie or pass it to the response headers
     const location = { city, country, region, latitude, longitude };
   
