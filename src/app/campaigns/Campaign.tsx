@@ -32,23 +32,19 @@ function Campaign({ campaigns, cookies, banner }: { campaigns: any; cookies: any
     selectedCampaignIdx(parseInt(getCookie("_csi_idx") ?? "0"));
   }, []);
 
-    useEffect(() => {
-      const data =new GetUserDevice().getTrackData()
-      trackPageView(window.location, 'page_load');
-    }, []);
-    
-
   if (!(campaignIdx || campaignIdx == 0))
     return <></>;
 
   if (campaigns[campaignIdx]?.selectedLayout == "rilt") {
     return (
+      <>
       <RightImageLeftText 
       campaign={campaigns[campaignIdx]}
        banner={banner} 
        cookies={cookies}
        colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? 'defaultColor'}
        />
+      </>
     );
   }
   if (campaigns[campaignIdx]?.selectedLayout == "lirt") {
