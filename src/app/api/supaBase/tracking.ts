@@ -17,7 +17,7 @@ export const trackPageView = async (
   const url = loc;
   const customerValue = loc.search.replace("?domain=", "");
   const regionNamesInEnglish = new Intl.DisplayNames(['en'], { type: 'region' });
-  const countryName =regionNamesInEnglish.of(locations?.country);
+  const countryName = regionNamesInEnglish?.of(locations?.country || "US");
 
   try {
     const { data, error } = await supabase
