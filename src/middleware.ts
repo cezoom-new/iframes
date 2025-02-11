@@ -26,27 +26,29 @@ export async function middleware(request: NextRequest) {
       : null;
 
     // If location already exists, avoid fetching geolocation again
+    const response = NextResponse.rewrite(url);
     if (locationValue && Object.keys(locationValue).length > 0) {
-      return NextResponse.next();
+      response.headers.set("x-location-data", JSON.stringify(locationValue));
+    } else {
+      const geoData = geolocation(request);
+      if (!geoData) return NextResponse.next(); // Avoid breaking the request if geolocation fails
+
+      const { city, country, region, latitude, longitude } = geoData;
+      locationValue = { city, country, region, latitude, longitude };
+
+      // Store location in cookies for 30 days
+      cookieStore.set("_loc", JSON.stringify(locationValue), {
+        sameSite: "none",
+        secure: true,
+        maxAge: 60 * 60 * 24 * 30, // 30 days
+      });
+      response.headers.set("x-location-data", JSON.stringify(locationValue));
     }
 
     // Fetch geolocation data from Vercel Edge
-    const geoData = geolocation(request);
-    if (!geoData) return NextResponse.next(); // Avoid breaking the request if geolocation fails
-
-    const { city, country, region, latitude, longitude } = geoData;
-    locationValue = { city, country, region, latitude, longitude };
-
-    // Store location in cookies for 30 days
-    cookieStore.set("_loc", JSON.stringify(locationValue), {
-      sameSite: "none",
-      secure: true,
-      maxAge: 60 * 60 * 24 * 30, // 30 days
-    });
 
     // Rewrite the response with location data
-    const response = NextResponse.rewrite(url);
-    response.headers.set("x-location-data", JSON.stringify(locationValue));
+
     response.headers.set("x-your-ip-address", JSON.stringify(ip));
 
     return response;
