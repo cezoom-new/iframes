@@ -1,8 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 
 // Initialize Supabase client
-const supabaseUrl: string = process.env.SUPABASE_URL || "";
-const supabaseKey: string = process.env.SUPABASE_ANON_KEY || "";
+const supabaseUrl: string = process.env.SUPABASE_PROJECT_URL || "";
+const supabaseKey: string = process.env.SUPABASE_ANON_PUBLIC || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const trackPageView = async (
