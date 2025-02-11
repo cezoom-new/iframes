@@ -15,7 +15,7 @@ export default function Anchor(button: ButtonProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const browseDatas = new GetUserDevice().getTrackData();
+  const getUserDetails = new GetUserDevice().getTrackData();
   useEffect(() => {
     const fetchLocation = async () => {
       try {
@@ -50,7 +50,7 @@ export default function Anchor(button: ButtonProps) {
           window.location,
           locations,
           locationIpAddress,
-          browseDatas,
+          getUserDetails,
           button?.ctaBtnLink,
           "click"
         );

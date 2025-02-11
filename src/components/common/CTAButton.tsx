@@ -1,7 +1,5 @@
-import { trackPageView } from "@/app/api/supaBase/tracking";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { GetUserDevice } from "./BrowseData/browseData";
 import Anchor from "./anchor/anchor";
 
 export interface CtaBtnProps {
@@ -25,7 +23,6 @@ export default function CTAButton({
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    const browseDatas =new GetUserDevice().getTrackData()
    useEffect(() => {
       const fetchLocation = async () => {
         try {
