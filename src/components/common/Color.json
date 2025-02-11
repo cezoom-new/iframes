@@ -279,6 +279,15 @@
       "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
       "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
       "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Blue Gradient Light 3",
+      "id": "14",
+      "value": "linear-gradient(300deg, #FFF -25.36%, rgba(87, 111, 174, 0.80) 54.67%, #254188 99.94%)",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
     }
   ]
 }
