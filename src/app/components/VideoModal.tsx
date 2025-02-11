@@ -1,6 +1,7 @@
 import React from "react";
 import { CloseIcon } from "@sanity/icons";
 import { VideoModal } from "@/components/common/SecondaryCTABtn";
+import Anchor from "@/components/common/anchor/anchor";
 
 type VideoPlatform = "vimeo" | "vidyard" | "youtube";
 
@@ -85,13 +86,13 @@ export default function VideoRender({
           }`}
         >
           {isPopup && onClose && (
-            <button
+            <Anchor
               className="absolute -top-10 -right-[5px] md:-right-5  hover:text-gray-800 transition-colors duration-200 p-1 rounded-full"
-              onClick={onClose}
+              onHandleClick={onClose}
               aria-label="Close video"
             >
               <CloseIcon color="white" height={30} />
-            </button>
+            </Anchor>
           )}
 
           {Array.isArray(videoData) ? (
