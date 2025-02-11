@@ -19,8 +19,8 @@ const nextConfig: NextConfig = {
     },
   },
   env: {
-    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
-    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_ANON_PUBLIC: process.env.SUPABASE_ANON_PUBLIC,
+    SUPABASE_PROJECT_URL: process.env.SUPABASE_PROJECT_URL,
   },
 };
 
