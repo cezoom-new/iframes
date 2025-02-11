@@ -1,21 +1,22 @@
 "use client";
 import PlayButton from "@/app/components/PlayButton";
-import  VideoRender  from "@/app/components/VideoModal";
+import VideoRender from "@/app/components/VideoModal";
 import React, { useState } from "react";
+import Anchor from "./anchor/anchor";
 
 export interface VideoModal {
   videoId: string;
   videoPlatform: string;
   videoTitle: string;
-  title:string
+  title: string;
 }
 export interface CtaBtnProps {
   ctaText?: string;
   themeMode?: string;
   isSecondaryBtn?: boolean;
-  videoDetails?:VideoModal ;
+  videoDetails?: VideoModal;
   ctaBtnTextColor?: string;
-  ctaBtnColor?:string;
+  ctaBtnColor?: string;
 }
 
 export default function SecondaryCTABtn({
@@ -24,39 +25,35 @@ export default function SecondaryCTABtn({
   isSecondaryBtn = true,
   videoDetails,
   ctaBtnTextColor,
-  ctaBtnColor
+  ctaBtnColor,
 }: CtaBtnProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
 
   return (
     <div>
-      <button
+      <Anchor
         className={`font-semibold text-center flex justify-center border items-center py-3 pl-3 pr-6 rounded-lg ${
           themeMode !== "darkMode"
             ? "text-black border-black"
             : "text-white border-white"
         } `}
         style={{
-          backgroundColor: ctaBtnColor
-            ? ctaBtnColor
-           : "",
-          color:
-            ctaBtnTextColor === "blackMode"
-              ? "#000000"
-              : "#fff",
+          backgroundColor: ctaBtnColor ? ctaBtnColor : "",
+          color: ctaBtnTextColor === "blackMode" ? "#000000" : "#fff",
 
-          borderColor:ctaBtnColor
-          ? ctaBtnColor
-         : "",
+          borderColor: ctaBtnColor ? ctaBtnColor : "",
         }}
-        onClick={(e: React.SyntheticEvent) => setIsOpen(!isOpen)}
+        onHandleClick={(e: React.SyntheticEvent) => setIsOpen(!isOpen)}
       >
         {isSecondaryBtn && (
-          <PlayButton className="mr-2" color={ctaBtnTextColor === "blackMode" ? "#000000"  : "#fff"}/>
+          <PlayButton
+            className="mr-2"
+            color={ctaBtnTextColor === "blackMode" ? "#000000" : "#fff"}
+          />
         )}
         {ctaText}
-      </button>
+      </Anchor>
       {isOpen && (
         <VideoRender
           isPopup={true}

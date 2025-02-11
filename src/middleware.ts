@@ -4,6 +4,7 @@ import { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
+  console.log("url", request)
   try {
     const { searchParams, pathname } = request.nextUrl;
 

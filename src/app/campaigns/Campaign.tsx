@@ -5,6 +5,7 @@ import RightImageLeftText from "./Layouts/RightImageLeftText";
 import LeftImageRightText from "./Layouts/LeftImageRightText";
 import { useEffect, useState } from "react";
 import { trackPageView } from "../api/supaBase/tracking";
+import { GetUserDevice } from "../Tracker/getUserDeviceDetails.ts/getUserDevice";
 
 const setCookie = (name: string, value: number) => {
   document.cookie = `${name}=${value}; path=/; SameSite=None; Secure`;

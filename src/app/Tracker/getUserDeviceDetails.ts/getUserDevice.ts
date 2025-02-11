@@ -12,16 +12,14 @@ export class GetUserDevice {
     }
   
     private getBrowserDetails() {
-      if (typeof navigator === "undefined") return { browser: "", os: "", platform: "" };
+      if (typeof navigator === "undefined") return { browser: "", os: "" };
   
       const userAgent = navigator.userAgent;
       const platform = navigator.platform;
   
       let browserName = "";
       let osName = "";
-      let platformType = "";
   
-      // Detecting browser
       if (userAgent.includes("Chrome") && !userAgent.includes("Edg/")) {
         browserName = "Chrome";
       } else if (userAgent.includes("Firefox")) {
@@ -34,7 +32,6 @@ export class GetUserDevice {
         browserName = "Internet Explorer";
       }
   
-      // Detecting OS
       if (platform.includes("Win")) {
         osName = "Windows";
       } else if (platform.includes("Mac")) {
@@ -47,27 +44,11 @@ export class GetUserDevice {
         osName = "Android";
       }
   
-      // Detecting platform (Mobile, Tablet, Desktop, or Bot)
-      if (/mobile/i.test(userAgent)) {
-        platformType = "Mobile";
-      } else if (/tablet/i.test(userAgent) || (/iPad/i.test(userAgent) && !/Mobile/i.test(userAgent))) {
-        platformType = "Tablet";
-      } else if (/bot|crawl|spider/i.test(userAgent)) {
-        platformType = "Bot";
-      } else {
-        platformType = "Desktop"; // Default to Desktop if it's neither Mobile, Tablet, nor Bot
-      }
-  
-      return { browser: browserName, os: osName, platform: platformType };
+      return { browser: browserName, os: osName };
     }
   
     public getTrackData() {
-      const { browser, os, platform } = this.getBrowserDetails(); // Get all details
-      return [
-        { browser, os, platform },  // Browser, OS, and platform (Mobile/Desktop/Tablet/Bot)
-        this.entryPath,
-        this.referrerUrl,
-      ];
+      return [this.getBrowserDetails(), this.entryPath, this.referrerUrl];
     }
   }
   

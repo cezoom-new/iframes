@@ -2,6 +2,7 @@ import { trackPageView } from "@/app/api/supaBase/tracking";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { GetUserDevice } from "./BrowseData/browseData";
+import Anchor from "./anchor/anchor";
 
 export interface CtaBtnProps {
   ctaText?: string;
@@ -51,7 +52,7 @@ export default function CTAButton({
   return (
     <div>
       <Link href={ctaBtnLink ? ctaBtnLink : ""}  target="_blank" passHref>
-      <button
+      <Anchor
         className={`font-semibold text-center py-3 px-8 rounded-lg whitespace-nowrap
             ${
           themeMode === "darkMode" ? "text-black " : "text-white"
@@ -69,10 +70,10 @@ export default function CTAButton({
                 ? "#ffffff"
                 : "",
         }}
-        onClick={() => trackPageView(window.location, locations, locationIpAddress, browseDatas, ctaBtnLink, 'click')}
+        ctaBtnLink={ctaBtnLink}
       >
         {ctaText}
-      </button>
+      </Anchor>
       </Link>
     </div>
   );
