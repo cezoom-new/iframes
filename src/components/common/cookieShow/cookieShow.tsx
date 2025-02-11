@@ -98,6 +98,7 @@ export default function CookieShow({ cookie, campaign }: any) {
                 ctaText={cookie?.ctaBtn?.ctaBtnText}
                 cookieMode={true}
                 toggleDrawer={closeDrawer}
+                campaignName={campaign?.name}
               />
             )}
             {cookie?.secondaryCtaBtn?.secondaryBtnText && (
@@ -105,6 +106,7 @@ export default function CookieShow({ cookie, campaign }: any) {
                 ctaText={cookie?.secondaryCtaBtn?.secondaryBtnText}
                 cookieMode={false}
                 toggleDrawer={toggleDrawer}
+                campaignName={campaign?.name}
               />
             )}
           </div>

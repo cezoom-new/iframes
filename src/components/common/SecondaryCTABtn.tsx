@@ -17,8 +17,8 @@ export interface CtaBtnProps {
   videoDetails?: VideoModal;
   ctaBtnTextColor?: string;
   ctaBtnColor?: string;
+  campaignName?:string;
 }
-
 export default function SecondaryCTABtn({
   ctaText,
   themeMode,
@@ -26,6 +26,7 @@ export default function SecondaryCTABtn({
   videoDetails,
   ctaBtnTextColor,
   ctaBtnColor,
+  campaignName
 }: CtaBtnProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
@@ -45,6 +46,7 @@ export default function SecondaryCTABtn({
           borderColor: ctaBtnColor ? ctaBtnColor : "",
         }}
         onHandleClick={(e: React.SyntheticEvent) => setIsOpen(!isOpen)}
+        campaignName={campaignName}
       >
         {isSecondaryBtn && (
           <PlayButton
@@ -62,6 +64,7 @@ export default function SecondaryCTABtn({
           onClose={() => setIsOpen(false)}
           openForm={() => setOpenForm(true)}
           hasDemoBanner={true}
+          campaignName={campaignName}
         />
       )}
     </div>

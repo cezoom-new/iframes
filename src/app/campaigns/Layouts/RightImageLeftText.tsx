@@ -2,7 +2,6 @@ import Banner from "@/components/common/Banner/Banner";
 import Container from "@/components/common/structure/Container";
 import Section from "@/components/common/structure/Section";
 import React from "react";
-import CampaignTextArea from "../../components/CampaignTextArea";
 import CampaignImageArea from "../../components/CampaignImageArea";
 import CookieShow from "@/components/common/cookieShow/cookieShow";
 import DynamicStructure from "@/app/components/dynamicStructure";
@@ -26,6 +25,8 @@ export default function RightImageLeftText({
   banner?: any;
   colors?:Color
 }) {
+  console.log("hhij",campaign)
+
   return (
     <Section
       bgColor={colors?.selectedBgColor}
@@ -48,7 +49,7 @@ export default function RightImageLeftText({
           />
         </div>
       </Container>
-      {banner && <Banner className="" banner={banner} />}
+      {banner && <Banner className="" banner={banner} campaignName={campaign?.name}/>}
     </Section>
   );
 }

@@ -11,6 +11,7 @@ export const trackPageView = async (
   locationIpAddress?: string,
   browseDatas?: any,
   ctaBtnLink?: string,
+  campaignName?:string,
   eventType?: string
 ) => {
   const url = loc;
@@ -23,7 +24,7 @@ export const trackPageView = async (
         {
           current_path: url.href,
           e_type: eventType,
-          // utm_campaign: customerValue,
+          utm_campaign: campaignName,
           domain: url.origin,
           browser: browseDatas[0].browser,
           os: browseDatas[0].os,
