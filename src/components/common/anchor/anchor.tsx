@@ -8,6 +8,7 @@ type ButtonProps = {
   children: ReactNode;
   ctaBtnLink?: string;
   onHandleClick?: any;
+  campaignName?: string;
 };
 export default function Anchor(button: ButtonProps) {
   const [locations, setLocation] = useState(null);
@@ -52,6 +53,7 @@ export default function Anchor(button: ButtonProps) {
           locationIpAddress,
           browseDatas,
           button?.ctaBtnLink,
+          button?.campaignName,
           "click"
         );
       }}

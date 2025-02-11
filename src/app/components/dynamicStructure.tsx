@@ -17,29 +17,6 @@ const DynamicComponents = ({
 }: any) => {
   const urlBuilder: any = (source: any) => urlBuilder(client).image(source);
 
-  // const ImageComponent = ({ value, isInline }: any) => {
-  //   if (!value?.asset?._ref) return null;
-
-  //   const { width, height } = value.asset.metadata?.dimensions || { width: 800, height: 600 };
-
-  //   return (
-  //     <img
-  //       src={builder.image(value).fit('max').auto('format').url()}
-  //       alt={value.alt || 'Sanity Image'}
-  //       // className="w-24 h-6"
-  //       className="h-[92px] pt-[20px] pb-[19px] mx-2"
-  //       loading="eager"
-  //       style={{
-
-  //         aspectRatio: width / height,
-  //         width:value?.width,
-  //         height:value?.height
-
-  //       }}
-  //     />
-  //   );
-  // };
-
   const titleComponent: any = {
     block: {
       normal: ({ children }: any) => (
@@ -251,6 +228,7 @@ const DynamicComponents = ({
                     themeMode={campaign?.themeMode}
                     ctaBtnTextColor={component?.ctaBtn?.ctaBtnTextColor}
                     ctaBtnLink={component?.ctaBtn?.ctaBtnLink}
+                    campaignName={campaign?.name}
                   />
                 )}
                 {component?.secondaryBtnComponent?.secondaryBtnText && (
@@ -265,6 +243,7 @@ const DynamicComponents = ({
                     videoDetails={
                       component?.secondaryBtnComponent?.videoDetails
                     }
+                    campaignName={campaign?.name}
                   />
                 )}
                 {component?.note && (

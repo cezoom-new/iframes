@@ -46,7 +46,7 @@ const descriptionComponents: any = {
     ),
   },
 };
-export default function Banner({ className, banner }: any) {
+export default function Banner({ className, banner, campaignName }: any) {
   const getMonths = (date: string) => {
     const months = [
       "Jan",
@@ -174,6 +174,7 @@ export default function Banner({ className, banner }: any) {
                             color: component?.ctaBtnTextColor,
                           }}
                           className="font-bold text-sm h-11 w-40 rounded bg-white text-[#1E293B]"
+                          campaignName={campaignName}
                         >
                           {component?.ctaBtnTextForEvent}
                         </Anchor>
