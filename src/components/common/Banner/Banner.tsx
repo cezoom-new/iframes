@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import locIcon from "../../../../public/Frame.svg";
 import { urlFor } from "@/sanity/lib/image";
+import Anchor from "../anchor/anchor";
 
 export interface IBannerInterface {
   className: string;
@@ -167,7 +168,7 @@ export default function Banner({ className, banner }: any) {
                       key={`buttonComponents-${index}`}
                     >
                       <Link href={component?.ctaBtnTextLink} target="_blank">
-                        <button
+                        <Anchor
                           style={{
                             backgroundColor: component?.ctaBtnColor,
                             color: component?.ctaBtnTextColor,
@@ -175,7 +176,7 @@ export default function Banner({ className, banner }: any) {
                           className="font-bold text-sm h-11 w-40 rounded bg-white text-[#1E293B]"
                         >
                           {component?.ctaBtnTextForEvent}
-                        </button>
+                        </Anchor>
                       </Link>
                     </div>
                   );

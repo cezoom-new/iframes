@@ -1,8 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 
 // Initialize Supabase client
-const supabaseUrl: string = process.env.SUPABASE_URL || "";
-const supabaseKey: string = process.env.SUPABASE_ANON_KEY || "";
+const supabaseUrl: string = process.env.SUPABASE_PROJECT_URL || "";
+const supabaseKey: string = process.env.SUPABASE_ANON_PUBLIC || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export const trackPageView = async (
@@ -18,7 +18,7 @@ export const trackPageView = async (
 
   try {
     const { data, error } = await supabase
-      .from("event_rows")
+      .from("iframe_events")
       .insert([
         {
           current_path: url.href,
@@ -28,7 +28,7 @@ export const trackPageView = async (
           browser: browseDatas[0].browser,
           os: browseDatas[0].os,
           platform: browseDatas[0].platform,
-          referrer_url: browseDatas[2].referrer,
+          referrer_url: window.document.referrer,
           ip_address: locationIpAddress,
           location: locations?.country,
           destination_url: ctaBtnLink,
