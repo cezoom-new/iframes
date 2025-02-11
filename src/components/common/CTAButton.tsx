@@ -50,7 +50,6 @@ export default function CTAButton({
       fetchLocation();
     }, []);
   
-  
   return (
     <div>
       <Link href={ctaBtnLink ? ctaBtnLink : ""}  target="_blank" passHref>
