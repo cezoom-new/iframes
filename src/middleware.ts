@@ -30,7 +30,7 @@ export async function middleware(request: NextRequest) {
     response.headers.set('x-location-data', JSON.stringify(location));
     response.headers.set('x-your-ip-address', JSON.stringify(ip));
    
-    return response;  // Return the rewritten response with location data in headers
+    return response; 
   } catch (error) {
     console.error("Error in middleware:", error);
     return NextResponse.error();
