@@ -16,6 +16,8 @@ export const trackPageView = async (
 ) => {
   const url = loc;
   const customerValue = loc.search.replace("?domain=", "");
+  const regionNamesInEnglish = new Intl.DisplayNames(['en'], { type: 'region' });
+  const countryName =regionNamesInEnglish.of(locations?.country);
 
   try {
     const { data, error } = await supabase
@@ -31,7 +33,7 @@ export const trackPageView = async (
           platform: browseDatas[0].platform,
           referrer_url: window.document.referrer,
           ip_address: locationIpAddress,
-          location: locations?.country,
+          location: countryName,
           destination_url: ctaBtnLink,
           practice_name: customerValue,
         },
