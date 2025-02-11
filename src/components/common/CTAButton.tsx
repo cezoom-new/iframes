@@ -8,6 +8,7 @@ export interface CtaBtnProps {
   ctaBtnColor?: string;
   ctaBtnTextColor?: string;
   ctaBtnLink?: string;
+  campaignName?: string;
 }
 
 export default function CTAButton({
@@ -15,7 +16,8 @@ export default function CTAButton({
   themeMode,
   ctaBtnColor,
   ctaBtnTextColor,
-  ctaBtnLink
+  ctaBtnLink,
+  campaignName
 }: CtaBtnProps) {
 
    const [locations, setLocation] = useState(null);
@@ -45,7 +47,6 @@ export default function CTAButton({
       fetchLocation();
     }, []);
   
-  
   return (
     <div>
       <Link href={ctaBtnLink ? ctaBtnLink : ""}  target="_blank" passHref>
@@ -68,6 +69,7 @@ export default function CTAButton({
                 : "",
         }}
         ctaBtnLink={ctaBtnLink}
+        campaignName={campaignName}
       >
         {ctaText}
       </Anchor>
