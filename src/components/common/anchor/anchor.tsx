@@ -27,7 +27,6 @@ export default function Anchor(button: ButtonProps) {
   const [error, setError] = useState<string>("");
 
   const getUserDetails = new GetUserDevice().getTrackData();
-  console.log(getUserDetails)
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -85,9 +84,6 @@ export default function Anchor(button: ButtonProps) {
       if (!response.ok) {
         throw new Error("Failed to track page view");
       }
-  
-      const data = await response.json();
-      console.log("Page view saved:", data);
     } catch (error) {
       console.error("Error tracking page view:", error);
     }

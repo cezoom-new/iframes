@@ -4,6 +4,7 @@ import CenterText from "./Layouts/CenterText";
 import RightImageLeftText from "./Layouts/RightImageLeftText";
 import LeftImageRightText from "./Layouts/LeftImageRightText";
 import { useEffect, useState } from "react";
+import { GetUserDevice } from '@/components/common/BrowseData/browseData';
 
 const setCookie = (name: string, value: number) => {
   document.cookie = `${name}=${value}; path=/; SameSite=None; Secure`;
@@ -30,6 +31,74 @@ function Campaign({ campaigns, cookies, banner }: { campaigns: any; cookies: any
     selectedCampaignIdx(parseInt(getCookie("_csi_idx") ?? "0"));
   }, []);
 
+    const [locations, setLocation] = useState<Location | null>(null);
+    const [locationIpAddress, setLocationIpAddress] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [metaDatas, setMetaDatas] = useState<Object | null>(null);
+  
+    const getUserDetails = new GetUserDevice().getTrackData();
+  
+    useEffect(() => {
+      const fetchLocation = async () => {
+        try {
+          const response = await fetch("/");
+          const locationData = response.headers.get("x-location-data");
+          const locationIp = response.headers.get("x-your-ip-address");
+          setLocationIpAddress(locationIp);
+          console.log(locationData,"---", locationIp, "---", getUserDetails)
+          if (locationData) {
+            setLocation(JSON.parse(locationData));
+            const metaData = {
+              path: window.location.href, // You can get the current page URL
+              location: {
+                data: locations,
+                name: `${locationData}`,
+              },
+              getUserDetails,
+            };
+            setMetaDatas(metaData);
+            console.log("lo",metaData)
+          } else {
+            console.log("Location data not found");
+          }
+        } catch (err) {
+          console.log("Failed to fetch location");
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchLocation();
+    }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+  
+      try {
+         await fetch('/api/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            meta: metaDatas,
+            loc: window.location,
+            locations,
+            locationIpAddress,
+            browserData: getUserDetails,
+          }),
+        });
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    // Call the async function
+    fetchData();
+  }, []);
+  
+  
   if (!(campaignIdx || campaignIdx == 0))
     return <></>;
 

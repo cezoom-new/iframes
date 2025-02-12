@@ -6,37 +6,15 @@ const supabaseUrl = process.env.SUPABASE_PROJECT_URL || "";
 const supabaseKey = process.env.SUPABASE_ANON_PUBLIC || ""; 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-interface Location {
-  country?: string;
-}
-
-interface BrowserData {
-  browser: string;
-  os: string;
-  platform: string;
-}
-
-interface TrackPageViewRequest {
-  loc: URL;
-  locations: Location;
-  locationIpAddress: string;
-  browserData: BrowserData[];
-  ctaBtnLink?: string;
-  campaignName?: string;
-  eventType?: string;
-}
-  
   export async function POST(req:NextRequest) {
     const request:any = await req.json();
 
     const {
+        meta,
         loc,
         locations,
         locationIpAddress,
-        browserData,
-        ctaBtnLink,
-        campaignName,
-        eventType,
+        browserData
       }: any = request;
   
       const customerValue = loc?.search?.replace("?domain=", "");
@@ -46,24 +24,18 @@ interface TrackPageViewRequest {
         : "US";
   
       try {
-        const { data, error } = await supabase.from("iframe_events").insert([
+        const { data, error } = await supabase.from("iframe_users").insert([
           {
-            current_path: loc.href,
-            e_type: eventType,
-            utm_campaign: campaignName,
-            domain: loc.origin,
-            browser: browserData.systemConfig.browser,
-            os: browserData.systemConfig.os,
-            platform: browserData.systemConfig.platform,
-            referrer_url: browserData.referrerUrl,
-            ip_address: locationIpAddress,
+            meta: meta,
             location: countryName,
-            destination_url: ctaBtnLink,
+            ip_address: locationIpAddress,
+            browser: browserData.systemConfig.browser,
             practice_name: customerValue,
           },
         ]);
   
         if (error) {
+            console.log(error,'thisError')
           console.error("Error inserting page view:", error.message);
           return new Response('', { status: 500 })
         //   return res.status(500).json({ error: error.message });
