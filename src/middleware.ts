@@ -45,10 +45,6 @@ export async function middleware(request: NextRequest) {
       response.headers.set("x-location-data", JSON.stringify(locationValue));
     }
 
-    // Fetch geolocation data from Vercel Edge
-
-    // Rewrite the response with location data
-
     response.headers.set("x-your-ip-address", JSON.stringify(ip));
 
     return response;

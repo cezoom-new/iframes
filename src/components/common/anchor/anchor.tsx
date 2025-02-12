@@ -27,6 +27,7 @@ export default function Anchor(button: ButtonProps) {
   const [error, setError] = useState<string>("");
 
   const getUserDetails = new GetUserDevice().getTrackData();
+  console.log(getUserDetails)
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -65,7 +66,7 @@ export default function Anchor(button: ButtonProps) {
       }))
 
     try {
-      const response = await fetch(`${process.env.PROJECT_URL}/api/supaBase`, {
+      const response = await fetch(`/api/track`, {
         method: "POST", 
         headers: {
           "Content-Type": "application/json",
