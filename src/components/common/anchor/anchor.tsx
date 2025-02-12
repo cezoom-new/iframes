@@ -1,22 +1,33 @@
-import { trackPageView } from "@/app/api/supaBase/tracking";
 import { useState, useEffect, ReactNode, CSSProperties } from "react";
 import { GetUserDevice } from "../BrowseData/browseData";
+
+interface Location {
+  country?: string;
+}
+
+interface BrowserData {
+  browser: string;
+  os: string;
+  platform: string;
+}
 
 type ButtonProps = {
   className?: string;
   style?: CSSProperties;
   children: ReactNode;
   ctaBtnLink?: string;
-  onHandleClick?: any;
+  onHandleClick?: () => void;
   campaignName?: string;
 };
+
 export default function Anchor(button: ButtonProps) {
-  const [locations, setLocation] = useState(null);
-  const [locationIpAddress, setLocationIpAddress] = useState<any>("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [locations, setLocation] = useState<Location | null>(null);
+  const [locationIpAddress, setLocationIpAddress] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   const getUserDetails = new GetUserDevice().getTrackData();
+
   useEffect(() => {
     const fetchLocation = async () => {
       try {
@@ -39,24 +50,56 @@ export default function Anchor(button: ButtonProps) {
     fetchLocation();
   }, []);
 
+  const handleButtonClick = async () => {
+    if (typeof button?.onHandleClick === "function") {
+      button?.onHandleClick(); // Call the function if it exists
+    }
+    console.log("b",JSON.stringify({
+        loc: window.location,
+        locations,
+        locationIpAddress,
+        browserData: getUserDetails,
+        ctaBtnLink: button?.ctaBtnLink,
+        campaignName: button?.campaignName,
+        eventType: "click",
+      }))
+
+    try {
+      const response = await fetch(`${process.env.PROJECT_URL}/api/supaBase`, {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          loc: window.location,
+          locations,
+          locationIpAddress,
+          browserData: getUserDetails,
+          ctaBtnLink: button?.ctaBtnLink,
+          campaignName: button?.campaignName,
+          eventType: "click",
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to track page view");
+      }
+  
+      const data = await response.json();
+      console.log("Page view saved:", data);
+    } catch (error) {
+      console.error("Error tracking page view:", error);
+    }
+  };
+  
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   return (
     <button
       className={button?.className}
       style={button?.style}
-      onClick={() => {
-        if (typeof button?.onHandleClick === "function") {
-          button?.onHandleClick(); // Call the function if it exists
-        }
-        trackPageView(
-          window.location,
-          locations,
-          locationIpAddress,
-          getUserDetails,
-          button?.ctaBtnLink,
-          button?.campaignName,
-          "click"
-        );
-      }}
+      onClick={handleButtonClick}
     >
       {button?.children}
     </button>
