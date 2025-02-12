@@ -30,8 +30,6 @@ export default function Anchor(button: ButtonProps) {
   const [buttonId, setButtonID] = useState<string>("");
 
   const getUserDetails = new GetUserDevice().getTrackData();
-  console.log(getUserDetails)
-
   useEffect(() => {
     const fetchLocation = async () => {
       try {
@@ -68,22 +66,10 @@ export default function Anchor(button: ButtonProps) {
     if (typeof button?.onHandleClick === "function") {
       button?.onHandleClick(); // Call the function if it exists
     }
-    console.log(
-      "b",
-      JSON.stringify({
-        loc: window.location,
-        locations,
-        locationIpAddress,
-        browserData: getUserDetails,
-        ctaBtnLink: button?.ctaBtnLink,
-        campaignName: button?.campaignName,
-        eventType: "click",
-      })
-    );
 
     try {
       const response = await fetch(`/api/track`, {
-        method: "POST", 
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
