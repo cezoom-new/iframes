@@ -49,7 +49,7 @@ function Campaign({ campaigns, cookies, banner }: { campaigns: any; cookies: any
           if (locationData) {
             setLocation(JSON.parse(locationData));
             const metaData = {
-              path: window.location.href, // You can get the current page URL
+              path: window.location.href,
               location: {
                 data: locations,
                 name: `${locationData}`,
