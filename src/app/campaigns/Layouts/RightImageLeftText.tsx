@@ -25,7 +25,6 @@ export default function RightImageLeftText({
   banner?: any;
   colors?:Color
 }) {
-  console.log("hhij",campaign)
 
   return (
     <Section
