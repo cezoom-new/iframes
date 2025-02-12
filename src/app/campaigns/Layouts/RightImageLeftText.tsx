@@ -35,7 +35,7 @@ export default function RightImageLeftText({
         <CookieShow cookie={cookies}  campaign={campaign}/>
       }
       <Container
-        className={` flex flex-col px-4 md:px-12 pt-4 md:py-8 z-10  gap-3  ${banner?.isFullScreen ? "flex-1" : ""}`}
+        className={` flex flex-col px-4 md:px-12 pt-4 md:py-4 z-10  gap-3  ${banner?.isFullScreen ? "flex-1" : ""}`}
       >
         <div className="flex-grow flex items-center justify-between gap-4 lg:gap-20">
           <DynamicStructure colors={colors} campaign={campaign} components={campaign?.structure?.components} className="flex flex-col max-w-lg xl:max-w-xl gap-3" />

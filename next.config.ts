@@ -21,6 +21,7 @@ const nextConfig: NextConfig = {
   env: {
     SUPABASE_ANON_PUBLIC: process.env.SUPABASE_ANON_PUBLIC,
     SUPABASE_PROJECT_URL: process.env.SUPABASE_PROJECT_URL,
+    PROJECT_URL:process.env.PROJECT_URL
   },
 };
 
