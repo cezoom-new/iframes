@@ -1,5 +1,6 @@
 import { useState, useEffect, ReactNode, CSSProperties } from "react";
 import { GetUserDevice } from "../BrowseData/browseData";
+import { debounce } from "@/components/common/Common";
 
 interface Location {
   country?: string;
@@ -62,36 +63,27 @@ export default function Anchor(button: ButtonProps) {
     }
   }, [button]);
 
-  const handleButtonClick = async () => {
-    if (typeof button?.onHandleClick === "function") {
-      button?.onHandleClick(); // Call the function if it exists
-    }
-
+  async function trackUserInteraction(){
     try {
-      const response = await fetch(`/api/track`, {
+      const response = await fetch(`/api/session`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          loc: window.location,
-          locations,
-          locationIpAddress,
-          browserData: getUserDetails,
-          ctaBtnLink: button?.ctaBtnLink,
-          campaignName: button?.campaignName,
-          eventType: "click",
-        }),
+        }
       });
 
       if (!response.ok) {
         throw new Error("Failed to track page view");
       }
-
-      const data = await response.json();
-      console.log("Page view saved:", data);
     } catch (error) {
       console.error("Error tracking page view:", error);
+    }
+  }
+
+  const handleButtonClick = async () => {
+    await trackUserInteraction();
+    if (typeof button?.onHandleClick === "function") {
+      button.onHandleClick();
     }
   };
 
@@ -103,7 +95,7 @@ export default function Anchor(button: ButtonProps) {
       id={buttonId}
       className={button?.className}
       style={button?.style}
-      onClick={handleButtonClick}
+      onClick={debounce(handleButtonClick,300)}
     >
       {button?.children}
     </button>
