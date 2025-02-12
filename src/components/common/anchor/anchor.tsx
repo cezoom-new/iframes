@@ -15,6 +15,7 @@ export default function Anchor(button: ButtonProps) {
   const [locationIpAddress, setLocationIpAddress] = useState<any>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [buttonId, setButtonID] = useState<string>("");
 
   const browseData = new GetUserDevice().getTrackData();
   useEffect(() => {
@@ -38,9 +39,20 @@ export default function Anchor(button: ButtonProps) {
 
     fetchLocation();
   }, []);
+  useEffect(() => {
+    if (window != undefined) {
+      const campaignName: string = button?.campaignName || "";
+      const btnTextValue: any = button?.children || "";
+      const costumerName: string =
+        window?.location?.search?.replace("?domain=", "") || "";
+      const id = campaignName + " " + btnTextValue + " " + costumerName;
+      setButtonID(id);
+    }
+  }, [button]);
 
   return (
     <button
+      id={buttonId}
       className={button?.className}
       style={button?.style}
       onClick={() => {
