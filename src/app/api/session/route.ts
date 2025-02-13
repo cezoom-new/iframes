@@ -1,11 +1,13 @@
 import { NextRequest } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { cookies } from "next/headers";
 
 const supabaseUrl = process.env.SUPABASE_PROJECT_URL || "";
 const supabaseKey = process.env.SUPABASE_ANON_PUBLIC || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
+  const cookieStore: any = await cookies();
 
   try {
     const id = crypto.randomUUID();
@@ -13,7 +15,7 @@ export async function POST(req: NextRequest) {
     try {
       const { data, error } = await supabase.from("iframe_sessions").insert([
         {
-          
+          user_id: cookieStore.get("_uID")?.value,
           start_time: startTime,
           end_time: new Date(),
         },
