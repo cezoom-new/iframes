@@ -2,7 +2,6 @@ import { NextRequest } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 
-// Initialize Supabase client
 const supabaseUrl = process.env.SUPABASE_PROJECT_URL || "";
 const supabaseKey = process.env.SUPABASE_ANON_PUBLIC || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -10,16 +9,22 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export async function POST(req: NextRequest) {
   const cookieStore = await cookies();
   const request: any = await req.json();
-
   const { meta, loc, locations, locationIpAddress, browserData }: any = request;
-
   const customerValue = loc?.search?.replace("?domain=", "");
   const regionNamesInEnglish = new Intl.DisplayNames(["en"], {
     type: "region",
   });
+
   const countryName = locations?.country
     ? regionNamesInEnglish.of(locations?.country)
     : "US";
+
+  /******* function to fetch session  *****/
+  async function fetchSession(){
+    
+  }
+
+
 
   try {
     const { data, error } = await supabase
@@ -33,13 +38,18 @@ export async function POST(req: NextRequest) {
           practice_name: customerValue,
         },
       ])
-      .select("*");
-    if (data?.length) {
-      const id = data[0]["id"];
-      cookieStore.set("_uID", JSON.stringify(id), {
+      .select()
+      .single();
+
+    /******
+     * Setting cookie for userDetails
+     * call  session Api
+     *******/
+    if (data && Object.keys(data)?.length) {
+      cookieStore.set("_UID", data?.id, {
         sameSite: "none",
         secure: true,
-        maxAge: 60 * 60 * 24 * 30* 12, //  1year
+        maxAge: 60 * 60 * 24 * 30 * 12,
       });
     }
 

@@ -7,19 +7,25 @@ const supabaseKey = process.env.SUPABASE_ANON_PUBLIC || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
-  const cookieStore: any = await cookies();
-
-  try {
-    const id = crypto.randomUUID();
-    const startTime = new Date();
+  if (req.method == "POST") {
+    const cookieStore: any = await cookies();
+    console.log(cookieStore.get("_UID")?.value, "mycookie");
+    const body = await req.json();
     try {
-      const { data, error } = await supabase.from("iframe_sessions").insert([
-        {
-          user_id: cookieStore.get("_uID")?.value,
-          start_time: startTime,
-          end_time: new Date(),
-        },
-      ]);
+      const { data, error } = await supabase
+        .from("iframe_sessions")
+        .insert([
+          {
+            user_id: cookieStore.get("_UID")?.value,
+            start_time: new Date(),
+            end_time: new Date(),
+          },
+        ])
+        .select()
+        .single();
+
+      console.log(data, "sessionData...");
+
       if (error) {
         console.error("Error inserting page view:", error.message);
         return new Response("", { status: 500 });
@@ -30,8 +36,5 @@ export async function POST(req: NextRequest) {
       console.error("Error tracking page view:", error);
       return new Response("", { status: 500 });
     }
-  } catch (err) {
-    console.error("Error tracking page view:", err);
-    return new Response("", { status: 500 });
   }
 }

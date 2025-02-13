@@ -4,7 +4,8 @@ import CenterText from "./Layouts/CenterText";
 import RightImageLeftText from "./Layouts/RightImageLeftText";
 import LeftImageRightText from "./Layouts/LeftImageRightText";
 import { useEffect, useState } from "react";
-import { GetUserDevice } from '@/components/common/BrowseData/browseData';
+import { GetUserDevice } from "@/components/common/BrowseData/browseData";
+import { checkCookiePermission, createSession } from "@/utils/helper";
 
 const setCookie = (name: string, value: number) => {
   document.cookie = `${name}=${value}; path=/; SameSite=None; Secure`;
@@ -19,9 +20,16 @@ const getCookie = (name: string) => {
   return null;
 };
 
-function Campaign({ campaigns, cookies, banner }: { campaigns: any; cookies: any; banner: any }) {
+function Campaign({
+  campaigns,
+  cookies,
+  banner,
+}: {
+  campaigns: any;
+  cookies: any;
+  banner: any;
+}) {
   const [campaignIdx, selectedCampaignIdx] = useState<any>(null);
-
   useEffect(() => {
     if (parseInt(getCookie("_csi_idx") ?? "0") >= campaigns.length - 1) {
       setCookie("_csi_idx", 0);
@@ -31,104 +39,112 @@ function Campaign({ campaigns, cookies, banner }: { campaigns: any; cookies: any
     selectedCampaignIdx(parseInt(getCookie("_csi_idx") ?? "0"));
   }, []);
 
-    const [locations, setLocation] = useState<Location | null>(null);
-    const [locationIpAddress, setLocationIpAddress] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [metaDatas, setMetaDatas] = useState<Object | null>(null);
-  
-    const getUserDetails = new GetUserDevice().getTrackData();
-  
-    useEffect(() => {
-      const fetchLocation = async () => {
-        try {
-          const response = await fetch("/");
-          const locationData = response.headers.get("x-location-data");
-          const locationIp = response.headers.get("x-your-ip-address");
-          setLocationIpAddress(locationIp);
-          console.log(locationData,"---", locationIp, "---", getUserDetails)
-          if (locationData) {
-            setLocation(JSON.parse(locationData));
-            const metaData = {
-              path: window.location.href,
-              location: {
-                data: locations,
-                name: `${locationData}`,
-              },
-              getUserDetails,
-            };
-            setMetaDatas(metaData);
-            console.log("lo",metaData)
-          } else {
-            console.log("Location data not found");
-          }
-        } catch (err) {
-          console.log("Failed to fetch location");
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchLocation();
-    }, []);
+  const [locations, setLocation] = useState<Location | null>(null);
+  const [locationIpAddress, setLocationIpAddress] = useState<string | null>(
+    null
+  );
+  const [loading, setLoading] = useState<boolean>(true);
+  const [metaDatas, setMetaData] = useState<Object | null>(null);
+
+  const getUserDetails = new GetUserDevice().getTrackData();
 
   useEffect(() => {
-    const fetchData = async () => {
-  
+    const fetchLocation = async () => {
       try {
-         await fetch('/api/user', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            meta: metaDatas,
-            loc: window.location,
-            locations,
-            locationIpAddress,
-            browserData: getUserDetails,
-          }),
-        });
-
-      } catch (error) {
-        console.error("Error fetching data:", error);
+        const response = await fetch("/");
+        const locationData = response.headers.get("x-location-data");
+        const locationIp = response.headers.get("x-your-ip-address");
+        setLocationIpAddress(locationIp);
+        console.log(locationData, "---", locationIp, "---", getUserDetails);
+        if (locationData) {
+          setLocation(JSON.parse(locationData));
+          const metaData = {
+            path: window.location.href,
+            location: {
+              data: locations,
+              name: `${locationData}`,
+            },
+            getUserDetails,
+          };
+          setMetaData(metaData);
+          console.log("lo", metaData);
+        } else {
+          console.log("Location data not found");
+        }
+      } catch (err) {
+        console.log("Failed to fetch location");
+      } finally {
+        setLoading(false);
       }
     };
-  
-    // Call the async function
-    fetchData();
+
+    fetchLocation();
   }, []);
-  
-  
-  if (!(campaignIdx || campaignIdx == 0))
-    return <></>;
+
+  useEffect(() => {
+    const isUserIdExist = getCookie("_UID");
+    if (checkCookiePermission() && !isUserIdExist) {
+      const createUser = async () => {
+        try {
+          await createSession();
+          const res = await fetch("/api/user", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              meta: metaDatas,
+              loc: window.location,
+              locations,
+              locationIpAddress,
+              browserData: getUserDetails,
+            }),
+          });
+
+          if (res.ok) {
+           
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      createUser();
+    }
+  }, []);
+
+  if (!(campaignIdx || campaignIdx == 0)) return <></>;
 
   if (campaigns[campaignIdx]?.selectedLayout == "rilt") {
     return (
       <>
-      <RightImageLeftText 
-      campaign={campaigns[campaignIdx]}
-       banner={banner} 
-       cookies={cookies}
-       colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? 'defaultColor'}
-       />
+        <RightImageLeftText
+          campaign={campaigns[campaignIdx]}
+          banner={banner}
+          cookies={cookies}
+          colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? "defaultColor"}
+        />
       </>
     );
   }
   if (campaigns[campaignIdx]?.selectedLayout == "lirt") {
     return (
-      <LeftImageRightText 
-      campaign={campaigns[campaignIdx]} 
-      banner={banner}
-       cookies={cookies}
-       colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? 'defaultColor'}/>
+      <LeftImageRightText
+        campaign={campaigns[campaignIdx]}
+        banner={banner}
+        cookies={cookies}
+        colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? "defaultColor"}
+      />
     );
   }
 
-  return <CenterText 
-  campaign={campaigns[campaignIdx]}
-   banner={banner} 
-   cookies={cookies}
-   colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? 'defaultColor'}/>;
+  return (
+    <CenterText
+      campaign={campaigns[campaignIdx]}
+      banner={banner}
+      cookies={cookies}
+      colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? "defaultColor"}
+    />
+  );
 }
 
 export default Campaign;
