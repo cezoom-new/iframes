@@ -6,28 +6,10 @@ const supabaseUrl = process.env.SUPABASE_PROJECT_URL || "";
 const supabaseKey = process.env.SUPABASE_ANON_PUBLIC || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-interface Location {
-  country?: string;
-}
-
-interface BrowserData {
-  browser: string;
-  os: string;
-  platform: string;
-}
-
-interface TrackPageViewRequest {
-  loc: URL;
-  locations: Location;
-  locationIpAddress: string;
-  browserData: BrowserData[];
-  ctaBtnLink?: string;
-  campaignName?: string;
-  eventType?: string;
-}
-
 export async function POST(req: NextRequest) {
+  console.log(req.cookies.get("_loc"), req.cookies.get("_iPa"), "eeeeee");
   const request: any = await req.json();
+  const locationValue = req.cookies.get("_loc")?.value;
   const {
     loc,
     locations,
@@ -40,7 +22,8 @@ export async function POST(req: NextRequest) {
     userId,
   }: any = request;
 
-  console.log({sessionId,userId})
+  console.log(req.headers.get("x-your-ip-address"), "yourIp");
+  const userIp = locationIpAddress ?? req.headers.get("X-Forwarded-For");
 
   const customerValue = loc?.search?.replace("?domain=", "");
   const regionNamesInEnglish = new Intl.DisplayNames(["en"], {
@@ -60,22 +43,20 @@ export async function POST(req: NextRequest) {
         os: browserData.systemConfig.os,
         platform: browserData.systemConfig.platform,
         referrer_url: browserData.referrerUrl,
-        ip_address: locationIpAddress,
-        location: countryName,
+        ip_address: userIp,
+        location: locationValue,
         destination_url: ctaBtnLink,
         practice_name: customerValue,
         session_id: sessionId,
-        // user_id: userId,
+        user_id: userId,
       },
     ]);
 
     if (error) {
       console.error("Error inserting page view:", error.message);
       return new Response("", { status: 500 });
-      //   return res.status(500).json({ error: error.message });
     } else {
       return new Response("", { status: 200 });
-      //   return res.status(200).json({ data });
     }
   } catch (err) {
     console.error("Error tracking page view:", err);
