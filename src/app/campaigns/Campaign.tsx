@@ -82,11 +82,10 @@ function Campaign({
   }, []);
 
   useEffect(() => {
-    const isUserIdExist = getCookie("_UID");
+    let isUserIdExist = getCookie("_UID");
     if (checkCookiePermission() && !isUserIdExist) {
       const createUser = async () => {
         try {
-          await createSession();
           const res = await fetch("/api/user", {
             method: "POST",
             headers: {
@@ -102,7 +101,7 @@ function Campaign({
           });
 
           if (res.ok) {
-           
+            await createSession(getCookie("_UID"));
           }
         } catch (error) {
           console.error("Error fetching data:", error);

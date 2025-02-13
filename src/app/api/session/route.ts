@@ -7,25 +7,29 @@ const supabaseKey = process.env.SUPABASE_ANON_PUBLIC || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
+  const cookieStore = await cookies();
   if (req.method == "POST") {
-    const cookieStore: any = await cookies();
-    console.log(cookieStore.get("_UID")?.value, "mycookie");
-    const body = await req.json();
+    const request: any = await req.json();
+    const { userId }: any = request;
     try {
       const { data, error } = await supabase
         .from("iframe_sessions")
         .insert([
           {
-            user_id: cookieStore.get("_UID")?.value,
+            user_id: userId,
             start_time: new Date(),
             end_time: new Date(),
           },
         ])
         .select()
         .single();
-
-      console.log(data, "sessionData...");
-
+      if (data && Object.keys(data)?.length) {
+        cookieStore.set("_SID", data?.id, {
+          sameSite: "none",
+          secure: true,
+          maxAge: 60 * 60 * 24 * 30 * 12,
+        });
+      }
       if (error) {
         console.error("Error inserting page view:", error.message);
         return new Response("", { status: 500 });

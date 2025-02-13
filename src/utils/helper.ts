@@ -15,17 +15,20 @@ export function checkCookiePermission() {
   }
   return cookieEnabled;
 }
-export async function createSession() { debugger
+
+export async function createSession(uID: string | null) {
   try {
-    const res = await fetch('api/session', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        
-    })
-        
-    if (!res.ok) { debugger
+    const res = await fetch("/api/session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: uID,
+      }),
+    });
+
+    if (!res.ok) {
       console.log("something went wrong");
     } else {
       const data = await res.json();

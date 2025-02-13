@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
   /******* function to fetch session  *****/
   async function fetchSession(){
-    
+
   }
 
 
@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
      * Setting cookie for userDetails
      * call  session Api
      *******/
+    console.log(data,'cookie123')
     if (data && Object.keys(data)?.length) {
       cookieStore.set("_UID", data?.id, {
         sameSite: "none",

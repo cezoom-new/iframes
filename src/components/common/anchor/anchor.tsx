@@ -65,7 +65,7 @@ export default function Anchor(button: ButtonProps) {
 
   async function trackUserInteraction(){
     try {
-      const response = await fetch(`/api/session`, {
+      const response = await fetch(`/api/track`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
