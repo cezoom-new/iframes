@@ -5,7 +5,7 @@ import RightImageLeftText from "./Layouts/RightImageLeftText";
 import LeftImageRightText from "./Layouts/LeftImageRightText";
 import { useEffect, useState } from "react";
 import { GetUserDevice } from "@/components/common/BrowseData/browseData";
-import { checkCookiePermission, createSession } from "@/utils/helper";
+import { checkCookiePermission, createSession, getLocationDetails } from "@/utils/helper";
 
 const setCookie = (name: string, value: number) => {
   document.cookie = `${name}=${value}; path=/; SameSite=None; Secure`;
@@ -51,9 +51,9 @@ function Campaign({
   useEffect(() => {
     const fetchLocation = async () => {
       try {
-        const response = await fetch("/");
-        const locationData = response.headers.get("x-location-data");
-        const locationIp = response.headers.get("x-your-ip-address");
+        const response = await getLocationDetails();
+        const locationData = response.locationData;
+        const locationIp = response.locationIp;
         setLocationIpAddress(locationIp);
         console.log(locationData, "---", locationIp, "---", getUserDetails);
         if (locationData) {

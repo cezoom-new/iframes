@@ -18,7 +18,7 @@ export function checkCookiePermission() {
 
 export async function createSession(uID: string | null) {
   try {
-    const res = await fetch("/api/session", {
+    await fetch("/api/session", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,14 +27,33 @@ export async function createSession(uID: string | null) {
         userId: uID,
       }),
     });
-
-    if (!res.ok) {
-      console.log("something went wrong");
-    } else {
-      const data = await res.json();
-      console.log(data, "session data is heree..");
-    }
   } catch (error) {
     console.log(error, "error while fetching...");
   }
 }
+
+export async function getLocationDetails() {
+  try {
+    const res = await fetch("/api/location", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.ok) {
+      return await res.json();
+    } else {
+      return {};
+    }
+  } catch (err) {
+    console.log(err, "something thing went wrong");
+  }
+}
+export const getCookie = (name: string) => {
+  const cookies = document.cookie.split("; ");
+  for (const cookie of cookies) {
+    const [key, value] = cookie.split("=");
+    if (key === name) return value;
+  }
+  return null;
+};
