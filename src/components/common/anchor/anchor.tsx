@@ -1,6 +1,7 @@
 import { useState, useEffect, ReactNode, CSSProperties } from "react";
 import { GetUserDevice } from "../BrowseData/browseData";
 import { debounce } from "@/components/common/Common";
+import { getCookie, getLocationDetails } from "@/utils/helper";
 
 interface Location {
   country?: string;
@@ -34,9 +35,9 @@ export default function Anchor(button: ButtonProps) {
   useEffect(() => {
     const fetchLocation = async () => {
       try {
-        const response = await fetch("/");
-        const locationData = response.headers.get("x-location-data");
-        const locationIp = response.headers.get("x-your-ip-address");
+        const response = await getLocationDetails();
+        const locationData = response?.locationData;
+        const locationIp = response?.locationIp;
         setLocationIpAddress(locationIp);
         if (locationData) {
           setLocation(JSON.parse(locationData));
@@ -63,13 +64,24 @@ export default function Anchor(button: ButtonProps) {
     }
   }, [button]);
 
-  async function trackUserInteraction(){
+  async function trackUserInteraction() {
     try {
       const response = await fetch(`/api/track`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-        }
+        },
+        body: JSON.stringify({
+          loc: window.location,
+          locations,
+          locationIpAddress,
+          browserData: getUserDetails,
+          ctaBtnLink: button?.ctaBtnLink,
+          campaignName: button?.campaignName,
+          eventType: "click",
+          sessionId: getCookie("_SID") ?? null,
+          userId: getCookie("_UID")?? null,
+        }),
       });
 
       if (!response.ok) {
@@ -86,14 +98,12 @@ export default function Anchor(button: ButtonProps) {
       button.onHandleClick();
     }
   };
-  if (error) return <div>{error}</div>;
-
   return (
     <button
       id={buttonId}
       className={button?.className}
       style={button?.style}
-      onClick={debounce(handleButtonClick,300)}
+      onClick={debounce(handleButtonClick, 300)}
     >
       {button?.children}
     </button>
