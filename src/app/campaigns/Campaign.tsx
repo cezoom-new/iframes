@@ -5,7 +5,11 @@ import RightImageLeftText from "./Layouts/RightImageLeftText";
 import LeftImageRightText from "./Layouts/LeftImageRightText";
 import { useEffect, useState } from "react";
 import { GetUserDevice } from "@/components/common/BrowseData/browseData";
-import { checkCookiePermission, createSession, getLocationDetails } from "@/utils/helper";
+import {
+  checkCookiePermission,
+  createSession,
+  getLocationDetails,
+} from "@/utils/helper";
 
 const setCookie = (name: string, value: number) => {
   document.cookie = `${name}=${value}; path=/; SameSite=None; Secure`;
@@ -39,7 +43,7 @@ function Campaign({
     selectedCampaignIdx(parseInt(getCookie("_csi_idx") ?? "0"));
   }, []);
 
-  const [locations, setLocation] = useState<Location | null>(null);
+  const [locations, setLocation] = useState<any>(null);
   const [locationIpAddress, setLocationIpAddress] = useState<string | null>(
     null
   );
@@ -54,7 +58,7 @@ function Campaign({
         const response = await getLocationDetails();
         const locationData = response.location;
         const locationIp = response.ipAddress;
-        console.log(response)
+        console.log(response);
         setLocationIpAddress(locationIp);
         console.log(locationData, "---", locationIp, "---", getUserDetails);
         if (locationData) {
@@ -84,7 +88,12 @@ function Campaign({
 
   useEffect(() => {
     let isUserIdExist = getCookie("_UID");
-    if (checkCookiePermission() && !isUserIdExist) {
+    if (
+      checkCookiePermission() &&
+      !isUserIdExist &&
+      locations?.country &&
+      locationIpAddress
+    ) {
       const createUser = async () => {
         try {
           const res = await fetch("/api/user", {
