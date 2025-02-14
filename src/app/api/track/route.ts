@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     userId,
   }: any = request;
 
-  console.log(req.headers.get("x-your-ip-address"), "yourIp");
+  console.log(req.headers.get("x-forwarded-for"), "yourIp");
   const userIp = locationIpAddress ?? req.headers.get("X-Forwarded-For");
   const sessionIdValue = cookie.get("_SID")
   const userIdValue = cookie.get("_UID")
@@ -38,22 +38,22 @@ export async function POST(req: NextRequest) {
     ? regionNamesInEnglish.of(locations?.country)
     : "US";
   try {
-    // console.log({
-    //   current_path: loc.href,
-    //   e_type: eventType,
-    //   utm_campaign: campaignName,
-    //   domain: loc.origin,
-    //   browser: browserData.systemConfig.browser,
-    //   os: browserData.systemConfig.os,
-    //   platform: browserData.systemConfig.platform,
-    //   referrer_url: browserData.referrerUrl,
-    //   ip_address: userIp,
-    //   location: locationValue,
-    //   destination_url: ctaBtnLink,
-    //   practice_name: customerValue,
-    //   session_id: sessionId,
-    //   user_id: userId,
-    // },'object to save 11111')
+    console.log({
+      current_path: loc.href,
+      e_type: eventType,
+      utm_campaign: campaignName,
+      domain: loc.origin,
+      browser: browserData.systemConfig.browser,
+      os: browserData.systemConfig.os,
+      platform: browserData.systemConfig.platform,
+      referrer_url: browserData.referrerUrl,
+      ip_address: userIp,
+      location: locationValue,
+      destination_url: ctaBtnLink,
+      practice_name: customerValue,
+      session_id: sessionId,
+      user_id: userId,
+    },'object to save 11111')
     const { data, error } = await supabase.from("iframe_events").insert([
       {
         current_path: loc.href,

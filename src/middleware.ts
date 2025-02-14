@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 import { cookies } from "next/headers";
 
 export async function middleware(request: NextRequest) {
-  const cookieStore:any = await cookies();
+  const cookieStore: any = await cookies();
   const url = request.nextUrl.clone();
 
   try {
@@ -39,33 +39,18 @@ export async function middleware(request: NextRequest) {
         maxAge: 60 * 60 * 24 * 30,
         path: "/", // Ensure the cookie is available across the entire site
       });
+      response.headers.set("x-location-data", JSON.stringify(locationValue));
     }
 
     response.headers.set("x-location-data", JSON.stringify(locationValue));
-
-    let userIpAddress = cookieStore.get("_iPa")?.value
-      ? JSON.parse(cookieStore.get("_iPa")?.value)
-      : null;
-
-    if (userIpAddress == null) {
-      const ip = ipAddress(request);
-      if (ip) {
-        userIpAddress = ip;
-        response.headers.set(
-          "x-your-ip-address",
-          JSON.stringify(userIpAddress)
-        );
-        response.cookies.set("_iPa", JSON.stringify(userIpAddress), {
-          sameSite: "none",
-          secure: true,
-          httpOnly: true,
-          maxAge: 60 * 60 * 24 * 30,
-          path: "/", // Ensure the cookie is available across the entire site
-        });
-      }
-    }
-
-    response.headers.set("x-your-ip-address", JSON.stringify(userIpAddress));
+    const ip = request.headers.get("x-forwarded-for");
+    response.cookies.set("_IPA", JSON.stringify(ip), {
+      sameSite: "none",
+      secure: true,
+      httpOnly: true,
+      maxAge: 60 * 60 * 24 * 30,
+      path: "/", // Ensure the cookie is available across the entire site
+    });
 
     console.log("Middleware executed successfully");
     return response;

@@ -54,6 +54,7 @@ function Campaign({
         const response = await getLocationDetails();
         const locationData = response.locationData;
         const locationIp = response.locationIp;
+        console.log(response)
         setLocationIpAddress(locationIp);
         console.log(locationData, "---", locationIp, "---", getUserDetails);
         if (locationData) {
