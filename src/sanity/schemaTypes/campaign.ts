@@ -1,5 +1,6 @@
 import { UserIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
+import customerData from "../../../database.json"
 
 export const campaign = defineType({
   name: "campaign",
@@ -38,7 +39,7 @@ export const campaign = defineType({
       group: "basic",
     }),
     defineField({
-      title: "Campagin Slug",
+      title: "Campaign Slug",
       name: "slug",
       type: "slug",
       group: "basic",
@@ -64,6 +65,22 @@ export const campaign = defineType({
         ],
       },
     }),
+    // defineField({
+    //   title: "Customer Name",
+    //   name: "customerName",
+    //   type: "string",
+    //   group: "basic",
+    //   options: {
+    //     list: () =>{
+    //       return customerData.map((item:any) => ({
+    //         title: item.name, // assuming 'name' field exists in your JSON
+    //         value: item.name.toLowerCase().replace(/\s+/g, ''),
+    //       }));
+
+    //     }
+        
+    //   },
+    // }),
     defineField({
       title: "Targeted Region",
       name: "region",
