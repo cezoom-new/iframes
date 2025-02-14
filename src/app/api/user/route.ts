@@ -15,9 +15,8 @@ export async function POST(req: NextRequest) {
     type: "region",
   });
 
-  const countryName = locations?.country
-    ? regionNamesInEnglish.of(locations?.country)
-    : "US";
+  const countryName = locations
+  console.log(countryName,'countryName11')
 
 
   try {

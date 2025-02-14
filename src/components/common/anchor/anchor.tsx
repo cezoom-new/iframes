@@ -36,8 +36,8 @@ export default function Anchor(button: ButtonProps) {
     const fetchLocation = async () => {
       try {
         const response = await getLocationDetails();
-        const locationData = response?.locationData;
-        const locationIp = response?.locationIp;
+        const locationData = response?.location;
+        const locationIp = response?.ipAddress;
         setLocationIpAddress(locationIp);
         if (locationData) {
           setLocation(JSON.parse(locationData));

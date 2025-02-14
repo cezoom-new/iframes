@@ -33,22 +33,27 @@ export async function createSession(uID: string | null) {
 }
 
 export async function getLocationDetails() {
-  try {
-    const res = await fetch("/api/location", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (res.ok) {
-      return await res.json();
-    } else {
+    try {
+      const res = await fetch("/api/location", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (!res.ok) {
+        return {};
+      }
+  
+      const data = await res.json();
+      console.log(data);
+      return data;
+    } catch (err) {
+      console.error("Something went wrong:", err);
       return {};
     }
-  } catch (err) {
-    console.log(err, "something thing went wrong");
   }
-}
+  
 export const getCookie = (name: string) => {
   const cookies = document.cookie.split("; ");
   for (const cookie of cookies) {
