@@ -44,7 +44,7 @@ function Campaign({
     null
   );
   const [loading, setLoading] = useState<boolean>(true);
-  const [metaDatas, setMetaData] = useState<Object | null>(null);
+  const [metaData, setMetaData] = useState<Object | null>(null);
 
   const getUserDetails = new GetUserDevice().getTrackData();
 
@@ -93,7 +93,7 @@ function Campaign({
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              meta: metaDatas,
+              meta: metaData,
               loc: window.location,
               locations,
               locationIpAddress,
@@ -110,7 +110,7 @@ function Campaign({
       };
       createUser();
     }
-  }, []);
+  }, [locationIpAddress, locations, metaData]);
 
   if (!(campaignIdx || campaignIdx == 0)) return <></>;
 
