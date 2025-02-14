@@ -15,8 +15,7 @@ export async function POST(req: NextRequest) {
     type: "region",
   });
 
-  const countryName = locations?.countryName?  regionNamesInEnglish.of(locations?.country):'countryName not available'
-  console.log(countryName,locations, "countryName11");
+  const countryName = locations?.country?  regionNamesInEnglish.of(locations?.country):'countryName not available'
   // if (countryName && locationIpAddress) {
     try {
       const { data, error } = await supabase
