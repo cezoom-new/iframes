@@ -52,8 +52,8 @@ function Campaign({
     const fetchLocation = async () => {
       try {
         const response = await getLocationDetails();
-        const locationData = response.locationData;
-        const locationIp = response.locationIp;
+        const locationData = response.location;
+        const locationIp = response.ipAddress;
         console.log(response)
         setLocationIpAddress(locationIp);
         console.log(locationData, "---", locationIp, "---", getUserDetails);
