@@ -19,12 +19,6 @@ export async function POST(req: NextRequest) {
     ? regionNamesInEnglish.of(locations?.country)
     : "US";
 
-  /******* function to fetch session  *****/
-  async function fetchSession(){
-
-  }
-
-
 
   try {
     const { data, error } = await supabase
@@ -45,7 +39,6 @@ export async function POST(req: NextRequest) {
      * Setting cookie for userDetails
      * call  session Api
      *******/
-    console.log(data,'cookie123')
     if (data && Object.keys(data)?.length) {
       cookieStore.set("_UID", data?.id, {
         sameSite: "none",
