@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   if (req.method == "POST") {
     const Ip = req.headers.get("x-forwarded-for");
     const locationDetail = req.cookies.get("_loc")?.value;
-    const { userId }: any = req.cookies.get("_UID");
+    const userId = cookieStore?.get("_UID")?.value;
     try {
       const { data, error } = await supabase
         .from("iframe_sessions")
