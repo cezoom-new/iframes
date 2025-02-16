@@ -9,8 +9,9 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export async function POST(req: NextRequest) {
   const cookieStore = await cookies();
   if (req.method == "POST") {
-    const request: any = await req.json();
-    const { userId }: any = request;
+    const Ip = req.headers.get("x-forwarded-for");
+    const locationDetail = req.cookies.get("_loc")?.value;
+    const { userId }: any = req.cookies.get("_UID");
     try {
       const { data, error } = await supabase
         .from("iframe_sessions")
@@ -19,6 +20,8 @@ export async function POST(req: NextRequest) {
             user_id: userId,
             start_time: new Date(),
             end_time: new Date(),
+            ip_address: Ip,
+            location: locationDetail,
           },
         ])
         .select()
@@ -27,7 +30,7 @@ export async function POST(req: NextRequest) {
         cookieStore.set("_SID", data?.id, {
           sameSite: "none",
           secure: true,
-          maxAge: 60 * 60 * 24 * 30 * 12,
+          maxAge: 60 * 60 * 24 * 30 * 12, // 1 year 
         });
       }
       if (error) {
