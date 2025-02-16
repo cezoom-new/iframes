@@ -8,7 +8,6 @@ export async function POST(req: NextRequest) {
 
   /* Check if location and IP exist in cookies */
   if (location) {
-    console.log("Using cookie data:", { location, ipAddress });
     return new Response(JSON.stringify({ location, ipAddress }), {
       status: 200,
       headers: { "Content-Type": "application/json" },

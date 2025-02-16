@@ -58,9 +58,7 @@ function Campaign({
         const response = await getLocationDetails();
         const locationData = response.location;
         const locationIp = response.ipAddress;
-        console.log(response);
         setLocationIpAddress(locationIp);
-        console.log(locationData, "---", locationIp, "---", getUserDetails);
         if (locationData) {
           setLocation(JSON.parse(locationData));
           const metaData = {
@@ -72,12 +70,11 @@ function Campaign({
             getUserDetails,
           };
           setMetaData(metaData);
-          console.log("lo", metaData);
         } else {
-          console.log("Location data not found");
+          console.log("some thing went wrong in iframe !!!!");
         }
       } catch (err) {
-        console.log("Failed to fetch location");
+        console.log("some thing went wrong in iframe !!!!");
       } finally {
         setLoading(false);
       }
