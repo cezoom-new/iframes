@@ -15,10 +15,10 @@ export async function POST(req: NextRequest) {
     type: "region",
   });
 
-  const countryName = locations
-  console.log(countryName,'countryName11')
-
-
+  const countryName = locations?.country
+    ? regionNamesInEnglish.of(locations?.country)
+    : "countryName not available";
+  // if (countryName && locationIpAddress) {
   try {
     const { data, error } = await supabase
       .from("iframe_users")
@@ -50,10 +50,11 @@ export async function POST(req: NextRequest) {
       console.error("Error inserting page view:", error.message);
       return new Response("", { status: 500 });
     } else {
-      return new Response("", { status: 200 });
+      return new Response("success", { status: 200 });
     }
   } catch (err) {
     console.error("Error tracking page view:", err);
     return new Response("", { status: 500 });
   }
+  // }
 }
