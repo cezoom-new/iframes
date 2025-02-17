@@ -65,22 +65,7 @@ export const campaign = defineType({
         ],
       },
     }),
-    // defineField({
-    //   title: "Customer Name",
-    //   name: "customerName",
-    //   type: "string",
-    //   group: "basic",
-    //   options: {
-    //     list: () =>{
-    //       return customerData.map((item:any) => ({
-    //         title: item.name, // assuming 'name' field exists in your JSON
-    //         value: item.name.toLowerCase().replace(/\s+/g, ''),
-    //       }));
-
-    //     }
-        
-    //   },
-    // }),
+   
     defineField({
       title: "Targeted Region",
       name: "region",
@@ -128,6 +113,20 @@ export const campaign = defineType({
           },
         ],
       },
+    }),
+    defineField({
+      name: "includeAudienceList",
+      type: "array",
+      title: "Include Audience List",
+      group: "basic",
+      of: [{ type: "reference", to: [{ type: "audienceList" }] }],
+    }),
+    defineField({
+      name: "excludeAudienceList",
+      type: "array",
+      title: "Exclude Audience List",
+      group: "basic",
+      of: [{ type: "reference", to: [{ type: "audienceList" }] }],
     }),
 
     defineField({

@@ -17,8 +17,7 @@ async function getEligibleAdjacencyCampaignsIds(customer: any, campaigns: any) {
   const customerType =
     DB[customer].locations >= 15 ? "largeScale" : "smallScale";
 
-  if (!campaigns || campaigns.length == 0 ) return []
-  
+  if (!campaigns || campaigns.length == 0) return []; 
   const eligibleCampaigns = (
     await Promise.all(
       adjacencies.map(async (adjacency: any) => {
@@ -28,17 +27,20 @@ async function getEligibleAdjacencyCampaignsIds(customer: any, campaigns: any) {
           customerType,
         });
 
-        return campaign.filter(
+        // filter the campaigns which is show on the viewport
+        const filteredCampaigns = campaign.filter(
           (campaign: any) =>
-            (adjacency.subscriptionStatus == false &&
-              campaign.audience == "exclude") ||
-            (adjacency.subscriptionStatus == true &&
-              campaign.audience == "include")
+            ((adjacency.subscriptionStatus === false &&
+              campaign.audience === "exclude") ||
+              (adjacency.subscriptionStatus === true &&
+                campaign.audience === "include")) &&
+            campaign?.includeAudienceLists?.includes(customer) &&
+            !campaign?.excludeAudienceLists?.includes(customer)
         );
+        return filteredCampaigns;
       })
     )
   ).reduce((a, b) => a.concat(b));
-
   return eligibleCampaigns;
 }
 
@@ -100,7 +102,7 @@ export async function getCampaigns(customer: string, viewportData: any) {
         customer,
         viewportData.selectedAdjacencyCampaigns
       );
-
+    console.log("adjacencyOrientedCampaigns", adjacencyOrientedCampaigns);
     const totalCampaignPool: any = getTotalCampaignPool(
       adjacencyOrientedCampaigns,
       viewportData.additionalCampaigns?.map((campaign: any) => {
@@ -108,6 +110,7 @@ export async function getCampaigns(customer: string, viewportData: any) {
       }),
       viewportData.combiningMode
     );
+    console.log("totalCampaignPool", totalCampaignPool);
     return totalCampaignPool;
   } catch (error) {
     console.error("Error in getting current campaign:", error);
