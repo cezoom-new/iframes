@@ -1,8 +1,7 @@
-import { trackPageView } from "@/app/api/supaBase/tracking";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { GetUserDevice } from "./BrowseData/browseData";
 import Anchor from "./anchor/anchor";
+import { getLocationDetails } from "@/utils/helper";
 
 export interface CtaBtnProps {
   ctaText?: string;
@@ -19,21 +18,19 @@ export default function CTAButton({
   ctaBtnColor,
   ctaBtnTextColor,
   ctaBtnLink,
-  campaignName
+  campaignName,
 }: CtaBtnProps) {
+  const [locations, setLocation] = useState(null);
+  const [locationIpAddress, setLocationIpAddress] = useState<any>("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-   const [locations, setLocation] = useState(null);
-   const [locationIpAddress, setLocationIpAddress] = useState<any>("");
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-
-    const browseDatas =new GetUserDevice().getTrackData()
    useEffect(() => {
       const fetchLocation = async () => {
         try {
-          const response = await fetch('/');
-          const locationData = response.headers.get('x-location-data');
-          const locationIp = response.headers.get('x-your-ip-address');
+          const response = await getLocationDetails();
+          const locationData = response?.location
+          const locationIp = response?.ipAddress
           setLocationIpAddress(locationIp)
           if (locationData) {
             setLocation(JSON.parse(locationData));
@@ -50,33 +47,30 @@ export default function CTAButton({
       fetchLocation();
     }, []);
   
-  
   return (
     <div>
-      <Link href={ctaBtnLink ? ctaBtnLink : ""}  target="_blank" passHref>
-      <Anchor
-        className={`font-semibold text-center py-3 px-8 rounded-lg whitespace-nowrap
-            ${
-          themeMode === "darkMode" ? "text-black " : "text-white"
-        }`}
-        style={{
-          background: ctaBtnColor
-            ? ctaBtnColor
-            : themeMode === "darkMode"
-              ? "#ffffff"
-              : "#000000",
-          color:
-            ctaBtnTextColor === "blackMode"
-              ? "#000000"
-              : ctaBtnTextColor === "whiteMode"
+      <Link href={ctaBtnLink ? ctaBtnLink : ""} target="_blank" passHref>
+        <Anchor
+          className={`font-semibold text-center py-3 px-8 rounded-lg whitespace-nowrap
+            ${themeMode === "darkMode" ? "text-black " : "text-white"}`}
+          style={{
+            background: ctaBtnColor
+              ? ctaBtnColor
+              : themeMode === "darkMode"
                 ? "#ffffff"
-                : "",
-        }}
-        ctaBtnLink={ctaBtnLink}
-        campaignName={campaignName}
-      >
-        {ctaText}
-      </Anchor>
+                : "#000000",
+            color:
+              ctaBtnTextColor === "blackMode"
+                ? "#000000"
+                : ctaBtnTextColor === "whiteMode"
+                  ? "#ffffff"
+                  : "",
+          }}
+          ctaBtnLink={ctaBtnLink}
+          campaignName={campaignName}
+        >
+          {ctaText}
+        </Anchor>
       </Link>
     </div>
   );

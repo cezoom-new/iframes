@@ -6,51 +6,53 @@ import { cookies } from "next/headers";
 export async function middleware(request: NextRequest) {
   const cookieStore: any = await cookies();
   const url = request.nextUrl.clone();
+
   try {
     const { searchParams, pathname } = request.nextUrl;
     const splitPath = pathname.trim().split("/");
 
-    const countrys = splitPath[splitPath.length - 1] ?? "us";
+    const country = splitPath[splitPath.length - 1] ?? "us";
     const product = splitPath[splitPath.length - 2];
     const customer = searchParams.get("domain") ?? "unknown";
 
-    if (product && countrys && customer) {
-      url.pathname = `${product}-${countrys}/${customer}`;
+    if (product && country && customer) {
+      url.pathname = `${product}-${country}/${customer}`;
     }
 
-    const ip = ipAddress(request);
-
-    // Retrieve existing location data from cookies
     let locationValue = cookieStore.get("_loc")?.value
       ? JSON.parse(cookieStore.get("_loc")?.value)
       : null;
 
-    // If location already exists, avoid fetching geolocation again
     const response = NextResponse.rewrite(url);
-    if (locationValue && Object.keys(locationValue).length > 0) {
-      response.headers.set("x-location-data", JSON.stringify(locationValue));
-    } else {
+
+    if (!locationValue) {
       const geoData = geolocation(request);
-      if (!geoData) return NextResponse.next(); // Avoid breaking the request if geolocation fails
+      if (!geoData) return NextResponse.next();
 
       const { city, country, region, latitude, longitude } = geoData;
       locationValue = { city, country, region, latitude, longitude };
 
-      // Store location in cookies for 30 days
-      cookieStore.set("_loc", JSON.stringify(locationValue), {
+      response.cookies.set("_loc", JSON.stringify(locationValue), {
         sameSite: "none",
         secure: true,
-        maxAge: 60 * 60 * 24 * 30, // 30 days
+        httpOnly: true,
+        maxAge: 60 * 60 * 24 * 30,
+        path: "/", // Ensure the cookie is available across the entire site
       });
       response.headers.set("x-location-data", JSON.stringify(locationValue));
     }
 
-    // Fetch geolocation data from Vercel Edge
+    response.headers.set("x-location-data", JSON.stringify(locationValue));
+    const ip = request.headers.get("x-forwarded-for");
+    response.cookies.set("_IPA", JSON.stringify(ip), {
+      sameSite: "none",
+      secure: true,
+      httpOnly: true,
+      maxAge: 60 * 60 * 24 * 30,
+      path: "/", // Ensure the cookie is available across the entire site
+    });
 
-    // Rewrite the response with location data
-
-    response.headers.set("x-your-ip-address", JSON.stringify(ip));
-
+    console.log("Middleware executed successfully");
     return response;
   } catch (error) {
     console.error("Error in middleware:", error);

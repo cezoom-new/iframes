@@ -1,5 +1,6 @@
 import { UserIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
+import customerData from "../../../database.json"
 
 export const campaign = defineType({
   name: "campaign",
@@ -38,7 +39,7 @@ export const campaign = defineType({
       group: "basic",
     }),
     defineField({
-      title: "Campagin Slug",
+      title: "Campaign Slug",
       name: "slug",
       type: "slug",
       group: "basic",
@@ -64,6 +65,7 @@ export const campaign = defineType({
         ],
       },
     }),
+   
     defineField({
       title: "Targeted Region",
       name: "region",
@@ -111,6 +113,20 @@ export const campaign = defineType({
           },
         ],
       },
+    }),
+    defineField({
+      name: "includeAudienceList",
+      type: "array",
+      title: "Include Audience List",
+      group: "basic",
+      of: [{ type: "reference", to: [{ type: "audienceList" }] }],
+    }),
+    defineField({
+      name: "excludeAudienceList",
+      type: "array",
+      title: "Exclude Audience List",
+      group: "basic",
+      of: [{ type: "reference", to: [{ type: "audienceList" }] }],
     }),
 
     defineField({
