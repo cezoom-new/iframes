@@ -45,7 +45,7 @@ export default function SecondaryCTABtn({
 
           borderColor: ctaBtnColor ? ctaBtnColor : "",
         }}
-        onHandleClick={(e: React.SyntheticEvent) => setIsOpen(!isOpen)}
+        onHandleClick={() => setIsOpen(!isOpen)}
         campaignName={campaignName}
       >
         {isSecondaryBtn && (

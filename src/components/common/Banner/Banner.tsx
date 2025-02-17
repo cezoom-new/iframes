@@ -104,7 +104,7 @@ export default function Banner({ className, banner, campaignName }: any) {
           backgroundColor: banner?.backgroundColorGradient,
           padding: banner?.sectionPadding,
         }}
-        className={`text-white w-full px-12 py-8 ${banner?.isFullScreen ? "flex-1 w-5/6 " : "rounded-lg"}`}
+        className={`text-white w-full px-12 py-6 ${banner?.isFullScreen ? "flex-1 w-5/6 " : "rounded-lg"}`}
       >
         <div
           className="container mx-auto"
