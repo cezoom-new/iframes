@@ -7,7 +7,7 @@ export const structure: StructureResolver = (S) =>
     .title("Base")
     .items([
       S.documentTypeListItem("campaign").title("Campaign"),
-      S.documentTypeListItem("viewport").title("View Port"),
+      S.documentTypeListItem("viewport").title("ViewPort"),
       S.documentTypeListItem("banner").title("Banner"),
       S.documentTypeListItem("cookiePreference").title("Cookie Preference"),
       S.documentTypeListItem("backgroundLinearGradient").title("Background Color"),

@@ -1,11 +1,6 @@
 import customerDB from "../../database.json";
 import { runQuery } from "../sanity/lib/client";
-import {
-  getViewPortByRegion,
-  getCampaignIdsByAdjacency,
-  getCampaignLayoutByID,
-  getViewPortByProductRegion,
-} from "../sanity/lib/queries";
+import { getCampaignIdsByAdjacency } from "../sanity/lib/queries";
 
 /*
   From customer metadata get eligible campaigns based on adjacencies the customer is subscribed to.
@@ -17,7 +12,8 @@ async function getEligibleAdjacencyCampaignsIds(customer: any, campaigns: any) {
   const customerType =
     DB[customer].locations >= 15 ? "largeScale" : "smallScale";
 
-  if (!campaigns || campaigns.length == 0) return []; 
+  if (!campaigns || campaigns.length == 0) return [];
+
   const eligibleCampaigns = (
     await Promise.all(
       adjacencies.map(async (adjacency: any) => {
@@ -26,18 +22,26 @@ async function getEligibleAdjacencyCampaignsIds(customer: any, campaigns: any) {
           campaignIds: campaigns?.map((campaign: any) => campaign._ref),
           customerType,
         });
-
         // filter the campaigns which is show on the viewport
-        const filteredCampaigns = campaign.filter(
-          (campaign: any) =>
-            ((adjacency.subscriptionStatus === false &&
-              campaign.audience === "exclude") ||
-              (adjacency.subscriptionStatus === true &&
-                campaign.audience === "include")) &&
-            campaign?.includeAudienceLists?.includes(customer) &&
-            !campaign?.excludeAudienceLists?.includes(customer)
-        );
-        return filteredCampaigns;
+        return campaign.filter((campaign: any) => {
+          // Priority 1: Exclude if the customer is in the excludeAudienceLists
+          if (campaign?.excludeAudienceLists?.includes(customer)) {
+            return false;
+          }
+
+          // Priority 2: Include if the customer is in the includeAudienceLists
+          if (campaign?.includeAudienceLists?.includes(customer)) {
+            return true;
+          }
+
+          // Priority 3: Apply the remaining conditions
+          return (
+            (adjacency.subscriptionStatus == false &&
+              campaign.audience == "exclude") ||
+            (adjacency.subscriptionStatus == true &&
+              campaign.audience == "include")
+          );
+        });
       })
     )
   ).reduce((a, b) => a.concat(b));
@@ -102,7 +106,6 @@ export async function getCampaigns(customer: string, viewportData: any) {
         customer,
         viewportData.selectedAdjacencyCampaigns
       );
-    console.log("adjacencyOrientedCampaigns", adjacencyOrientedCampaigns);
     const totalCampaignPool: any = getTotalCampaignPool(
       adjacencyOrientedCampaigns,
       viewportData.additionalCampaigns?.map((campaign: any) => {
@@ -110,7 +113,7 @@ export async function getCampaigns(customer: string, viewportData: any) {
       }),
       viewportData.combiningMode
     );
-    console.log("totalCampaignPool", totalCampaignPool);
+
     return totalCampaignPool;
   } catch (error) {
     console.error("Error in getting current campaign:", error);
