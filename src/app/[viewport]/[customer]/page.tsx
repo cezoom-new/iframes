@@ -10,10 +10,7 @@ import { getCampaigns } from "@/utils/getCampaigns";
 import Campaign from "../../campaigns/Campaign";
 import customerDB from "../../../../database.json";
 import NotFound from "@/app/not-found";
-import { getMethod } from "@/utils/helper";
 import { fetchAllViewport, fetchViewportByDimensionValue } from "@/utils/Api";
-
-export const revalidate: number = 86400  //  60 * 60 * 24 equals to one day
 
 
 export async function generateStaticParams() {
