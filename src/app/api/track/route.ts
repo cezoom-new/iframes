@@ -19,6 +19,8 @@ export async function POST(req: NextRequest) {
     eventType,
     sessionId,
     userId,
+    element_id,
+    e_name
   }: any = request;
 
   const customerValue = loc?.search?.replace("?domain=", "");
@@ -38,6 +40,8 @@ export async function POST(req: NextRequest) {
         practice_name: customerValue,
         session_id: sessionId,
         user_id: userId,
+        element_id: element_id,
+        e_name: e_name,
       },
     ]);
 
