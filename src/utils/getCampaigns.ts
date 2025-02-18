@@ -1,46 +1,74 @@
 import customerDB from "../../database.json";
-import { runQuery } from "../sanity/lib/client";
-import {
-  getViewPortByRegion,
-  getCampaignIdsByAdjacency,
-  getCampaignLayoutByID,
-  getViewPortByProductRegion,
-} from "../sanity/lib/queries";
 
 /*
   From customer metadata get eligible campaigns based on adjacencies the customer is subscribed to.
 */
-async function getEligibleAdjacencyCampaignsIds(customer: any, campaigns: any) {
+async function getEligibleAdjacencyCampaignsIds(
+  viewport: string,
+  customer: any,
+  campaigns: any
+) {
   const DB: any = customerDB;
   if (!customer || !DB[customer]) return [];
   const adjacencies = DB[customer].subscriptions;
   const customerType =
     DB[customer].locations >= 15 ? "largeScale" : "smallScale";
 
-  if (!campaigns || campaigns.length == 0 ) return []
-  
+  if (!campaigns || campaigns.length == 0) return [];
+
   const eligibleCampaigns = (
     await Promise.all(
       adjacencies.map(async (adjacency: any) => {
-        const campaign = await runQuery(getCampaignIdsByAdjacency(), {
-          adjacency: adjacency.adjacencyName,
-          campaignIds: campaigns?.map((campaign: any) => campaign._ref),
-          customerType,
-        });
+        const campaign: any = await fetchCampaignByFilters(
+          viewport,
+          customer,
+          adjacency.adjacencyName,
+          campaigns?.map((campaign: any) => campaign._ref),
+          customerType
+        );
+        // filter the campaigns which is show on the viewport
+        return campaign.filter((campaign: any) => {
+          if (campaign?.excludeAudienceLists?.includes(customer)) {
+            return false;
+          }
 
-        return campaign.filter(
-          (campaign: any) =>
+          if (campaign?.includeAudienceLists?.includes(customer)) {
+            return true;
+          }
+
+          return (
             (adjacency.subscriptionStatus == false &&
               campaign.audience == "exclude") ||
             (adjacency.subscriptionStatus == true &&
               campaign.audience == "include")
-        );
+          );
+        });
       })
     )
   ).reduce((a, b) => a.concat(b));
-
   return eligibleCampaigns;
 }
+const fetchCampaignByFilters = async (
+  viewport: string,
+  customer: string,
+  adjacency: string,
+  campaignIDs: string[],
+  customerType: string
+) => {
+  const url = new URL(`${process.env.PROJECT_URL}/api/campaigns`);
+  const res = await fetch(url, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({ adjacency, campaignIDs, customerType }),
+    next: {
+      tags: [String(viewport), String(customer)]
+    }
+  });
+  return (await res.json())?.data;
+};
 
 /* motive of below function is to generate a
  unique banner based of each refresh based on available campaign*/
@@ -93,10 +121,15 @@ const getTotalCampaignPool = (
   return combiningMode === "override" ? poolTwo : poolOne.concat(poolTwo);
 };
 
-export async function getCampaigns(customer: string, viewportData: any) {
+export async function getCampaigns(
+  viewport: string,
+  customer: string,
+  viewportData: any
+) {
   try {
     const adjacencyOrientedCampaigns: any =
       await getEligibleAdjacencyCampaignsIds(
+        viewport,
         customer,
         viewportData.selectedAdjacencyCampaigns
       );
@@ -113,3 +146,4 @@ export async function getCampaigns(customer: string, viewportData: any) {
     console.error("Error in getting current campaign:", error);
   }
 }
+

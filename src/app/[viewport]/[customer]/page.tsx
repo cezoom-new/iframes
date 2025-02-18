@@ -39,18 +39,25 @@ export default async function ViewPort({ params }: { params: any }) {
   });
 
   if (!viewportData) {
-    return <NotFound/>;
+    return <NotFound />;
   }
 
-  const requiredCampaigns = await getCampaigns(customer, viewportData)
-  const campaigns = requiredCampaigns && requiredCampaigns.length !== 0 ? await Promise.all(
-    requiredCampaigns.filter((campaign: any) => !!campaign ).map(
-      async (campaign: any) =>
-        await runQuery(getCampaignByID(), { campaignID: campaign._id }, [
-          campaign._id,
-        ])
-    )
-  ) : []
+  const requiredCampaigns = await getCampaigns(viewport,customer, viewportData);
+  const campaigns =
+    requiredCampaigns && requiredCampaigns.length !== 0
+      ? await Promise.all(
+          requiredCampaigns
+            .filter((campaign: any) => !!campaign)
+            .map(
+              async (campaign: any) =>
+                await runQuery(
+                  getCampaignByID(),
+                  { campaignID: campaign._id },
+                  [campaign._id]
+                )
+            )
+        )
+      : [];
 
   const bannerID = viewportData.showBanner
     ? viewportData.selectedBanner?.[0]?._ref

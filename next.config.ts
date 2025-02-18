@@ -16,7 +16,12 @@ const nextConfig: NextConfig = {
     // @ts-ignore
     incomingRequests: {
       ignore: [/\api\/v1\/health/],
-    }
+    },
+  },
+  env: {
+    SUPABASE_ANON_PUBLIC: process.env.SUPABASE_ANON_PUBLIC,
+    SUPABASE_PROJECT_URL: process.env.SUPABASE_PROJECT_URL,
+    PROJECT_URL:process.env.PROJECT_URL
   },
 };
 

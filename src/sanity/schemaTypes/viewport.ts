@@ -90,6 +90,13 @@ export const viewport = defineType({
         },
       ],
     }),
+    defineField({
+      name: "isCookieShow",
+      title: "Cookie Notification show",
+      type: "boolean",
+      group: "basic",
+    }),
+
   ],
   preview: {
     select: {

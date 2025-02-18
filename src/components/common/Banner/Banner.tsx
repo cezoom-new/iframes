@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import locIcon from "../../../../public/Frame.svg";
 import { urlFor } from "@/sanity/lib/image";
+import Anchor from "../anchor/anchor";
 
 export interface IBannerInterface {
   className: string;
@@ -45,7 +46,7 @@ const descriptionComponents: any = {
     ),
   },
 };
-export default function Banner({ className, banner }: any) {
+export default function Banner({ className, banner, campaignName }: any) {
   const getMonths = (date: string) => {
     const months = [
       "Jan",
@@ -103,7 +104,7 @@ export default function Banner({ className, banner }: any) {
           backgroundColor: banner?.backgroundColorGradient,
           padding: banner?.sectionPadding,
         }}
-        className={`text-white w-full px-12 py-8 ${banner?.isFullScreen ? "flex-1 w-5/6 " : "rounded-lg"}`}
+        className={`text-white w-full px-12 py-6 ${banner?.isFullScreen ? "flex-1 w-5/6 " : "rounded-lg"}`}
       >
         <div
           className="container mx-auto"
@@ -167,15 +168,16 @@ export default function Banner({ className, banner }: any) {
                       key={`buttonComponents-${index}`}
                     >
                       <Link href={component?.ctaBtnTextLink} target="_blank">
-                        <button
+                        <Anchor
                           style={{
                             backgroundColor: component?.ctaBtnColor,
                             color: component?.ctaBtnTextColor,
                           }}
                           className="font-bold text-sm h-11 w-40 rounded bg-white text-[#1E293B]"
+                          campaignName={campaignName}
                         >
                           {component?.ctaBtnTextForEvent}
-                        </button>
+                        </Anchor>
                       </Link>
                     </div>
                   );

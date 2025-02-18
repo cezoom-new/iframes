@@ -3,6 +3,7 @@ import { PortableText } from "next-sanity";
 import { CloseIcon } from "@sanity/icons";
 
 import CookieCTAButton from "../cookieCTABtn";
+import Anchor from "../anchor/anchor";
 
 export interface IBannerInterface {
   className: string;
@@ -97,6 +98,7 @@ export default function CookieShow({ cookie, campaign }: any) {
                 ctaText={cookie?.ctaBtn?.ctaBtnText}
                 cookieMode={true}
                 toggleDrawer={closeDrawer}
+                campaignName={campaign?.name}
               />
             )}
             {cookie?.secondaryCtaBtn?.secondaryBtnText && (
@@ -104,6 +106,7 @@ export default function CookieShow({ cookie, campaign }: any) {
                 ctaText={cookie?.secondaryCtaBtn?.secondaryBtnText}
                 cookieMode={false}
                 toggleDrawer={toggleDrawer}
+                campaignName={campaign?.name}
               />
             )}
           </div>
@@ -118,12 +121,10 @@ export default function CookieShow({ cookie, campaign }: any) {
           isDrawerOpen ? "translate-y-0" : "translate-y-full"
         } z-20`}
       >
-        <button
-          onClick={toggleDrawer}
-          className="absolute top-4 right-4 text-white"
-        >
-          <CloseIcon style={{ color: '#fff', fontSize: '36px' }} />
-        </button>
+        <Anchor onHandleClick={toggleDrawer}
+          className="absolute top-4 right-4 text-white">
+        <CloseIcon style={{ color: '#fff', fontSize: '36px' }} />
+        </Anchor>
         <div className="py-8 px-2 text-white max-w-7xl m-auto">
           <PortableText
             value={cookie?.cookiesDetail}

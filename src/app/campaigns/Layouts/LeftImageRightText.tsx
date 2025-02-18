@@ -2,7 +2,6 @@ import Banner from "@/components/common/Banner/Banner";
 import Container from "@/components/common/structure/Container";
 import Section from "@/components/common/structure/Section";
 import React from "react";
-import CampaignTextArea from "../../components/CampaignTextArea";
 import CampaignImageArea from "../../components/CampaignImageArea";
 import CookieShow from "@/components/common/cookieShow/cookieShow";
 import { Color } from "./RightImageLeftText";
@@ -25,7 +24,7 @@ export default function LeftImageRightText({
       bgImage={campaign?.backgroundImage?.url}
       //  className={`w-full h-screen`}
     >
-      {campaign?.isCookieShow && (
+      {cookies && (
         <CookieShow cookie={cookies} campaign={campaign} />
       )}
       <Container
@@ -49,11 +48,6 @@ export default function LeftImageRightText({
             components={campaign?.structure?.components}
             className="max-w-lg xl:max-w-xl gap-3"
           />
-          {/* <CampaignTextArea
-            colors={colors}
-            campaign={campaign}
-            className="max-w-xl xl:max-w-3xl"
-          /> */}
         </div>
       </Container>
       {banner && <Banner className="" banner={banner} />}
