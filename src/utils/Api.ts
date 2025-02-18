@@ -1,3 +1,5 @@
+import 'server-only'
+
 export const fetchAllViewport = async () => {
   try {
     const res = await fetch(`${process.env.PROJECT_URL}/api/viewports`, {
