@@ -31,7 +31,7 @@ export default function RightImageLeftText({
       bgColor={colors?.selectedBgColor}
       bgImage={campaign?.backgroundImage?.url}
     >
-      {campaign?.isCookieShow &&
+      {cookies &&
         <CookieShow cookie={cookies}  campaign={campaign}/>
       }
       <Container

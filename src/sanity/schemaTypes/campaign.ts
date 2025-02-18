@@ -120,6 +120,7 @@ export const campaign = defineType({
       title: "Include Audience List",
       group: "basic",
       of: [{ type: "reference", to: [{ type: "audienceList" }] }],
+      validation: Rule => Rule.length(1).error('You can only select one item.') 
     }),
     defineField({
       name: "excludeAudienceList",
@@ -127,6 +128,7 @@ export const campaign = defineType({
       title: "Exclude Audience List",
       group: "basic",
       of: [{ type: "reference", to: [{ type: "audienceList" }] }],
+      validation: Rule => Rule.length(1).error('You can only select one item.') 
     }),
 
     defineField({
@@ -187,13 +189,7 @@ export const campaign = defineType({
       type: "image",
       group: "template",
     }),
-    defineField({
-      name: "isCookieShow",
-      title: "Cookie Notification show",
-      type: "boolean",
-      group: "template",
-    }),
-
+  
     // strcture schema
 
     defineField({

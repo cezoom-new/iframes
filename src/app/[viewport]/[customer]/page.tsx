@@ -67,7 +67,7 @@ export default async function ViewPort({ params }: { params: any }) {
     ? await runQuery(getBannerByID(), { bannerID }, [bannerID])
     : null;
 
-  const cookies = await runQuery(getCookiesData());
+  const cookies = viewportData.isCookieShow ? await runQuery(getCookiesData()) : null;
 
   // const campaign = campaigns[Math.floor(Math.random() * campaigns.length)];
   // const campaigns = campaigns.map((campaign: any) => campaign._id )
