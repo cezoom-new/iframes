@@ -24,7 +24,7 @@ export default function LeftImageRightText({
       bgImage={campaign?.backgroundImage?.url}
       //  className={`w-full h-screen`}
     >
-      {campaign?.isCookieShow && (
+      {cookies && (
         <CookieShow cookie={cookies} campaign={campaign} />
       )}
       <Container

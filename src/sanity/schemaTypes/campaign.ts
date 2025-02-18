@@ -189,13 +189,7 @@ export const campaign = defineType({
       type: "image",
       group: "template",
     }),
-    defineField({
-      name: "isCookieShow",
-      title: "Cookie Notification show",
-      type: "boolean",
-      group: "template",
-    }),
-
+  
     // strcture schema
 
     defineField({
