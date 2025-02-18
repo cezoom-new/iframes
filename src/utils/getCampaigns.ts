@@ -1,6 +1,4 @@
 import customerDB from "../../database.json";
-import { runQuery } from "../sanity/lib/client";
-import { getCampaignIdsByAdjacency } from "../sanity/lib/queries";
 
 /*
   From customer metadata get eligible campaigns based on adjacencies the customer is subscribed to.
@@ -50,6 +48,27 @@ async function getEligibleAdjacencyCampaignsIds(
   ).reduce((a, b) => a.concat(b));
   return eligibleCampaigns;
 }
+const fetchCampaignByFilters = async (
+  viewport: string,
+  customer: string,
+  adjacency: string,
+  campaignIDs: string[],
+  customerType: string
+) => {
+  const url = new URL(`${process.env.PROJECT_URL}/api/campaigns`);
+  const res = await fetch(url, {
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({ adjacency, campaignIDs, customerType }),
+    next: {
+      tags: [String(viewport), String(customer)]
+    }
+  });
+  return (await res.json())?.data;
+};
 
 /* motive of below function is to generate a
  unique banner based of each refresh based on available campaign*/
@@ -128,12 +147,3 @@ export async function getCampaigns(
   }
 }
 
-function fetchCampaignByFilters(
-  viewport: any,
-  customer: any,
-  adjacencyName: any,
-  arg3: any,
-  customerType: string
-) {
-  throw new Error("Function not implemented.");
-}
