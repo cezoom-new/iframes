@@ -30,6 +30,7 @@ export default function Anchor(button: ButtonProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [buttonId, setButtonID] = useState<string>("");
+  const [buttonText, setBtnText] = useState<string>("");
 
   const getUserDetails = new GetUserDevice().getTrackData();
   useEffect(() => {
@@ -80,7 +81,9 @@ export default function Anchor(button: ButtonProps) {
           campaignName: button?.campaignName,
           eventType: "click",
           sessionId: getCookie("_SID") ?? null,
-          userId: getCookie("_UID")?? null,
+          userId: getCookie("_UID") ?? null,
+          element_id: buttonId,
+          e_name: buttonText,
         }),
       });
 
@@ -92,7 +95,8 @@ export default function Anchor(button: ButtonProps) {
     }
   }
 
-  const handleButtonClick = async () => {
+  const handleButtonClick = async (e: any) => {
+    setBtnText(e?.target?.innerText);
     await trackUserInteraction();
     if (typeof button?.onHandleClick === "function") {
       button.onHandleClick();
@@ -103,7 +107,7 @@ export default function Anchor(button: ButtonProps) {
       id={buttonId}
       className={button?.className}
       style={button?.style}
-      onClick={debounce(handleButtonClick, 300)}
+      onClick={(e) => debounce(handleButtonClick(e), 300)}
     >
       {button?.children}
     </button>
