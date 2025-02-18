@@ -10,14 +10,12 @@ import { getCampaigns } from "@/utils/getCampaigns";
 import Campaign from "../../campaigns/Campaign";
 import customerDB from "../../../../database.json";
 import NotFound from "@/app/not-found";
-import { fetchAllViewport, fetchCookieSettings, fetchViewportByDimensionValue } from "@/utils/Api";
 
 export const revalidate: number = 86400  //  60 * 60 * 24 equals to one day
 
 
 export async function generateStaticParams() {
-  // const viewports = await runQuery(getViewPorts());
-  const viewports = await fetchAllViewport()
+  const viewports = await runQuery(getViewPorts());
   const allParams: any = [];
 
   for (const port of viewports) {
@@ -36,8 +34,10 @@ export async function generateStaticParams() {
 
 export default async function ViewPort({ params }: { params: any }) {
   const { viewport, customer } = await params;
-  const viewportData = await fetchViewportByDimensionValue(viewport, customer);
-  
+  const viewportData = await runQuery(getViewPortByProductRegion(), {
+    productRegion: viewport,
+  });
+
   if (!viewportData) {
     return <NotFound />;
   }
@@ -66,7 +66,7 @@ export default async function ViewPort({ params }: { params: any }) {
     ? await runQuery(getBannerByID(), { bannerID }, [bannerID])
     : null;
 
-  const cookies = await fetchCookieSettings(viewport,customer)
+  const cookies = await runQuery(getCookiesData());
 
   // const campaign = campaigns[Math.floor(Math.random() * campaigns.length)];
   // const campaigns = campaigns.map((campaign: any) => campaign._id )
