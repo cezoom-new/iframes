@@ -2,20 +2,19 @@ import { runQuery } from "@/sanity/lib/client";
 import {
   getBannerByID,
   getCampaignByID,
-  getCookiesData,
-  getViewPortByProductRegion,
-  getViewPorts,
 } from "@/sanity/lib/queries";
 import { getCampaigns } from "@/utils/getCampaigns";
 import Campaign from "../../campaigns/Campaign";
 import customerDB from "../../../../database.json";
 import NotFound from "@/app/not-found";
+import { fetchAllViewport, fetchCookieSettings, fetchViewportByDimensionValue } from "@/utils/Api";
 
 export const revalidate: number = 86400  //  60 * 60 * 24 equals to one day
 
 
 export async function generateStaticParams() {
-  const viewports = await runQuery(getViewPorts());
+  // const viewports = await runQuery(getViewPorts());
+  const viewports = await fetchAllViewport()
   const allParams: any = [];
 
   for (const port of viewports) {
@@ -34,10 +33,7 @@ export async function generateStaticParams() {
 
 export default async function ViewPort({ params }: { params: any }) {
   const { viewport, customer } = await params;
-  const viewportData = await runQuery(getViewPortByProductRegion(), {
-    productRegion: viewport,
-  });
-
+  const viewportData = await fetchViewportByDimensionValue(viewport, customer);
   if (!viewportData) {
     return <NotFound />;
   }
@@ -66,7 +62,7 @@ export default async function ViewPort({ params }: { params: any }) {
     ? await runQuery(getBannerByID(), { bannerID }, [bannerID])
     : null;
 
-  const cookies = await runQuery(getCookiesData());
+  const cookies = await fetchCookieSettings(viewport,customer);
 
   // const campaign = campaigns[Math.floor(Math.random() * campaigns.length)];
   // const campaigns = campaigns.map((campaign: any) => campaign._id )
