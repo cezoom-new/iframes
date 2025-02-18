@@ -24,17 +24,14 @@ async function getEligibleAdjacencyCampaignsIds(customer: any, campaigns: any) {
         });
         // filter the campaigns which is show on the viewport
         return campaign.filter((campaign: any) => {
-          // Priority 1: Exclude if the customer is in the excludeAudienceLists
           if (campaign?.excludeAudienceLists?.includes(customer)) {
             return false;
           }
 
-          // Priority 2: Include if the customer is in the includeAudienceLists
           if (campaign?.includeAudienceLists?.includes(customer)) {
             return true;
           }
 
-          // Priority 3: Apply the remaining conditions
           return (
             (adjacency.subscriptionStatus == false &&
               campaign.audience == "exclude") ||
