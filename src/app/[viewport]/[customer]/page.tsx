@@ -3,8 +3,6 @@ import {
   getBannerByID,
   getCampaignByID,
   getCookiesData,
-  getViewPortByProductRegion,
-  getViewPorts,
 } from "@/sanity/lib/queries";
 import { getCampaigns } from "@/utils/getCampaigns";
 import Campaign from "../../campaigns/Campaign";
