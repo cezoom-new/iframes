@@ -26,8 +26,6 @@ export async function POST(req: NextRequest) {
   const customerValue = loc?.search?.replace("?domain=", "");
 
   try {
-    console.log(    {element_id: element_id,
-      e_name: e_name},'aravind')
     const { data, error } = await supabase.from("iframe_events").insert([
       {
         current_path: loc.href,
