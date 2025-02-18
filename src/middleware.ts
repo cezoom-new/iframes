@@ -6,6 +6,17 @@ import { cookies } from "next/headers";
 export async function middleware(request: NextRequest) {
   const cookieStore: any = await cookies();
   const url = request.nextUrl.clone();
+  // const authHeader = req.headers.get("Authorization");
+//   if (authHeader !== process.env.TOKEN) {
+//     return NextResponse.json(
+//       { error: "Unauthorized: No token provided" },
+//       { status: 401 }
+//     );
+//   } else {
+//     return NextResponse.next();
+//   }
+// }
+
 
   try {
     const { searchParams, pathname } = request.nextUrl;

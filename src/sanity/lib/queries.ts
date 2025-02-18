@@ -102,6 +102,74 @@ const getCampaignByID = () => {
 const getBannerByID = () => {
   return groq`*[_type == "banner" && _id == $bannerID] | order(_createdAt desc)[0]`;
 };
+const getCampaignByIDs = () => {
+  return groq`*[_type == "campaign" &&  _id in $campaignIDs]{
+    ...,
+  "colorSchema":colorSchema->,
+  "campaignImage": structure.campaignImage.asset->{
+          _id,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        },
+        "colorTemplate1":colorTemplate[]->{paragraphColor,
+          h1Color,
+          highlightColor,
+          selectedBgColor,
+          subtitleText
+        },
+        "templateLogos":
+        structure {
+          components[ _type == "topTemplateLogo"] {
+            _key, 
+            templateLogos[] {
+              asset->{
+                _id,
+                url,
+                metadata {
+                  dimensions {
+                    width,
+                    height,
+                    aspectRatio
+                  }
+                }
+              }
+            }
+          }
+        },
+        "backgroundImage": backgroundImage.asset->{
+          _id,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        },
+    campaignCarousalImage[]{
+    speakerName,
+      speakerDesignation,
+   'image':speakerImage.asset->{
+          _id,
+          url,
+          metadata {
+            dimensions {
+              width,
+              height,
+              aspectRatio
+            }
+          }
+        },
+  }
+  }`;
+};
 
 const getCampaignLayoutByID = () => {
   return groq`*[_type == "campaign" && _id == $campaignID]{ selectedLayout } | order(_createdAt desc)[0]`;
@@ -117,4 +185,5 @@ export {
   getCampaignLayoutByID,
   getAllCampaignsByLayout,
   getCookiesData,
+  getCampaignByIDs
 };

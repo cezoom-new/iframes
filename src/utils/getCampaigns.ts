@@ -5,7 +5,11 @@ import { getCampaignIdsByAdjacency } from "../sanity/lib/queries";
 /*
   From customer metadata get eligible campaigns based on adjacencies the customer is subscribed to.
 */
-async function getEligibleAdjacencyCampaignsIds(customer: any, campaigns: any) {
+async function getEligibleAdjacencyCampaignsIds(
+  viewport: string,
+  customer: any,
+  campaigns: any
+) {
   const DB: any = customerDB;
   if (!customer || !DB[customer]) return [];
   const adjacencies = DB[customer].subscriptions;
@@ -17,13 +21,15 @@ async function getEligibleAdjacencyCampaignsIds(customer: any, campaigns: any) {
   const eligibleCampaigns = (
     await Promise.all(
       adjacencies.map(async (adjacency: any) => {
-        const campaign = await runQuery(getCampaignIdsByAdjacency(), {
-          adjacency: adjacency.adjacencyName,
-          campaignIds: campaigns?.map((campaign: any) => campaign._ref),
-          customerType,
-        });
+        const campaign: any = await fetchCampaignByFilters(
+          viewport,
+          customer,
+          adjacency.adjacencyName,
+          campaigns?.map((campaign: any) => campaign._ref),
+          customerType
+        );
         // filter the campaigns which is show on the viewport
-        return campaign.filter((campaign: any) => {
+        return campaign?.filter((campaign: any) => {
           // Priority 1: Exclude if the customer is in the excludeAudienceLists
           if (campaign?.excludeAudienceLists?.includes(customer)) {
             return false;
@@ -99,13 +105,19 @@ const getTotalCampaignPool = (
   return combiningMode === "override" ? poolTwo : poolOne.concat(poolTwo);
 };
 
-export async function getCampaigns(customer: string, viewportData: any) {
+export async function getCampaigns(
+  viewport: string,
+  customer: string,
+  viewportData: any
+) {
   try {
     const adjacencyOrientedCampaigns: any =
       await getEligibleAdjacencyCampaignsIds(
+        viewport,
         customer,
         viewportData.selectedAdjacencyCampaigns
       );
+
     const totalCampaignPool: any = getTotalCampaignPool(
       adjacencyOrientedCampaigns,
       viewportData.additionalCampaigns?.map((campaign: any) => {
@@ -113,9 +125,18 @@ export async function getCampaigns(customer: string, viewportData: any) {
       }),
       viewportData.combiningMode
     );
-
     return totalCampaignPool;
   } catch (error) {
     console.error("Error in getting current campaign:", error);
   }
+}
+
+function fetchCampaignByFilters(
+  viewport: any,
+  customer: any,
+  adjacencyName: any,
+  arg3: any,
+  customerType: string
+) {
+  throw new Error("Function not implemented.");
 }
