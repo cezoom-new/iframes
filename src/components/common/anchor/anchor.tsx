@@ -96,7 +96,6 @@ export default function Anchor(button: ButtonProps) {
   }
 
   const handleButtonClick = async (e: any) => {
-    console.log(e);
     setBtnText(e?.target?.innerText);
     await trackUserInteraction();
     if (typeof button?.onHandleClick === "function") {
