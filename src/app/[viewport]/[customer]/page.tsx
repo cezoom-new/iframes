@@ -14,8 +14,8 @@ import { fetchAllViewport, fetchViewportByDimensionValue } from "@/utils/Api";
 
 
 export async function generateStaticParams() {
-  // const viewports = await runQuery(getViewPorts());
-  const viewports = await fetchAllViewport()
+  const viewports = await runQuery(getViewPorts());
+  // const viewports = await fetchAllViewport()
   const allParams: any = [];
 
   for (const port of viewports) {
@@ -34,7 +34,10 @@ export async function generateStaticParams() {
 
 export default async function ViewPort({ params }: { params: any }) {
   const { viewport, customer } = await params;
-  const viewportData = await fetchViewportByDimensionValue(viewport, customer);
+  // const viewportData = await fetchViewportByDimensionValue(viewport, customer);
+  const viewportData = await runQuery(getViewPortByProductRegion(), {
+    productRegion: viewport,
+  });
   
   if (!viewportData) {
     return <NotFound />;
