@@ -136,7 +136,7 @@ export default async function ViewPort({ params }: { params: any }) {
     url.searchParams.append("slug", viewport);
 
     try {
-      const res = await fetch(url, {
+      const res: any = await fetch(url, {
         next: { tags: [viewport, customer] },
         method: "GET",
         headers: {
@@ -145,13 +145,15 @@ export default async function ViewPort({ params }: { params: any }) {
         },
       });
       if (res.ok) {
-        return (await res.json())?.data;
+        const a = await res.json()
+        console.log(a,'wwwwwwwwwwwwwee')
+        return (a?.data);
       } else {
         console.error("Something went wrong");
       }
     } catch (error) {
       console.log(error);
-      throw new Error("Unexpected Error");
+      // throw new Error("Unexpected Error");
     }
   };
   const { viewport, customer } = await params;
