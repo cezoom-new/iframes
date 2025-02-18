@@ -10,12 +10,12 @@ import { getCampaigns } from "@/utils/getCampaigns";
 import Campaign from "../../campaigns/Campaign";
 import customerDB from "../../../../database.json";
 import NotFound from "@/app/not-found";
-
-export const revalidate: number = 86400  //  60 * 60 * 24 equals to one day
+import { fetchAllViewport, fetchViewportByDimensionValue } from "@/utils/Api";
 
 
 export async function generateStaticParams() {
-  const viewports = await runQuery(getViewPorts());
+  // const viewports = await runQuery(getViewPorts());
+  const viewports = await fetchAllViewport()
   const allParams: any = [];
 
   for (const port of viewports) {
@@ -34,15 +34,13 @@ export async function generateStaticParams() {
 
 export default async function ViewPort({ params }: { params: any }) {
   const { viewport, customer } = await params;
-  const viewportData = await runQuery(getViewPortByProductRegion(), {
-    productRegion: viewport,
-  });
-
+  const viewportData = await fetchViewportByDimensionValue(viewport, customer);
+  
   if (!viewportData) {
     return <NotFound />;
   }
 
-  const requiredCampaigns = await getCampaigns(customer, viewportData);
+  const requiredCampaigns = await getCampaigns(viewport,customer, viewportData);
   const campaigns =
     requiredCampaigns && requiredCampaigns.length !== 0
       ? await Promise.all(

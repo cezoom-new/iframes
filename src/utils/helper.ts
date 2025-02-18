@@ -32,10 +32,10 @@ export async function createSession(uID: string | null) {
   }
 }
 
-/*** taking url from env  instead /api/location -> can be accessed in server component ********/
+
 export async function getLocationDetails() {
   try {
-    const res = await fetch(`${process.env.PROJECT_URL}/api/location`, {
+    const res = await fetch(`/api/location`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,3 +61,25 @@ export const getCookie = (name: string) => {
   }
   return null;
 };
+
+
+export const getMethod = async (url:string) => {
+    try {
+      const res = await fetch(`${process.env.PROJECT_URL}${url}`, {
+        method: "GET",
+        headers: {
+          'Authorization': `${process.env.TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (!res?.ok) {
+        throw new Error(`Error ${res.status}: ${res.statusText}`);
+      } else {
+        const data = await res.json();
+        return data?.data ?? null;
+      }
+    } catch (error: any) {
+      console.error({ error });
+      throw new Error(error);
+    }
+}
