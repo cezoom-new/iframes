@@ -19,11 +19,15 @@ export async function POST(req: NextRequest) {
     eventType,
     sessionId,
     userId,
+    element_id,
+    e_name
   }: any = request;
 
   const customerValue = loc?.search?.replace("?domain=", "");
 
   try {
+    console.log(    {element_id: element_id,
+      e_name: e_name},'aravind')
     const { data, error } = await supabase.from("iframe_events").insert([
       {
         current_path: loc.href,
@@ -38,6 +42,8 @@ export async function POST(req: NextRequest) {
         practice_name: customerValue,
         session_id: sessionId,
         user_id: userId,
+        element_id: element_id,
+        e_name: e_name,
       },
     ]);
 

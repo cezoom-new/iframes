@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactNode, CSSProperties } from "react";
+import { useState, useEffect, ReactNode, CSSProperties, useRef } from "react";
 import { GetUserDevice } from "../BrowseData/browseData";
 import { debounce } from "@/components/common/Common";
 import { getCookie, getLocationDetails } from "@/utils/helper";
@@ -30,7 +30,8 @@ export default function Anchor(button: ButtonProps) {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [buttonId, setButtonID] = useState<string>("");
-  const [buttonText, setBtnText] = useState<string>("");
+  const buttonRef = useRef<any>()
+
 
   const getUserDetails = new GetUserDevice().getTrackData();
   useEffect(() => {
@@ -65,7 +66,7 @@ export default function Anchor(button: ButtonProps) {
     }
   }, [button]);
 
-  async function trackUserInteraction() {
+  async function trackUserInteraction(btnRef:string) {
     try {
       const response = await fetch(`/api/track`, {
         method: "POST",
@@ -83,7 +84,7 @@ export default function Anchor(button: ButtonProps) {
           sessionId: getCookie("_SID") ?? null,
           userId: getCookie("_UID") ?? null,
           element_id: buttonId,
-          e_name: buttonText,
+          e_name: btnRef,
         }),
       });
 
@@ -96,18 +97,18 @@ export default function Anchor(button: ButtonProps) {
   }
 
   const handleButtonClick = async (e: any) => {
-    setBtnText(e?.target?.innerText);
-    await trackUserInteraction();
+    await trackUserInteraction(e);
     if (typeof button?.onHandleClick === "function") {
       button.onHandleClick();
     }
   };
   return (
     <button
+      ref={buttonRef}
       id={buttonId}
       className={button?.className}
       style={button?.style}
-      onClick={(e) => debounce(handleButtonClick(e), 300)}
+      onClick={(e) => debounce(handleButtonClick(buttonRef?.current?.innerText), 300)}
     >
       {button?.children}
     </button>
