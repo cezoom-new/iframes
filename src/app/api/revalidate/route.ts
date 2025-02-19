@@ -1,4 +1,4 @@
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
   try {
     
     if (res.tag) {
-      await revalidateTag(res.tag);
+     revalidateTag(res.tag);
     }
 
     return new Response(JSON.stringify({ message: res }), { status: 200 });
