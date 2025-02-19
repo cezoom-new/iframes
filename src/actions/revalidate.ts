@@ -5,7 +5,7 @@ export default async function triggerISR(props: any) {
 
   if (props.type == "viewport") {
     console.log(
-      `Revalidating ... ${props?.published?.selectedLayout}/[customer]`
+      `Revalidating ... ${props.draft.dimensionValue.current}/[customer]`
     );
 
     await fetch(`${process.env.PROJECT_URL}/api/revalidate`, {
@@ -15,11 +15,11 @@ export default async function triggerISR(props: any) {
         Authorization: `${process.env.TOKEN}`,
       },
       method: "POST",
-      body: JSON.stringify({ tag: props?.published?.selectedLayout }),
+      body: JSON.stringify({ tag: props.draft.dimensionValue.current }),
     });
 
     console.log(
-      `Revalidated ... ${props?.published?.selectedLayout}/[customer]`
+      `Revalidated ... ${props.draft.dimensionValue.current}/[customer]`
     );
   }
   if (props.type == "campaign") {

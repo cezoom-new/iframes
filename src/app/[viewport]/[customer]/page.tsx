@@ -1,6 +1,9 @@
 import { getCampaigns } from "@/utils/getCampaigns";
 import Campaign from "../../campaigns/Campaign";
 import customerDB from "../../../../database.json";
+import { runQuery } from "@/sanity/lib/client";
+import { getViewPortByProductRegion } from "@/sanity/lib/queries";
+import { unstable_cache } from 'next/cache'
 
 export const dynamicParams = true;
 const sanityUrl: string | undefined = process.env.PROJECT_URL;
@@ -32,6 +35,7 @@ const fetchViewportByDimensionValue = async (
 ) => {
   const url = new URL(`${sanityUrl}/api/viewports`);
   url.searchParams.append("slug", viewport);
+  console.log({viewport})
 
   try {
     const res = await fetch(url, {
@@ -58,6 +62,7 @@ const fetchCampaignByIDs = async (
   viewport: string,
   customer: string
 ) => {
+  console.log({"campaign":viewport})
   const url = new URL(`${sanityUrl}/api/campaigns`);
   try {
     const res = await fetch(url, {
@@ -149,7 +154,24 @@ export async function generateStaticParams() {
 
 export default async function ViewPort({ params }: { params: any }) {
   const { viewport, customer } = await params;
-  const viewportData = await fetchViewportByDimensionValue(viewport, customer);
+  // const viewportData = await fetchViewportByDimensionValue(viewport, customer);
+
+  const res =  unstable_cache(
+    async () => {
+      return  await runQuery(getViewPortByProductRegion(), {
+        productRegion: viewport,
+      });
+      //  await db.select().from(posts)
+    },
+    [viewport,customer],
+    // { revalidate: 3600, tags: ['posts'] }
+  )
+  const viewportData = await res();
+  console.log({viewportData})
+
+  // const viewportData = await runQuery(getViewPortByProductRegion(), {
+  //   productRegion: viewport,
+  // });
 
   if (!viewportData) {
     return <>Something went wrong ...</>;
