@@ -14,16 +14,16 @@ export async function POST(req: NextRequest) {
     if (res._type == "custom" && res.path) {
       await revalidatePath(`${res.path}`, "page");
     }
-    if (res._type == "viewport" && res.dimensionValue) {
-      await revalidatePath(`/carestack-gb/[customer]`, "page");
+    if (res._type == "viewport" && res.tag) {
+      await revalidateTag(res.tag);
     }
 
-    if (res.type == "campaign" && res._id) {
-      await revalidateTag(res._id);
+    if (res.type == "campaign" && res.tag) {
+      await revalidateTag(res.tag);
     }
 
-    if (res.type == "banner" && res._id) {
-      await revalidateTag(res._id);
+    if (res.type == "banner" && res.tag) {
+      await revalidateTag(res.tag);
     }
 
     return new Response(JSON.stringify({ message: res }), { status: 200 });
