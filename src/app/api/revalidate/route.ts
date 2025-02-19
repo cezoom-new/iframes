@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       await revalidateTag(res._id);
     }
 
-    return new Response(JSON.stringify({ message: `` }), { status: 200 });
+    return new Response(JSON.stringify({ message: res }), { status: 200 });
   } catch (error) {
     console.error("Error revalidating path:", error);
     return new Response(

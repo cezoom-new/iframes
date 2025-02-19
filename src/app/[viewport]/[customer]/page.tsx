@@ -21,7 +21,7 @@ export async function generateStaticParams({
   // const viewports = await fetchAllViewport()
   console.log("vie",viewport)
   const res = await fetch(`${process.env.PROJECT_URL}/api/viewports`, {
-    next: { tags: [`${viewport}`] },
+    next: { tags: [`${viewport}-${customer}`] },
     method: "GET",
     headers: {
       Authorization: `${process.env.TOKEN}`,
