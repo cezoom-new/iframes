@@ -74,7 +74,7 @@ const fetchCampaignByIDs = async (
       method: "POST",
       body: JSON.stringify({ campaignIDs }),
       next: {
-        tags: [viewport, customer],
+        tags: [viewport, customer,...campaignIDs],
       },
     });
     if (!res?.ok) {
@@ -96,7 +96,7 @@ const fetchBannerByID = async (
     const url = new URL(`${sanityUrl}/api/banners`);
     url.searchParams.append("banner-id", bannerID);
     const res = await fetch(url, {
-      next: { tags: [viewport, customer] },
+      next: { tags: [viewport, customer,bannerID] },
       headers: {  
         'Authorization': `${process.env.TOKEN}`,
         "Content-Type": "application/json",
