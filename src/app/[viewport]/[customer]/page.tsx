@@ -152,19 +152,19 @@ export default async function ViewPort({ params }: { params: any }) {
   const { viewport, customer } = await params;
   const url = new URL(`${sanityUrl}/api/viewports`);
   url.searchParams.append("slug", viewport);
-  // const viewportData = await fetchViewportByDimensionValue(viewport, customer);
-  const res = await fetch(url, {
-    next: { tags: [viewport, customer] },
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      'Authorization': `${process.env.TOKEN}`,
-    },
-  });
+  const viewportData = await fetchViewportByDimensionValue(viewport, customer);
+  // const res = await fetch(url, {
+  //   next: { tags: [viewport, customer] },
+  //   method: "GET",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //     'Authorization': `${process.env.TOKEN}`,
+  //   },
+  // });
 
-  const response =await res.json();
-  const viewportData = response.data;
-  if (!res.ok) {
+  // const response =await res.json();
+  // const viewportData = response.data;
+  if (!viewportData) {
     return <>Something went wrong ...</>;
   }
 

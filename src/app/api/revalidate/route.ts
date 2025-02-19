@@ -11,18 +11,8 @@ export async function POST(req: NextRequest) {
   // }
 
   try {
-    if (res._type == "custom" && res.path) {
-      await revalidatePath(`${res.path}`, "page");
-    }
-    if (res._type == "viewport" && res.tag) {
-      await revalidateTag(res.tag);
-    }
-
-    if (res.type == "campaign" && res.tag) {
-      await revalidateTag(res.tag);
-    }
-
-    if (res.type == "banner" && res.tag) {
+    
+    if (res.tag) {
       await revalidateTag(res.tag);
     }
 
