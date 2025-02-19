@@ -12,9 +12,22 @@ import { fetchAllViewport, fetchCookieSettings, fetchViewportByDimensionValue } 
 // export const revalidate: number = 86400  //  60 * 60 * 24 equals to one day
 
 
-export async function generateStaticParams() {
+export async function generateStaticParams({
+  params: { viewport, customer },
+}: {
+  params: { viewport: string, customer:string  }
+}) {
   // const viewports = await runQuery(getViewPorts());
-  const viewports = await fetchAllViewport()
+  // const viewports = await fetchAllViewport()
+  const res = await fetch(`${process.env.PROJECT_URL}/api/viewports`, {
+    next: { tags: [`${viewport}`] },
+    method: "GET",
+    headers: {
+      Authorization: `${process.env.TOKEN}`,
+      "Content-Type": "application/json",
+    },
+  });
+  const viewports = await res.json()
   const allParams: any = [];
 
   for (const port of viewports) {
