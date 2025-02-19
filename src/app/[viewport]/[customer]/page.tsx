@@ -4,7 +4,7 @@ import customerDB from "../../../../database.json";
 import { viewport } from "@/sanity/schemaTypes/viewport";
 
 export const dynamicParams = true;
-const sanityUrl: string | undefined = process.env.SANITY_API;
+const sanityUrl: string | undefined = process.env.PROJECT_URL;
 
 const fetchAllViewports = async () => {
   try {
