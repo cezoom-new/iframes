@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
       await revalidatePath(`${res.path}`, "page");
     }
     if (res._type == "viewport" && res.dimensionValue) {
-      await revalidatePath(`/${res.dimensionValue.current}/[customer]`, "page");
+      await revalidatePath(`/carestack-gb/[customer]`, "page");
     }
 
     if (res.type == "campaign" && res._id) {

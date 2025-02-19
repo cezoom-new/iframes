@@ -41,11 +41,24 @@ export async function generateStaticParams({
 
 export default async function ViewPort({ params }: { params: any }) {
   const { viewport, customer } = await params;
-  const viewportData = await fetchViewportByDimensionValue(viewport, customer);
-  if (!viewportData) {
+  // const viewportData = await fetchViewportByDimensionValue(viewport, customer);
+  const url = new URL(`${process.env.PROJECT_URL}/api/viewports`);
+  url.searchParams.append("slug", viewport);
+
+  const res = await fetch(url, {
+    next: { tags: [viewport, customer] },
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `${process.env.TOKEN}`,
+    },
+  })
+
+  if (!res.ok) {
     return <NotFound />;
   }
-
+  const response = await res.json();
+  const viewportData = response.data;
   const requiredCampaigns = await getCampaigns(viewport,customer, viewportData);
   const campaigns =
     requiredCampaigns && requiredCampaigns.length !== 0
