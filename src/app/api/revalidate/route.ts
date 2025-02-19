@@ -11,6 +11,9 @@ export async function POST(req: NextRequest) {
   // }
 
   try {
+    if (res._type == "custom" && res.path) {
+      await revalidatePath(`${res.path}`, "page");
+    }
     if (res._type == "viewport" && res.dimensionValue) {
       await revalidatePath(`/${res.dimensionValue.current}/[customer]`, "page");
     }
