@@ -9,7 +9,7 @@ import customerDB from "../../../../database.json";
 import NotFound from "@/app/not-found";
 import { fetchAllViewport, fetchCookieSettings, fetchViewportByDimensionValue } from "@/utils/Api";
 
-export const revalidate: number = 86400  //  60 * 60 * 24 equals to one day
+// export const revalidate: number = 86400  //  60 * 60 * 24 equals to one day
 
 
 export async function generateStaticParams() {

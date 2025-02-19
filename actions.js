@@ -4,6 +4,7 @@ import triggerISR from '@/actions/revalidate';
 
 
 export function SetAndPublishAction(props) {
+  console.log("uuuuuuuu")
   const { patch, publish } = useDocumentOperation(props.id, props.type);
   const [isPublishing, setIsPublishing] = useState(false);
 
@@ -32,7 +33,10 @@ export function SetAndPublishAction(props) {
 
       // Perform the publish operation
       publish.execute();
+      console.log("before",props)
       triggerISR(props)
+      console.log("after",props)
+
       // Signal that the action is complete
       props.onComplete();
     },
