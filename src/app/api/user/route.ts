@@ -7,26 +7,21 @@ const supabaseKey = process.env.SUPABASE_ANON_PUBLIC || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
+  
   const cookieStore = await cookies();
   const request: any = await req.json();
-  const { meta, loc, locations, locationIpAddress, browserData }: any = request;
+  const { meta, loc, locationData, browserData }: any = request;
+  const ip = req.headers.get("x-forwarded-for");
   const customerValue = loc?.search?.replace("?domain=", "");
-  const regionNamesInEnglish = new Intl.DisplayNames(["en"], {
-    type: "region",
-  });
 
-  const countryName = locations?.country
-    ? regionNamesInEnglish.of(locations?.country)
-    : "countryName not available";
-  // if (countryName && locationIpAddress) {
   try {
     const { data, error } = await supabase
       .from("iframe_users")
       .insert([
         {
           meta: meta,
-          location: countryName,
-          ip_address: locationIpAddress,
+          location: locationData,
+          ip_address: ip,
           browser: browserData.systemConfig.browser,
           practice_name: customerValue,
         },

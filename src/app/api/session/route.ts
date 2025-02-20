@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   const cookieStore = await cookies();
   if (req.method == "POST") {
     const Ip = req.headers.get("x-forwarded-for");
-    const locationDetail = req.cookies.get("_loc")?.value;
+    const {locationData} = await req.json();
     const userId = cookieStore?.get("_UID")?.value;
     try {
       const { data, error } = await supabase
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
             start_time: new Date(),
             end_time: new Date(),
             ip_address: Ip,
-            location: locationDetail,
+            location: locationData,
           },
         ])
         .select()
