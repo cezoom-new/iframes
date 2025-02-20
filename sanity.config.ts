@@ -64,12 +64,12 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({defaultApiVersion: apiVersion}),
   ],
-  // document: {
-  //   actions: (prev) =>
-  //     prev.map((originalAction) =>
-  //       originalAction.action === 'publish'
-  //         ? SetAndPublishAction
-  //         : originalAction,
-  //     ),
-  // },
+  document: {
+    actions: (prev) =>
+      prev.map((originalAction) =>
+        originalAction.action === 'publish'
+          ? SetAndPublishAction
+          : originalAction,
+      ),
+  },
 })

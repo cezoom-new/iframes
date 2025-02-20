@@ -5,6 +5,8 @@ import { getViewPortByProductRegion, getViewPorts } from "../../../sanity/lib/qu
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
   const slug = searchParams.get("slug")
+  console.log({request})
+  console.log('helo from viewports')
 
   if (!slug) {
     const viewports = await runQuery(getViewPorts());
@@ -13,7 +15,10 @@ export async function GET(request: NextRequest) {
 
   const viewportData = await runQuery(getViewPortByProductRegion(), {
     productRegion: slug,
-  });
+  },
+  [slug]
+  // request.next.tags
+);
 
   return Response.json({ error: false, message: `Successfully fetch data of ${slug} viewport`, data: viewportData });
 
