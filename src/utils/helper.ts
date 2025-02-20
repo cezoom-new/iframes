@@ -16,7 +16,7 @@ export function checkCookiePermission() {
   return cookieEnabled;
 }
 
-export async function createSession(uID: string | null) {
+export async function createSession(uID: string | null,locationData:any) {
   try {
     await fetch("/api/session", {
       method: "POST",
@@ -25,6 +25,7 @@ export async function createSession(uID: string | null) {
       },
       body: JSON.stringify({
         userId: uID,
+        locationData
       }),
     });
   } catch (error) {
@@ -36,7 +37,7 @@ export async function createSession(uID: string | null) {
 export async function getLocationDetails() {
   try {
     const res = await fetch(`/api/location`, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },

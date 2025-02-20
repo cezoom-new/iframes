@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Anchor from "./anchor/anchor";
 
 export interface CtaBtnProps {

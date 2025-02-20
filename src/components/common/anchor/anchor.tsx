@@ -35,27 +35,6 @@ export default function Anchor(button: ButtonProps) {
 
   const getUserDetails = new GetUserDevice().getTrackData();
   useEffect(() => {
-    const fetchLocation = async () => {
-      try {
-        const response = await getLocationDetails();
-        const locationData = response?.location;
-        const locationIp = response?.ipAddress;
-        setLocationIpAddress(locationIp);
-        if (locationData) {
-          setLocation(JSON.parse(locationData));
-        } else {
-          setError("Location data not found");
-        }
-      } catch (err) {
-        setError("Failed to fetch location");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLocation();
-  }, []);
-  useEffect(() => {
     if (window != undefined) {
       const campaignName: string = button?.campaignName || "";
       const btnTextValue: any = button?.children || "";

@@ -10,6 +10,7 @@ import {
   createSession,
   getLocationDetails,
 } from "@/utils/helper";
+import { ipAddress } from "@vercel/edge";
 
 const setCookie = (name: string, value: number) => {
   document.cookie = `${name}=${value}; path=/; SameSite=None; Secure`;
@@ -43,7 +44,7 @@ function Campaign({
     selectedCampaignIdx(parseInt(getCookie("_csi_idx") ?? "0"));
   }, []);
 
-  const [locations, setLocation] = useState<any>(null);
+  const [location, setLocation] = useState<any>(null);
   const [locationIpAddress, setLocationIpAddress] = useState<string | null>(
     null
   );
@@ -51,72 +52,45 @@ function Campaign({
   const [metaData, setMetaData] = useState<Object | null>(null);
 
   const getUserDetails = new GetUserDevice().getTrackData();
-
-  useEffect(() => {
-    const fetchLocation = async () => {
-      try {
-        const response = await getLocationDetails();
-        const locationData = response.location;
-        const locationIp = response.ipAddress;
-        setLocationIpAddress(locationIp);
-        if (locationData) {
-          setLocation(JSON.parse(locationData));
-          const metaData = {
-            path: window.location.href,
-            location: {
-              data: locations,
-              name: `${locationData}`,
-            },
-            getUserDetails,
-          };
-          setMetaData(metaData);
-        } else {
-          console.log("some thing went wrong in iframe !!!!");
-        }
-      } catch (err) {
-        console.log("some thing went wrong in iframe !!!!");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchLocation();
-  }, []);
+  const fetchLocation = async () => {
+    const response = await getLocationDetails();
+    const locationData = response?.region;
+    const locationIp = response.ipAddress;
+    return { locationData, locationIp };
+  };
 
   useEffect(() => {
     let isUserIdExist = getCookie("_UID");
-    if (
-      checkCookiePermission() &&
-      !isUserIdExist &&
-      locations?.country &&
-      locationIpAddress
-    ) {
-      const createUser = async () => {
-        try {
-          const res = await fetch("/api/user", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              meta: metaData,
-              loc: window.location,
-              locations,
-              locationIpAddress,
-              browserData: getUserDetails,
-            }),
-          });
+    if (checkCookiePermission() && !isUserIdExist) {
+        const createUser = async () => {
+          try {
+            const data= await fetchLocation();
+            const locationData = data?.locationData;
+            const ipAddressData = data?.locationIp;
+            const res = await fetch("/api/user", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                meta: metaData,
+                loc: window.location,
+                locationData,
+                ipAddressData,
+                browserData: getUserDetails,
+              }),
+            });
 
-          if (res.ok) {
-            await createSession(getCookie("_UID"));
+            if (res.ok) {
+              await createSession(getCookie("_UID"),locationData);
+            }
+          } catch (error) {
+            console.error("Error fetching data:", error);
           }
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-      };
-      createUser();
+        };
+        createUser();
     }
-  }, [locationIpAddress, locations, metaData]);
+  }, [location, locationIpAddress]);
 
   if (!(campaignIdx || campaignIdx == 0)) return <></>;
 

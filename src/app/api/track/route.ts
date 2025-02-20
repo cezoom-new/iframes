@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     sessionId,
     userId,
     element_id,
-    e_name
+    e_name,
   }: any = request;
 
   const customerValue = loc?.search?.replace("?domain=", "");
