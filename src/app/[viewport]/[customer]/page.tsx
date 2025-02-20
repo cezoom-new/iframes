@@ -35,7 +35,6 @@ const fetchViewportByDimensionValue = async (
 ) => {
   const url = new URL(`${sanityUrl}/api/viewports`);
   url.searchParams.append("slug", viewport);
-  console.log({ viewport });
 
   try {
     const res = await fetch(url, {
@@ -52,7 +51,6 @@ const fetchViewportByDimensionValue = async (
       console.error("Something went wrong");
     }
   } catch (error) {
-    console.log(error);
     throw new Error("Unexpected Error");
   }
 };
@@ -62,7 +60,6 @@ const fetchCampaignByIDs = async (
   viewport: string,
   customer: string
 ) => {
-  console.log({ campaign: viewport });
   const url = new URL(`${sanityUrl}/api/campaigns`);
   try {
     const res = await fetch(url, {
