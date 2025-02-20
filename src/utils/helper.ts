@@ -22,6 +22,7 @@ export async function createSession(uID: string | null,locationData:any) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${process.env.TOKEN}`,
       },
       body: JSON.stringify({
         userId: uID,
@@ -40,6 +41,7 @@ export async function getLocationDetails() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `${process.env.TOKEN}`,
       },
     });
     if (!res.ok) {

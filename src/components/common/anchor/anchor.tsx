@@ -51,6 +51,7 @@ export default function Anchor(button: ButtonProps) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `${process.env.TOKEN}`,
         },
         body: JSON.stringify({
           loc: window.location,

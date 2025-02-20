@@ -6,8 +6,15 @@ import {
 } from "../../../sanity/lib/queries";
 
 export async function POST(request: NextRequest) {
+  const token = request.headers.get("Authorization");
+  if (token != process.env.TOKEN) {
+    return Response.json({
+      error: true,
+      status: 401,
+      message: "UnAuthorized Token",
+    });
+  }
   const { adjacency, campaignIDs, customerType } = await request.json();
-
   if (adjacency && campaignIDs && customerType) {
     const campaigns = await runQuery(getCampaignIdsByAdjacency(), {
       adjacency,
