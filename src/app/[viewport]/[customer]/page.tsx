@@ -154,19 +154,19 @@ export async function generateStaticParams() {
 
 export default async function ViewPort({ params }: { params: any }) {
   const { viewport, customer } = await params;
-  // const viewportData = await fetchViewportByDimensionValue(viewport, customer);
+  const viewportData = await fetchViewportByDimensionValue(viewport, customer);
 
-  const res =  unstable_cache(
-    async () => {
-      return  await runQuery(getViewPortByProductRegion(), {
-        productRegion: viewport,
-      });
-      //  await db.select().from(posts)
-    },
-    [viewport,customer],
-    // { revalidate: 3600, tags: ['posts'] }
-  )
-  const viewportData = await res();
+  // const res =  unstable_cache(
+  //   async () => {
+  //     return  await runQuery(getViewPortByProductRegion(), {
+  //       productRegion: viewport,
+  //     });
+  //     //  await db.select().from(posts)
+  //   },
+  //   [viewport,customer],
+  //   // { revalidate: 3600, tags: ['posts'] }
+  // )
+  // const viewportData = await res();
   console.log({viewportData})
 
   // const viewportData = await runQuery(getViewPortByProductRegion(), {
