@@ -55,7 +55,7 @@ function Campaign({
   const getUserDetails = new GetUserDevice().getTrackData();
   const fetchLocation = async () => {
     const response = await getLocationDetails();
-    const locationData = response?.region;
+    const locationData = response?.country;
     const locationIp = response.ipAddress;
     return { locationData, locationIp };
   };
