@@ -7,6 +7,7 @@ const supabaseKey = process.env.SUPABASE_ANON_PUBLIC || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
+  
   const cookieStore = await cookies();
   const request: any = await req.json();
   const { meta, loc, locationData, browserData }: any = request;
