@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Anchor from "./anchor/anchor";
-import { getLocationDetails } from "@/utils/helper";
 
 export interface CtaBtnProps {
   ctaText?: string;
@@ -20,33 +19,7 @@ export default function CTAButton({
   ctaBtnLink,
   campaignName,
 }: CtaBtnProps) {
-  const [locations, setLocation] = useState(null);
-  const [locationIpAddress, setLocationIpAddress] = useState<any>("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
-   useEffect(() => {
-      const fetchLocation = async () => {
-        try {
-          const response = await getLocationDetails();
-          const locationData = response?.location
-          const locationIp = response?.ipAddress
-          setLocationIpAddress(locationIp)
-          if (locationData) {
-            setLocation(JSON.parse(locationData));
-          } else {
-            setError("Location data not found");
-          }
-        } catch (err) {
-          setError('Failed to fetch location');
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchLocation();
-    }, []);
-  
   return (
     <div>
       <Link href={ctaBtnLink ? ctaBtnLink : ""} target="_blank" passHref>

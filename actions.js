@@ -23,7 +23,7 @@ export function SetAndPublishAction(props) {
   return {
     disabled: isDisabled, // Ensure this is always boolean
     label,
-    onHandle: () => {
+    onHandle:  () => {
       // Update the button text and set isPublishing to true
       setIsPublishing(true);
 
@@ -31,8 +31,11 @@ export function SetAndPublishAction(props) {
       // patch.execute([{ set: { publishedAt: new Date().toISOString() }}]);
 
       // Perform the publish operation
-      publish.execute();
-      triggerISR(props)
+       publish.execute();
+      setTimeout(() => {
+        triggerISR(props)
+      },2000);
+      
       // Signal that the action is complete
       props.onComplete();
     },

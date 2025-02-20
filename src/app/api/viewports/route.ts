@@ -13,7 +13,10 @@ export async function GET(request: NextRequest) {
 
   const viewportData = await runQuery(getViewPortByProductRegion(), {
     productRegion: slug,
-  });
+  },
+  [slug]
+  // request.next.tags
+);
 
   return Response.json({ error: false, message: `Successfully fetch data of ${slug} viewport`, data: viewportData });
 

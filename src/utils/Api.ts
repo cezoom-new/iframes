@@ -43,7 +43,6 @@ export const fetchViewportByDimensionValue = async (
       console.error("Something went wrong");
     }
   } catch (error) {
-    console.log(error);
     throw new Error("Unexpected Error");
   }
 };
