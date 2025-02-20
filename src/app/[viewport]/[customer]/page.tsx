@@ -3,7 +3,7 @@ import Campaign from "../../campaigns/Campaign";
 import customerDB from "../../../../database.json";
 import { runQuery } from "@/sanity/lib/client";
 import { getViewPortByProductRegion } from "@/sanity/lib/queries";
-import { unstable_cache } from 'next/cache'
+import NotFound from "@/app/not-found";
 
 export const dynamicParams = true;
 const sanityUrl: string | undefined = process.env.PROJECT_URL;
@@ -13,7 +13,7 @@ const fetchAllViewports = async () => {
     const res = await fetch(`${sanityUrl}/api/viewports`, {
       method: "GET",
       headers: {
-        'Authorization': `${process.env.TOKEN}`,
+        Authorization: `${process.env.TOKEN}`,
         "Content-Type": "application/json",
       },
     });
@@ -35,7 +35,7 @@ const fetchViewportByDimensionValue = async (
 ) => {
   const url = new URL(`${sanityUrl}/api/viewports`);
   url.searchParams.append("slug", viewport);
-  console.log({viewport})
+  console.log({ viewport });
 
   try {
     const res = await fetch(url, {
@@ -43,7 +43,7 @@ const fetchViewportByDimensionValue = async (
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `${process.env.TOKEN}`,
+        Authorization: `${process.env.TOKEN}`,
       },
     });
     if (res.ok) {
@@ -62,19 +62,19 @@ const fetchCampaignByIDs = async (
   viewport: string,
   customer: string
 ) => {
-  console.log({"campaign":viewport})
+  console.log({ campaign: viewport });
   const url = new URL(`${sanityUrl}/api/campaigns`);
   try {
     const res = await fetch(url, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        'Authorization': `${process.env.TOKEN}`,
+        Authorization: `${process.env.TOKEN}`,
       },
       method: "POST",
       body: JSON.stringify({ campaignIDs }),
       next: {
-        tags: [viewport, customer,...campaignIDs],
+        tags: [viewport, customer, ...campaignIDs],
       },
     });
     if (!res?.ok) {
@@ -96,9 +96,9 @@ const fetchBannerByID = async (
     const url = new URL(`${sanityUrl}/api/banners`);
     url.searchParams.append("banner-id", bannerID);
     const res = await fetch(url, {
-      next: { tags: [viewport, customer,bannerID] },
-      headers: {  
-        'Authorization': `${process.env.TOKEN}`,
+      next: { tags: [viewport, customer, bannerID] },
+      headers: {
+        Authorization: `${process.env.TOKEN}`,
         "Content-Type": "application/json",
       },
     });
@@ -120,7 +120,7 @@ const fetchCookieSettings = async (viewport: string, customer: string) => {
 
       method: "GET",
       headers: {
-        'Authorization': `${process.env.TOKEN}`,
+        Authorization: `${process.env.TOKEN}`,
         "Content-Type": "application/json",
       },
     });
@@ -156,25 +156,8 @@ export default async function ViewPort({ params }: { params: any }) {
   const { viewport, customer } = await params;
   const viewportData = await fetchViewportByDimensionValue(viewport, customer);
 
-  // const res =  unstable_cache(
-  //   async () => {
-  //     return  await runQuery(getViewPortByProductRegion(), {
-  //       productRegion: viewport,
-  //     });
-  //     //  await db.select().from(posts)
-  //   },
-  //   [viewport,customer],
-  //   // { revalidate: 3600, tags: ['posts'] }
-  // )
-  // const viewportData = await res();
-  console.log({viewportData})
-
-  // const viewportData = await runQuery(getViewPortByProductRegion(), {
-  //   productRegion: viewport,
-  // });
-
   if (!viewportData) {
-    return <>Something went wrong ...</>;
+    return <NotFound />;
   }
 
   const requiredCampaigns = await getCampaigns(
