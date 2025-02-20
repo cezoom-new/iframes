@@ -33,6 +33,7 @@ function Campaign({
   cookies: any;
   banner: any;
 }) {
+
   const [campaignIdx, selectedCampaignIdx] = useState<any>(null);
   useEffect(() => {
     if (parseInt(getCookie("_csi_idx") ?? "0") >= campaigns.length - 1) {
@@ -125,8 +126,8 @@ function Campaign({
       <>
         <RightImageLeftText
           campaign={campaigns[campaignIdx]}
-          banner={banner}
-          cookies={cookies}
+          banner={banner && banner[0]}
+          cookies={cookies && cookies[0]}
           colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? "defaultColor"}
         />
       </>
@@ -136,8 +137,8 @@ function Campaign({
     return (
       <LeftImageRightText
         campaign={campaigns[campaignIdx]}
-        banner={banner}
-        cookies={cookies}
+        banner={banner && banner[0]}
+        cookies={cookies && cookies[0]}
         colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? "defaultColor"}
       />
     );
@@ -146,8 +147,8 @@ function Campaign({
   return (
     <CenterText
       campaign={campaigns[campaignIdx]}
-      banner={banner}
-      cookies={cookies}
+      banner={banner && banner[0]}
+      cookies={cookies && cookies[0]}
       colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? "defaultColor"}
     />
   );

@@ -110,6 +110,7 @@ const fetchBannerByID = async (
 };
 
 const fetchCookieSettings = async (viewport: string, customer: string) => {
+  debugger
   const url = new URL(`${sanityUrl}/api/cookie-settings`);
   try {
     const res = await fetch(url, {
@@ -180,7 +181,7 @@ export default async function ViewPort({ params }: { params: any }) {
     ? await fetchBannerByID(bannerID, viewport, customer)
     : null;
 
-  const cookies = await fetchCookieSettings(viewport, customer);
+    const cookies = viewportData.isCookieShow ? await fetchCookieSettings(viewport, customer) : null;
 
   return <Campaign campaigns={campaigns} banner={banner} cookies={cookies} />;
 }
