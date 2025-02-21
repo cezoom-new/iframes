@@ -7,14 +7,14 @@ const supabaseKey = process.env.SUPABASE_ANON_PUBLIC || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
-  const token = req.headers.get("Authorization");
-  if (token != process.env.REVALIDATE_SECRET) {
-    return Response.json({
-      error: true,
-      status: 401,
-      message: "UnAuthorized Token",
-    });
-  }
+  // const token = req.headers.get("Authorization");
+  // if (token != process.env.REVALIDATE_SECRET) {
+  //   return Response.json({
+  //     error: true,
+  //     status: 401,
+  //     message: "UnAuthorized Token",
+  //   });
+  // }
   const cookieStore = await cookies();
   if (req.method == "POST") {
     const Ip = req.headers.get("x-forwarded-for");
