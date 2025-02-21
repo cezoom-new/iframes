@@ -60,6 +60,7 @@ const fetchCampaignByFilters = async (
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      Authorization: `${process.env.TOKEN}`,
     },
     method: "POST",
     body: JSON.stringify({ adjacency, campaignIDs, customerType }),
