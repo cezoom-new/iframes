@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   if (req.method == "POST") {
     const Ip = req.headers.get("x-forwarded-for");
     const {locationData} = await req.json();
-    const userId = cookieStore?.get("_UID")?.value;
+    const userId = cookieStore?.get("_csi_uid")?.value;
     try {
       const { data, error } = await supabase
         .from("iframe_sessions")
@@ -35,10 +35,9 @@ export async function POST(req: NextRequest) {
         .select()
         .single();
       if (data && Object.keys(data)?.length) {
-        cookieStore.set("_SID", data?.id, {
+        cookieStore.set("_csi_sid", data?.id, {
           sameSite: "none",
           secure: true,
-          maxAge: 60 * 60 * 24 * 30 * 12, // 1 year 
         });
       }
       if (error) {

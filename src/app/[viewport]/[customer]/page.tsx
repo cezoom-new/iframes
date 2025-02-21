@@ -1,8 +1,6 @@
 import { getCampaigns } from "@/utils/getCampaigns";
 import Campaign from "../../campaigns/Campaign";
 import customerDB from "../../../../database.json";
-import { runQuery } from "@/sanity/lib/client";
-import { getViewPortByProductRegion } from "@/sanity/lib/queries";
 import NotFound from "@/app/not-found";
 
 export const dynamicParams = true;

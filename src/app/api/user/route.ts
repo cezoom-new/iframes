@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
      * call  session Api
      *******/
     if (data && Object.keys(data)?.length) {
-      cookieStore.set("_UID", data?.id, {
+      cookieStore.set("_csi_uid", data?.id, {
         sameSite: "none",
         secure: true,
         maxAge: 60 * 60 * 24 * 30 * 12,
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
       console.error("Error inserting page view:", error.message);
       return new Response("", { status: 500 });
     } else {
-      return new Response("success", { status: 200 });
+      return Response.json({id:data?.id})
     }
   } catch (err) {
     console.error("Error tracking page view:", err);
