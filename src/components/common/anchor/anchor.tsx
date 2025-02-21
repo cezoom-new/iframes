@@ -20,6 +20,7 @@ type ButtonProps = {
   ctaBtnLink?: string;
   onHandleClick?: () => void;
   campaignName?: string;
+  text?: string;
 };
 
 export default function Anchor(button: ButtonProps) {
@@ -35,9 +36,11 @@ export default function Anchor(button: ButtonProps) {
 
   const getUserDetails = new GetUserDevice().getTrackData();
   useEffect(() => {
-    if (window != undefined) {
+    if (window != undefined) { 
       const campaignName: string = button?.campaignName || "";
-      const btnTextValue: any = button?.children || "";
+      const btnTextValue: any = typeof button?.children === 'object' && button?.children !== null 
+      ? button?.text 
+      : button?.children;
       const costumerName: string =
         window?.location?.search?.replace("?domain=", "") || "";
       const id = campaignName + " " + btnTextValue + " " + costumerName;
@@ -63,7 +66,7 @@ export default function Anchor(button: ButtonProps) {
           sessionId: getCookie("_SID") ?? null,
           userId: getCookie("_UID") ?? null,
           element_id: buttonId,
-          e_name: btnRef,
+          e_name: btnRef || button?.text,
         }),
       });
 
@@ -87,7 +90,7 @@ export default function Anchor(button: ButtonProps) {
       id={buttonId}
       className={button?.className}
       style={button?.style}
-      onClick={(e) => debounce(handleButtonClick(buttonRef?.current?.innerText), 300)}
+      onClick={(e) => debounce(handleButtonClick(buttonRef?.current?.innerText), 100)}
     >
       {button?.children}
     </button>

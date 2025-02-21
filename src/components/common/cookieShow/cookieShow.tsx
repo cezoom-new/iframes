@@ -73,6 +73,7 @@ export default function CookieShow({ cookie, campaign }: any) {
   };
   const closeDrawer = () => {
     setIsVisible(false);
+    setIsDrawerOpen(false);
   };
 
   return (
@@ -122,7 +123,7 @@ export default function CookieShow({ cookie, campaign }: any) {
         } z-20`}
       >
         <Anchor onHandleClick={toggleDrawer}
-          className="absolute top-4 right-4 text-white">
+          className="absolute top-4 right-4 text-white"  campaignName={campaign?.name}  text="Close" >
         <CloseIcon style={{ color: '#fff', fontSize: '36px' }} />
         </Anchor>
         <div className="py-8 px-2 text-white max-w-7xl m-auto">
