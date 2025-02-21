@@ -11,7 +11,7 @@ const fetchAllViewports = async () => {
     const res = await fetch(`${sanityUrl}/api/viewports`, {
       method: "GET",
       headers: {
-        Authorization: `${process.env.REVALIDATE_SECRET}`,
+        // Authorization: `${process.env.REVALIDATE_SECRET}`,
         "Content-Type": "application/json",
       },
     });
@@ -41,7 +41,7 @@ const fetchViewportByDimensionValue = async (
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${process.env.REVALIDATE_SECRET}`,
+        // Authorization: `${process.env.REVALIDATE_SECRET}`,
       },
     });
     if (res.ok) {
@@ -65,7 +65,7 @@ const fetchCampaignByIDs = async (
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `${process.env.REVALIDATE_SECRET}`,
+        // Authorization: `${process.env.REVALIDATE_SECRET}`,
       },
       method: "POST",
       body: JSON.stringify({ campaignIDs }),
@@ -133,6 +133,7 @@ const fetchCookieSettings = async (viewport: string, customer: string) => {
 
 export async function generateStaticParams() {
   const viewports = await fetchAllViewports();
+  console.log({viewports})
   const allParams: any = [];
 
     for (const port of viewports) {
