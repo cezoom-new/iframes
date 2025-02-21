@@ -34,7 +34,6 @@ function Campaign({
   cookies: any;
   banner: any;
 }) {
-
   const [campaignIdx, selectedCampaignIdx] = useState<any>(null);
   useEffect(() => {
     if (parseInt(getCookie("_csi_idx") ?? "0") >= campaigns.length - 1) {
@@ -55,23 +54,25 @@ function Campaign({
   const getUserDetails = new GetUserDevice().getTrackData();
   const fetchLocation = async () => {
     const response = await getLocationDetails();
-    const locationData = response
+    const locationData = response;
     const locationIp = response.ipAddress;
     return { locationData, locationIp };
   };
 
   useEffect(() => {
-    let isUserIdExist = getCookie("_UID");
-    if (checkCookiePermission() && !isUserIdExist) {
-        const createUser = async () => {
+    let isUserIdExist: any = getCookie("_csi_uid");
+    const initialize = async () => {
+      try {
+        const data = await fetchLocation();
+        const locationData = data?.locationData;
+        const ipAddressData = data?.locationIp;
+        if (checkCookiePermission() && !isUserIdExist) {
           try {
-            const data= await fetchLocation();
-            const locationData = data?.locationData;
-            const ipAddressData = data?.locationIp;
             const res = await fetch("/api/user", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
+                Authorization: `${process.env.TOKEN}`,
               },
               body: JSON.stringify({
                 meta: metaData,
@@ -81,16 +82,25 @@ function Campaign({
                 browserData: getUserDetails,
               }),
             });
-
-            if (res.ok) {
-              await createSession(getCookie("_UID"),locationData);
+            const response = await res.json();
+            if (res.ok && response.id) {
+              isUserIdExist = true;
+              await createSession(response.id, locationData);
             }
           } catch (error) {
             console.error("Error fetching data:", error);
           }
-        };
-        createUser();
-    }
+        } else if (checkCookiePermission() && isUserIdExist) {
+          if (getCookie("_csi_sid") == null || !getCookie("_csi_sid")) {
+            await createSession(getCookie("_csi_uid"), locationData);
+          }
+        }
+      } catch (error) {
+        console.error("Error in Initializing");
+      }
+    };
+
+    initialize();
   }, [location, locationIpAddress]);
 
   if (!(campaignIdx || campaignIdx == 0)) return <></>;
