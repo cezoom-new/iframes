@@ -2,7 +2,7 @@ import { geolocation } from "@vercel/edge";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const token = req.headers.get("Authorization");
+  // const token = req.headers.get("Authorization");
   // if (token != process.env.REVALIDATE_SECRET) {
   //   return Response.json({
   //     error: true,
