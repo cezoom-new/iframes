@@ -4,13 +4,13 @@ import { getViewPortByProductRegion, getViewPorts } from "../../../sanity/lib/qu
 
 export async function GET(request: NextRequest) {
   const token = request.headers.get("Authorization");
-  if (token != process.env.TOKEN) {
-    return Response.json({
-      error: true,
-      status: 401,
-      message: "UnAuthorized Token",
-    });
-  }
+  // if (token != process.env.REVALIDATE_SECRET) {
+  //   return Response.json({
+  //     error: true,
+  //     status: 401,
+  //     message: "UnAuthorized Token",
+  //   });
+  // }
   const searchParams = request.nextUrl.searchParams
   const slug = searchParams.get("slug")
 

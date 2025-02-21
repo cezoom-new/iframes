@@ -5,7 +5,7 @@ export const fetchAllViewport = async () => {
     const res = await fetch(`${process.env.PROJECT_URL}/api/viewports`, {
       method: "GET",
       headers: {
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
         "Content-Type": "application/json",
       },
     });
@@ -34,7 +34,7 @@ export const fetchViewportByDimensionValue = async (
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
       },
     });
     if (res.ok) {
@@ -58,7 +58,7 @@ export const fetchCampaignByIDs = async (
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
       },
       method: "POST",
       body: JSON.stringify({ campaignIDs }),
@@ -87,7 +87,7 @@ export const fetchBannerByID = async (
     const res = await fetch(url, {
       next: { tags: [viewport, customer] },
       headers: {
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
         "Content-Type": "application/json",
       },
     });
@@ -112,7 +112,7 @@ export const fetchCookieSettings = async (
 
       method: "GET",
       headers: {
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
         "Content-Type": "application/json",
       },
     });

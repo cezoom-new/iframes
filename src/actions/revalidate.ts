@@ -8,7 +8,7 @@ export default async function triggerISR(props: any) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
       },
       method: "POST",
       body: JSON.stringify({ tag: props.draft.dimensionValue.current }),
@@ -19,7 +19,7 @@ export default async function triggerISR(props: any) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
       },
       method: "POST",
       body: JSON.stringify({ tag: props.draft._id.split(".")[1] }),
