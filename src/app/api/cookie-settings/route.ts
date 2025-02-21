@@ -3,7 +3,7 @@ import { runQuery } from "../../../sanity/lib/client";
 import { getCookiesData } from "../../../sanity/lib/queries";
 
 export async function GET(request: NextRequest) {
-  const token = request.headers.get("Authorization");
+  // const token = request.headers.get("Authorization");
   // if (token != process.env.REVALIDATE_SECRET) {
   //   return Response.json({
   //     error: true,
