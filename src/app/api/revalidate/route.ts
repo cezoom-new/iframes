@@ -9,14 +9,14 @@ export async function POST(req: NextRequest) {
   //     status: 401,
   //   });
   // }
-  // const token = req.headers.get("Authorization");
-  // if (token != process.env.REVALIDATE_SECRET) {
-  //   return Response.json({
-  //     error: true,
-  //     status: 401,
-  //     message: "UnAuthorized Token",
-  //   });
-  // }
+  const token = req.headers.get("Authorization");
+  if (token != process.env.REVALIDATE_SECRET) {
+    return Response.json({
+      error: true,
+      status: 401,
+      message: "UnAuthorized Token",
+    });
+  }
 
   try {
     
