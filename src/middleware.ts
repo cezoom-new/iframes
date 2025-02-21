@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
   const cookieStore: any = await cookies();
   const url = request.nextUrl.clone();
   // const authHeader = req.headers.get("Authorization");
-  //   if (authHeader !== process.env.TOKEN) {
+  //   if (authHeader !== process.env.REVALIDATE_SECRET) {
   //     return NextResponse.json(
   //       { error: "Unauthorized: No token provided" },
   //       { status: 401 }

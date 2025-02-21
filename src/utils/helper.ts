@@ -22,7 +22,7 @@ export async function createSession(uID: string | null,locationData:any) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
       },
       body: JSON.stringify({
         userId: uID,
@@ -41,7 +41,7 @@ export async function getLocationDetails() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
       },
     });
     if (!res.ok) {
@@ -71,7 +71,7 @@ export const getMethod = async (url:string) => {
       const res = await fetch(`${process.env.PROJECT_URL}${url}`, {
         method: "GET",
         headers: {
-          'Authorization': `${process.env.TOKEN}`,
+          'Authorization': `${process.env.REVALIDATE_SECRET}`,
           "Content-Type": "application/json",
         },
       });
