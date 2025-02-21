@@ -9,7 +9,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
   const token = req.headers.get("Authorization");
-  if (token != process.env.TOKEN) {
+  if (token != process.env.REVALIDATE_SECRET) {
     return Response.json({
       error: true,
       status: 401,

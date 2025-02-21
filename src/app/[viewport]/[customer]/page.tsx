@@ -11,10 +11,11 @@ const fetchAllViewports = async () => {
     const res = await fetch(`${sanityUrl}/api/viewports`, {
       method: "GET",
       headers: {
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
         "Content-Type": "application/json",
       },
     });
+    console.log({res},"VIEWPORT:::::")
     if (!res?.ok) {
       throw new Error(`Error ${res.status}: ${res.statusText}`);
     } else {
@@ -40,7 +41,7 @@ const fetchViewportByDimensionValue = async (
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
       },
     });
     if (res.ok) {
@@ -64,7 +65,7 @@ const fetchCampaignByIDs = async (
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
       },
       method: "POST",
       body: JSON.stringify({ campaignIDs }),
@@ -93,7 +94,7 @@ const fetchBannerByID = async (
     const res = await fetch(url, {
       next: { tags: [viewport, customer, bannerID] },
       headers: {
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
         "Content-Type": "application/json",
       },
     });
@@ -116,7 +117,7 @@ const fetchCookieSettings = async (viewport: string, customer: string) => {
 
       method: "GET",
       headers: {
-        Authorization: `${process.env.TOKEN}`,
+        Authorization: `${process.env.REVALIDATE_SECRET}`,
         "Content-Type": "application/json",
       },
     });
@@ -134,18 +135,18 @@ export async function generateStaticParams() {
   const viewports = await fetchAllViewports();
   const allParams: any = [];
 
-  for (const port of viewports) {
-    const customers = Object.keys(customerDB);
-
-    customers.forEach((customer) => {
-      allParams.push({
-        viewport: port.dimensionValue.current,
-        customer,
+    for (const port of viewports) {
+      const customers = Object.keys(customerDB);
+  
+      customers.forEach((customer) => {
+        allParams.push({
+          viewport: port.dimensionValue.current,
+          customer,
+        });
       });
-    });
-  }
-
-  return allParams;
+    }
+  
+    return allParams;
 }
 
 export default async function ViewPort({ params }: { params: any }) {

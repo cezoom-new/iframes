@@ -22,7 +22,7 @@ const nextConfig: NextConfig = {
     SUPABASE_ANON_PUBLIC: process.env.SUPABASE_ANON_PUBLIC,
     SUPABASE_PROJECT_URL: process.env.SUPABASE_PROJECT_URL,
     PROJECT_URL: process.env.PROJECT_URL,
-    TOKEN: process.env.TOKEN,
+    REVALIDATE_SECRET: process.env.REVALIDATE_SECRET,
   },
 };
 
