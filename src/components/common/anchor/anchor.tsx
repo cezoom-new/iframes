@@ -51,6 +51,7 @@ export default function Anchor(button: ButtonProps) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `${process.env.TOKEN}`,
         },
         body: JSON.stringify({
           loc: window.location,
@@ -60,8 +61,8 @@ export default function Anchor(button: ButtonProps) {
           ctaBtnLink: button?.ctaBtnLink,
           campaignName: button?.campaignName,
           eventType: "click",
-          sessionId: getCookie("_SID") ?? null,
-          userId: getCookie("_UID") ?? null,
+          sessionId: getCookie("_csi_sid") ?? null,
+          userId: getCookie("_csi_uid") ?? null,
           element_id: buttonId,
           e_name: btnRef,
         }),
