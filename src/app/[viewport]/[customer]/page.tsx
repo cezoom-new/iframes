@@ -11,7 +11,7 @@ const fetchAllViewports = async () => {
     const res = await fetch(`${sanityUrl}/api/viewports`, {
       method: "GET",
       headers: {
-        "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
+      "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
         "Content-Type": "application/json",
       },
     });

@@ -17,6 +17,9 @@ export async function GET(req: NextRequest) {
 
   return new Response(JSON.stringify(geoData), {
     status: 200,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${process.env.REVALIDATE_SECRET}`,
+    },
   });
 }
