@@ -5,29 +5,29 @@ import { NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { searchParams, pathname } = request.nextUrl;
-  // if (pathname.includes("/api")) {
-  //   const authToken = request.headers.get("authorization");
+  if (pathname.includes("/api")) {
+    const authToken = request.headers.get("authorization");
 
-  //   if (!authToken) {
-  //     return NextResponse.json(
-  //       { error: true, message: "Auth Token Missing", status: 401 },
-  //       { status: 401 }
-  //     );
-  //   }
+    if (!authToken) {
+      return NextResponse.json(
+        { error: true, message: "Auth Token Missing", status: 401 },
+        { status: 401 }
+      );
+    }
 
-  //   const tokenParts = authToken.split(" ");
-  //   const isBearer = tokenParts[0] === "Bearer";
-  //   const authKey = tokenParts[1] === process.env.REVALIDATE_SECRET;
+    const tokenParts = authToken.split(" ");
+    const isBearer = tokenParts[0] === "Bearer";
+    const authKey = tokenParts[1] === process.env.REVALIDATE_SECRET;
 
-  //   if (!isBearer || !authKey) {
-  //     return NextResponse.json(
-  //       { error: true, message: "Invalid Token", status: 401 },
-  //       { status: 401 }
-  //     );
-  //   }
+    if (!isBearer || !authKey) {
+      return NextResponse.json(
+        { error: true, message: "Invalid Token", status: 401 },
+        { status: 401 }
+      );
+    }
 
-  //   return NextResponse.next();
-  // }
+    return NextResponse.next();
+  }
 
   // return NextResponse.next();
 
