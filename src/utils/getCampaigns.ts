@@ -60,7 +60,7 @@ const fetchCampaignByFilters = async (
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      // Authorization: `${process.env.REVALIDATE_SECRET}`,
+     "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
     },
     method: "POST",
     body: JSON.stringify({ adjacency, campaignIDs, customerType }),

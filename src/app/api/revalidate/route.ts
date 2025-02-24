@@ -4,19 +4,19 @@ import { NextRequest } from "next/server";
 export async function POST(req: NextRequest) {
   const res = await req.json();
 
-  // if (res.secret !== process.env.REVALIDATE_SECRET) {
-  //   return new Response(JSON.stringify({ message: "Invalid secret" }), {
-  //     status: 401,
-  //   });
-  // }
-  // const token = req.headers.get("Authorization");
-  // if (token != process.env.REVALIDATE_SECRET) {
-  //   return Response.json({
-  //     error: true,
-  //     status: 401,
-  //     message: "UnAuthorized Token",
-  //   });
-  // }
+  if (res.secret !== process.env.REVALIDATE_SECRET) {
+    return new Response(JSON.stringify({ message: "Invalid secret" }), {
+      status: 401,
+    });
+  }
+  const token = req.headers.get("authorization");
+  if (token != process.env.REVALIDATE_SECRET) {
+    return Response.json({
+      error: true,
+      status: 401,
+      message: "UnAuthorized Token",
+    });
+  }
 
   try {
     
