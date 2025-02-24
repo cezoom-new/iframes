@@ -3,13 +3,13 @@ import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
   const token = req.headers.get("authorization");
-  if (token != process.env.REVALIDATE_SECRET) {
-    return Response.json({
-      error: true,
-      status: 401,
-      message: "UnAuthorized Token",
-    });
-  }
+  // if (token != process.env.REVALIDATE_SECRET) {
+  //   return Response.json({
+  //     error: true,
+  //     status: 401,
+  //     message: "UnAuthorized Token",
+  //   });
+  // }
   const geoData = geolocation(req);
   const ipAddress = req.headers.get("x-forwarded-for");
   const data: any = geoData;
