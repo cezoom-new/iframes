@@ -34,20 +34,22 @@ export default function RightImageLeftText({
       {cookies &&
         <CookieShow cookie={cookies}  campaign={campaign}/>
       }
-      <Container
-        className={` flex flex-col px-4 md:px-12 pt-4 md:py-4 z-10  gap-3  ${banner?.isFullScreen ? "flex-1" : ""}`}
-      >
-        <div className="flex-grow flex items-center justify-between gap-4 lg:gap-20">
-          <DynamicStructure colors={colors} campaign={campaign} components={campaign?.structure?.components} className="flex flex-col max-w-lg xl:max-w-xl gap-3" />
-          <CampaignImageArea
-            campaignImage={campaign}
-            className="items-center max-w-[500px] hidden lg:block"
-            isCarousal={
-              campaign?.structure?.campaignCarousalImage?.length >= 1 ? true : false
-            }
-          />
-        </div>
-      </Container>
+      <div className="px-4 md:px-8 xl:px-12">
+        <Container
+          className={` flex flex-col pt-4 md:py-4 z-10  gap-3  ${banner?.isFullScreen ? "flex-1" : ""}`}
+        >
+          <div className="flex-grow flex items-center justify-between gap-4 lg:gap-20">
+            <DynamicStructure colors={colors} campaign={campaign} components={campaign?.structure?.components} className="flex flex-col max-w-lg xl:max-w-xl gap-3" />
+            <CampaignImageArea
+              campaignImage={campaign}
+              className="items-center max-w-[500px] hidden lg:block"
+              isCarousal={
+                campaign?.structure?.campaignCarousalImage?.length >= 1 ? true : false
+              }
+            />
+          </div>
+        </Container>
+      </div>
       {banner && <Banner className="" banner={banner} campaignName={campaign?.name}/>}
     </Section>
   );
