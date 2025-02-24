@@ -123,7 +123,7 @@ export const Banner = defineType({
             select: {},
             prepare() {
               return {
-                title: "bannerHeading",
+                title: "Banner Heading",
               };
             },
           },
@@ -142,7 +142,7 @@ export const Banner = defineType({
             select: {},
             prepare() {
               return {
-                title: "eventDescription",
+                title: "Event Description",
               };
             },
           },
