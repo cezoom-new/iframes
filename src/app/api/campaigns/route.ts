@@ -7,13 +7,13 @@ import {
 
 export async function POST(request: NextRequest) {
   const token = request.headers.get("authorization");
-  if (token != process.env.REVALIDATE_SECRET) {
-    return Response.json({
-      error: true,
-      status: 401,
-      message: "UnAuthorized Token",
-    });
-  }
+  // if (token != process.env.REVALIDATE_SECRET) {
+  //   return Response.json({
+  //     error: true,
+  //     status: 401,
+  //     message: "UnAuthorized Token",
+  //   });
+  // }
   const { adjacency, campaignIDs, customerType } = await request.json();
   if (adjacency && campaignIDs && customerType) {
     const campaigns = await runQuery(getCampaignIdsByAdjacency(), {

@@ -8,13 +8,13 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
   const token = req.headers.get("authorization");
-  if (token != process.env.REVALIDATE_SECRET) {
-    return Response.json({
-      error: true,
-      status: 401,
-      message: "UnAuthorized Token",
-    });
-  }
+  // if (token != process.env.REVALIDATE_SECRET) {
+  //   return Response.json({
+  //     error: true,
+  //     status: 401,
+  //     message: "UnAuthorized Token",
+  //   });
+  // }
   const cookieStore = await cookies();
   const request: any = await req.json();
   const { meta, loc, locationData, browserData }: any = request;
