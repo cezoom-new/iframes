@@ -6,7 +6,9 @@ import { cookies } from "next/headers";
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { searchParams, pathname } = request.nextUrl;
-  if (pathname.includes("/api")) {
+  if (pathname.includes("/api") && !pathname.includes('/api/session')
+    && !pathname.includes('/api/track') && !pathname.includes('/api/location')
+  ) {
     const authToken = request.headers.get("authorization");
 
     if (!authToken) {
@@ -73,5 +75,5 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher:
-    "/((?!studio|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.css|.*\\.js|.*\\.png|.*\\.jpg).*)",
+    "/((?!studio|_next/static|api|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.css|.*\\.js|.*\\.png|.*\\.jpg).*)",
 };
