@@ -8,7 +8,6 @@ export const fetchAllViewport = async () => {
       headers: {
         "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
         "Content-Type": "application/json",
-        "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
       },
     });
     if (!res?.ok) {
