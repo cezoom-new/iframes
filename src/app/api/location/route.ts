@@ -2,7 +2,7 @@ import { geolocation } from "@vercel/edge";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {
-  // const token = req.headers.get("Authorization");
+  const token = req.headers.get("authorization");
   // if (token != process.env.REVALIDATE_SECRET) {
   //   return Response.json({
   //     error: true,
@@ -17,6 +17,9 @@ export async function GET(req: NextRequest) {
 
   return new Response(JSON.stringify(geoData), {
     status: 200,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${process.env.REVALIDATE_SECRET}`,
+    },
   });
 }

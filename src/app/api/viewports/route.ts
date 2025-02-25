@@ -3,7 +3,8 @@ import { runQuery } from "../../../sanity/lib/client";
 import { getViewPortByProductRegion, getViewPorts } from "../../../sanity/lib/queries";
 
 export async function GET(request: NextRequest) {
-  // const token = request.headers.get("Authorization");
+  const token = request.headers.get("authorization");
+  console.log(token,'nextToken!!')
   // if (token != process.env.REVALIDATE_SECRET) {
   //   return Response.json({
   //     error: true,

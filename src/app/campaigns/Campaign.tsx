@@ -72,7 +72,7 @@ function Campaign({
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: `${process.env.REVALIDATE_SECRET}`,
+                "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
               },
               body: JSON.stringify({
                 meta: metaData,

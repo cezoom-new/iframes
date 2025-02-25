@@ -8,7 +8,7 @@ const supabaseKey = process.env.SUPABASE_ANON_PUBLIC || "";
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function POST(req: NextRequest) {
-  // const token = req.headers.get("Authorization");
+  const token = req.headers.get("authorization");
   // if (token != process.env.REVALIDATE_SECRET) {
   //   return Response.json({
   //     error: true,
