@@ -174,7 +174,7 @@ export default function Banner({ className, banner, campaignName }: any) {
                 }
               })}
               </div>
-              <div >
+              <div>
               {banner?.banner?.map((component: any, index: number) => {                
                 return (
                   component._type == "buttonComponents" ?
