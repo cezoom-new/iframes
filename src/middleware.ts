@@ -6,10 +6,12 @@ import { cookies } from "next/headers";
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { searchParams, pathname } = request.nextUrl;
-  if (pathname.includes("/api") && !pathname.includes('/api/session')
-    && !pathname.includes('/api/track') && !pathname.includes('/api/location')
+  if (
+    pathname.startsWith("/api") &&
+    !["/api/session", "/api/track", "/api/location"].includes(pathname)
   ) {
     const authToken = request.headers.get("authorization");
+
 
     if (!authToken) {
       return NextResponse.json(
@@ -32,7 +34,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // return NextResponse.next();
 
   try {
     const { searchParams, pathname } = request.nextUrl;
@@ -40,27 +41,6 @@ export async function middleware(request: NextRequest) {
     const country = splitPath[splitPath.length - 1] ?? "us";
     const product = splitPath[splitPath.length - 2];
     const customer = searchParams.get("domain") ?? "unknown";
-    if (pathname.includes("/api")) {
-      const authToken = request.headers.get("authorization");
-      if (!authToken) {
-        return NextResponse.json(
-          { error: true, message: "Auth Token Missing", status: 401 },
-          { status: 401 }
-        );
-      }
-      const tokenParts = authToken.split(" ");
-      const isBearer = tokenParts[0] === "Bearer";
-      const authKey = tokenParts[1] === process.env.REVALIDATE_SECRET;
-
-      if (!isBearer || !authKey) {
-        return NextResponse.json(
-          { error: true, message: "Invalid Token", status: 401 },
-          { status: 401 }
-        );
-      }
-
-      return NextResponse.next();
-    }
     if (product && country && customer) {
       url.pathname = `${product}-${country}/${customer}`;
     }
@@ -75,5 +55,5 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher:
-    "/((?!studio|_next/static|api|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.css|.*\\.js|.*\\.png|.*\\.jpg).*)",
+    "/((?!studio|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.css|.*\\.js|.*\\.png|.*\\.jpg).*)",
 };
