@@ -54,7 +54,7 @@ export default function Anchor(button: ButtonProps) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
+          // "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
         },
         body: JSON.stringify({
           loc: window.location,

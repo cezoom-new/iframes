@@ -22,7 +22,7 @@ export async function createSession(uID: string | null,locationData:any) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
+        // "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
       },
       body: JSON.stringify({
         userId: uID,
@@ -41,7 +41,7 @@ export async function getLocationDetails() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
+        // "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
       },
     });
     if (!res.ok) {
