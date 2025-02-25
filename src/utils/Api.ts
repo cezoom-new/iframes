@@ -8,6 +8,7 @@ export const fetchAllViewport = async () => {
       headers: {
         "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
         "Content-Type": "application/json",
+        "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
       },
     });
     if (!res?.ok) {
@@ -59,7 +60,7 @@ export const fetchCampaignByIDs = async (
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-       "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
+        "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
       },
       method: "POST",
       body: JSON.stringify({ campaignIDs }),
