@@ -135,9 +135,7 @@ export default function Banner({ className, banner, campaignName }: any) {
                     );
 
                   case "buttonComponents":
-                    return (
-                      <></>
-                    );
+                    return null;
                   case "pillElement":
                     return (
                       <div
@@ -171,33 +169,13 @@ export default function Banner({ className, banner, campaignName }: any) {
                       </div>
                     );
                   
-                    return (
-                      <div
-                        className="relative lg:absolute top-1/2 right-0 transform lg:-translate-y-1/2"
-                        key={`buttonComponents-${index}`}
-                      >
-                        <Link href={component?.ctaBtnTextLink} target="_blank">
-                          <Anchor
-                            style={{
-                              backgroundColor: component?.ctaBtnColor,
-                              color: component?.ctaBtnTextColor,
-                            }}
-                            className="font-bold text-sm h-11 w-40 rounded bg-white text-[#1E293B]"
-                            campaignName={campaignName}
-                          >
-                            {component?.ctaBtnTextForEvent}
-                          </Anchor>
-                        </Link>
-                      </div>
-                    );
                   default:
                     return <div key={`unknown-${index}`}>Unknown component</div>;
                 }
               })}
               </div>
-              <div>
-              {banner?.banner?.map((component: any, index: number) => {
-                
+              <div >
+              {banner?.banner?.map((component: any, index: number) => {                
                 return (
                   component._type == "buttonComponents" ?
                   <div
@@ -212,12 +190,13 @@ export default function Banner({ className, banner, campaignName }: any) {
                         }}
                         className="font-bold text-sm h-11 w-40 rounded bg-white text-[#1E293B]"
                         campaignName={campaignName}
+                        ctaBtnLink={component?.ctaBtnTextLink}
                       >
                         {component?.ctaBtnTextForEvent}
                       </Anchor>
                     </Link>
                   </div>
-                  : <></>
+                  : null
                 );
               })}
               </div>
