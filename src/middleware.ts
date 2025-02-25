@@ -6,12 +6,17 @@ import { cookies } from "next/headers";
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { searchParams, pathname } = request.nextUrl;
+  if (pathname.startsWith("/api")) {
+    if (["/api/session", "/api/track", "/api/location"].includes(pathname)) {
+
+      return NextResponse.next();
+    }
+  }
   if (
     pathname.startsWith("/api") &&
     !["/api/session", "/api/track", "/api/location"].includes(pathname)
   ) {
     const authToken = request.headers.get("authorization");
-
 
     if (!authToken) {
       return NextResponse.json(
@@ -33,7 +38,6 @@ export async function middleware(request: NextRequest) {
 
     return NextResponse.next();
   }
-
 
   try {
     const { searchParams, pathname } = request.nextUrl;
