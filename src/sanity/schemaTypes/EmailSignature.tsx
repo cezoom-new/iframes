@@ -44,7 +44,7 @@ export const EmailSignature = defineType({
     {
       name: "signatureImage",
       title: "Image",
-      type: "image",
+      type: "blockContent",
     },
   ],
 });
