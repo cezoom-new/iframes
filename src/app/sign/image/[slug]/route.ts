@@ -16,6 +16,7 @@ export async function GET(req: NextRequest, { params }: any) {
       next: { tags: ["product-management"] },
     });
 
+
  
     const headers = new Headers();
     return new NextResponse(response.body, {
