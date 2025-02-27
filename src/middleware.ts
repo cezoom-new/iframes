@@ -13,7 +13,7 @@ console.log({pathname});
   if(pathname.startsWith("/m/image")){
     const response = await fetch(`${process.env.PROJECT_URL}/sign/image/product-management.gif`, { cache: 'force-cache' });
     const headers = new Headers();
-    headers.set("Content-Type", "image/gif");
+    headers.set("Content-Type", "image/gif"); 
 
     return new NextResponse(response.body, {
       status: 200,
