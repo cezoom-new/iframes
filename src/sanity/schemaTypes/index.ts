@@ -7,7 +7,8 @@ import { blockContent } from "./objects/BlockContent";
 import { CookiePreference } from "./cookiePreference";
 import { BackgroundColor } from "./BackgroundColor";
 import { AudienceList } from "./AudienceList";
+import { EmailSignature } from "./EmailSignature";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [campaign, viewport, Banner, blockContent, CookiePreference,BackgroundColor, AudienceList],
+  types: [campaign, viewport, Banner, blockContent, CookiePreference,BackgroundColor, AudienceList, EmailSignature],
 };
