@@ -193,7 +193,7 @@ const getEmailSignatureBySlug = () => {
               }
             },
       
-      }
+      }[0]
       }[0]`;
 };
 const getAllEmailSignatures = () => {

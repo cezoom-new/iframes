@@ -7,10 +7,6 @@ const fetchAllEmailSignatures = unstable_cache(async ()=>{
   return signatures
 })
 
-const fetchEmailSignatureBySlug = unstable_cache(async (slug)=>{
-  const signatures:any = await runQuery(getEmailSignatureBySlug(),{slug},[slug]);
-  return signatures
-})
 
 
 export async function generateStaticParams() {
@@ -27,8 +23,15 @@ export async function generateStaticParams() {
     return allParams;
 }
 export default async function emailSignature({ params }: { params: any }) {
+
   const { slug } = await params;
-  const signature = await fetchEmailSignatureBySlug(slug);
-  console.log({signature});
-  return(<>HI</>)
+  const url =`${process.env.PROJECT_URL}/sign/image/${slug}.gif`
+  return(<div className="w-1/2  h-1/2">
+    <div contentEditable={true}>
+    <a href={`${process.env.PROJECT_URL}/sign/link/${slug}`}>
+    <img src={url} alt={"Email Signature Image"} />
+    </a>
+    </div>
+
+  </div>)
 }
