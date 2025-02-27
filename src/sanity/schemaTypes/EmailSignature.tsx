@@ -2,10 +2,11 @@ import { defineField, defineType } from "sanity";
 import { SchemaIcon } from "@sanity/icons";
 
 export const EmailSignature = defineType({
-  name: "emailsiganture",
-  title: "Email Siganture",
+  name: "emailSignature",
+  title: "Email Signature",
   type: "document",
   icon: SchemaIcon,
+
   fields: [
     {
       name: "teamName",
@@ -21,30 +22,21 @@ export const EmailSignature = defineType({
       },
     },
     {
-      name: "campaignList",
+      name: "emailSignatureCampaignList",
       title: "Campaign",
       type: "array",
       of: [
         {
-          name: "campaign",
+          name: "emailSignatureCampaigns",
           title: "Add Campaign",
           type: "reference",
-          to: [{ type: "campaign" }],
-          options: {
-            disableNew: true, // Disable creating new campaigns from this schema
-          },
+          to: [{ type: "emailSignatureCampaign" }],
+          validation: (Rule) => Rule.max(1),
+          // options: {
+          //   disableNew: true,
+          // },
         },
       ],
-    },
-    {
-      name: "url",
-      title: "Redirect URL",
-      type: "url",
-    },
-    {
-      name: "signatureImage",
-      title: "Image",
-      type: "image",
     },
   ],
 });
