@@ -15,7 +15,10 @@ export const EmailSignature = defineType({
     {
       name: "slug",
       title: "Slug",
-      type: "string",
+      type: "slug",
+      options: {
+        source: "teamName",
+      },
     },
     {
       name: "campaignList",
@@ -36,7 +39,7 @@ export const EmailSignature = defineType({
     {
       name: "url",
       title: "URL",
-      type: "blockContent",
+      type: "url",
     },
     {
       name: "signatureImage",
