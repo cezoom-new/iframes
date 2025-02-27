@@ -38,13 +38,13 @@ export const EmailSignature = defineType({
     },
     {
       name: "url",
-      title: "URL",
+      title: "Redirect URL",
       type: "url",
     },
     {
       name: "signatureImage",
       title: "Image",
-      type: "blockContent",
+      type: "image",
     },
   ],
 });
