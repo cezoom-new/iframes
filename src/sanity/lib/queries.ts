@@ -175,6 +175,31 @@ const getCampaignLayoutByID = () => {
   return groq`*[_type == "campaign" && _id == $campaignID]{ selectedLayout } | order(_createdAt desc)[0]`;
 };
 
+const getEmailSignatureBySlug = () => {
+  return groq`*[_type == "emailSignature" && slug.current == $slug]{
+    team,
+      "emailSignatureCampaignList":emailSignatureCampaignList[]->{
+        slug,
+     
+        'image':signatureImage.asset->{
+              _id,
+              url,
+              metadata {
+                dimensions {
+                  width,
+                  height,
+                  aspectRatio
+                }
+              }
+            },
+      
+      }[0]
+      }[0]`;
+};
+const getAllEmailSignatures = () => {
+  return groq`*[_type == "emailSignature"]`;
+};
+
 export {
   getViewPorts,
   getViewPortByRegion,
@@ -185,5 +210,7 @@ export {
   getCampaignLayoutByID,
   getAllCampaignsByLayout,
   getCookiesData,
-  getCampaignByIDs
+  getCampaignByIDs,
+  getAllEmailSignatures,
+  getEmailSignatureBySlug
 };

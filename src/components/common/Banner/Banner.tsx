@@ -90,8 +90,8 @@ export default function Banner({ className, banner, campaignName }: any) {
                 {getMonths(banner?.eventStartingDate)}
               </span>
               <span className="text-2xl lg:text-4xl font-medium">
-                {getDate(banner?.eventStartingDate)}-
-                {getDate(banner?.eventEndingDate)}
+                {banner?.eventStartingDate ? getDate(banner?.eventStartingDate) : ''}
+                {banner?.eventEndingDate ? ` - ${getDate(banner.eventEndingDate)}` : ""}
               </span>
               <span className="text-sm lg:text-lg font-medium text-white">
                 {new Date(banner?.eventStartingDate).getFullYear()}

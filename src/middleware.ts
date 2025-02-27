@@ -2,10 +2,26 @@ import { geolocation, ipAddress } from "@vercel/edge";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 import { cookies } from "next/headers";
+import next from "next";
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { searchParams, pathname } = request.nextUrl;
+
+console.log({pathname});
+
+  if(pathname.startsWith("/m/image")){
+    const response = await fetch(`${process.env.PROJECT_URL}/sign/image/product-management.gif`, { cache: 'force-cache' });
+    const headers = new Headers();
+    headers.set("Content-Type", "image/gif"); 
+
+    return new NextResponse(response.body, {
+      status: 200,
+      statusText: "OK",
+      headers,
+    });
+  
+  }
   if (pathname.startsWith("/api")) {
     if (["/api/session", "/api/track", "/api/location"].includes(pathname)) {
 
@@ -59,5 +75,5 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher:
-    "/((?!studio|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\.css|.*\\.js|.*\\.png|.*\\.jpg).*)",
+    "/((?!studio|_next/static|_next/image|sign|sign-preview|favicon.ico|robots.txt|sitemap.xml|.*\\.css|.*\\.js|.*\\.png|.*\\.jpg).*)",
 };
