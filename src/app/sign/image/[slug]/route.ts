@@ -18,6 +18,7 @@ export async function GET(req: NextRequest, { params }: any) {
     const response2 = await data;
     
 
+
  
     const headers = new Headers();
     return new NextResponse(response2.body, {
