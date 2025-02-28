@@ -14,11 +14,12 @@ export async function GET(req: NextRequest, { params }: any) {
     const data = await fetch(response.result.image, {
       next: { tags: ["product-management"] },
     });
-
+    const response2 = await data;
+    
 
  
     const headers = new Headers();
-    return new NextResponse(response.body, {
+    return new NextResponse(response2.body, {
       status: 200,
       statusText: "OK",
       headers,
