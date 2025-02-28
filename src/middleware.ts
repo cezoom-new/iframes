@@ -8,8 +8,6 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { searchParams, pathname } = request.nextUrl;
 
-console.log({pathname});
-
   if(pathname.startsWith("/m/image")){
     const response = await fetch(`${process.env.PROJECT_URL}/sign/image/product-management.gif`, { cache: 'force-cache' });
     const headers = new Headers();
