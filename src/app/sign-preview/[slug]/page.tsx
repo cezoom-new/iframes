@@ -1,3 +1,5 @@
+
+import EmailSignatureTemplate from "@/components/common/EmailSignatureTemplate/emailSignatureTemplate";
 import { runQuery } from "@/sanity/lib/client";
 import {
   getAllEmailSignatures,
@@ -23,13 +25,7 @@ export async function generateStaticParams() {
 export default async function emailSignature({ params }: { params: any }) {
   const { slug } = await params;
   const url = `${process.env.PROJECT_URL}/sign/image/${slug}.gif`;
-  return (
-    <div className="w-1/2  h-1/2">
-      <div contentEditable={true}>
-        <a href={`${process.env.PROJECT_URL}/sign/link/${slug}`}>
-          <img src={url} alt={"Email Signature Image"} />
-        </a>
-      </div>
-    </div>
-  );
+  const link = `${process.env.PROJECT_URL}/sign/link/${slug}`;
+
+  return <EmailSignatureTemplate link={link} redirectUrl={url} />;
 }
