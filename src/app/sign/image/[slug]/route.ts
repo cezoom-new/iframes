@@ -15,15 +15,11 @@ export async function GET(req: NextRequest, { params }: any) {
       next: { tags: ["product-management"] },
     });
     const response2 = await data;
-    const headers = new Headers();
-    headers.set(
-      "Cache-Control",
-      "public, max-age=3600, stale-while-revalidate=86400"
-    );
+
     return new NextResponse(response2.body, {
       status: 200,
       statusText: "OK",
-      headers,
+
     });
   } catch (error) {
     // Base64-encoded 1x1 pixel GIF (transparent)
