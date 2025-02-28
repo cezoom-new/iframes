@@ -13,7 +13,7 @@ export async function GET(req: NextRequest, { params }: any) {
     const campaignSlug = params.slug.split(".")[0];
     const res = await fetch(
       `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2024-11-25/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=*%5B_type+%3D%3D+%22emailSignature%22+%26%26+slug.current+%3D%3D%22${campaignSlug}%22%5D%7B%0A%0A++%27image%27%3AemailSignatureCampaignList%5B0%5D-%3EsignatureImage.asset-%3Eurl%2C%0A++++%27campagin%27%3AemailSignatureCampaignList%5B0%5D-%3Eslug.current%2C%0A++++teamName%2C%0A+++%27url%27%3AemailSignatureCampaignList%5B0%5D-%3Eurl%0A++%7D%5B0%5D%0A++%0A%0A`
-    );
+    ,{cache: "no-store"});
     const response = await res.json();
     const data1 = await fetch(response.result.image, {
       
