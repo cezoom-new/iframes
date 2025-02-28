@@ -1,25 +1,40 @@
+import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, { params }: any) {
+  const supabaseUrl = process.env.SUPABASE_PROJECT_URL || "";
+  const supabaseKey = process.env.SUPABASE_ANON_PUBLIC || "";
+  const supabase = createClient(supabaseUrl, supabaseKey);
+  const metadata = Object.fromEntries(req.headers.entries());
+  const url: any = req.nextUrl.searchParams;
+  const email = url.get("email");
   try {
     const campaignSlug = params.slug.split(".")[0];
     const res = await fetch(
-      `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2024-11-25/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=*%5B_type+%3D%3D+%22emailSignature%22+%26%26+slug.current+%3D%3D%22${campaignSlug}%22%5D%7B%0A++%22image%22%3AemailSignatureCampaignList%5B0%5D-%3E%0A+++signatureImage.asset-%3Eurl%0A++%0A%7D%5B0%5D%0A++%0A%0A`,
+      `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2024-11-25/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=*%5B_type+%3D%3D+%22emailSignature%22+%26%26+slug.current+%3D%3D%22${campaignSlug}%22%5D%7B%0A%0A++%27image%27%3AemailSignatureCampaignList%5B0%5D-%3EsignatureImage.asset-%3Eurl%2C%0A++++%27campagin%27%3AemailSignatureCampaignList%5B0%5D-%3Eslug.current%2C%0A++++teamName%2C%0A+++%27url%27%3AemailSignatureCampaignList%5B0%5D-%3Eurl%0A++%7D%5B0%5D%0A++%0A%0A`,
       {
         next: { tags: ["product-management"] },
       }
     );
     const response = await res.json();
-
-    const data = await fetch(response.result.image, {
+    const data1 = await fetch(response.result.image, {
       next: { tags: ["product-management"] },
     });
-    const response2 = await data;
+    const response2 = await data1;
+    await supabase.from("email_signature_logs").insert([
+      {
+        event_type: "Email Opened",
+        sender_email: email,
+        campaign: response.result.campagin,
+        meta: metadata,
+        team: response.result.teamName,
+        redirect_url: response.result.url,
+      },
+    ]);
 
     return new NextResponse(response2.body, {
       status: 200,
       statusText: "OK",
-
     });
   } catch (error) {
     // Base64-encoded 1x1 pixel GIF (transparent)
