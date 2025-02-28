@@ -4,7 +4,6 @@ export async function GET(req: NextRequest, { params }: any) {
   try {
     const campaignSlug = params.slug.split(".")[0];
     const res = await fetch(
-
       `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2024-11-25/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=*%5B_type+%3D%3D+%22emailSignature%22+%26%26+slug.current+%3D%3D%22${campaignSlug}%22%5D%7B%0A++%22image%22%3AemailSignatureCampaignList%5B0%5D-%3E%0A+++signatureImage.asset-%3Eurl%0A++%0A%7D%5B0%5D%0A++%0A%0A`,
       {
         next: { tags: ["product-management"] },
@@ -16,8 +15,11 @@ export async function GET(req: NextRequest, { params }: any) {
       next: { tags: ["product-management"] },
     });
     const response2 = await data;
-
     const headers = new Headers();
+    headers.set(
+      "Cache-Control",
+      "public, max-age=3600, stale-while-revalidate=86400"
+    );
     return new NextResponse(response2.body, {
       status: 200,
       statusText: "OK",
