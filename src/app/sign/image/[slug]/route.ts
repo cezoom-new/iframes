@@ -16,10 +16,7 @@ export async function GET(req: NextRequest, { params }: any) {
       next: { tags: ["product-management"] },
     });
     const response2 = await data;
-    
 
-
- 
     const headers = new Headers();
     return new NextResponse(response2.body, {
       status: 200,
