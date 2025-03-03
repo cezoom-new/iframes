@@ -52,4 +52,4 @@ export async function GET(req: NextRequest, { params }: any) {
   }
 }
 
-export const revalidate = 200; // Revalidate every hour automatically
+export const revalidate = 600; // Revalidate every hour automatically
