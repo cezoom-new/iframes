@@ -27,16 +27,21 @@ export async function GET(req: NextRequest, { params }: any) {
         redirect_url: response.result.url,
       },
     ]);
-    /*   ### stale-while-revalidate = receive the old cached response while the new one is being fetched for 30 mins
+
+      /*
+      - public: Allows both browser and CDN to cache the response.
+      - max-age=3600: Browser caches the response for 1 hour.
+      - s-maxage=3600: CDN caches the response for 1 hour (overrides max-age for CDNs).
+      - stale-while-revalidate=3600: After 1 hour, serve stale content for up to another 1 hour while fetching a fresh version in the background.
       */
 
-    return new NextResponse(response2.body, { 
+    return new NextResponse(response2.body, {
       status: 200,
       statusText: "OK",
       headers: {
         "Content-Type": "image/jpeg",
         "Cache-Control":
-        "public, max-age=240, s-maxage=240, stale-while-revalidate=300" ,
+          "public, max-age=300, s-maxage=300, stale-while-revalidate=300",
       },
     });
   } catch (error) {
@@ -51,4 +56,3 @@ export async function GET(req: NextRequest, { params }: any) {
     });
   }
 }
-
