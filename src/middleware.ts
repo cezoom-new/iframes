@@ -8,18 +8,18 @@ export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { searchParams, pathname } = request.nextUrl;
 
-  if(pathname.startsWith("/m/image")){
-    const response = await fetch(`${process.env.PROJECT_URL}/sign/image/product-management.gif`, { cache: 'force-cache' });
-    const headers = new Headers();
-    headers.set("Content-Type", "image/gif"); 
+  // if(pathname.startsWith("/m/image")){
+  //   const response = await fetch(`${process.env.PROJECT_URL}/sign/image/product-management.gif`, { cache: 'force-cache' });
+  //   const headers = new Headers();
+  //   headers.set("Content-Type", "image/gif"); 
 
-    return new NextResponse(response.body, {
-      status: 200,
-      statusText: "OK",
-      headers,
-    });
+  //   return new NextResponse(response.body, {
+  //     status: 200,
+  //     statusText: "OK",
+  //     headers,
+  //   });
   
-  }
+  // }
   if (pathname.startsWith("/api")) {
     if (["/api/session", "/api/track", "/api/location"].includes(pathname)) {
 

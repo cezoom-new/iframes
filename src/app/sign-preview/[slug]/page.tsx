@@ -24,7 +24,7 @@ export async function generateStaticParams() {
 }
 export default async function emailSignature({ params }: { params: any }) {
   const { slug } = await params;
-  const url = `${process.env.PROJECT_URL}/m/image/${slug}.gif`;
+  const url = `${process.env.PROJECT_URL}/sign/image/${slug}.gif`;
   const link = `${process.env.PROJECT_URL}/sign/link/${slug}`;
 
 
