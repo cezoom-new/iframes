@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+"use client";
 import { useSearchParams } from "next/navigation";
 import React, { useRef, useState } from "react";
 
-function copySearchParams(sourceUrl: string, destUrl: string): string {
+const copySearchParams = (sourceUrl: string, destUrl: string): string  =>{
   const source = new URL(sourceUrl);
   const dest = new URL(destUrl);
   source.searchParams.forEach((value, key) => {
