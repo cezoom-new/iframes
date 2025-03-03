@@ -34,7 +34,7 @@ export async function GET(req: NextRequest, { params }: any) {
       headers: {
         "Content-Type": "application/json",
         "Cache-Control":
-          "public, max-age=240, s-maxage=240, stale-while-revalidate",
+          "public, max-age=240, s-maxage=240, stale-while-revalidate=300",
       },
     });
   } catch (error) {
