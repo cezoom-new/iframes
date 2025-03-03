@@ -1,8 +1,6 @@
-import { geolocation, ipAddress } from "@vercel/edge";
+
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
-import { cookies } from "next/headers";
-import next from "next";
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
