@@ -108,7 +108,6 @@ const fetchBannerByID = async (
 };
 
 const fetchCookieSettings = async (viewport: string, customer: string) => {
-  debugger
   const url = new URL(`${sanityUrl}/api/cookie-settings`);
   try {
     const res = await fetch(url, {
