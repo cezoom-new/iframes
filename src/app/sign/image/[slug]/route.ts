@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, { params }: any) {
@@ -12,13 +13,11 @@ export async function GET(req: NextRequest, { params }: any) {
     const campaignSlug = params.slug.split(".")[0];
     const res = await fetch(
       `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2024-11-25/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=*%5B_type+%3D%3D+%22emailSignature%22+%26%26+slug.current+%3D%3D%22${campaignSlug}%22%5D%7B%0A%0A++%27image%27%3AemailSignatureCampaignList%5B0%5D-%3EsignatureImage.asset-%3Eurl%2C%0A++++%27campagin%27%3AemailSignatureCampaignList%5B0%5D-%3Eslug.current%2C%0A++++teamName%2C%0A+++%27url%27%3AemailSignatureCampaignList%5B0%5D-%3Eurl%0A++%7D%5B0%5D%0A++%0A%0A`,
-      {
-        next: { tags: ["product-management"] },
-      }
-    );
+     { next: { tags:campaignSlug  }}
+    ,);
     const response = await res.json();
     const data1 = await fetch(response.result.image, {
-      next: { tags: ["product-management"] },
+      
     });
     const response2 = await data1;
     await supabase.from("email_signature_logs").insert([
@@ -35,6 +34,11 @@ export async function GET(req: NextRequest, { params }: any) {
     return new NextResponse(response2.body, {
       status: 200,
       statusText: "OK",
+      headers: {
+        "Content-Type": "image/jpeg",
+        "Cache-Control":
+          "public, max-age=3600, s-maxage=3600, stale-while-revalidate=1800",
+      },
     });
   } catch (error) {
     // Base64-encoded 1x1 pixel GIF (transparent)
@@ -48,3 +52,29 @@ export async function GET(req: NextRequest, { params }: any) {
     });
   }
 }
+
+export async function POST(request: NextRequest, { params }: any) {
+  const campaignSlug = params.slug.split(".")[0];
+  revalidateTag(campaignSlug);
+  const res = await fetch(`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2024-11-25/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}?query=*%5B_type+%3D%3D+%22emailSignature%22+%26%26+slug.current+%3D%3D%22${campaignSlug}%22%5D%7B%0A%0A++%27image%27%3AemailSignatureCampaignList%5B0%5D-%3EsignatureImage.asset-%3Eurl%2C%0A++++%27campagin%27%3AemailSignatureCampaignList%5B0%5D-%3Eslug.current%2C%0A++++teamName%2C%0A+++%27url%27%3AemailSignatureCampaignList%5B0%5D-%3Eurl%0A++%7D%5B0%5D%0A++%0A%0A`,
+    {cache: "no-store"}
+  );
+  // const imageBuffer = await imageResponse.arrayBuffer();
+  const response = await res.json();
+  const data1 = await fetch(response.result.image, {
+    
+  });
+  const response2 = await data1;
+  return new NextResponse(response2.body, {
+    status: 200,
+    statusText: "revalidated ",
+    headers: {
+      "Content-Type": "image/jpeg",
+      "Cache-Control": "no-cache",
+    },
+
+  });
+
+}
+
+export const revalidate = 3600; // Revalidate every hour automatically
