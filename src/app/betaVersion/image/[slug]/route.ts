@@ -33,11 +33,11 @@ export async function GET(req: NextRequest, { params }: any) {
     return new NextResponse(response2.body, { 
       status: 200,
       statusText: "OK",
-      headers: {
-        "Content-Type": "image/jpeg",
-        "Cache-Control":
-        "public, max-age=240, s-maxage=240, stale-while-revalidate" ,
-      },
+      // headers: {
+      //   "Content-Type": "image/jpeg",
+      //   "Cache-Control":
+      //     "public, max-age=3600, s-maxage=3600, stale-while-revalidate", 
+      // },
     });
   } catch (error) {
     // Base64-encoded 1x1 pixel GIF (transparent)
@@ -52,3 +52,4 @@ export async function GET(req: NextRequest, { params }: any) {
   }
 }
 
+export const revalidate = 200; // Revalidate every hour automatically

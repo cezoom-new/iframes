@@ -26,6 +26,13 @@ export default async function emailSignature({ params }: { params: any }) {
   const { slug } = await params;
   const url = `${process.env.PROJECT_URL}/sign/image/${slug}.gif`;
   const link = `${process.env.PROJECT_URL}/sign/link/${slug}`;
+  const url1 = `${process.env.PROJECT_URL}/betaVersion/image/${slug}.gif`;
+  const link1 = `${process.env.PROJECT_URL}/betaVersion/link/${slug}`;1
 
-  return <EmailSignatureTemplate link={link} redirectUrl={url} />;
+  return(
+    <div>
+       <EmailSignatureTemplate link={link} redirectUrl={url} />
+       <EmailSignatureTemplate link={link1} redirectUrl={url1} />
+    </div>
+  );
 }
