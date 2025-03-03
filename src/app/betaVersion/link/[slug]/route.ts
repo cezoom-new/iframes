@@ -31,11 +31,11 @@ export async function GET(req: NextRequest, { params }: any) {
       */
 
     return NextResponse.redirect(new URL(response.result.url), {
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control":
-          "public, max-age=240, s-maxage=240, stale-while-revalidate",
-      },
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   "Cache-Control":
+      //     "public, max-age=3600, s-maxage=3600, stale-while-revalidate",
+      // },
     });
   } catch (error) {
     return new NextResponse("", {
@@ -44,3 +44,5 @@ export async function GET(req: NextRequest, { params }: any) {
     });
   }
 }
+
+export const revalidate = 200;
