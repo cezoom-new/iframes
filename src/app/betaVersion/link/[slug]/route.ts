@@ -45,4 +45,4 @@ export async function GET(req: NextRequest, { params }: any) {
   }
 }
 
-export const revalidate = 200;
+export const revalidate = 600;
