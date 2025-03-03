@@ -30,13 +30,13 @@ export async function GET(req: NextRequest, { params }: any) {
     /*   ### stale-while-revalidate = receive the old cached response while the new one is being fetched for 30 mins
       */
 
-    return new NextResponse(response2.body, {
+    return new NextResponse(response2.body, { 
       status: 200,
       statusText: "OK",
       headers: {
         "Content-Type": "image/jpeg",
         "Cache-Control":
-          "public, max-age=3600, s-maxage=3600, stale-while-revalidate",
+          "public, max-age=3600, s-maxage=3600, stale-while-revalidate", 
       },
     });
   } catch (error) {
