@@ -30,9 +30,16 @@ export default function EmailSignatureTemplate(props: {
     if (typeof window !== "undefined") {
       const currentUrl = window.location.href;
       setUpdatedLink(props?.link ? copySearchParams(currentUrl, props.link) : "");
-      setUpdatedRedirectUrl(props?.redirectUrl ? copySearchParams(currentUrl, props.redirectUrl) : "");
+      
+      if (props?.redirectUrl) {
+        const encodedRedirectUrl = copySearchParams(currentUrl, props.redirectUrl);
+        setUpdatedRedirectUrl(encodeURI(encodedRedirectUrl)); // Ensure it's properly encoded
+      } else {
+        setUpdatedRedirectUrl("");
+      }
     }
-  }, [props.link, props.redirectUrl]); 
+  }, [props.link, props.redirectUrl]);
+  
 
   const copyToClipboard = async () => {
     if (hiddenDivRef.current) {
@@ -61,7 +68,7 @@ export default function EmailSignatureTemplate(props: {
             <img src={updatedRedirectUrl} alt="Email Signature Image" style={{ border: "none" }} />
           </a>
         ) : (
-          <p>Invalid link</p>
+          <p></p>
         )}
       </div>
 
@@ -72,7 +79,7 @@ export default function EmailSignatureTemplate(props: {
             <img src={updatedRedirectUrl} alt="Email Signature Image" style={{ border: "none" }} />
           </a>
         ) : (
-          <p>Invalid link</p>
+          <p></p>
         )}
       </div>
 
