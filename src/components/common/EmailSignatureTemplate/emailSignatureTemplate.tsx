@@ -28,17 +28,54 @@ export default function EmailSignatureTemplate(props: {
   const hiddenDivRef = useRef<HTMLDivElement | null>(null);
   const [updatedLink, setUpdatedLink] = useState<string>("");
   const [updatedRedirectUrl, setUpdatedRedirectUrl] = useState<string>("");
-  const [linkedinUrl, setLinkedinUrl] = useState<string>("");
-  const [websiteUrl, setWebsiteUrl] = useState<string>("");
-  const [twitterUrl, setTwitterUrl] = useState<string>("");
-  const [instagramUrl, setInstagramUrl] = useState<string>("");
-  const [youtubeUrl, setYoutubeUrl] = useState<string>("");
 
-  const transformUrl = (url: string, setUrl: React.Dispatch<React.SetStateAction<string>>) => {
-    setUrl((prevUrl) => {
-      const cleanUrl = url.replace(/^https?:\/\//, '');
-      return `https://${cleanUrl}`;
-    });
+  const [urls, setUrls] = useState<any>({
+    websiteUrl: "",
+    linkedinUrl: "",
+    twitterUrl: "",
+    youtubeUrl: "",
+    instagramUrl: "",
+  });
+
+  const formFields = [
+    {
+      label: "Name",
+      placeholder: "Enter Name",
+    },
+    {
+      label: "Website",
+      key: "websiteUrl",
+      placeholder: "Enter website URL",
+    },
+    {
+      label: "LinkedIn",
+      key: "linkedinUrl",
+      placeholder: "Enter LinkedIn URL",
+    },
+    {
+      label: "Twitter",
+      key: "twitterUrl",
+      placeholder: "Enter Twitter URL",
+    },
+    {
+      label: "YouTube",
+      key: "youtubeUrl",
+      placeholder: "Enter YouTube URL",
+    },
+    {
+      label: "Instagram",
+      key: "instagramUrl",
+      placeholder: "Enter Instagram URL",
+    },
+  ];
+
+  const transformUrl = (url: string, key: string) => {
+    const cleanUrl = url.replace(/^https?:\/\//, "");
+  
+    setUrls((prevUrls:any) => ({
+      ...prevUrls,
+      [key]: `https://${cleanUrl}`,
+    }));
   };
  
 
@@ -66,6 +103,14 @@ export default function EmailSignatureTemplate(props: {
       }
     }
   }, [props.link, props.redirectUrl]);
+
+  const handleInputChange = (key:any, value:any) => {
+    setUrls((prevUrls:any) => ({
+      ...prevUrls,
+      [key]: transformUrl(value,key)
+    }));
+  };
+
 
   const copyToClipboard = async () => {
     if (!hiddenDivRef.current) return;
@@ -107,11 +152,11 @@ export default function EmailSignatureTemplate(props: {
             <td>
               <b>${fullName}</b>
               <td style="display: flex; ">
-              ${websiteUrl ? `<a style="width:20px" href="${websiteUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${websiteIconBase64}" alt="Website" /></a>` : ""}
-              ${linkedinUrl ? `<a style="width:20px" href="${linkedinUrl}" target="_blank"><img style="width:16px; height:16px;" src="${linkedinIconBase64}" alt="LinkedIn" /></a>` : ""}
-              ${twitterUrl ? `<a style="width:20px" href="${twitterUrl}" target="_blank"><img style="width:16px; height:16px;" src="${twitterBase64}" alt="Twitter" /></a>` : ""}
-              ${youtubeUrl ? `<a style="width:20px" href="${youtubeUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${youtubeBase64}" alt="YouTube" /></a>` : ""}
-               ${instagramUrl ? `<a style="width:20px" href="${instagramUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${instagramBase64}" alt="YouTube" /></a>` : ""}
+              ${urls.websiteUrl ? `<a style="width:20px" href="${urls.websiteUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${websiteIconBase64}" alt="Website" /></a>` : ""}
+              ${urls.linkedinUrl ? `<a style="width:20px" href="${urls.linkedinUrl}" target="_blank"><img style="width:16px; height:16px;" src="${linkedinIconBase64}" alt="LinkedIn" /></a>` : ""}
+              ${urls.twitterUrl ? `<a style="width:20px" href="${urls.twitterUrl}" target="_blank"><img style="width:16px; height:16px;" src="${twitterBase64}" alt="Twitter" /></a>` : ""}
+              ${urls.youtubeUrl ? `<a style="width:20px" href="${urls.youtubeUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${youtubeBase64}" alt="YouTube" /></a>` : ""}
+               ${urls.instagramUrl ? `<a style="width:20px" href="${urls.instagramUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${instagramBase64}" alt="YouTube" /></a>` : ""}
             </td>
             </td>
               <tr>
@@ -136,7 +181,7 @@ export default function EmailSignatureTemplate(props: {
           <tr>
             <td colspan="2">
               <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
-                <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none;" />
+                <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none; width:200px;" />
               </a>
             </td>
           </tr>
@@ -151,79 +196,28 @@ export default function EmailSignatureTemplate(props: {
   return (
     <div className="flex p-6 justify-center h-screen">
       <div className="w-[400px]">
-        <form
-          style={{
-            width: "250px",
-          }}
-        >
-          <label>
-            Website
-            <input
-              type="text"
-              value={websiteUrl}
-              onChange={(e) =>  transformUrl(e.target.value,setWebsiteUrl)}
-              style={{
-                border: "1px solid #ccc",
-                padding: "5px",
-              }}
-            />
-          </label>
+      {formFields.map((field:any) => (
+        <label key={field.key}>
+          {field.label}
+          <input
+            type="text"
+            value={urls[field.key]}
+            onChange={(e) => handleInputChange(field.key, e.target.value)}
+            placeholder={field.placeholder}
+            style={{
+              border: "1px solid #ccc",
+              padding: "5px",
+              width: "100%",
+              marginBottom: "10px",
+            }}
+          />
+        </label>
+      ))
+      }
+   
+  
 
-          <label>
-            LinkedIn
-            <input
-              type="text"
-              value={linkedinUrl}
-              onChange={(e) => transformUrl(e.target.value,setLinkedinUrl)}
-              style={{
-                border: "1px solid #ccc",
-                padding: "5px",
-              }}
-            />
-          </label>
-
-          <label>
-            Twitter
-            <input
-              type="text"
-              value={twitterUrl}
-              onChange={(e) =>  transformUrl(e.target.value,setTwitterUrl)}
-              style={{
-                border: "1px solid #ccc",
-                padding: "5px",
-              }}
-            />
-          </label>
-
-          <label>
-            YouTube 
-            <input
-              type="text"
-              value={youtubeUrl}
-              onChange={(e) => transformUrl(e.target.value,setYoutubeUrl)}
-              style={{
-                border: "1px solid #ccc",
-                padding: "5px",
-              }}
-            />
-          </label>
-
-          <label>
-            Instagram
-            <input
-              type="text"
-              value={instagramUrl}
-              onChange={(e) => transformUrl(e.target.value,setInstagramUrl)}
-              style={{
-                border: "1px solid #ccc",
-                padding: "5px",
-              }}
-            />
-          </label>
-        </form>
-      </div>
-      <div className="w-1/2 flex flex-col">
-        {/* Hidden container to hold the HTML we want to copy */}
+    </div><div className="w-1/2 flex flex-col">
         <div
           ref={hiddenDivRef}
           dangerouslySetInnerHTML={{ __html: signatureHtml }}
@@ -231,7 +225,11 @@ export default function EmailSignatureTemplate(props: {
         <div className="flex pt-6 gap-3 flex-col relative">
           <button
             className="bg-green-600 p-2 rounded-md text-white"
-            onClick={copyToClipboard}
+            onClick={(e: any) => {
+              e.preventDefault();
+              e.stopPropagation();
+              copyToClipboard();
+            } }
           >
             Copy Signature
           </button>
