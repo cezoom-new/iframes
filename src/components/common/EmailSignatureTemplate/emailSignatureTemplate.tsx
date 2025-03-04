@@ -28,6 +28,9 @@ export default function EmailSignatureTemplate(props: {
   const hiddenDivRef = useRef<HTMLDivElement | null>(null);
   const [updatedLink, setUpdatedLink] = useState<string>("");
   const [updatedRedirectUrl, setUpdatedRedirectUrl] = useState<string>("");
+  const [linkedinUrl, setLinkedinUrl] = useState<string>("");
+  const [googleUrl, setGoogleUrl] = useState<string>("");
+  const [twitterUrl, setTwitterUrl] = useState<string>("");
 
   const searchParams = useSearchParams();
   const emailId = searchParams.get("email");
@@ -73,160 +76,198 @@ export default function EmailSignatureTemplate(props: {
   };
 
   return (
-    <div className="p-6 justify-items-center h-screen flex flex-col items-center justify-center">
-      {/* Hidden container to hold the HTML we want to copy */}
-      <div ref={hiddenDivRef} style={{ display: "none" }}>
-        {updatedLink && updatedRedirectUrl ? (
-          <Link href={updatedLink} target="_blank" rel="noopener noreferrer">
-            <table border={1} cellPadding={5} cellSpacing={0}>
-              <tbody>
-                <tr>
-                  <td colSpan={2}>
-                    {" "}
-                    <b>{fullName}</b>
-                    <br />
-                    {designation}
-                    <br />
-                    <img src="https://cdn.sanity.io/images/bgk0i4de/dev/abb19b7036ad3bdfe699063717831052bc8952d9-83x10.svg" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                    >
-                      <path
-                        d="M1.875 2.25C1.57663 2.25 1.29048 2.36853 1.0795 2.5795C0.868526 2.79048 0.75 3.07663 0.75 3.375V3.96975C0.7695 3.9765 0.78825 3.98475 0.807 3.99375L5.7555 6.3825C5.91 6.4575 6.09 6.4575 6.2445 6.3825L11.193 3.99375C11.2115 3.98472 11.2306 3.97671 11.25 3.96975V3.375C11.25 3.07663 11.1315 2.79048 10.9205 2.5795C10.7095 2.36853 10.4234 2.25 10.125 2.25H1.875Z"
-                        fill="#334155"
-                      />
-                      <path
-                        d="M11.25 5.21545L6.7335 7.39495C6.50474 7.50536 6.25401 7.56271 6 7.56271C5.74599 7.56271 5.49526 7.50536 5.2665 7.39495L0.75 5.21545V8.62495C0.75 8.92332 0.868526 9.20947 1.0795 9.42045C1.29048 9.63143 1.57663 9.74995 1.875 9.74995H10.125C10.4234 9.74995 10.7095 9.63143 10.9205 9.42045C11.1315 9.20947 11.25 8.92332 11.25 8.62495V5.21545Z"
-                        fill="#334155"
-                      />
-                    </svg>
-                    {emailId}
-                  </td>
-                  <td>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M2.89125 5.4645L3.6915 5.064C3.83358 4.9931 3.94949 4.87894 4.02254 4.73796C4.09559 4.59698 4.12201 4.43646 4.098 4.2795L3.768 2.136C3.74078 1.95897 3.6511 1.79754 3.51519 1.68088C3.37928 1.56423 3.20611 1.50007 3.027 1.5H2.25C2.05109 1.5 1.86032 1.57902 1.71967 1.71967C1.57902 1.86032 1.5 2.05109 1.5 2.25V3.75C1.5 4.28175 1.5615 4.8 1.6785 5.2965C1.96692 6.51806 2.58978 7.63518 3.4773 8.5227C4.36482 9.41022 5.48194 10.0331 6.7035 10.3215C7.21042 10.4403 7.72935 10.5002 8.25 10.5H9.75C9.94891 10.5 10.1397 10.421 10.2803 10.2803C10.421 10.1397 10.5 9.94891 10.5 9.75V8.973C10.4999 8.79389 10.4358 8.62072 10.3191 8.48481C10.2025 8.3489 10.041 8.25922 9.864 8.232L7.7205 7.902C7.56354 7.87799 7.40302 7.90441 7.26204 7.97746C7.12105 8.05051 7.0069 8.16642 6.936 8.3085L6.5355 9.10875C5.68206 8.83467 4.90625 8.36112 4.27235 7.72736C3.63846 7.0936 3.1655 6.31788 2.89125 5.4645Z"
-                        fill="#334155"
-                      />
-                    </svg>
-                    {phoneNumber}
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan={2}>
-                    <img
-                      src={updatedRedirectUrl}
-                      alt="Email Signature Image"
-                      style={{ border: "none" }}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </Link>
-        ) : (
-          <p></p>
-        )}
+    <>
+      <div>
+        Linkedin Url
+        <input
+          type="text"
+          value={linkedinUrl}
+          onChange={(e) => setLinkedinUrl(e.target.value)}
+          className="border"
+        />
       </div>
+      <div className="p-6 justify-items-center h-screen flex flex-col items-center justify-center">
+        {/* Hidden container to hold the HTML we want to copy */}
+        <div ref={hiddenDivRef} style={{ display: "none" }}>
+          {updatedLink && updatedRedirectUrl ? (
+            <Link href={updatedLink} target="_blank" rel="noopener noreferrer">
+              <table border={1} cellPadding={5} cellSpacing={0}>
+                <tbody>
+                  <tr>
+                    <td>
+                      {" "}
+                      <b>{fullName}</b>
+                      <br />
+                      {designation}
+                      <br />
+                      <img src="https://cdn.sanity.io/images/bgk0i4de/dev/abb19b7036ad3bdfe699063717831052bc8952d9-83x10.svg" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                      >
+                        <path
+                          d="M1.875 2.25C1.57663 2.25 1.29048 2.36853 1.0795 2.5795C0.868526 2.79048 0.75 3.07663 0.75 3.375V3.96975C0.7695 3.9765 0.78825 3.98475 0.807 3.99375L5.7555 6.3825C5.91 6.4575 6.09 6.4575 6.2445 6.3825L11.193 3.99375C11.2115 3.98472 11.2306 3.97671 11.25 3.96975V3.375C11.25 3.07663 11.1315 2.79048 10.9205 2.5795C10.7095 2.36853 10.4234 2.25 10.125 2.25H1.875Z"
+                          fill="#334155"
+                        />
+                        <path
+                          d="M11.25 5.21545L6.7335 7.39495C6.50474 7.50536 6.25401 7.56271 6 7.56271C5.74599 7.56271 5.49526 7.50536 5.2665 7.39495L0.75 5.21545V8.62495C0.75 8.92332 0.868526 9.20947 1.0795 9.42045C1.29048 9.63143 1.57663 9.74995 1.875 9.74995H10.125C10.4234 9.74995 10.7095 9.63143 10.9205 9.42045C11.1315 9.20947 11.25 8.92332 11.25 8.62495V5.21545Z"
+                          fill="#334155"
+                        />
+                      </svg>
+                      {emailId}
+                    </td>
+                    <td>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M2.89125 5.4645L3.6915 5.064C3.83358 4.9931 3.94949 4.87894 4.02254 4.73796C4.09559 4.59698 4.12201 4.43646 4.098 4.2795L3.768 2.136C3.74078 1.95897 3.6511 1.79754 3.51519 1.68088C3.37928 1.56423 3.20611 1.50007 3.027 1.5H2.25C2.05109 1.5 1.86032 1.57902 1.71967 1.71967C1.57902 1.86032 1.5 2.05109 1.5 2.25V3.75C1.5 4.28175 1.5615 4.8 1.6785 5.2965C1.96692 6.51806 2.58978 7.63518 3.4773 8.5227C4.36482 9.41022 5.48194 10.0331 6.7035 10.3215C7.21042 10.4403 7.72935 10.5002 8.25 10.5H9.75C9.94891 10.5 10.1397 10.421 10.2803 10.2803C10.421 10.1397 10.5 9.94891 10.5 9.75V8.973C10.4999 8.79389 10.4358 8.62072 10.3191 8.48481C10.2025 8.3489 10.041 8.25922 9.864 8.232L7.7205 7.902C7.56354 7.87799 7.40302 7.90441 7.26204 7.97746C7.12105 8.05051 7.0069 8.16642 6.936 8.3085L6.5355 9.10875C5.68206 8.83467 4.90625 8.36112 4.27235 7.72736C3.63846 7.0936 3.1655 6.31788 2.89125 5.4645Z"
+                          fill="#334155"
+                        />
+                      </svg>
+                      {phoneNumber}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colSpan={2}>
+                      <img
+                        src={updatedRedirectUrl}
+                        alt="Email Signature Image"
+                        style={{ border: "none" }}
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </Link>
+          ) : (
+            <p></p>
+          )}
+        </div>
 
-      {/* Preview of the email signature */}
-      <div className="w-2/3">
-        {updatedLink && updatedRedirectUrl ? (
-          <Link href={updatedLink} target="_blank" rel="noopener noreferrer">
-            <table border={1} cellPadding={5} cellSpacing={0}>
-              <tbody>
-                <tr>
-                  <td colSpan={2}>
-                    {" "}
-                    <b>{fullName}</b>
-                    <br />
-                    {designation}
-                    <br />
-                    <img src="https://cdn.sanity.io/images/bgk0i4de/dev/abb19b7036ad3bdfe699063717831052bc8952d9-83x10.svg" />
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                    >
-                      <path
-                        d="M1.875 2.25C1.57663 2.25 1.29048 2.36853 1.0795 2.5795C0.868526 2.79048 0.75 3.07663 0.75 3.375V3.96975C0.7695 3.9765 0.78825 3.98475 0.807 3.99375L5.7555 6.3825C5.91 6.4575 6.09 6.4575 6.2445 6.3825L11.193 3.99375C11.2115 3.98472 11.2306 3.97671 11.25 3.96975V3.375C11.25 3.07663 11.1315 2.79048 10.9205 2.5795C10.7095 2.36853 10.4234 2.25 10.125 2.25H1.875Z"
-                        fill="#334155"
-                      />
-                      <path
-                        d="M11.25 5.21545L6.7335 7.39495C6.50474 7.50536 6.25401 7.56271 6 7.56271C5.74599 7.56271 5.49526 7.50536 5.2665 7.39495L0.75 5.21545V8.62495C0.75 8.92332 0.868526 9.20947 1.0795 9.42045C1.29048 9.63143 1.57663 9.74995 1.875 9.74995H10.125C10.4234 9.74995 10.7095 9.63143 10.9205 9.42045C11.1315 9.20947 11.25 8.92332 11.25 8.62495V5.21545Z"
-                        fill="#334155"
-                      />
-                    </svg>
-                    {emailId}
-                  </td>
-                  <td>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M2.89125 5.4645L3.6915 5.064C3.83358 4.9931 3.94949 4.87894 4.02254 4.73796C4.09559 4.59698 4.12201 4.43646 4.098 4.2795L3.768 2.136C3.74078 1.95897 3.6511 1.79754 3.51519 1.68088C3.37928 1.56423 3.20611 1.50007 3.027 1.5H2.25C2.05109 1.5 1.86032 1.57902 1.71967 1.71967C1.57902 1.86032 1.5 2.05109 1.5 2.25V3.75C1.5 4.28175 1.5615 4.8 1.6785 5.2965C1.96692 6.51806 2.58978 7.63518 3.4773 8.5227C4.36482 9.41022 5.48194 10.0331 6.7035 10.3215C7.21042 10.4403 7.72935 10.5002 8.25 10.5H9.75C9.94891 10.5 10.1397 10.421 10.2803 10.2803C10.421 10.1397 10.5 9.94891 10.5 9.75V8.973C10.4999 8.79389 10.4358 8.62072 10.3191 8.48481C10.2025 8.3489 10.041 8.25922 9.864 8.232L7.7205 7.902C7.56354 7.87799 7.40302 7.90441 7.26204 7.97746C7.12105 8.05051 7.0069 8.16642 6.936 8.3085L6.5355 9.10875C5.68206 8.83467 4.90625 8.36112 4.27235 7.72736C3.63846 7.0936 3.1655 6.31788 2.89125 5.4645Z"
-                        fill="#334155"
-                      />
-                    </svg>
-                    {phoneNumber}
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan={2}>
-                    <img
-                      src={updatedRedirectUrl}
-                      alt="Email Signature Image"
-                      style={{ border: "none" }}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </Link>
-        ) : (
-          <p></p>
-        )}
-      </div>
+        {/* Preview of the email signature */}
 
-      <div className="flex pt-6 gap-3 flex-col relative">
-        <button
-          className="bg-green-600 p-2 rounded-md text-white"
-          onClick={copyToClipboard}
-        >
-          Copy Signature
-        </button>
-        <div className="flex w-full absolute -bottom-8 text-center justify-center">
-          {copySuccess}
+        <div className="w-2/3">
+          {updatedLink && updatedRedirectUrl ? (
+              <table cellPadding={5} cellSpacing={0}>
+                <tbody>
+                  <tr>
+                    <td>
+                      {" "}
+                      <b>{fullName}</b>
+                      <br />
+                      {designation}
+                      <br />
+                      <img src="https://cdn.sanity.io/images/bgk0i4de/dev/abb19b7036ad3bdfe699063717831052bc8952d9-83x10.svg" />
+                    </td>
+                    <td>
+                      <Link href={linkedinUrl}>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="12"
+                          height="12"
+                          viewBox="0 0 12 12"
+                          fill="none"
+                        >
+                          <g clip-path="url(#clip0_1103_2645)">
+                            <path
+                              d="M6 11.25C7.16375 11.2499 8.29452 10.8634 9.21477 10.151C10.135 9.43865 10.7926 8.44084 11.0843 7.31425M6 11.25C4.83625 11.2499 3.70548 10.8634 2.78524 10.151C1.86499 9.43865 1.20738 8.44084 0.915669 7.31425M6 11.25C7.44959 11.25 8.625 8.89917 8.625 6C8.625 3.10083 7.44959 0.75 6 0.75M6 11.25C4.55042 11.25 3.375 8.89917 3.375 6C3.375 3.10083 4.55042 0.75 6 0.75M11.0843 7.31425C11.1923 6.89425 11.25 6.45383 11.25 6C11.2514 5.09707 11.0189 4.20916 10.5751 3.42283M11.0843 7.31425C9.52868 8.17664 7.7787 8.62779 6 8.625C4.1555 8.625 2.42242 8.14958 0.915669 7.31425M0.915669 7.31425C0.805271 6.8849 0.749608 6.44332 0.750002 6C0.750002 5.06375 0.995002 4.18408 1.42492 3.42283M6 0.75C6.93114 0.749612 7.84562 0.996959 8.64961 1.46666C9.4536 1.93637 10.1182 2.61151 10.5751 3.42283M6 0.75C5.06886 0.749612 4.15438 0.996959 3.35039 1.46666C2.5464 1.93637 1.88185 2.61151 1.42492 3.42283M10.5751 3.42283C9.30498 4.52296 7.68031 5.12742 6 5.125C4.25117 5.125 2.65167 4.48333 1.42492 3.42283"
+                              stroke="black"
+                              stroke-width="0.875"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_1103_2645">
+                              <rect width="12" height="12" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </Link>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                      >
+                        <path
+                          d="M1.875 2.25C1.57663 2.25 1.29048 2.36853 1.0795 2.5795C0.868526 2.79048 0.75 3.07663 0.75 3.375V3.96975C0.7695 3.9765 0.78825 3.98475 0.807 3.99375L5.7555 6.3825C5.91 6.4575 6.09 6.4575 6.2445 6.3825L11.193 3.99375C11.2115 3.98472 11.2306 3.97671 11.25 3.96975V3.375C11.25 3.07663 11.1315 2.79048 10.9205 2.5795C10.7095 2.36853 10.4234 2.25 10.125 2.25H1.875Z"
+                          fill="#334155"
+                        />
+                        <path
+                          d="M11.25 5.21545L6.7335 7.39495C6.50474 7.50536 6.25401 7.56271 6 7.56271C5.74599 7.56271 5.49526 7.50536 5.2665 7.39495L0.75 5.21545V8.62495C0.75 8.92332 0.868526 9.20947 1.0795 9.42045C1.29048 9.63143 1.57663 9.74995 1.875 9.74995H10.125C10.4234 9.74995 10.7095 9.63143 10.9205 9.42045C11.1315 9.20947 11.25 8.92332 11.25 8.62495V5.21545Z"
+                          fill="#334155"
+                        />
+                      </svg>
+                      {emailId}
+                    </td>
+                    <td>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M2.89125 5.4645L3.6915 5.064C3.83358 4.9931 3.94949 4.87894 4.02254 4.73796C4.09559 4.59698 4.12201 4.43646 4.098 4.2795L3.768 2.136C3.74078 1.95897 3.6511 1.79754 3.51519 1.68088C3.37928 1.56423 3.20611 1.50007 3.027 1.5H2.25C2.05109 1.5 1.86032 1.57902 1.71967 1.71967C1.57902 1.86032 1.5 2.05109 1.5 2.25V3.75C1.5 4.28175 1.5615 4.8 1.6785 5.2965C1.96692 6.51806 2.58978 7.63518 3.4773 8.5227C4.36482 9.41022 5.48194 10.0331 6.7035 10.3215C7.21042 10.4403 7.72935 10.5002 8.25 10.5H9.75C9.94891 10.5 10.1397 10.421 10.2803 10.2803C10.421 10.1397 10.5 9.94891 10.5 9.75V8.973C10.4999 8.79389 10.4358 8.62072 10.3191 8.48481C10.2025 8.3489 10.041 8.25922 9.864 8.232L7.7205 7.902C7.56354 7.87799 7.40302 7.90441 7.26204 7.97746C7.12105 8.05051 7.0069 8.16642 6.936 8.3085L6.5355 9.10875C5.68206 8.83467 4.90625 8.36112 4.27235 7.72736C3.63846 7.0936 3.1655 6.31788 2.89125 5.4645Z"
+                          fill="#334155"
+                        />
+                      </svg>
+                      {phoneNumber}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colSpan={2}>
+                    <Link href={updatedLink} target="_blank" rel="noopener noreferrer">
+                      <img
+                        src={updatedRedirectUrl}
+                        alt="Email Signature Image"
+                        style={{ border: "none" }}
+                      />
+                      </Link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+          ) : (
+            <p></p>
+          )}
+        </div>
+
+        <div className="flex pt-6 gap-3 flex-col relative">
+          <button
+            className="bg-green-600 p-2 rounded-md text-white"
+            onClick={copyToClipboard}
+          >
+            Copy Signature
+          </button>
+          <div className="flex w-full absolute -bottom-8 text-center justify-center">
+            {copySuccess}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
