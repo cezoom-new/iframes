@@ -125,7 +125,7 @@ export default function EmailSignatureTemplate(props: {
           </label>
 
           <label>
-            YouTube
+            YouTube 
             <input
               type="text"
               value={youtubeUrl}
