@@ -1,43 +1,66 @@
-import { useState, useEffect } from 'react';
-import { useDocumentOperation } from 'sanity';
-import triggerISR from '@/actions/revalidate';
+import { useState, useEffect } from "react";
+import { useDocumentOperation } from "sanity";
+import triggerISR from "@/actions/revalidate";
 
+/* commenting this code for reference , commnted because validation not working in schema level*/
+// export function SetAndPublishAction(props) {
+//   const { patch, publish } = useDocumentOperation(props.id, props.type);
+//   const [isPublishing, setIsPublishing] = useState(false);
 
-export function SetAndPublishAction(props) {
-  const { patch, publish } = useDocumentOperation(props.id, props.type);
-  const [isPublishing, setIsPublishing] = useState(false);
+//   useEffect(() => {
+//     // Reset the publishing state once the draft becomes `null` (published)
+//     if (isPublishing && !props.draft) {
+//       setIsPublishing(false);
+//     }
+//   }, [props.draft, isPublishing]);
 
-  useEffect(() => {
-    // Reset the publishing state once the draft becomes `null` (published)
-    if (isPublishing && !props.draft) {
-      setIsPublishing(false);
-    }
-  }, [props.draft, isPublishing]);
+//   // Ensure the disabled property is strictly boolean
+//   const isDisabled = publish.disabled === false ? false : true;
 
-  // Ensure the disabled property is strictly boolean
-  const isDisabled = publish.disabled === false ? false : true;
+//   // Determine the label based on the document type
+//   const label = isPublishing
+//     ? "Publishing…"
+//     : props.type === "tag"
+//       ? "Save"
+//       : "Publish & Update";
 
-  // Determine the label based on the document type
-  const label = isPublishing ? 'Publishing…' : props.type === 'tag' ? 'Save' : 'Publish & Update';
+//   return {
+//     disabled: isDisabled, // Ensure this is always boolean
+//     label,
+//     onHandle: () => {
+//       // Update the button text and set isPublishing to true
+//       setIsPublishing(true);
 
-  return {
-    disabled: isDisabled, // Ensure this is always boolean
-    label,
-    onHandle:  () => {
-      // Update the button text and set isPublishing to true
-      setIsPublishing(true);
+//       // Optional: Patch the document to set any specific fields (e.g., publishedAt)
+//       // patch.execute([{ set: { publishedAt: new Date().toISOString() }}]);
 
-      // Optional: Patch the document to set any specific fields (e.g., publishedAt)
-      // patch.execute([{ set: { publishedAt: new Date().toISOString() }}]);
+//       // Perform the publish operation
+//       publish.execute();
+//       setTimeout(() => {
+//         triggerISR(props);
+//       }, 2000);
 
-      // Perform the publish operation
-       publish.execute();
-      setTimeout(() => {
-        triggerISR(props)
-      },2000);
-      
-      // Signal that the action is complete
-      props.onComplete();
-    },
+//       // Signal that the action is complete
+//       props.onComplete();
+//     },
+//   };
+// }
+
+export function SetAndPublishAction(originalPublishAction) {
+  // const [isPublishing, setIsPublishing] = useState(false);
+  const BetterAction = (props) => {
+    const originalResult = originalPublishAction(props);
+    return {
+      ...originalResult,
+      onHandle: () => {
+        console.log("ISR Triggered");
+        // then delegate to original handler
+        setTimeout(() => {
+          triggerISR(props);
+        }, 2000);
+        originalResult.onHandle();
+      },
+    };
   };
+  return BetterAction;
 }

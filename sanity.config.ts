@@ -75,7 +75,7 @@ export default defineConfig({
     actions: (prev) =>
       prev.map((originalAction) =>
         originalAction.action === 'publish'
-          ? SetAndPublishAction
+          ? SetAndPublishAction(originalAction)
           : originalAction,
       ),
   },

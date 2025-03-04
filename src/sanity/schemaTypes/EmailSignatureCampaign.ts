@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineField, defineType, validation } from "sanity";
 import { SchemaIcon } from "@sanity/icons";
 import { getExtension } from "@sanity/asset-utils";
 
@@ -7,6 +7,7 @@ export const EmailSignatureCampaign = defineType({
   title: "Email Signature Campaign",
   type: "document",
   icon: SchemaIcon,
+
   fields: [
     {
       name: "campaignName",
@@ -27,19 +28,19 @@ export const EmailSignatureCampaign = defineType({
       name: "url",
       title: "Redirect URL",
       type: "url",
-      validation: (rule) => rule.required(),
+      validation: (rule) => rule.required().error("Redirect URL is required"),
     },
     {
       name: "signatureImage",
       title: "Image",
       type: "image",
-
       validation: (rule) =>
         rule
           .required()
           .assetRequired()
           .custom((value: any) => {
             if (!value || !value.asset || !value.asset._ref) {
+              
               return "Image is required";
             }
             const filetype = getExtension(value.asset._ref);
