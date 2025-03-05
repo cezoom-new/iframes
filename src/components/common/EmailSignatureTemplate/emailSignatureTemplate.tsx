@@ -70,14 +70,13 @@ export default function EmailSignatureTemplate(props: {
   ];
 
   const transformUrl = (url: string, key: string) => {
-    const cleanUrl = url.replace(/^https?:\/\//, "");
-  
-    setUrls((prevUrls:any) => ({
+    // const cleanUrl =  url?.length ?url.replace(/^https?:\/\//, "") :""
+
+    setUrls((prevUrls: any) => ({
       ...prevUrls,
-      [key]: `https://${cleanUrl}`,
+      [key]: url,
     }));
   };
- 
 
   const searchParams = useSearchParams();
   const emailId = searchParams.get("email");
@@ -104,26 +103,25 @@ export default function EmailSignatureTemplate(props: {
     }
   }, [props.link, props.redirectUrl]);
 
-  const handleInputChange = (key:any, value:any) => {
-    setUrls((prevUrls:any) => ({
+  const handleInputChange = (key: any, value: any) => {
+    setUrls((prevUrls: any) => ({
       ...prevUrls,
-      [key]: transformUrl(value,key)
+      [key]: transformUrl(value, key),
     }));
   };
 
-
   const copyToClipboard = async () => {
     if (!hiddenDivRef.current) return;
-  
+
     const htmlToCopy = hiddenDivRef.current.innerHTML.trim(); // Trim to avoid duplicate spacing
-  
+
     try {
       const clipboardItem = new ClipboardItem({
         "text/html": new Blob([htmlToCopy], { type: "text/html" }),
       });
-  
+
       await navigator.clipboard.write([clipboardItem]);
-  
+
       setCopySuccess("Copied!");
       setTimeout(() => setCopySuccess(""), 3000);
     } catch (err) {
@@ -131,7 +129,7 @@ export default function EmailSignatureTemplate(props: {
       setCopySuccess("Failed to copy");
     }
   };
-  
+
   const instagramBase64 =
     "https://cdn.sanity.io/images/bgk0i4de/dev/a07728c329a140c9149c40f6840c137354d4fbc5-48x48.png";
   const youtubeBase64 =
@@ -140,7 +138,8 @@ export default function EmailSignatureTemplate(props: {
     "https://cdn.sanity.io/images/bgk0i4de/dev/3f4d11881d7e0a853004d8eb22386b95fc1d4941-12x12.png";
   const linkedinIconBase64 =
     "https://cdn.sanity.io/images/bgk0i4de/dev/14f26847b7d0ea012c56f7af156debda9aaf313d-13x12.png";
-  const websiteIconBase64 ="https://cdn.sanity.io/images/bgk0i4de/dev/612de8a32ca89ad42bbe30cf3219f76b53c6272c-12x12.png";
+  const websiteIconBase64 =
+    "https://cdn.sanity.io/images/bgk0i4de/dev/612de8a32ca89ad42bbe30cf3219f76b53c6272c-12x12.png";
   const signatureHtml: string = `
   <div>
     ${
@@ -152,11 +151,11 @@ export default function EmailSignatureTemplate(props: {
             <td>
               <b>${fullName}</b>
               <td style="display: flex; ">
-              ${urls.websiteUrl ? `<a style="width:20px" href="${urls.websiteUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${websiteIconBase64}" alt="Website" /></a>` : ""}
-              ${urls.linkedinUrl ? `<a style="width:20px" href="${urls.linkedinUrl}" target="_blank"><img style="width:16px; height:16px;" src="${linkedinIconBase64}" alt="LinkedIn" /></a>` : ""}
-              ${urls.twitterUrl ? `<a style="width:20px" href="${urls.twitterUrl}" target="_blank"><img style="width:16px; height:16px;" src="${twitterBase64}" alt="Twitter" /></a>` : ""}
-              ${urls.youtubeUrl ? `<a style="width:20px" href="${urls.youtubeUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${youtubeBase64}" alt="YouTube" /></a>` : ""}
-               ${urls.instagramUrl ? `<a style="width:20px" href="${urls.instagramUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${instagramBase64}" alt="YouTube" /></a>` : ""}
+              ${urls.websiteUrl ? `<a style="width:20px" href="https://${urls.websiteUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${websiteIconBase64}" alt="Website" /></a>` : ""}
+              ${urls.linkedinUrl ? `<a style="width:20px" href="https://${urls.linkedinUrl}" target="_blank"><img style="width:16px; height:16px;" src="${linkedinIconBase64}" alt="LinkedIn" /></a>` : ""}
+              ${urls.twitterUrl ? `<a style="width:20px" href="https://${urls.twitterUrl}" target="_blank"><img style="width:16px; height:16px;" src="${twitterBase64}" alt="Twitter" /></a>` : ""}
+              ${urls.youtubeUrl ? `<a style="width:20px" href="https://${urls.youtubeUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${youtubeBase64}" alt="YouTube" /></a>` : ""}
+               ${urls.instagramUrl ? `<a style="width:20px" href="https://${urls.instagramUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${instagramBase64}" alt="YouTube" /></a>` : ""}
             </td>
             </td>
               <tr>
@@ -195,28 +194,25 @@ export default function EmailSignatureTemplate(props: {
   return (
     <div className="flex p-6 justify-center h-screen">
       <div className="w-[400px]">
-      {formFields.map((field:any, i) => (
-        <label key={`${field.key} + ${i}`}>
-          {field.label}
-          <input
-            type="text"
-            value={urls[field.key]}
-            onChange={(e) => handleInputChange(field.key, e.target.value)}
-            placeholder={field.placeholder}
-            style={{
-              border: "1px solid #ccc",
-              padding: "5px",
-              width: "100%",
-              marginBottom: "10px",
-            }}
-          />
-        </label>
-      ))
-      }
-   
-  
-
-    </div><div className="w-1/2 flex flex-col">
+        {formFields.map((field: any, i) => (
+          <label key={`${field.key} + ${i}`}>
+            {field.label}
+            <input
+              type="text"
+              value={urls[field.key]}
+              onChange={(e) => handleInputChange(field.key, e.target.value)}
+              placeholder={field.placeholder}
+              style={{
+                border: "1px solid #ccc",
+                padding: "5px",
+                width: "100%",
+                marginBottom: "10px",
+              }}
+            />
+          </label>
+        ))}
+      </div>
+      <div className="w-1/2 flex flex-col">
         <div
           ref={hiddenDivRef}
           dangerouslySetInnerHTML={{ __html: signatureHtml }}
@@ -228,7 +224,7 @@ export default function EmailSignatureTemplate(props: {
               e.preventDefault();
               e.stopPropagation();
               copyToClipboard();
-            } }
+            }}
           >
             Copy Signature
           </button>
