@@ -36,6 +36,13 @@ export default function EmailSignatureTemplate(props: {
     youtubeUrl: "",
     instagramUrl: "",
   });
+  const [urlParams, setUrlParams] = useState<any>({
+    websiteUrl: "",
+    linkedinUrl: "",
+    twitterUrl: "",
+    youtubeUrl: "",
+    instagramUrl: "",
+  });
 
   const formFields = [
     {
@@ -71,13 +78,12 @@ export default function EmailSignatureTemplate(props: {
 
   const transformUrl = (url: string, key: string) => {
     const cleanUrl = url.replace(/^https?:\/\//, "");
-  
-    setUrls((prevUrls:any) => ({
+
+    setUrls((prevUrls: any) => ({
       ...prevUrls,
       [key]: `https://${cleanUrl}`,
     }));
   };
- 
 
   const searchParams = useSearchParams();
   const emailId = searchParams.get("email");
@@ -104,26 +110,25 @@ export default function EmailSignatureTemplate(props: {
     }
   }, [props.link, props.redirectUrl]);
 
-  const handleInputChange = (key:any, value:any) => {
-    setUrls((prevUrls:any) => ({
+  const handleInputChange = (key: any, value: any) => {
+    setUrls((prevUrls: any) => ({
       ...prevUrls,
-      [key]: transformUrl(value,key)
+      [key]: transformUrl(value, key),
     }));
   };
 
-
   const copyToClipboard = async () => {
     if (!hiddenDivRef.current) return;
-  
+
     const htmlToCopy = hiddenDivRef.current.innerHTML.trim(); // Trim to avoid duplicate spacing
-  
+
     try {
       const clipboardItem = new ClipboardItem({
         "text/html": new Blob([htmlToCopy], { type: "text/html" }),
       });
-  
+
       await navigator.clipboard.write([clipboardItem]);
-  
+
       setCopySuccess("Copied!");
       setTimeout(() => setCopySuccess(""), 3000);
     } catch (err) {
@@ -131,22 +136,23 @@ export default function EmailSignatureTemplate(props: {
       setCopySuccess("Failed to copy");
     }
   };
-  
+
   const instagramBase64 =
-    "https://cdn.sanity.io/images/bgk0i4de/dev/a07728c329a140c9149c40f6840c137354d4fbc5-48x48.png";
+    "https://cdn.sanity.io/images/bgk0i4de/dev/47cdeb792da79e7b8aaf4b45e4e2f060b1724388-36x36.png";
   const youtubeBase64 =
-    "https://cdn.sanity.io/images/bgk0i4de/dev/b39c3b31e591f0f2e99bf4fa74d0005aa7317fc7-48x48.png";
+    "https://cdn.sanity.io/images/bgk0i4de/dev/130e2b6615e93144a1233b85f75807d482458518-36x36.png";
   const twitterBase64 =
-    "https://cdn.sanity.io/images/bgk0i4de/dev/3f4d11881d7e0a853004d8eb22386b95fc1d4941-12x12.png";
+    "https://cdn.sanity.io/images/bgk0i4de/dev/1debd3d9fd49e63dfde681a2a4c212278c4f512d-36x36.png";
   const linkedinIconBase64 =
-    "https://cdn.sanity.io/images/bgk0i4de/dev/14f26847b7d0ea012c56f7af156debda9aaf313d-13x12.png";
-  const websiteIconBase64 ="https://cdn.sanity.io/images/bgk0i4de/dev/612de8a32ca89ad42bbe30cf3219f76b53c6272c-12x12.png";
+    "https://cdn.sanity.io/images/bgk0i4de/dev/7f399538cdc9b3d4ff2ac723ad534ce38a973c1e-36x36.png";
+  const websiteIconBase64 =
+    "https://cdn.sanity.io/images/bgk0i4de/dev/7ef082ccb2fc583a7ad7f279587da6f03e19e80c-36x36.png";
   const signatureHtml: string = `
   <div>
     ${
       updatedLink && updatedRedirectUrl
         ? `
-      <table cellpadding="5" cellspacing="0">
+      <table cellpadding="5" cellspacing="0" width="420px">
         <tbody>
           <tr>
             <td>
@@ -167,20 +173,20 @@ export default function EmailSignatureTemplate(props: {
                   </td>
 
           </tr>
-          <tr style="display:flex;">
+          <tr style="display:flex; gap: 12px;">
             <td style="display:flex; gap: 6px; align-items:center;">
-              <img style="width:17px; height:17px" src="https://cdn.sanity.io/images/bgk0i4de/dev/09582d3c4b67791813421aecf3cd25ae10039e08-12x12.png" />
+              <img style="width:17px; height:17px" src="https://cdn.sanity.io/images/bgk0i4de/dev/736282c23bf20758259b602816fa2f9584a7809d-36x36.png" />
               ${emailId}
             </td>
             <td style="display:flex; gap: 6px; align-items:center;">
-              <img style="width:17px; height:17px"  src="https://cdn.sanity.io/images/bgk0i4de/dev/0123b006244e3a1f0cce79fe1237dc4912f133b2-12x12.png" />
+              <img style="width:17px; height:17px"  src="https://cdn.sanity.io/images/bgk0i4de/dev/a3f88c02dde1d35371fbb2fc5c22162e3c98ef40-36x36.png" />
               ${phoneNumber}
             </td>
           </tr>
           <tr>
             <td colspan="2">
               <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
-                <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none; width:200px;" />
+                <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none; width:420px;" />
               </a>
             </td>
           </tr>
@@ -193,42 +199,39 @@ export default function EmailSignatureTemplate(props: {
 `;
 
   return (
-    <div className="flex p-6 justify-center h-screen">
+    <div className="flex p-6 justify-center h-screen gap-6">
       <div className="w-[400px]">
-      {formFields.map((field:any, i) => (
-        <label key={`${field.key} + ${i}`}>
-          {field.label}
-          <input
-            type="text"
-            value={urls[field.key]}
-            onChange={(e) => handleInputChange(field.key, e.target.value)}
-            placeholder={field.placeholder}
-            style={{
-              border: "1px solid #ccc",
-              padding: "5px",
-              width: "100%",
-              marginBottom: "10px",
-            }}
-          />
-        </label>
-      ))
-      }
-   
-  
-
-    </div><div className="w-1/2 flex flex-col">
+        {formFields.map((field: any, i) => (
+          <label key={`${field.key} + ${i}`}>
+            {field.label}
+            <input
+              type="text"
+              value={urls[field.key]}
+              onChange={(e) => handleInputChange(field.key, e.target.value)}
+              placeholder={field.placeholder}
+              style={{
+                border: "1px solid #ccc",
+                padding: "5px",
+                width: "100%",
+                marginBottom: "10px",
+              }}
+            />
+          </label>
+        ))}
+      </div>
+      <div className="w-1/2 flex flex-col">
         <div
           ref={hiddenDivRef}
           dangerouslySetInnerHTML={{ __html: signatureHtml }}
         ></div>
         <div className="flex pt-6 gap-3 flex-col relative">
           <button
-            className="bg-green-600 p-2 rounded-md text-white"
+            className="bg-green-600 p-2 rounded-md text-white w-fit"
             onClick={(e: any) => {
               e.preventDefault();
               e.stopPropagation();
               copyToClipboard();
-            } }
+            }}
           >
             Copy Signature
           </button>
