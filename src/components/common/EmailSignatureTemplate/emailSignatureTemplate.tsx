@@ -63,7 +63,7 @@ export default function EmailSignatureTemplate(props: {
     role: role,
     websiteUrl: "",
     linkedinUrl: "",
-    twitterUrl: "",
+    facebook: "",
     youtubeUrl: "",
     instagramUrl: "",
   });
@@ -98,8 +98,8 @@ export default function EmailSignatureTemplate(props: {
       placeholder: "Enter LinkedIn URL",
     },
     {
-      label: "Twitter",
-      key: "twitterUrl",
+      label: "Facebook",
+      key: "facebook",
       placeholder: "Enter Twitter URL",
     },
     {
@@ -222,7 +222,7 @@ export default function EmailSignatureTemplate(props: {
               ${urls.websiteUrl ? `
               <span style="margin-right:4px;"><a href="${ensureHttps(urls.websiteUrl)}" target="_blank">Website</a></span>` : ""}
               ${urls.linkedinUrl ? `<span style="margin-right:4px;"> <a  href="${ensureHttps(urls.linkedinUrl)}" target="_blank">Linkedin</a></span>` : ""}
-              ${urls.twitterUrl ? `<span style="margin-right:4px;"> <a href="${ensureHttps(urls.twitterUrl)}" target="_blank">Facebook</a></span>` : ""}
+              ${urls.facebook ? `<span style="margin-right:4px;"> <a href="${ensureHttps(urls.facebook)}" target="_blank">Facebook</a></span>` : ""}
                ${urls.youtubeUrl ? `<span style="margin-right:4px;"> <a href="${ensureHttps(urls.youtubeUrl)}" target="_blank">Youtube</a></span>` : ""}
             </td>
             </tr>
