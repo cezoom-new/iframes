@@ -49,3 +49,10 @@ body {
   background-color: #ffffff !important;
   opacity: 1 !important;
 }
+
+
+.reset-tw,
+.reset-tw *{
+  all:revert;
+}
+

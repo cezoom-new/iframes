@@ -42,8 +42,6 @@ export default function EmailSignatureTemplate(props: {
   const [updatedLink, setUpdatedLink] = useState<string>("");
   const [updatedRedirectUrl, setUpdatedRedirectUrl] = useState<string>("");
 
-
-
   const searchParams = useSearchParams();
   const emailId = searchParams.get("email");
   const fullName = searchParams.get("name");
@@ -51,14 +49,10 @@ export default function EmailSignatureTemplate(props: {
   const designation = searchParams.get("role");
 
   const [urls, setUrls] = useState<any>({
-    fullName:fullName,
-    websiteUrl: "",
-    linkedinUrl: "",
-    twitterUrl: "",
-    youtubeUrl: "",
-    instagramUrl: "",
-  });
-  const [urlParams, setUrlParams] = useState<any>({
+    fullName: fullName,
+    emailId: emailId,
+    phoneNumber: phoneNumber,
+    designation: designation,
     websiteUrl: "",
     linkedinUrl: "",
     twitterUrl: "",
@@ -66,18 +60,19 @@ export default function EmailSignatureTemplate(props: {
     instagramUrl: "",
   });
 
+
   const formFields = [
     {
-      label: "Name",
+      label: "fullName",
       key: fullName,
       placeholder: fullName,
     },
     {
-      label: "Phone",
+      label: "phoneNumber",
       key: "phoneNumber",
       placeholder: phoneNumber,
     },
-    
+
     {
       label: "Website",
       key: "websiteUrl",
@@ -107,15 +102,11 @@ export default function EmailSignatureTemplate(props: {
   ];
 
   const transformUrl = (url: string, key: string) => {
-    // const cleanUrl =  url?.length ?url.replace(/^https?:\/\//, "") :""
-
     setUrls((prevUrls: any) => ({
       ...prevUrls,
       [key]: url,
     }));
   };
-
-
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -137,12 +128,17 @@ export default function EmailSignatureTemplate(props: {
     }
   }, [props.link, props.redirectUrl]);
 
-  console.log("hupdatedRedirectUrl",updatedRedirectUrl)
-  const handleInputChange = (key: any, value: any) => {
-    setUrls((prevUrls: any) => ({
-      ...prevUrls,
-      [key]: transformUrl(value, key),
-    }));
+  const handleInputChange = (key: any, value: any, label: string) => {
+    const searchParams = [emailId, fullName, phoneNumber, designation];
+
+    const nonUrlField = key.includes(searchParams);
+    if (key.includes(searchParams)) {
+    } else {
+      setUrls((prevUrls: any) => ({
+        ...prevUrls,
+        [key]: nonUrlField ? value : transformUrl(value, key),
+      }));
+    }
   };
 
   const copyToClipboard = async () => {
@@ -164,57 +160,52 @@ export default function EmailSignatureTemplate(props: {
     }
   };
 
-  const instagramBase64 =
-    "https://cdn.sanity.io/images/bgk0i4de/dev/47cdeb792da79e7b8aaf4b45e4e2f060b1724388-36x36.png";
-  const youtubeBase64 =
-    "https://cdn.sanity.io/images/bgk0i4de/dev/130e2b6615e93144a1233b85f75807d482458518-36x36.png";
-  const twitterBase64 =
-    "https://cdn.sanity.io/images/bgk0i4de/dev/1debd3d9fd49e63dfde681a2a4c212278c4f512d-36x36.png";
-  const linkedinIconBase64 =
-    "https://cdn.sanity.io/images/bgk0i4de/dev/7f399538cdc9b3d4ff2ac723ad534ce38a973c1e-36x36.png";
-  const websiteIconBase64 =
-    "https://cdn.sanity.io/images/bgk0i4de/dev/7ef082ccb2fc583a7ad7f279587da6f03e19e80c-36x36.png";
   const signatureHtml: string = `
   <div>
     ${
       updatedLink && updatedRedirectUrl
         ? `
-      <table cellpadding="5" cellspacing="0" width="420px">
+      <table cellpadding="0px" style="border-spacing:0px" cellspacing="0px" width="420px">
         <tbody>
           <tr>
-            <td>
+            <td colspan="2">
               <b>${fullName}</b>
-              <td style="display: flex; ">
-              ${urls.websiteUrl ? `<a style="width:20px" href="https://${urls.websiteUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${websiteIconBase64}" alt="Website" /></a>` : ""}
-              ${urls.linkedinUrl ? `<a style="width:20px" href="https://${urls.linkedinUrl}" target="_blank"><img style="width:16px; height:16px;" src="${linkedinIconBase64}" alt="LinkedIn" /></a>` : ""}
-              ${urls.twitterUrl ? `<a style="width:20px" href="https://${urls.twitterUrl}" target="_blank"><img style="width:16px; height:16px;" src="${twitterBase64}" alt="Twitter" /></a>` : ""}
-              ${urls.youtubeUrl ? `<a style="width:20px" href="https://${urls.youtubeUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${youtubeBase64}" alt="YouTube" /></a>` : ""}
-               ${urls.instagramUrl ? `<a style="width:20px" href="https://${urls.instagramUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${instagramBase64}" alt="YouTube" /></a>` : ""}
-            </td>
-            </td>
-              <tr>
-                  <td>${designation}</td>
-                </tr>
-                     <td>
-                 <img src="https://cdn.sanity.io/images/bgk0i4de/dev/e01dc3e25789ddfbb2bea504b1b516beafd2f043-83x10.png"/>
-                  </td>
-
+             </td>
           </tr>
-          <tr> <td><div style="border: 1px solid #E2E8F0;"></div></td></tr>
-          <tr style="display:flex; gap: 12px;">
-            <td style="display:flex; gap: 6px; align-items:center;">
-              <img style="width:12px; height:12px; margin-left:5px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/736282c23bf20758259b602816fa2f9584a7809d-36x36.png" />
-              ${emailId}
-            </td>
-            <td style="display:flex; gap: 6px; align-items:center;">
-              <img style="width:12px; height:12px"  src="https://cdn.sanity.io/images/bgk0i4de/dev/a3f88c02dde1d35371fbb2fc5c22162e3c98ef40-36x36.png" />
+          <tr>
+              <td colspan="2" style="color:#331455;">${designation}</td>
+          </tr>
+
+          <tr>
+              
+              <td colspan="2"> 
+                <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
+               <img style="width:100px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"/>
+               </a>
+               </td>
+          </tr>
+          <tr>
+            <td width="320px " style="vertical-align:middle; height:24px; text-align:left;">
+              <!-- <span>
+              <img style="width:17px; height:17px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/736282c23bf20758259b602816fa2f9584a7809d-36x36.png" />
+              </span> -->
+
+              <span style="vertical-align:middle; margin-right: 4px;">
+             ${emailId}
+              </span>
+             <!-- <span>
+              <img style="width:17px; height:17px; vertical-align: middle;"  src="https://cdn.sanity.io/images/bgk0i4de/dev/a3f88c02dde1d35371fbb2fc5c22162e3c98ef40-36x36.png" />
+              </span> -->
+              •
+              <span style=" margin-left:4px; vertical-align:middle;">
               ${phoneNumber}
+              </span>
             </td>
           </tr>
           <tr>
             <td colspan="2">
               <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
-                <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none; width:420px;" />
+                <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none; width:420px; margin-top:8px;" />
               </a>
             </td>
           </tr>
@@ -235,7 +226,9 @@ export default function EmailSignatureTemplate(props: {
             <input
               type="text"
               value={urls[field.key]}
-              onChange={(e) => handleInputChange(field.key, e.target.value)}
+              onChange={(e) =>
+                handleInputChange(field.key, e.target.value, field.label)
+              }
               placeholder={field.placeholder}
               style={{
                 border: "1px solid #ccc",
@@ -247,7 +240,7 @@ export default function EmailSignatureTemplate(props: {
           </label>
         ))}
       </div>
-      <div className="w-1/2 flex flex-col">
+      <div className="w-1/2 flex flex-col reset-tw">
         <div
           ref={hiddenDivRef}
           dangerouslySetInnerHTML={{ __html: signatureHtml }}
