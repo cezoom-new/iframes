@@ -20,6 +20,22 @@ const copySearchParams = (sourceUrl: string, destUrl: string): string => {
   }
 };
 
+const mergeUrls = (baseUrl:string, extraUrl:string) => {
+  const base = new URL(baseUrl);
+  const extra = new URL(extraUrl);
+
+  // Get the email parameter from the extra URL
+  const email = extra.searchParams.get("email");
+
+  if (email) {
+      // Append the email parameter to the base URL
+      base.searchParams.set("email", email);
+  }
+
+  return base.toString();
+}
+
+
 export default function EmailSignatureTemplate(props: {
   link?: string;
   redirectUrl?: string;
@@ -94,8 +110,9 @@ export default function EmailSignatureTemplate(props: {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const currentUrl = window.location.href;
+      console.log(currentUrl,props.link, props.redirectUrl)
       setUpdatedLink(
-        props?.link ? copySearchParams(currentUrl, props.link) : ""
+        props?.link ? mergeUrls(props.link,currentUrl) : ""
       );
 
       if (props?.redirectUrl) {
@@ -110,6 +127,7 @@ export default function EmailSignatureTemplate(props: {
     }
   }, [props.link, props.redirectUrl]);
 
+  console.log("hupdatedRedirectUrl",updatedRedirectUrl)
   const handleInputChange = (key: any, value: any) => {
     setUrls((prevUrls: any) => ({
       ...prevUrls,
@@ -173,13 +191,14 @@ export default function EmailSignatureTemplate(props: {
                   </td>
 
           </tr>
+          <tr> <td><div style="border: 1px solid #E2E8F0;"></div></td></tr>
           <tr style="display:flex; gap: 12px;">
             <td style="display:flex; gap: 6px; align-items:center;">
-              <img style="width:17px; height:17px" src="https://cdn.sanity.io/images/bgk0i4de/dev/736282c23bf20758259b602816fa2f9584a7809d-36x36.png" />
+              <img style="width:12px; height:12px; margin-left:5px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/736282c23bf20758259b602816fa2f9584a7809d-36x36.png" />
               ${emailId}
             </td>
             <td style="display:flex; gap: 6px; align-items:center;">
-              <img style="width:17px; height:17px"  src="https://cdn.sanity.io/images/bgk0i4de/dev/a3f88c02dde1d35371fbb2fc5c22162e3c98ef40-36x36.png" />
+              <img style="width:12px; height:12px"  src="https://cdn.sanity.io/images/bgk0i4de/dev/a3f88c02dde1d35371fbb2fc5c22162e3c98ef40-36x36.png" />
               ${phoneNumber}
             </td>
           </tr>
