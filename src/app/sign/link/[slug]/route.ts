@@ -1,6 +1,12 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 
+function appendEmailToUrl(url: string | URL, email: string) {
+  let urlObj = new URL(url);
+  urlObj.searchParams.set('email', email);
+  return urlObj.toString();
+}
+
 export async function GET(req: NextRequest, { params }: any) {
   const url: any = req.nextUrl.searchParams;
   const email = url.get("email");
@@ -31,8 +37,9 @@ export async function GET(req: NextRequest, { params }: any) {
       - s-maxage=3600: CDN caches the response for 1 hour (overrides max-age for CDNs).
       - stale-while-revalidate=3600: After 1 hour, serve stale content for up to another 1 hour while fetching a fresh version in the background.
     */
+      const finalUrl = appendEmailToUrl(response.result.url, email);
 
-    return NextResponse.redirect(new URL(response.result.url), {
+    return NextResponse.redirect(new URL(finalUrl), {
       headers: {
         "Content-Type": "application/json",
         "Cache-Control":

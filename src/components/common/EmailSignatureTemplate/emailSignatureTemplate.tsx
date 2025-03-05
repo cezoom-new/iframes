@@ -247,7 +247,7 @@ export default function EmailSignatureTemplate(props: {
         ></div>
         <div className="flex pt-6 gap-3 flex-col relative">
           <button
-            className="bg-green-600 p-2 rounded-md text-white w-fit"
+          style={{backgroundColor: "#43A047", borderRadius: "12px", color: "#ffffff", padding: "8px",  border: "none"}}
             onClick={(e: any) => {
               e.preventDefault();
               e.stopPropagation();
