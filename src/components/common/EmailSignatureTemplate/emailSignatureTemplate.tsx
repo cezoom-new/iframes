@@ -63,14 +63,19 @@ export default function EmailSignatureTemplate(props: {
 
   const formFields = [
     {
-      label: "fullName",
+      label: "Full Name",
       key: fullName,
       placeholder: fullName,
     },
     {
-      label: "phoneNumber",
+      label: "Phone Number",
       key: "phoneNumber",
       placeholder: phoneNumber,
+    },
+    {
+      label: "Role",
+      key: "role",
+      placeholder: designation,
     },
 
     {
@@ -180,7 +185,7 @@ export default function EmailSignatureTemplate(props: {
               
               <td colspan="2"> 
                 <a href="https://carestack.com" target="_blank" rel="noopener noreferrer">
-               <img style="width:100px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"/>
+               <img style="width:110px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"/>
                </a>
                </td>
           </tr>
@@ -201,7 +206,17 @@ export default function EmailSignatureTemplate(props: {
               ${phoneNumber}
               </span>
             </td>
+            
           </tr>
+          <tr>
+               <td colspan="2">
+              ${urls.websiteUrl ? `
+              <span style="margin-right:4px;"><a href="https://${urls.websiteUrl}" target="_blank">Website</a></span>` : ""}
+              ${urls.linkedinUrl ? `<span style="margin-right:4px;"> <a  href="https://${urls.linkedinUrl}" target="_blank">Linkedin</a></span>` : ""}
+              ${urls.twitterUrl ? `<span style="margin-right:4px;"> <a href="https://${urls.twitterUrl}" target="_blank">Facebook</a></span>` : ""}
+               ${urls.youtubeUrl ? `<span style="margin-right:4px;"> <a href="https://${urls.youtubeUrl}" target="_blank">Youtube</a></span>` : ""}
+            </td>
+            </tr>
           <tr>
             <td colspan="2">
               <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
