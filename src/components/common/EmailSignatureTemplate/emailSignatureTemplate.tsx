@@ -194,7 +194,7 @@ export default function EmailSignatureTemplate(props: {
               
               <td colspan="2"> 
                 <a href="https://carestack.com" target="_blank" rel="noopener noreferrer">
-               <img style="width:110px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"/>
+               <img style="width:110px; vertical-align:middle;" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"/>
                </a>
                </td>
           </tr>
