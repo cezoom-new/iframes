@@ -179,7 +179,7 @@ export default function EmailSignatureTemplate(props: {
           <tr>
               
               <td colspan="2"> 
-                <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
+                <a href="https://carestack.com" target="_blank" rel="noopener noreferrer">
                <img style="width:100px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"/>
                </a>
                </td>
@@ -190,14 +190,14 @@ export default function EmailSignatureTemplate(props: {
               <img style="width:17px; height:17px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/736282c23bf20758259b602816fa2f9584a7809d-36x36.png" />
               </span> -->
 
-              <span style="vertical-align:middle; margin-right: 4px;">
+              <span style="vertical-align:middle; color:#331455; ">
              ${emailId}
               </span>
              <!-- <span>
               <img style="width:17px; height:17px; vertical-align: middle;"  src="https://cdn.sanity.io/images/bgk0i4de/dev/a3f88c02dde1d35371fbb2fc5c22162e3c98ef40-36x36.png" />
               </span> -->
-              •
-              <span style=" margin-left:4px; vertical-align:middle;">
+                 <span style="margin-right:4px; margin-left:4px;">•</span>
+              <span style="vertical-align:middle; color:#331455;">
               ${phoneNumber}
               </span>
             </td>
