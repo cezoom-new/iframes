@@ -1,9 +1,6 @@
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
 
 const copySearchParams = (sourceUrl: string, destUrl: string): string => {
   try {
@@ -45,7 +42,16 @@ export default function EmailSignatureTemplate(props: {
   const [updatedLink, setUpdatedLink] = useState<string>("");
   const [updatedRedirectUrl, setUpdatedRedirectUrl] = useState<string>("");
 
+
+
+  const searchParams = useSearchParams();
+  const emailId = searchParams.get("email");
+  const fullName = searchParams.get("name");
+  const phoneNumber = searchParams.get("phone");
+  const designation = searchParams.get("role");
+
   const [urls, setUrls] = useState<any>({
+    fullName:fullName,
     websiteUrl: "",
     linkedinUrl: "",
     twitterUrl: "",
@@ -63,13 +69,21 @@ export default function EmailSignatureTemplate(props: {
   const formFields = [
     {
       label: "Name",
-      placeholder: "Enter Name",
+      key: fullName,
+      placeholder: fullName,
     },
+    {
+      label: "Phone",
+      key: "phoneNumber",
+      placeholder: phoneNumber,
+    },
+    
     {
       label: "Website",
       key: "websiteUrl",
       placeholder: "Enter website URL",
     },
+
     {
       label: "LinkedIn",
       key: "linkedinUrl",
@@ -101,11 +115,7 @@ export default function EmailSignatureTemplate(props: {
     }));
   };
 
-  const searchParams = useSearchParams();
-  const emailId = searchParams.get("email");
-  const fullName = searchParams.get("name");
-  const phoneNumber = searchParams.get("phone");
-  const designation = searchParams.get("role");
+
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -139,7 +149,6 @@ export default function EmailSignatureTemplate(props: {
     if (!hiddenDivRef.current) return;
 
     const htmlToCopy = hiddenDivRef.current.innerHTML.trim(); // Trim to avoid duplicate spacing
-
     try {
       const clipboardItem = new ClipboardItem({
         "text/html": new Blob([htmlToCopy], { type: "text/html" }),
