@@ -77,11 +77,11 @@ export default function EmailSignatureTemplate(props: {
   ];
 
   const transformUrl = (url: string, key: string) => {
-    const cleanUrl = url.replace(/^https?:\/\//, "");
+    // const cleanUrl =  url?.length ?url.replace(/^https?:\/\//, "") :""
 
     setUrls((prevUrls: any) => ({
       ...prevUrls,
-      [key]: `https://${cleanUrl}`,
+      [key]: url,
     }));
   };
 
@@ -158,11 +158,11 @@ export default function EmailSignatureTemplate(props: {
             <td>
               <b>${fullName}</b>
               <td style="display: flex; ">
-              ${urls.websiteUrl ? `<a style="width:20px" href="${urls.websiteUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${websiteIconBase64}" alt="Website" /></a>` : ""}
-              ${urls.linkedinUrl ? `<a style="width:20px" href="${urls.linkedinUrl}" target="_blank"><img style="width:16px; height:16px;" src="${linkedinIconBase64}" alt="LinkedIn" /></a>` : ""}
-              ${urls.twitterUrl ? `<a style="width:20px" href="${urls.twitterUrl}" target="_blank"><img style="width:16px; height:16px;" src="${twitterBase64}" alt="Twitter" /></a>` : ""}
-              ${urls.youtubeUrl ? `<a style="width:20px" href="${urls.youtubeUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${youtubeBase64}" alt="YouTube" /></a>` : ""}
-               ${urls.instagramUrl ? `<a style="width:20px" href="${urls.instagramUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${instagramBase64}" alt="YouTube" /></a>` : ""}
+              ${urls.websiteUrl ? `<a style="width:20px" href="https://${urls.websiteUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${websiteIconBase64}" alt="Website" /></a>` : ""}
+              ${urls.linkedinUrl ? `<a style="width:20px" href="https://${urls.linkedinUrl}" target="_blank"><img style="width:16px; height:16px;" src="${linkedinIconBase64}" alt="LinkedIn" /></a>` : ""}
+              ${urls.twitterUrl ? `<a style="width:20px" href="https://${urls.twitterUrl}" target="_blank"><img style="width:16px; height:16px;" src="${twitterBase64}" alt="Twitter" /></a>` : ""}
+              ${urls.youtubeUrl ? `<a style="width:20px" href="https://${urls.youtubeUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${youtubeBase64}" alt="YouTube" /></a>` : ""}
+               ${urls.instagramUrl ? `<a style="width:20px" href="https://${urls.instagramUrl}" target="_blank"><img  style="width:16px; height:16px;" src="${instagramBase64}" alt="YouTube" /></a>` : ""}
             </td>
             </td>
               <tr>
