@@ -43,16 +43,24 @@ export default function EmailSignatureTemplate(props: {
   const [updatedRedirectUrl, setUpdatedRedirectUrl] = useState<string>("");
 
   const searchParams = useSearchParams();
+
+  function ensureHttps(url:any) {
+    if (!/^https?:\/\//i.test(url)) {
+      return `https://${url}`;
+    }
+    return url;
+  }
+
   const emailId = searchParams.get("email");
   const fullName = searchParams.get("name");
   const phoneNumber = searchParams.get("phone");
-  const designation = searchParams.get("role");
+  const role = searchParams.get("role");
 
   const [urls, setUrls] = useState<any>({
     fullName: fullName,
     emailId: emailId,
     phoneNumber: phoneNumber,
-    designation: designation,
+    role: role,
     websiteUrl: "",
     linkedinUrl: "",
     twitterUrl: "",
@@ -63,14 +71,19 @@ export default function EmailSignatureTemplate(props: {
 
   const formFields = [
     {
-      label: "fullName",
-      key: fullName,
+      label: "Full Name",
+      key: "fullName",
       placeholder: fullName,
     },
     {
-      label: "phoneNumber",
+      label: "Phone Number",
       key: "phoneNumber",
       placeholder: phoneNumber,
+    },
+    {
+      label: "Role",
+      key: "role",
+      placeholder: role,
     },
 
     {
@@ -108,6 +121,8 @@ export default function EmailSignatureTemplate(props: {
     }));
   };
 
+
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const currentUrl = window.location.href;
@@ -129,16 +144,15 @@ export default function EmailSignatureTemplate(props: {
   }, [props.link, props.redirectUrl]);
 
   const handleInputChange = (key: any, value: any, label: string) => {
-    const searchParams = [emailId, fullName, phoneNumber, designation];
+    // const searchParams = [emailId, fullName, phoneNumber, designation];
 
     const nonUrlField = key.includes(searchParams);
-    if (key.includes(searchParams)) {
-    } else {
+ 
       setUrls((prevUrls: any) => ({
         ...prevUrls,
-        [key]: nonUrlField ? value : transformUrl(value, key),
+        [key]: value
       }));
-    }
+    
   };
 
   const copyToClipboard = async () => {
@@ -169,18 +183,18 @@ export default function EmailSignatureTemplate(props: {
         <tbody>
           <tr>
             <td colspan="2">
-              <b>${fullName}</b>
+              <b>${urls.fullName}</b>
              </td>
           </tr>
           <tr>
-              <td colspan="2" style="color:#331455;">${designation}</td>
+              <td colspan="2" style="color:#331455;">${urls.role}</td>
           </tr>
 
           <tr>
               
               <td colspan="2"> 
                 <a href="https://carestack.com" target="_blank" rel="noopener noreferrer">
-               <img style="width:100px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"/>
+               <img style="width:110px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"/>
                </a>
                </td>
           </tr>
@@ -191,17 +205,27 @@ export default function EmailSignatureTemplate(props: {
               </span> -->
 
               <span style="vertical-align:middle; color:#331455; ">
-             ${emailId}
+              <a href="mailto:${urls.emailId}">${urls.emailId}</a>
               </span>
              <!-- <span>
               <img style="width:17px; height:17px; vertical-align: middle;"  src="https://cdn.sanity.io/images/bgk0i4de/dev/a3f88c02dde1d35371fbb2fc5c22162e3c98ef40-36x36.png" />
               </span> -->
                  <span style="margin-right:4px; margin-left:4px;">•</span>
               <span style="vertical-align:middle; color:#331455;">
-              ${phoneNumber}
+              <a href="tel:${urls.phoneNumber}">${urls.phoneNumber}</a>
               </span>
             </td>
+            
           </tr>
+          <tr>
+               <td colspan="2">
+              ${urls.websiteUrl ? `
+              <span style="margin-right:4px;"><a href="${ensureHttps(urls.websiteUrl)}" target="_blank">Website</a></span>` : ""}
+              ${urls.linkedinUrl ? `<span style="margin-right:4px;"> <a  href="${ensureHttps(urls.linkedinUrl)}" target="_blank">Linkedin</a></span>` : ""}
+              ${urls.twitterUrl ? `<span style="margin-right:4px;"> <a href="${ensureHttps(urls.twitterUrl)}" target="_blank">Facebook</a></span>` : ""}
+               ${urls.youtubeUrl ? `<span style="margin-right:4px;"> <a href="${ensureHttps(urls.youtubeUrl)}" target="_blank">Youtube</a></span>` : ""}
+            </td>
+            </tr>
           <tr>
             <td colspan="2">
               <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
@@ -225,7 +249,7 @@ export default function EmailSignatureTemplate(props: {
             {field.label}
             <input
               type="text"
-              value={urls[field.key]}
+              value={urls[`${field.key}`]}
               onChange={(e) =>
                 handleInputChange(field.key, e.target.value, field.label)
               }
