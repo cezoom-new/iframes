@@ -4,7 +4,6 @@ import { getViewPortByProductRegion, getViewPorts } from "../../../sanity/lib/qu
 
 export async function GET(request: NextRequest) {
   const token = request.headers.get("authorization");
-  console.log(token,'nextToken!!')
   // if (token != process.env.REVALIDATE_SECRET) {
   //   return Response.json({
   //     error: true,

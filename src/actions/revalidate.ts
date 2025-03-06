@@ -14,7 +14,7 @@ export default async function triggerISR(props: any) {
       body: JSON.stringify({ tag: props.draft.dimensionValue.current }),
     });
   }
-  if (props.type == "campaign") {
+  // if (props.type == "campaign") {
     await fetch(`${process.env.PROJECT_URL}/api/revalidate`, {
       headers: {
         Accept: "application/json",
@@ -24,5 +24,5 @@ export default async function triggerISR(props: any) {
       method: "POST",
       body: JSON.stringify({ tag: props.draft._id.split(".")[1] }),
     });
-  }
+  // }
 }

@@ -59,6 +59,13 @@ export default defineConfig({
       maximumUploadSize: 10000000,
       // number - maximum file size (in bytes) that can be uploaded through the plugin interface
     }),
+    // previewUrl({
+    //   base: '/api/draft',
+    //   requiresSlug: Object.values(siteConfig.pageURLs).map((url) =>
+    //     url.slice(1),
+    //   ),
+    //   urlSecretId: previewSecretId,
+    // }),
     structureTool({structure}),
     // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
@@ -68,8 +75,12 @@ export default defineConfig({
     actions: (prev) =>
       prev.map((originalAction) =>
         originalAction.action === 'publish'
-          ? SetAndPublishAction
+          ? SetAndPublishAction(originalAction)
           : originalAction,
       ),
   },
 })
+function previewUrl(arg0: { base: string; requiresSlug: any[]; urlSecretId: any }): any {
+  throw new Error('Function not implemented.')
+}
+
