@@ -244,7 +244,7 @@ export default function EmailSignatureTemplate(props: {
   return (
     <div className="flex p-6 justify-center h-screen gap-6">
       <div className="w-[400px]">
-        {formFields.map((field: any, i) => (
+        {formFields?.map((field: any, i) => (
           <label key={`${field.key} + ${i}`}>
             {field.label}
             <input
