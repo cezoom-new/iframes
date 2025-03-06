@@ -23,8 +23,8 @@ export async function GET(req: NextRequest, { params }: any) {
     const response = await res.json();
     const { data, error } = await supabase.from("email_signature_logs").insert([
       {
-        event_type: "Email Link Clicked",
-        sender_email: email,
+        event_type: "sign-click",
+        sender_email: unescape(email),
         campaign: response.result.campaign,
         meta: metadata,
         team: team,

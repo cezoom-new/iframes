@@ -19,8 +19,8 @@ export async function GET(req: NextRequest, { params }: any) {
     const response2 = await data1;
     await supabase.from("email_signature_logs").insert([
       {
-        event_type: "Email Opened",
-        sender_email: email,
+        event_type: "email-opened",
+        sender_email: unescape(email),
         campaign: response.result.campagin,
         meta: metadata,
         team: response.result.teamName,
