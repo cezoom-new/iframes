@@ -47,7 +47,7 @@ export default function LeftImageRightText({
               colors={colors}
               campaign={campaign}
               components={campaign?.structure?.components}
-              className="max-w-lg xl:max-w-xl gap-3"
+              className="max-w-xl xl:max-w-2xl gap-3"
             />
           </div>
         </Container>
