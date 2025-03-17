@@ -288,6 +288,15 @@
       "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF"],
       "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF"],
       "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF"]
+    },
+    {
+      "title": "Green 50",
+      "id": "15",
+      "value": "#F0FDF3",
+      "ParagraphColor": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF", "#064E3B", "#022C22"],
+      "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF","#064E3B","#022C22"],
+      "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF","#064E3B","#022C22"],
+      "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF","#064E3B","#022C22"]
     }
   ]
 }
