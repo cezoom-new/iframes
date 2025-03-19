@@ -172,7 +172,7 @@ const DynamicComponents = ({
               <CampaignHeader
                 key={`pillElement-${index}`}
                 logoUrl={component?.templateLogo?.url}
-                templateHeader={component?.templateText}
+                templateHeader={component?.subTitle}
                 eventType={component?.templateEventType}
                 eventDate={component?.templateEventDate}
                 eventLocation={component?.eventLocation}

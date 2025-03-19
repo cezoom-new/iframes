@@ -20,7 +20,7 @@ export default function CampaignHeader({
   return (
     <>
       {(templateHeader || eventType || eventDate) && (
-        <div className="flex items-center gap-6 text-sm mt-6">
+        <div className="flex items-center gap-2 text-sm mt-6">
           {templateHeader && (
             <h2 className="text-green-700 font-semibold uppercase">
               {templateHeader}
@@ -37,7 +37,6 @@ export default function CampaignHeader({
           {eventDate && (
             <button
               className="font-medium px-2.5 py-1.5 rounded uppercase"
-              style={{ backgroundColor: "#FFFFFF66" }}
             >
               {eventDate.replace(/\s*\|\s*/g, "   |   ")} {eventLocation? "  |  " : ""}  {eventLocation}
             </button>
