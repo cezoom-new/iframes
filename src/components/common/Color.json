@@ -297,6 +297,15 @@
       "highlightColor": ["", "yellow", "#09b895", "#0F172A", "#FFF","#064E3B","#022C22"],
       "h1Color": ["", "#fafbfc", "#09b895", "#0F172A", "#FFF","#064E3B","#022C22", "#111827"],
       "subtitleText": ["", "red", "#09b895", "#0F172A", "#FFF","#064E3B","#022C22", "#374151"]
+    },
+    {
+      "title": "Blue Gradient Dark2 reverse ",
+      "id": "16",
+      "value": "linear-gradient(111deg, #002988 4.46%, #2869FF 110.79%)",
+      "ParagraphColor": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "highlightColor": ["", "yellow", "#EAB308", "#FFF", "#93C5FD"],
+      "h1Color": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "subtitleText": ["", "red", "#EAB308", "#FFF", "#93C5FD"]
     }
   ]
 }
