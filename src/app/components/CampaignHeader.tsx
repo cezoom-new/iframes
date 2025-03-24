@@ -27,19 +27,19 @@ export default function CampaignHeader({
             </h2>
           )}
           {eventType && (
-            <button
+            <div
               className="font-medium px-2.5 py-1.5 rounded uppercase"
               style={{ backgroundColor: "#FFFFFF29" }}
             >
               {eventType}
-            </button>
+            </div>
           )}
           {eventDate && (
-            <button
+            <div
               className="font-medium px-2.5 py-1.5 rounded uppercase"
             >
               {eventDate.replace(/\s*\|\s*/g, "   |   ")} {eventLocation? "  |  " : ""}  {eventLocation}
-            </button>
+            </div>
           )}
         </div>
       )}
