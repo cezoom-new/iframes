@@ -188,7 +188,7 @@ export default function Banner({ className, banner, campaignName }: any) {
                           backgroundColor: component?.ctaBtnColor,
                           color: component?.ctaBtnTextColor,
                         }}
-                        className="font-bold text-sm h-11 w-40 rounded bg-white text-[#1E293B]"
+                        className="font-bold text-base h-11 w-max px-8 rounded bg-white text-[#1E293B]"
                         campaignName={campaignName}
                         ctaBtnLink={component?.ctaBtnTextLink}
                       >
