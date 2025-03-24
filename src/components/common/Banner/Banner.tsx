@@ -147,7 +147,7 @@ export default function Banner({ className, banner, campaignName }: any) {
                             <span
                               key={i}
                               style={{ backgroundColor: item?.badgeColor }}
-                              className="text-xs font-semibold p-2 text-center uppercase rounded text-[#CBD5E1]"
+                              className="text-xs font-semibold p-2 text-center uppercase rounded text-white"
                             >
                               {item?.badgeTitle}
                             </span>
