@@ -256,7 +256,7 @@ const DynamicComponents = ({
 
           case "promocodeButton":
             return (
-              <div className="flex gap-6 mt-4">
+              <div className="flex gap-6 mt-4" key={`promocodeButton-${index}`}>
                 {component?.ctaBtn?.ctaBtnText && (
                   <CTAButton
                     ctaText={component?.ctaBtn?.ctaBtnText}
@@ -267,14 +267,15 @@ const DynamicComponents = ({
                     campaignName={campaign?.name}
                   />
                 )}
-                <div className="flex flex-col text-white">
+                <div className="flex flex-col text-white ">
                   <div className="flex gap-1 text-xs">
                     <span>USE PROMO CODE</span>
-                    <span className="font-bold">{component?.promocode}</span>
+                    <span className="font-bold">
+                      <PortableText  value={component?.promocode} components={noteComponents}/></span>
                   </div>
                   <div className="flex gap-2 relative">
                     <span className="font-semibold text-3xl">
-                      {component?.discountPrice}
+                      {component?.discountPrice}<span className="text-white font-normal text-base align-super">.00</span>
                     </span>
 
                     <span className="text-sm ml-1 relative opacity-70">

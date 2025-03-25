@@ -348,7 +348,7 @@ export const campaign = defineType({
                 {
                   name: "promocode",
                   title: "Promo Code",
-                  type: "string",
+                  type: "blockContent",
                 },
                 {
                   name: "originalPrice",
