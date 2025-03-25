@@ -257,7 +257,7 @@ const DynamicComponents = ({
           case "promocodeButton":
             return (
               <div className="flex gap-6 mt-4">
-                  {component?.ctaBtn?.ctaBtnText && (
+                {component?.ctaBtn?.ctaBtnText && (
                   <CTAButton
                     ctaText={component?.ctaBtn?.ctaBtnText}
                     ctaBtnColor={component?.ctaBtn?.ctaBtnColor}
@@ -267,29 +267,29 @@ const DynamicComponents = ({
                     campaignName={campaign?.name}
                   />
                 )}
-              <div className="flex flex-col text-white">
-                <div className="flex gap-1 text-xs">
-                  <span>USE PROMO CODE</span>
-                  <span className="font-bold">{component?.promocode}</span>
+                <div className="flex flex-col text-white">
+                  <div className="flex gap-1 text-xs">
+                    <span>USE PROMO CODE</span>
+                    <span className="font-bold">{component?.promocode}</span>
+                  </div>
+                  <div className="flex gap-2 relative">
+                    <span className="font-semibold text-3xl">
+                      {component?.discountPrice}
+                    </span>
+
+                    <span className="text-sm ml-1 relative opacity-70">
+                      {" "}
+                      <span>{component?.originalPrice}</span>
+                      <span
+                        className="absolute inset-2 w-full h-0.5 bg-red-500"
+                        style={{
+                          transform: "rotate(-10deg)",
+                          transformOrigin: "center",
+                        }}
+                      ></span>
+                    </span>
+                  </div>
                 </div>
-                <div className="flex gap-2 relative">
-                  <span className="font-semibold text-3xl">
-                    {component?.discountPrice}
-                  </span>
-                 
-                  <span className="text-sm ml-1 relative opacity-70">
-                    {" "}
-                    <span>{component?.originalPrice}</span>
-                    <span
-                      className="absolute inset-2 w-full h-0.5 bg-red-500"
-                      style={{
-                        transform: "rotate(-10deg)",
-                        transformOrigin: "center",
-                      }}
-                    ></span>
-                  </span>
-                </div>
-              </div>
               </div>
             );
 
