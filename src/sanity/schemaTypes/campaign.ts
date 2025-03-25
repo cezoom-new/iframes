@@ -342,6 +342,92 @@ export const campaign = defineType({
             // Button Component
             {
               type: "object",
+              name: "promocodeButton",
+              title: "Button with promocode Price",
+              fields: [
+                {
+                  name: "promocode",
+                  title: "Promo Code",
+                  type: "string",
+                },
+                {
+                  name: "originalPrice",
+                  title: "Original Price",
+                  type: "string",
+                },
+                {
+                  name: "discountPrice",
+                  title: "Discount Price",
+                  type: "string",
+                },
+                {
+                  name: "ctaBtn",
+                  title: "Primary Button",
+                  type: "object",
+                  options: {
+                    collapsed: true,
+                    collapsible: true,
+                  },
+                  fields: [
+                    {
+                      name: "ctaBtnText",
+                      title: "CTA Button Text",
+                      type: "string",
+                    },
+                    {
+                      name: "ctaBtnLink",
+                      title: "CTA Button Link",
+                      type: "url",
+                    },
+                    {
+                      name: "ctaBtnColor",
+                      title: "CTA Button Color",
+                      type: 'string',
+                      options: {
+                        list: [
+                          { title: 'Red', value: '#FF5733' },
+                          { title: 'Green', value: '#26A363' },
+                          { title: 'Blue', value: '#007bff' },
+                          { title: 'Yellow', value: '#FFEB3B' },
+                          { title: 'Purple', value: '#6f42c1' },
+                          { title: 'White', value: '#fff' },
+                          { title: 'Black', value: '#000000' },
+                          {title: 'Dark Blue',value: '#181F32'}
+                        ], 
+                        layout: 'dropdown',
+                      },
+                    },
+                    {
+                      name: "ctaBtnTextColor",
+                      title: "CTA Button Text Color",
+                      type: "string",
+                      options: {
+                        list: [
+                          {
+                            title: "White text",
+                            value: "whiteMode",
+                          },
+                          {
+                            title: "Black text",
+                            value: "blackMode",
+                          },
+                        ],
+                        layout: 'radio',
+                      },
+                    },
+                  ],
+                },
+              ],
+              preview: {
+                prepare() {
+                  return {
+                    title: `Button with promocode price`,
+                  };
+                },
+              },
+            },
+            {
+              type: "object",
               name: "buttonComponents",
               title: "Button Component",
               fields: [
