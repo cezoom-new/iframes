@@ -340,6 +340,36 @@ export const campaign = defineType({
               },
             },
             // Button Component
+
+            {
+              type: "object",
+              name: "promocodeButton",
+              title: "Button with promocode Component",
+              fields: [
+                {
+                  name: "promocode",
+                  title: "Promo Code",
+                  type: "string",
+                },
+                {
+                  name: "originalPrice",
+                  title: "Original Price",
+                  type: "string",
+                },
+                {
+                  name: "discountPrice",
+                  title: "Discount Price",
+                  type: "string",
+                },
+              ],
+              preview: {
+                prepare() {
+                  return {
+                    title: `Button with promocode Component`,
+                  };
+                },
+              },
+            },
             {
               type: "object",
               name: "buttonComponents",
