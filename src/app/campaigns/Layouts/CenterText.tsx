@@ -35,7 +35,7 @@ export default function CenterText({
               colors={colors}
               campaign={campaign}
               components={campaign?.structure?.components}
-              className="w-full justify-items-center"
+              className="w-full items-center flex flex-col"
             />
           </div>
         </Container>
