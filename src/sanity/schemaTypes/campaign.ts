@@ -392,7 +392,8 @@ export const campaign = defineType({
                           { title: 'Purple', value: '#6f42c1' },
                           { title: 'White', value: '#fff' },
                           { title: 'Black', value: '#000000' },
-                          {title: 'Dark Blue',value: '#181F32'}
+                          {title: 'Dark Blue',value: '#181F32'},
+                          {title: 'Green 50', value: '#30A063'}
                         ], 
                         layout: 'dropdown',
                       },
