@@ -53,6 +53,24 @@ const DynamicComponents = ({
     },
   };
 
+  const promoComponent: any = {
+    block: {
+      normal: ({ children }: any) => (
+        <p
+          style={{ color: colors?.subtitleText }}
+          className="text-xs font-semibold"
+        >
+          {children}
+        </p>
+      ),
+    },
+    marks: {
+      highlight: ({ children }: any) => (
+        <span style={{ color: colors?.highlightColor }}>{children}</span>
+      ),
+    },
+  };
+
   const noteComponents: any = {
     block: {
       normal: ({ children }: any) => (
@@ -271,18 +289,18 @@ const DynamicComponents = ({
                   <div className="flex gap-1 text-xs">
                     <span>USE PROMO CODE</span>
                     <span className="font-bold">
-                      <PortableText  value={component?.promocode} components={noteComponents}/></span>
+                      <PortableText  value={component?.promocode} components={promoComponent}/></span>
                   </div>
                   <div className="flex gap-2 relative">
                     <span className="font-semibold text-3xl">
                       {component?.discountPrice}<span className="text-white font-normal text-base align-super">.00</span>
                     </span>
 
-                    <span className="text-sm ml-1 relative opacity-70">
+                    <span className="text-sm ml-1 relative">
                       {" "}
-                      <span>{component?.originalPrice}</span>
+                      <span className="opacity-70">{component?.originalPrice}</span>
                       <span
-                        className="absolute inset-2 w-full h-0.5 bg-red-500"
+                        className="absolute inset-2.5 left-[-6%] w-[110%] h-0.5 bg-[#E32526]"
                         style={{
                           transform: "rotate(-10deg)",
                           transformOrigin: "center",
