@@ -22,7 +22,7 @@ const DynamicComponents = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.h1Color }}
-          className="text-3xl lg:text-5xl font-extrabold pt-3 !leading-tight font-manrope"
+          className="text-3xl lg:text-5xl font-extrabold py-3 !leading-tight font-manrope"
         >
           {children}
         </p>

@@ -306,6 +306,42 @@
       "highlightColor": ["", "yellow", "#EAB308", "#FFF", "#93C5FD"],
       "h1Color": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
       "subtitleText": ["", "red", "#EAB308", "#FFF", "#93C5FD"]
+    },
+    {
+      "title": "Slate 900",
+      "id": "17",
+      "value": "#0f172a",
+      "ParagraphColor": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "highlightColor": ["", "yellow", "#EAB308", "#FFF", "#93C5FD"],
+      "h1Color": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "subtitleText": ["", "red", "#EAB308", "#FFF", "#93C5FD"]
+    },
+    {
+      "title": "Slate 800",
+      "id": "18",
+      "value": "#1e293b",
+      "ParagraphColor": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "highlightColor": ["", "yellow", "#EAB308", "#FFF", "#93C5FD"],
+      "h1Color": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "subtitleText": ["", "red", "#EAB308", "#FFF", "#93C5FD"]
+    },
+    {
+      "title": "Slate 700",
+      "id": "19",
+      "value": "#334155",
+      "ParagraphColor": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "highlightColor": ["", "yellow", "#EAB308", "#FFF", "#93C5FD"],
+      "h1Color": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "subtitleText": ["", "red", "#EAB308", "#FFF", "#93C5FD"]
+    },
+    {
+      "title": "Slate 300",
+      "id": "20",
+      "value": "#cbd5e1",
+      "ParagraphColor": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "highlightColor": ["", "yellow", "#EAB308", "#FFF", "#93C5FD"],
+      "h1Color": ["", "#fafbfc", "#EAB308", "#FFF", "#93C5FD"],
+      "subtitleText": ["", "red", "#EAB308", "#FFF", "#93C5FD"]
     }
   ]
 }
