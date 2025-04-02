@@ -27,11 +27,11 @@ export default function LeftImageRightText({
       {cookies && (
         <CookieShow cookie={cookies} campaign={campaign} />
       )}
-      <div className="px-4 md:px-8 xl:px-12">
+      <div className="px-4 md:px-12 xl:px-12">
         <Container
           className={` flex flex-col pt-4 md:py-8 gap-3  `}
         >
-          <div className="flex items-center gap-4 lg:gap-24 pb-8 justify-between">
+          <div className="flex items-center gap-4 md:gap-16 xl:gap-24 pb-8 justify-between">
             {/* <CampaignImageArea
               campaignImage={campaign}
               className=" max-w-[500px] hidden lg:block"
