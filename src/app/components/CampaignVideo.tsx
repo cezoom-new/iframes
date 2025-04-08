@@ -12,12 +12,8 @@ interface ICampaignImageArea {
   campaignVideo?: any;
 }
 
-function CampaignVideo({
-  className,
-  campaignVideo,
-}: ICampaignImageArea) {
-
-    const videoId = campaignVideo?.videoId;
+function CampaignVideo({ className, campaignVideo }: ICampaignImageArea) {
+  const videoId = campaignVideo?.videoId;
   const platform = campaignVideo?.videoPlatform;
 
   const getVideoUrl = () => {
@@ -25,24 +21,24 @@ function CampaignVideo({
     console.log("platform", platform);
     if (!videoId || !platform) return ""; // Return empty string if videoId or platform is not provided
     // Construct the video URL based on the platform
-      switch (platform) {
-        case "youtube":
-          return `https://www.youtube.com/embed/${videoId}`;
-        case "vimeo":
-          return `https://player.vimeo.com/video/${videoId}`;
-        case "vidyard":
-          return `https://play.vidyard.com/${videoId}.html`;
-        default:
-          return "";
-      }
+    switch (platform) {
+      case "youtube":
+        return `https://www.youtube.com/embed/${videoId}`;
+      case "vimeo":
+        return `https://player.vimeo.com/video/${videoId}`;
+      case "vidyard":
+        return `https://play.vidyard.com/${videoId}.html`;
+      default:
+        return "";
+    }
   };
 
   return (
     <div className={className}>
-          {videoId && (
+      {videoId && (
         <iframe
           className="w-full h-full aspect-video rounded-xl border-4 border-[#FFFFFF80]"
-          src={getVideoUrl()}
+          src={`${getVideoUrl()}?autoplay=1&mute=1`}
           title="Video"
           frameBorder="0"
           allow="autoplay; fullscreen"
