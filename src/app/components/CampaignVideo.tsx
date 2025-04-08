@@ -37,7 +37,7 @@ function CampaignVideo({ className, campaignVideo }: ICampaignImageArea) {
     <div className={className}>
       {videoId && (
         <iframe
-          className="w-full h-full aspect-video rounded-xl border-4 border-[#FFFFFF80]"
+          className="w-full h-full aspect-video rounded-xl border-2 border-[#FFFFFF40]"
           src={`${getVideoUrl()}?autoplay=1&mute=1`}
           title="Video"
           frameBorder="0"
