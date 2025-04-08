@@ -119,7 +119,6 @@ const DynamicComponents = ({
       ),
     },
   };
-  console.log("jjwgfjsgjdf", components);
   return (
     <div
       className={`${className} ${
