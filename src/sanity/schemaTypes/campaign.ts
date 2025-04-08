@@ -159,6 +159,10 @@ export const campaign = defineType({
             title: "Left Image Right Text",
             value: "lirt",
           },
+          {
+            title: "Right Video Left Text",
+            value: "rvlt",
+          },
         ],
       },
       group: "template",
@@ -606,6 +610,28 @@ export const campaign = defineType({
           title: "Campaign Image",
           type: "image",
         }),
+        {
+          name: "campaignVideo",
+          title: "Campaign Video",
+          type: "object",
+          fields: [
+            {
+              name: "videoPlatform",
+              title: "Video Platform",
+              type: "string",
+            },
+            {
+              name: "videoId",
+              title: "Video ID",
+              type: "string",
+            },
+            {
+              name: "videoTitle",
+              title: "Video Title",
+              type: "string",
+            },
+          ],
+        },
         defineField({
           name: "campaignCarousalImage",
           title: "Campaign Image For Carousel",

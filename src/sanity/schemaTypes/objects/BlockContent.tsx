@@ -1,14 +1,6 @@
 import { defineArrayMember, defineType } from 'sanity';
 import React from 'react';
 
-const HighlightIcon = () => (
-  <span style={{ fontWeight: 'bold' }}>H</span>
-);
-
-const HighlightDecorator = (props: any) => (
-  <span style={{ backgroundColor: 'yellow' }}>{props.children}</span>
-);
-
 export const blockContent = defineType({
   title: 'Block Content',
   name: 'blockContent',
@@ -87,7 +79,7 @@ export const blockContent = defineType({
           name: 'caption',
           type: 'string',
           title: 'Caption',
-          options: { isHighlighted: true }, // Highlights the field in the image editor
+          // options: { isHighlighted: true }, // Highlights the field in the image editor
         },
       ],
     }),
