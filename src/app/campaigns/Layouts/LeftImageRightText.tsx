@@ -29,16 +29,16 @@ export default function LeftImageRightText({
       )}
       <div className="px-4 md:px-12 xl:px-12">
         <Container
-          className={` flex flex-col pt-4 md:py-8 gap-3  `}
+          className={` flex flex-col pt-4 md:py-4 gap-3  `}
         >
-          <div className="flex items-center gap-4 md:gap-16 xl:gap-24 pb-8 justify-between">
+          <div className="flex-grow flex items-center gap-4 md:gap-16 xl:gap-24">
             {/* <CampaignImageArea
               campaignImage={campaign}
               className=" max-w-[500px] hidden lg:block"
             /> */}
             <CampaignImageArea
               campaignImage={campaign}
-              className="items-center max-w-[500px] hidden lg:block"
+              className="items-center max-w-[500px] hidden lg:block flex-1"
               isCarousal={
                 campaign?.structure?.campaignCarousalImage?.length >= 1 ? true : false
               }
@@ -47,7 +47,7 @@ export default function LeftImageRightText({
               colors={colors}
               campaign={campaign}
               components={campaign?.structure?.components}
-              className="max-w-xl xl:max-w-2xl gap-3"
+              className="flex flex-col max-w-xl xl:max-w-2xl"
             />
           </div>
         </Container>

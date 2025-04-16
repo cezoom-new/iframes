@@ -1,11 +1,5 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
-import { urlFor } from "@/sanity/lib/image";
+import React, { useEffect, useState } from "react";
 
 interface ICampaignImageArea {
   className: string;
@@ -16,11 +10,17 @@ function CampaignVideo({ className, campaignVideo }: ICampaignImageArea) {
   const videoId = campaignVideo?.videoId;
   const platform = campaignVideo?.videoPlatform;
 
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    const isMobile = window.innerWidth < 768; // Tailwind 'md' breakpoint
+    if (!isMobile) {
+      setShowVideo(true);
+    }
+  }, []);
+
   const getVideoUrl = () => {
-    console.log("videoId", videoId);
-    console.log("platform", platform);
-    if (!videoId || !platform) return ""; // Return empty string if videoId or platform is not provided
-    // Construct the video URL based on the platform
+    if (!videoId || !platform) return "";
     switch (platform) {
       case "youtube":
         return `https://www.youtube.com/embed/${videoId}`;
@@ -33,18 +33,18 @@ function CampaignVideo({ className, campaignVideo }: ICampaignImageArea) {
     }
   };
 
+  if (!showVideo || !videoId) return null;
+
   return (
-    <div className={className}>
-      {videoId && (
-        <iframe
-          className="w-full h-full aspect-video rounded-xl border-2 border-[#FFFFFF40]"
-          src={`${getVideoUrl()}?autoplay=1&mute=1`}
-          title="Video"
-          frameBorder="0"
-          allow="autoplay; fullscreen"
-          allowFullScreen
-        ></iframe>
-      )}
+    <div className="items-center flex-1 w-full hidden md:flex">
+      <iframe
+        className="w-full h-full aspect-video rounded-xl border-2 border-[#FFFFFF40]"
+        src={`${getVideoUrl()}?autoplay=1&mute=1`}
+        title="Video"
+        frameBorder="0"
+        allow="autoplay; fullscreen"
+        allowFullScreen
+      ></iframe>
     </div>
   );
 }

@@ -39,10 +39,10 @@ export default function RightVideoLeftText({
         <Container
           className={` flex flex-col pt-4 md:py-4 z-10  gap-3  ${banner?.isFullScreen ? "flex-1" : ""}`}
         >
-          <div className="flex-grow flex items-center justify-between gap-4 md:gap-16 xl:gap-24">
-            <DynamicStructure colors={colors} campaign={campaign} components={campaign?.structure?.components} className="flex flex-col flex-1 gap-3 lg:max-w-[500px]" />
+          <div className="flex-grow flex items-center gap-4 md:gap-16 xl:gap-24">
+            <DynamicStructure colors={colors} campaign={campaign} components={campaign?.structure?.components} className="flex flex-col flex-1 lg:max-w-[500px]" />
             <CampaignVideo
-              className="items-center flex-1 hidden lg:block w-full"
+              className="items-center flex-1 hidden invisible md:visible lg:block w-full"
               campaignVideo={campaign?.structure?.campaignVideo}
             />
           </div>
