@@ -38,11 +38,11 @@ export default function RightImageLeftText({
         <Container
           className={` flex flex-col pt-4 md:py-4 z-10  gap-3  ${banner?.isFullScreen ? "flex-1" : ""}`}
         >
-          <div className="flex-grow flex items-center justify-between gap-4 md:gap-16 xl:gap-24">
-            <DynamicStructure colors={colors} campaign={campaign} components={campaign?.structure?.components} className="flex flex-col max-w-xl xl:max-w-2xl gap-3" />
+          <div className="flex-grow flex items-center gap-4 md:gap-16 xl:gap-24">
+            <DynamicStructure colors={colors} campaign={campaign} components={campaign?.structure?.components} className="flex flex-col max-w-xl xl:max-w-2xl" />
             <CampaignImageArea
               campaignImage={campaign}
-              className="items-center max-w-[500px] hidden lg:block"
+              className="items-center max-w-[500px] hidden lg:block flex-1"
               isCarousal={
                 campaign?.structure?.campaignCarousalImage?.length >= 1 ? true : false
               }
