@@ -610,6 +610,11 @@ export const campaign = defineType({
           title: "Campaign Image",
           type: "image",
         }),
+        defineField({
+          name: "campaignvideoUrl",
+          title: "Campaign Video URL",
+          type: "string",
+        }),
         {
           name: "campaignVideo",
           title: "Campaign Video",
