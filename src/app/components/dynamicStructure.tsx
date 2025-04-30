@@ -57,8 +57,7 @@ const DynamicComponents = ({
     block: {
       normal: ({ children }: any) => (
         <p
-          style={{ color: colors?.subtitleText }}
-          className="text-xs font-semibold"
+          className="text-xs"
         >
           {children}
         </p>
@@ -286,8 +285,8 @@ const DynamicComponents = ({
                 )}
                 <div className="flex flex-col text-white ">
                   <div className="flex gap-1 text-xs">
-                    <span>USE PROMO CODE</span>
-                    <span className="font-bold">
+                    {/* <span>USE PROMO CODE</span> */}
+                    <span className="">
                       <PortableText  value={component?.promocode} components={promoComponent}/></span>
                   </div>
                   <div className="flex gap-2 relative">
