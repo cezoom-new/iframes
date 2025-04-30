@@ -283,7 +283,7 @@ const DynamicComponents = ({
                     campaignName={campaign?.name}
                   />
                 )}
-                <div className="flex flex-col text-white ">
+                <div className="flex flex-col text-white gap-0.5">
                   <div className="flex gap-1 text-xs">
                     {/* <span>USE PROMO CODE</span> */}
                     <span className="">
