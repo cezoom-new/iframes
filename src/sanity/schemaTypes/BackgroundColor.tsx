@@ -9,18 +9,19 @@ const DynamicColorDropdown = (props: any) => {
   const selectedItem = list?.themes?.find(
     (item: { value: unknown }) => item.value === selectedBgColor
   );
- 
+  const colorSectionItems = list?.colors;
+
   const options: string | Array<any> =
   selectedItem && id === "h1Color"
-    ? selectedItem.h1Color || []
+    ? colorSectionItems || []
     : selectedItem && id === "paragraphColor"
-      ? selectedItem.ParagraphColor || []
+      ? colorSectionItems || []
       : selectedItem && id === "highlightColor"
-        ? selectedItem.highlightColor || []
+        ? colorSectionItems || []
         : selectedItem && id === "title"
-          ? selectedItem.title || []
+          ? colorSectionItems || []
           : selectedItem && id === "subtitleText"
-            ? selectedItem.subtitleText || []
+            ? colorSectionItems || []
             : [];
 
 
