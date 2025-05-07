@@ -15,7 +15,6 @@ export default function VideoPlayer({
   isMobile,
   campaignImage
 }: VideoPlayerProps) {
-  console.log('videoData', videoData)
   const movFile = isMobile
     ? videoData?.bgVideoUrlMobileMacMov
     : videoData?.bgVideoUrlMobile
