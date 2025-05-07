@@ -75,7 +75,7 @@ const DynamicComponents = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.paragraphColor }}
-          className="text-sm font-semibold !leading-snug"
+          className="text-sm font-semibold !leading-snug text-left"
         >
           {children}
         </p>
