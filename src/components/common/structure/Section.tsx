@@ -22,7 +22,7 @@ export default function Section(props: Props) {
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center"
       }}
-      className={`w-full flex flex-col h-screen justify-center relative ${props.className}`}
+      className={`w-full flex flex-col min-h-screen justify-center relative ${props.className}`}
     >
       {props.children}
     </section>
