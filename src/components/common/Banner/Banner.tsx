@@ -112,7 +112,7 @@ export default function Banner({ className, banner, campaignName }: any) {
             className=""
             style={{ padding: banner?.containerPadding }}
           >
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 xl:gap-8 relative">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-16 xl:gap-28 relative">
               <div>
 
               {banner?.banner?.map((component: any, index: number) => {
