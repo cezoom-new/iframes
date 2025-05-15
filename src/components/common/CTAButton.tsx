@@ -9,6 +9,7 @@ export interface CtaBtnProps {
   ctaBtnTextColor?: string;
   ctaBtnLink?: string;
   campaignName?: string;
+  className?: string;
 }
 
 export default function CTAButton({
@@ -18,13 +19,14 @@ export default function CTAButton({
   ctaBtnTextColor,
   ctaBtnLink,
   campaignName,
+  className
 }: CtaBtnProps) {
 
   return (
-    <div>
+    <div className={className}>
       <Link href={ctaBtnLink ? ctaBtnLink : ""} target="_blank" passHref>
         <Anchor
-          className={`font-semibold text-center py-3 px-8 rounded-lg whitespace-nowrap
+          className={`${className} font-semibold text-center py-3 px-8 rounded-lg whitespace-nowrap
             ${themeMode === "darkMode" ? "text-black " : "text-white"}`}
           style={{
             background: ctaBtnColor

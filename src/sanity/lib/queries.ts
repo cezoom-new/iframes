@@ -44,16 +44,12 @@ const getCampaignByID = () => {
             }
           }
         },
-        "colorTemplate1":colorTemplate[]->{paragraphColor,
-          h1Color,
-          highlightColor,
-          selectedBgColor,
-          subtitleText
-        },
+        "colorTemplate1":colorTemplate[]->,
         "templateLogos":
         structure {
           components[ _type == "topTemplateLogo"] {
             _key, 
+            "notifyIconUrl":popupText.notifyIcon->asset.url,
             templateLogos[] {
               asset->{
                 _id,
@@ -117,16 +113,21 @@ const getCampaignByIDs = () => {
             }
           }
         },
-        "colorTemplate1":colorTemplate[]->{paragraphColor,
+       "colorTemplate1": colorTemplate[]->{
+          ...,
+          paragraphColor,
           h1Color,
           highlightColor,
           selectedBgColor,
-          subtitleText
+          subtitleText,
+          popupTitleBgColor,
+          popupTextColor
         },
         "templateLogos":
         structure {
           components[ _type == "topTemplateLogo"] {
             _key, 
+             "notifyIconUrl":popupText.notifyIcon->asset.url,
             templateLogos[] {
               asset->{
                 _id,

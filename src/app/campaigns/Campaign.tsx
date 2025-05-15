@@ -12,6 +12,7 @@ import {
 } from "@/utils/helper";
 import { ipAddress } from "@vercel/edge";
 import RightVideoLeftText from "./Layouts/RightVideoLeftText";
+import OSDentalLayout from "./Layouts/OsdentalLayout";
 
 const setCookie = (name: string, value: number) => {
   document.cookie = `${name}=${value}; path=/; SameSite=None; Secure`;
@@ -138,6 +139,18 @@ function Campaign({
       />
     );
   }
+   if (campaigns[campaignIdx]?.selectedLayout == "osdental") {
+    console.log(campaigns[campaignIdx],'TprintTYPE')
+    return (
+      <OSDentalLayout
+        campaign={campaigns[campaignIdx]}
+        banner={banner && banner[0]}
+        cookies={cookies && cookies[0]}
+           colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? "defaultColor"}
+      />
+    );
+  }
+
 
   return (
     <CenterText

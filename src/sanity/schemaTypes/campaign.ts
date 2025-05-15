@@ -1,6 +1,6 @@
 import { UserIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
-import customerData from "../../../database.json"
+import customerData from "../../../database.json";
 
 export const campaign = defineType({
   name: "campaign",
@@ -65,7 +65,7 @@ export const campaign = defineType({
         ],
       },
     }),
-   
+
     defineField({
       title: "Targeted Region",
       name: "region",
@@ -120,7 +120,8 @@ export const campaign = defineType({
       title: "Include Audience List",
       group: "basic",
       of: [{ type: "reference", to: [{ type: "audienceList" }] }],
-      validation: Rule => Rule.length(1).error('You can only select one item.') 
+      validation: (Rule) =>
+        Rule.length(1).error("You can only select one item."),
     }),
     defineField({
       name: "excludeAudienceList",
@@ -128,16 +129,18 @@ export const campaign = defineType({
       title: "Exclude Audience List",
       group: "basic",
       of: [{ type: "reference", to: [{ type: "audienceList" }] }],
-      validation: Rule => Rule.length(1).error('You can only select one item.') 
+      validation: (Rule) =>
+        Rule.length(1).error("You can only select one item."),
     }),
 
     defineField({
       name: "colorTemplate",
-      type: "array",
       title: "Color Schema",
+      type: "array",
       of: [{ type: "reference", to: [{ type: "backgroundLinearGradient" }] }],
       group: "template",
-      validation: Rule => Rule.length(1).error('You can only select one item.') 
+      validation: (Rule) =>
+        Rule.length(1).error("You can only select one item."),
     }),
 
     defineField({
@@ -162,6 +165,10 @@ export const campaign = defineType({
           {
             title: "Right Video Left Text",
             value: "rvlt",
+          },
+          {
+            title: "OSDental Layout",
+            value: "osdental",
           },
         ],
       },
@@ -193,7 +200,18 @@ export const campaign = defineType({
       type: "image",
       group: "template",
     }),
-  
+    defineField({
+      name: "headingUnderline",
+      title: "Heading Underline",
+      type: "string",
+      group: "template",
+    }),
+    defineField({
+      name: "frameTitleBgColor",
+      title: "Frame Title Background Color",
+      type: "string",
+      group: "template",
+    }),
     // strcture schema
 
     defineField({
@@ -261,7 +279,7 @@ export const campaign = defineType({
                   name: "eventLocation",
                   title: "Pill Location",
                   type: "string",
-                }
+                },
               ],
               preview: {
                 prepare() {
@@ -343,6 +361,34 @@ export const campaign = defineType({
                 },
               },
             },
+            {
+              type: "object",
+              name: "listComponent",
+              title: "List Component",
+              fields: [
+                {
+                  name: "list",
+                  title: "List",
+                  type: "blockContent",
+                },
+                {
+                  name: "listIcon",
+                  title: "List Icon",
+                  type: "image",
+                },
+              ],
+              preview: {
+                select: {
+                  title: "list[0].children[0].text", // Display the first block's text
+                },
+                prepare({ title }) {
+                  return {
+                    title: "List Component",
+                    subtitle: title || "No heading provided",
+                  };
+                },
+              },
+            },
             // Button Component
             {
               type: "object",
@@ -386,20 +432,20 @@ export const campaign = defineType({
                     {
                       name: "ctaBtnColor",
                       title: "CTA Button Color",
-                      type: 'string',
+                      type: "string",
                       options: {
                         list: [
-                          { title: 'Red', value: '#FF5733' },
-                          { title: 'Green', value: '#26A363' },
-                          { title: 'Blue', value: '#007bff' },
-                          { title: 'Yellow', value: '#FFEB3B' },
-                          { title: 'Purple', value: '#6f42c1' },
-                          { title: 'White', value: '#fff' },
-                          { title: 'Black', value: '#000000' },
-                          {title: 'Dark Blue',value: '#181F32'},
-                          {title: 'Green 50', value: '#30A063'}
-                        ], 
-                        layout: 'dropdown',
+                          { title: "Red", value: "#FF5733" },
+                          { title: "Green", value: "#26A363" },
+                          { title: "Blue", value: "#007bff" },
+                          { title: "Yellow", value: "#FFEB3B" },
+                          { title: "Purple", value: "#6f42c1" },
+                          { title: "White", value: "#fff" },
+                          { title: "Black", value: "#000000" },
+                          { title: "Dark Blue", value: "#181F32" },
+                          { title: "Green 50", value: "#30A063" },
+                        ],
+                        layout: "dropdown",
                       },
                     },
                     {
@@ -417,7 +463,7 @@ export const campaign = defineType({
                             value: "blackMode",
                           },
                         ],
-                        layout: 'radio',
+                        layout: "radio",
                       },
                     },
                   ],
@@ -458,19 +504,20 @@ export const campaign = defineType({
                     {
                       name: "ctaBtnColor",
                       title: "CTA Button Color",
-                      type: 'string',
+                      type: "string",
                       options: {
                         list: [
-                          { title: 'Red', value: '#FF5733' },
-                          { title: 'Green', value: '#26A363' },
-                          { title: 'Blue', value: '#007bff' },
-                          { title: 'Yellow', value: '#FFEB3B' },
-                          { title: 'Purple', value: '#6f42c1' },
-                          { title: 'White', value: '#fff' },
-                          { title: 'Black', value: '#000000' },
-                          {title: 'Dark Blue',value: '#181F32'}
-                        ], 
-                        layout: 'dropdown',
+                          { title: "Red", value: "#FF5733" },
+                          { title: "Green", value: "#26A363" },
+                          { title: "Blue", value: "#007bff" },
+                          { title: "Yellow", value: "#FFEB3B" },
+                          { title: "Purple", value: "#6f42c1" },
+                          { title: "White", value: "#fff" },
+                          { title: "Black", value: "#000000" },
+                          { title: "Dark Blue", value: "#181F32" },
+                           { title: "T Blue", value: "#02024A" }
+                        ],
+                        layout: "dropdown",
                       },
                     },
                     {
@@ -488,7 +535,7 @@ export const campaign = defineType({
                             value: "blackMode",
                           },
                         ],
-                        layout: 'radio',
+                        layout: "radio",
                       },
                     },
                   ],
@@ -532,19 +579,19 @@ export const campaign = defineType({
                     {
                       name: "ctaBtnColor",
                       title: "CTA Button Color",
-                      type: 'string',
+                      type: "string",
                       options: {
                         list: [
-                          { title: 'Red', value: '#FF5733' },
-                          { title: 'Green', value: '#26A363' },
-                          { title: 'Blue', value: '#007bff' },
-                          { title: 'Yellow', value: '#FFEB3B' },
-                          { title: 'Purple', value: '#6f42c1' },
-                          { title: 'White', value: '#fff' },
-                          { title: 'Black', value: '#000000' },
-                          { title: 'Transparent', value: 'transparent' }
-                        ], 
-                        layout: 'dropdown',
+                          { title: "Red", value: "#FF5733" },
+                          { title: "Green", value: "#26A363" },
+                          { title: "Blue", value: "#007bff" },
+                          { title: "Yellow", value: "#FFEB3B" },
+                          { title: "Purple", value: "#6f42c1" },
+                          { title: "White", value: "#fff" },
+                          { title: "Black", value: "#000000" },
+                          { title: "Transparent", value: "transparent" },
+                        ],
+                        layout: "dropdown",
                       },
                     },
                     {
@@ -562,7 +609,7 @@ export const campaign = defineType({
                             value: "blackMode",
                           },
                         ],
-                        layout: 'radio',
+                        layout: "radio",
                       },
                     },
                   ],
@@ -577,7 +624,7 @@ export const campaign = defineType({
                 select: {},
                 prepare() {
                   return {
-                    title:"Button Component",
+                    title: "Button Component",
                   };
                 },
               },
@@ -602,7 +649,7 @@ export const campaign = defineType({
                 },
               },
             },
-          ],      
+          ],
         }),
         // Image Component
         defineField({
@@ -664,7 +711,93 @@ export const campaign = defineType({
             },
           ],
         }),
-      ], 
+        defineField({
+          name: "popupTitle",
+          title: "Frame Title",
+          type: "string",
+        }),
+
+        defineField({
+          name: "popupButton",
+          title: "Popup Button Button",
+          type: "object",
+          options: {
+            collapsed: true,
+            collapsible: true,
+          },
+          fields: [
+            {
+              name: "ctaBtnText",
+              title: "CTA Button Text",
+              type: "string",
+            },
+            {
+              name: "ctaBtnLink",
+              title: "CTA Button Link",
+              type: "url",
+            },
+            {
+              name: "ctaBtnColor",
+              title: "CTA Button Color",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Red", value: "#FF5733" },
+                  { title: "Green", value: "#26A363" },
+                  { title: "Blue", value: "#007bff" },
+                  { title: "Yellow", value: "#FFEB3B" },
+                  { title: "Purple", value: "#6f42c1" },
+                  { title: "White", value: "#fff" },
+                  { title: "Black", value: "#000000" },
+                  { title: "Dark Blue", value: "#181F32" },
+                  { title: "Green 50", value: "#30A063" },
+                ],
+                layout: "dropdown",
+              },
+            },
+            {
+              name: "ctaBtnTextColor",
+              title: "CTA Button Text Color",
+              type: "string",
+              options: {
+                list: [
+                  {
+                    title: "White text",
+                    value: "whiteMode",
+                  },
+                  {
+                    title: "Black text",
+                    value: "blackMode",
+                  },
+                ],
+                layout: "radio",
+              },
+            },
+          ],
+        }),
+        defineField({
+          name: "popupText",
+          title: "Frame Text",
+          type: "object",
+          fields: [
+            {
+              name: "notificationText",
+              title: "Notify Text",
+              type: "blockContent",
+            },
+            {
+              name: "notifyIcon",
+              title: "Notify Icon",
+              type: "image",
+            },
+          ],
+        }),
+        defineField({
+          name: "frameTextColor",
+          title: "Frame Text Color",
+          type: "string",
+        }),
+      ],
     }),
   ],
   preview: {
