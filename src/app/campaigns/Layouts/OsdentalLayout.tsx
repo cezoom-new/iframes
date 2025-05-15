@@ -71,7 +71,7 @@ export default function OSDentalLayout({
               <div
                 // style={{ background: "linear-gradient(270deg, #9B42F1 -0.66%, #F768D1 101.16%)" }}
                 style={{ background: campaign?.frameTitleBgColor }}
-                className="text-white py-6 px-8 xl:py-10 xl:px-16 text-xl xl:text-3xl font-bold"
+                className="text-white py-6 px-6 xl:py-10 xl:px-16 text-xl xl:text-3xl font-bold"
               >
                 {campaign?.structure?.popupTitle}
               </div>
@@ -84,7 +84,8 @@ export default function OSDentalLayout({
                   layout="osdental"
                 />
                 {campaign?.structure?.campaignvideoUrl ? (
-                  <div className="items-center w-2/3 block flex-1 rounded-xl overflow-hidden h-full">
+                  <div className="items-center w-2/3 block flex-1 rounded-xl overflow-hidden h-full justify-items-end
+">
                     <VideoPlayer
                       videoData={campaign?.structure?.campaignvideoUrl}
                       campaignImage={campaign?.campaignImage?.url}
@@ -93,7 +94,7 @@ export default function OSDentalLayout({
                 ) : (
                   <CampaignImageArea
                     campaignImage={campaign}
-                    className="items-center w-2/3 block flex-1"
+                    className="items-center w-2/3 block flex-1 justify-items-end min-w-[300px]"
                     isCarousal={
                       campaign?.structure?.campaignCarousalImage?.length >= 1
                         ? true

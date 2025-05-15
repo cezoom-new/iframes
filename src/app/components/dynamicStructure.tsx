@@ -119,7 +119,7 @@ const DynamicComponents = ({
   const listComponents: any = (listIcon: any) => ({
     list: {
       bullet: ({ children }: { children: React.ReactNode }) => (
-        <ul className="text-xs xl:text-sm text-[#404040] gap-3.5 flex flex-col">
+        <ul className="text-xs xl:text-sm text-[#404040] gap-3 flex flex-col">
           {children}
         </ul>
       ),
