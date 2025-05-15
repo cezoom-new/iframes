@@ -75,7 +75,7 @@ export default function OSDentalLayout({
               >
                 {campaign?.structure?.popupTitle}
               </div>
-              <div className="flex-grow flex flex-col-reverse lg:flex-row items-center gap-4 md:gap-8 xl:gap-16 p-8 xl:p-16 text-left">
+              <div className="flex-grow flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8 xl:gap-16 p-8 xl:p-16 text-left">
                 <DynamicStructure
                   colors={colors}
                   campaign={campaign}
@@ -84,8 +84,7 @@ export default function OSDentalLayout({
                   layout="osdental"
                 />
                 {campaign?.structure?.campaignvideoUrl ? (
-                  <div className="items-center w-2/3 block flex-1 rounded-xl overflow-hidden h-full justify-items-end
-">
+                  <div className="items-center w-2/3 block flex-1 rounded-xl overflow-hidden h-full justify-items-end">
                     <VideoPlayer
                       videoData={campaign?.structure?.campaignvideoUrl}
                       campaignImage={campaign?.campaignImage?.url}
@@ -94,7 +93,7 @@ export default function OSDentalLayout({
                 ) : (
                   <CampaignImageArea
                     campaignImage={campaign}
-                    className="items-center w-2/3 block flex-1 justify-items-end min-w-[300px]"
+                    className="items-center block flex-1 justify-items-end min-w-[300px]"
                     isCarousal={
                       campaign?.structure?.campaignCarousalImage?.length >= 1
                         ? true

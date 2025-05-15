@@ -127,7 +127,7 @@ const DynamicComponents = ({
     listItem: {
       bullet: ({ children }: any) => (
         <li className="flex gap-2 text-[#404040] items-start font-medium text-xs xl:text-sm">
-          <div className="w-4 flex-shrink-0 mt-1">
+          <div className="w-4 flex-shrink-0">
             <Image
               src={urlFor(listIcon).url()}
               alt="icon"
