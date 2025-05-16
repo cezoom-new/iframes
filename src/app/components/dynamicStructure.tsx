@@ -16,7 +16,7 @@ const DynamicComponents = ({
   colors,
   layout,
 }: any) => {
-  const urlBuilder: any = (source: any) => urlBuilder(client).image(source);
+  const urlBuilder: any = (source: any) => builder?.image(source);
 
   const titleComponent: any = {
     block: {
