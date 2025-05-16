@@ -84,7 +84,7 @@ export default function OSDentalLayout({
                   layout="osdental"
                 />
                 {campaign?.structure?.campaignvideoUrl ? (
-                  <div className="items-center w-2/3 block flex-1 rounded-xl overflow-hidden h-full justify-items-end">
+                  <div className="items-center block flex-1 rounded-xl overflow-hidden max-h-[calc(100vh-250px)] justify-items-end min-w-[300px]">
                     <VideoPlayer
                       videoData={campaign?.structure?.campaignvideoUrl}
                       campaignImage={campaign?.campaignImage?.url}
