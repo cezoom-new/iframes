@@ -63,19 +63,19 @@ export default function OSDentalLayout({
     >
       {cookies && <CookieShow cookie={cookies} campaign={campaign} />}
       <div className="">
-      
-          <div
-            className={`flex flex-col gap-3 ${banner?.isFullScreen ? "flex-1" : ""}`}
-          >
-            <div className="w-full text-center flex flex-col">
-              <div
-                // style={{ background: "linear-gradient(270deg, #9B42F1 -0.66%, #F768D1 101.16%)" }}
-                style={{ background: campaign?.frameTitleBgColor }}
-                className="text-white py-6 px-6 xl:py-10 xl:px-16 text-xl xl:text-3xl font-bold"
-              >
-                {campaign?.structure?.popupTitle}
-              </div>
-              <div className="flex-grow flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8 xl:gap-16 p-8 xl:p-16 text-left">
+        <div
+          className={`flex flex-col gap-3  ${banner?.isFullScreen ? "flex-1" : ""}`}
+        >
+          <div className="w-full text-center flex flex-col">
+            <div
+              // style={{ background: "linear-gradient(270deg, #9B42F1 -0.66%, #F768D1 101.16%)" }}
+              style={{ background: campaign?.frameTitleBgColor }}
+              className="text-white py-6 px-6 xl:py-10 xl:px-16 text-xl xl:text-3xl font-bold"
+            >
+              {campaign?.structure?.popupTitle}
+            </div>
+            <div className="w-full max-w-[1628px] m-auto flex justify-self-center">
+              <div className="flex-grow flex flex-col-reverse md:flex-row items-center gap-4 md:gap-8 xl:gap-16 p-4 xl:p-16 text-left">
                 <DynamicStructure
                   colors={colors}
                   campaign={campaign}
@@ -84,7 +84,7 @@ export default function OSDentalLayout({
                   layout="osdental"
                 />
                 {campaign?.structure?.campaignvideoUrl ? (
-                  <div className="items-center block flex-1 rounded-xl overflow-hidden max-h-[calc(100vh-250px)] justify-items-end min-w-[300px]">
+                  <div className="items-center block flex-1 rounded-xl overflow-hidden aspect-video justify-items-end min-w-[300px]">
                     <VideoPlayer
                       videoData={campaign?.structure?.campaignvideoUrl}
                       campaignImage={campaign?.campaignImage?.url}
@@ -102,7 +102,8 @@ export default function OSDentalLayout({
                   />
                 )}
               </div>
-              {/* <CTAButton
+            </div>
+            {/* <CTAButton
                 ctaText={campaign?.structure?.popupButton?.ctaBtnText}
                 ctaBtnColor={campaign?.structure?.popupButton?.ctaBtnColor}
                 themeMode={campaign?.themeMode}
@@ -113,7 +114,7 @@ export default function OSDentalLayout({
                 campaignName={campaign?.name}
                 className="text-lg px-24"
               /> */}
-              {/* <div className="flex text-center justify-center gap-2">
+            {/* <div className="flex text-center justify-center gap-2">
                 <Image
                   src={urlFor(campaign?.structure?.popupText?.notifyIcon).url()}
                   alt="icon"
@@ -127,8 +128,8 @@ export default function OSDentalLayout({
                   )}
                 />
               </div> */}
-            </div>
           </div>
+        </div>
       </div>
       {banner && (
         <Banner className="" banner={banner} campaignName={campaign?.name} />
