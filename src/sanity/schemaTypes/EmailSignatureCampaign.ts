@@ -44,8 +44,8 @@ export const EmailSignatureCampaign = defineType({
               return "Image is required";
             }
             const filetype = getExtension(value.asset._ref);
-            if (filetype !== "jpg" && filetype !== "png") {
-              return "Image must be a JPG or PNG";
+            if (filetype !== "jpg" && filetype !== "png" && filetype !== "gif") {
+              return "Image must be a JPG or PNG or GIF";
             }
 
             return true;

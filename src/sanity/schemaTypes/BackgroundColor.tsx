@@ -5,7 +5,6 @@ import list from "../../components/common/Color.json";
 const DynamicColorDropdown = (props: any) => {
   const { onChange, description, title, name, id, value, ...restProps } = props;
   const selectedBgColor = useFormValue(["selectedBgColor"]);
-
   const selectedItem = list?.themes?.find(
     (item: { value: unknown }) => item.value === selectedBgColor
   );
@@ -115,6 +114,16 @@ export const BackgroundColor = defineType({
       components: {
         input: DynamicColorDropdown,
       },
+    }),
+     defineField({
+      name: "popupTitleBgColor",
+      title: "Popup Title Background Color",
+      type: "string",
+    }),
+    defineField({
+      name: "popupTextColor",
+      title: "Popup Text Color",
+      type: "string",
     }),
   ],
   preview: {

@@ -14,6 +14,7 @@ const DynamicComponents = ({
   components,
   className,
   colors,
+  layout,
 }: any) => {
   const urlBuilder: any = (source: any) => urlBuilder(client).image(source);
 
@@ -21,10 +22,12 @@ const DynamicComponents = ({
     block: {
       normal: ({ children }: any) => (
         <p
-          style={{ color: colors?.h1Color }}
-          className="text-3xl lg:text-5xl font-extrabold py-3 !leading-tight font-manrope"
+          style={{ color: colors?.h1Color}}
+          className={`${layout == "osdental" ? "text-sm" : "text-3xl lg:text-5xl"} font-extrabold py-3 !leading-tight font-manrope`}
         >
           {children}
+          {campaign?.headingUnderline && <div style={{background: campaign?.headingUnderline}} className="w-full h-[3px] mt-3"></div>}
+          
         </p>
       ),
     },
@@ -40,7 +43,7 @@ const DynamicComponents = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.subtitleText }}
-          className="text-2xl lg:text-3xl font-semibold pb-3 !leading-snug"
+          className={`${layout == "osdental" ? "text-xl xl:text-3xl font-bold" : "text-2xl lg:text-3xl font-semibold"} pb-3 !leading-snug`}
         >
           {children}
         </p>
@@ -55,13 +58,7 @@ const DynamicComponents = ({
 
   const promoComponent: any = {
     block: {
-      normal: ({ children }: any) => (
-        <p
-          className="text-xs"
-        >
-          {children}
-        </p>
-      ),
+      normal: ({ children }: any) => <p className="text-xs">{children}</p>,
     },
     marks: {
       highlight: ({ children }: any) => (
@@ -118,6 +115,31 @@ const DynamicComponents = ({
       ),
     },
   };
+
+  const listComponents: any = (listIcon: any) => ({
+    list: {
+      bullet: ({ children }: { children: React.ReactNode }) => (
+        <ul className="text-xs xl:text-sm text-[#404040] gap-3 flex flex-col">
+          {children}
+        </ul>
+      ),
+    },
+    listItem: {
+      bullet: ({ children }: any) => (
+        <li className="flex gap-2 text-[#404040] items-start font-medium text-xs xl:text-sm">
+          <div className="w-4 flex-shrink-0">
+            <Image
+              src={urlFor(listIcon).url()}
+              alt="icon"
+              width={28}
+              height={28}
+            />
+          </div>
+          <div className="flex-1">{children}</div>
+        </li>
+      ),
+    },
+  });
   return (
     <div
       className={`${className} ${
@@ -229,6 +251,14 @@ const DynamicComponents = ({
                 components={paragraphComponents}
               />
             );
+          case "listComponent":
+            return (
+              <PortableText
+                key={`listComponent-${index}`}
+                value={component?.list}
+                components={listComponents(component?.listIcon)}
+              />
+            );
 
           case "buttonComponents":
             return (
@@ -244,6 +274,7 @@ const DynamicComponents = ({
                     ctaBtnTextColor={component?.ctaBtn?.ctaBtnTextColor}
                     ctaBtnLink={component?.ctaBtn?.ctaBtnLink}
                     campaignName={campaign?.name}
+                    className={`${layout == "osdental" ? 'w-full': ''}`}
                   />
                 )}
                 {component?.secondaryBtnComponent?.secondaryBtnText && (
@@ -287,16 +318,25 @@ const DynamicComponents = ({
                   <div className="flex gap-1 text-xs">
                     {/* <span>USE PROMO CODE</span> */}
                     <span className="">
-                      <PortableText  value={component?.promocode} components={promoComponent}/></span>
+                      <PortableText
+                        value={component?.promocode}
+                        components={promoComponent}
+                      />
+                    </span>
                   </div>
                   <div className="flex gap-2 relative">
                     <span className="font-semibold text-3xl">
-                      {component?.discountPrice}<span className="text-white font-normal text-base align-super">.00</span>
+                      {component?.discountPrice}
+                      <span className="text-white font-normal text-base align-super">
+                        .00
+                      </span>
                     </span>
 
                     <span className="text-sm ml-1 relative">
                       {" "}
-                      <span className="opacity-70">{component?.originalPrice}</span>
+                      <span className="opacity-70">
+                        {component?.originalPrice}
+                      </span>
                       <span
                         className="absolute inset-2.5 left-[-6%] w-[110%] h-0.5 bg-[#E32526]"
                         style={{

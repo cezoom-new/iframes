@@ -13,6 +13,8 @@ export  interface Color{
   paragraphColor:string
   selectedBgColor:string
   subtitleText: string
+   popupTextColor: string;
+  popupTitleBgColor: string;
 }
 
 export default function RightVideoLeftText({
