@@ -210,7 +210,7 @@ export default function EmailSignatureTemplate(props: {
              <!-- <span>
               <img style="width:17px; height:17px; vertical-align: middle;"  src="https://cdn.sanity.io/images/bgk0i4de/dev/a3f88c02dde1d35371fbb2fc5c22162e3c98ef40-36x36.png" />
               </span> -->
-                 <span style="margin-right:4px; margin-left:4px;">•</span>
+                ${urls.phoneNumber ? `<span style="margin-right:4px; margin-left:4px;">•</span>` : ""}
               <span style="vertical-align:middle; color:#331455;">
               <a href="tel:${urls.phoneNumber}">${urls.phoneNumber? urls.phoneNumber : ""}</a>
               </span>
@@ -249,7 +249,7 @@ export default function EmailSignatureTemplate(props: {
             {field.label}
             <input
               type="text"
-              value={urls[`${field.key}`]}
+              value={urls[`${field?.key}`] ?? ""}
               onChange={(e) =>
                 handleInputChange(field.key, e.target.value, field.label)
               }
