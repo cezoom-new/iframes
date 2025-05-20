@@ -6,7 +6,7 @@ export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false
+  useCdn: true
 });
 
 export const runQuery = async (query: any, params: any = {}, tags: any = null) => {
