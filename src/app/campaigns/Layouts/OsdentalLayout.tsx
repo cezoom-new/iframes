@@ -56,11 +56,27 @@ export default function OSDentalLayout({
     },
   });
   return (
-    <Section
-      bgColor={colors?.selectedBgColor}
-      bgImage={campaign?.backgroundImage?.url}
-      className="!justify-start"
-    >
+    <Section className="!justify-start">
+      <div
+        className="absolute inset-0 z-[-2]"
+        style={{
+          background: colors?.selectedBgColor || "transparent",
+        }}
+      />
+      {campaign?.backgroundImage?.url && (
+        <Image
+          src={campaign?.backgroundImage?.url}
+          alt="Background"
+          fill
+          quality={75}
+          priority
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+            zIndex: -1,
+          }}
+        />
+      )}
       {cookies && <CookieShow cookie={cookies} campaign={campaign} />}
       <div className="">
         <div
