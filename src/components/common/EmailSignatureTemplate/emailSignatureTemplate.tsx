@@ -41,6 +41,7 @@ export default function EmailSignatureTemplate(props: {
   const hiddenDivRef = useRef<HTMLDivElement | null>(null);
   const [updatedLink, setUpdatedLink] = useState<string>("");
   const [updatedRedirectUrl, setUpdatedRedirectUrl] = useState<string>("");
+  const [hideData, setHideData] = useState<boolean>(true);
 
   const searchParams = useSearchParams();
 
@@ -145,14 +146,11 @@ export default function EmailSignatureTemplate(props: {
 
   const handleInputChange = (key: any, value: any, label: string) => {
     // const searchParams = [emailId, fullName, phoneNumber, designation];
-
     const nonUrlField = key.includes(searchParams);
- 
       setUrls((prevUrls: any) => ({
         ...prevUrls,
         [key]: value
       }));
-    
   };
 
   const copyToClipboard = async () => {
@@ -181,58 +179,71 @@ export default function EmailSignatureTemplate(props: {
         ? `
       <table cellpadding="0px" style="border-spacing:0px" cellspacing="0px" width="420px">
         <tbody>
-          <tr>
-            <td colspan="2">
-              <b>${urls.fullName ? urls.fullName : ""}</b>
-             </td>
-          </tr>
-          <tr>
-              <td colspan="2" style="color:#331455;">${urls.role ? urls.role : ""}</td>
-          </tr>
-
-          <tr>
-              
-              <td colspan="2"> 
+        ${
+          hideData
+            ? ` 
+             ${urls.fullName ? `
+              <tr>
+                <td colspan="2">
+                  <b>${urls.fullName}</b>
+                </td>
+              </tr>
+            ` : ''}
+                  ${urls.role ? `
+              <tr>
+                <td colspan="2" style="color:#331455;">${urls.role}</td>
+              </tr>
+            ` : ''}
+          
+                  <tr>
+              <td colspan="2">
                 <a href="https://carestack.com" target="_blank" rel="noopener noreferrer">
-               <img style="width:110px; vertical-align:middle;" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"/>
-               </a>
-               </td>
-          </tr>
-          <tr>
-            <td width="320px " style="vertical-align:middle; height:24px; text-align:left;">
-              <!-- <span>
-              <img style="width:17px; height:17px;" src="https://cdn.sanity.io/images/bgk0i4de/dev/736282c23bf20758259b602816fa2f9584a7809d-36x36.png" />
-              </span> -->
-
-              <span style="vertical-align:middle; color:#331455; ">
-              <a href="mailto:${urls.emailId}">${urls.emailId ? urls.emailId : ""}</a>
-              </span>
-             <!-- <span>
-              <img style="width:17px; height:17px; vertical-align: middle;"  src="https://cdn.sanity.io/images/bgk0i4de/dev/a3f88c02dde1d35371fbb2fc5c22162e3c98ef40-36x36.png" />
-              </span> -->
-                ${urls.phoneNumber ? `<span style="margin-right:4px; margin-left:4px;">•</span>` : ""}
-              <span style="vertical-align:middle; color:#331455;">
-              <a href="tel:${urls.phoneNumber}">${urls.phoneNumber? urls.phoneNumber : ""}</a>
-              </span>
-            </td>
-            
-          </tr>
-          <tr>
-               <td colspan="2">
-              ${urls.websiteUrl ? `
-              <span style="margin-right:4px;"><a href="${ensureHttps(urls.websiteUrl)}" target="_blank">Website</a></span>` : ""}
-              ${urls.linkedinUrl ? `<span style="margin-right:4px;"> <a  href="${ensureHttps(urls.linkedinUrl)}" target="_blank">Linkedin</a></span>` : ""}
-              ${urls.facebook ? `<span style="margin-right:4px;"> <a href="${ensureHttps(urls.facebook)}" target="_blank">Facebook</a></span>` : ""}
-               ${urls.youtubeUrl ? `<span style="margin-right:4px;"> <a href="${ensureHttps(urls.youtubeUrl)}" target="_blank">Youtube</a></span>` : ""}
-            </td>
+                  <img style="width:110px; vertical-align:middle;" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png" />
+                </a>
+              </td>
             </tr>
-          <tr>
-            <td colspan="2">
-              <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
-                <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none; width:420px; margin-top:8px;" />
-              </a>
-            </td>
-          </tr>
+                  ${(urls.emailId || urls.phoneNumber) ? `
+              <tr>
+                <td width="320px" style="vertical-align:middle; height:24px; text-align:left;">
+                  ${urls.emailId ? `
+                    <span style="vertical-align:middle; color:#331455;">
+                      <a href="mailto:${urls.emailId}">${urls.emailId}</a>
+                    </span>
+                  ` : ''}
+
+                  ${(urls.emailId && urls.phoneNumber) ? `
+                    <span style="margin-right:4px; margin-left:4px;">•</span>
+                  ` : ''}
+
+                  ${urls.phoneNumber ? `
+                    <span style="vertical-align:middle; color:#331455;">
+                      <a href="tel:${urls.phoneNumber}">${urls.phoneNumber}</a>
+                    </span>
+                  ` : ''}
+                </td>
+              </tr>
+            ` : ''}
+                    ${(urls.websiteUrl || urls.linkedinUrl || urls.facebook || urls.youtubeUrl) ? `
+              <tr>
+                <td colspan="2">
+                  ${urls.websiteUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.websiteUrl)}" target="_blank">Website</a></span>` : ''}
+                  ${urls.linkedinUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.linkedinUrl)}" target="_blank">Linkedin</a></span>` : ''}
+                  ${urls.facebook ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.facebook)}" target="_blank">Facebook</a></span>` : ''}
+                  ${urls.youtubeUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.youtubeUrl)}" target="_blank">Youtube</a></span>` : ''}
+                </td>
+              </tr>
+            ` : ''}
+          ` : ''}
+
+                    ${updatedLink && updatedRedirectUrl ? `
+            <tr>
+              <td colspan="2">
+                <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
+                  <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none; width:420px; margin-top:8px;" />
+                </a>
+              </td>
+            </tr>
+          ` : ''}
         </tbody>
       </table>
     `
@@ -242,8 +253,23 @@ export default function EmailSignatureTemplate(props: {
 `;
 
   return (
-    <div className="flex p-6 justify-center h-screen gap-6">
-      <div className="w-[400px]">
+    <div className="flex p-6 justify-center h-screen gap-6 md-gap-12 lg:gap-32 bg-slate-50">
+      <div className="w-[400px] bg-white p-6 rounded-lg shadow-md flex flex-col">
+        <label> 
+          <input
+            type="checkbox"
+            checked={hideData}
+            onChange={(e) => setHideData(e.target.checked)}
+            style={{
+              width: "20px",
+              height: "20px",
+              marginRight: "10px",
+               marginBottom: "20px",
+            }}
+          />
+          Use Detail in Signature
+        </label>
+        <br />
         {formFields?.map((field: any, i) => (
           <label key={`${field.key} + ${i}`}>
             {field.label}
@@ -271,7 +297,7 @@ export default function EmailSignatureTemplate(props: {
         ></div>
         <div className="flex pt-6 gap-3 flex-col relative">
           <button
-          style={{backgroundColor: "#43A047", borderRadius: "12px", color: "#ffffff", padding: "8px",  border: "none"}}
+          style={{backgroundColor: "#43A047", borderRadius: "10px", color: "#ffffff", padding: "12px 16px",  border: "none"}}
             onClick={(e: any) => {
               e.preventDefault();
               e.stopPropagation();
