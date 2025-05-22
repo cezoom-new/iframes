@@ -211,7 +211,7 @@ export default function EmailSignatureTemplate(props: {
                     </span>
                   ` : ''}
 
-                  ${(urls.emailId && urls.phoneNumber) ? `
+                  ${(urls.phoneNumber) ? `
                     <span style="margin-right:4px; margin-left:4px;">•</span>
                   ` : ''}
 
