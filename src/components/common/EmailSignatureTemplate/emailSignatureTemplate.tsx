@@ -211,7 +211,7 @@ export default function EmailSignatureTemplate(props: {
                     </span>
                   ` : ''}
 
-                  ${(urls.phoneNumber) ? `
+                  ${(urls.phoneNumber) && (urls.emailId) ? `
                     <span style="margin-right:4px; margin-left:4px;">•</span>
                   ` : ''}
 
@@ -288,6 +288,7 @@ export default function EmailSignatureTemplate(props: {
                 marginBottom: "20px",
                 backgroundColor: "#f9f9f9",
                 borderRadius: "4px",
+                marginTop: "5px",
               }}
             />
           </label>
