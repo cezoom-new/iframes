@@ -239,7 +239,7 @@ export default function EmailSignatureTemplate(props: {
             <tr>
               <td colspan="2">
                 <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
-                  <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none; width:420px; margin-top:8px;" />
+                  <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none; width:100%; max-width:420px; margin-top:8px;" />
                 </a>
               </td>
             </tr>
@@ -253,8 +253,9 @@ export default function EmailSignatureTemplate(props: {
 `;
 
   return (
-    <div className="flex p-6 justify-center h-screen gap-6 md-gap-12 lg:gap-32 bg-slate-50">
-      <div className="w-[400px] bg-white p-6 rounded-lg shadow-md flex flex-col">
+    <div className="flex flex-col md:flex-row p-6 justify-center gap-6 lg:gap-32 bg-slate-200">
+      <div className="max-w-[500px] w-full bg-white p-6 rounded-lg shadow-md flex flex-col">
+        <h6 className="text-lg font-semibold pb-8 text-center">Email Signature Form</h6>
         <label> 
           <input
             type="checkbox"
@@ -284,7 +285,9 @@ export default function EmailSignatureTemplate(props: {
                 border: "1px solid #ccc",
                 padding: "5px",
                 width: "100%",
-                marginBottom: "10px",
+                marginBottom: "20px",
+                backgroundColor: "#f9f9f9",
+                borderRadius: "4px",
               }}
             />
           </label>
