@@ -253,7 +253,7 @@ export default function EmailSignatureTemplate(props: {
 `;
 
   return (
-    <div className="flex flex-col md:flex-row p-6 justify-center gap-6 lg:gap-32 bg-slate-200">
+    <div className="flex flex-col md:flex-row h-screen p-6 justify-center gap-6 lg:gap-32 bg-slate-200">
       <div className="max-w-[500px] w-full bg-white p-6 rounded-lg shadow-md flex flex-col">
         <h6 className="text-lg font-semibold pb-8 text-center">Email Signature Form</h6>
         <label> 
