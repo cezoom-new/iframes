@@ -235,13 +235,10 @@ export default function EmailSignatureTemplate(props: {
                 </a>
               </td>
             </tr>
-                  ${
-                    hideEmail && urls.emailId
-                      ? `
               <tr>
                 <td width="320px" style="vertical-align:middle; height:24px; text-align:left;">
                   ${
-                    urls.emailId
+                   hideEmail && urls.emailId
                       ? `
                     <span style="vertical-align:middle; color:#331455;">
                       <a href="mailto:${urls.emailId}">${urls.emailId}</a>
@@ -251,7 +248,7 @@ export default function EmailSignatureTemplate(props: {
                   }
 
                   ${
-                    urls.phoneNumber && urls.emailId
+                    hideEmail && urls.phoneNumber && urls.emailId
                       ? `
                     <span style="margin-right:4px; margin-left:4px;">•</span>
                   `
@@ -269,9 +266,7 @@ export default function EmailSignatureTemplate(props: {
                   }
                 </td>
               </tr>
-            `
-                      : ""
-                  }
+                      
                     ${
                       urls.websiteUrl ||
                       urls.linkedinUrl ||
@@ -320,9 +315,9 @@ export default function EmailSignatureTemplate(props: {
   return (
     <div className="flex flex-col md:max-w-7xl w-full md:flex-row py-16 justify-center gap-6 lg:gap-32">
       <div className="w-1/2 bg-white py-16 px-16 rounded-lg shadow-md flex flex-col">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-        One-Time Gmail Signature Setup
-      </h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">
+          One-Time Gmail Signature Setup
+        </h2>
         <Form {...form}>
           <FormField
             control={control}
@@ -426,7 +421,7 @@ export default function EmailSignatureTemplate(props: {
             ></div>
           </div>
         </div>
-        <div className="flex pt-6 gap-3 flex-col relative">
+        <div className="flex pt-8 gap-3 flex-col relative">
           <Button
             className="w-fit"
             onClick={(e: any) => {
@@ -440,7 +435,7 @@ export default function EmailSignatureTemplate(props: {
           </Button>
           <div className="flex w-full absolute -bottom-6">{copySuccess}</div>
         </div>
-        <SetupForSignature/>
+        <SetupForSignature />
       </div>
     </div>
   );
