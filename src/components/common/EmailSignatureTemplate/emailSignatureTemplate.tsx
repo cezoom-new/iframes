@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input"; // assuming you're using this Input component from shadcn/ui
 import { useForm } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
+import SetupForSignature from "./SetupForSignature";
 
 const copySearchParams = (sourceUrl: string, destUrl: string): string => {
   try {
@@ -54,6 +55,7 @@ export default function EmailSignatureTemplate(props: {
   const [updatedLink, setUpdatedLink] = useState<string>("");
   const [updatedRedirectUrl, setUpdatedRedirectUrl] = useState<string>("");
   const [hideData, setHideData] = useState<boolean>(true);
+  const [hideEmail, setHideEmail] = useState<boolean>(true);
 
   const searchParams = useSearchParams();
   const form = useForm({
@@ -68,6 +70,7 @@ export default function EmailSignatureTemplate(props: {
       youtubeUrl: "",
       instagramUrl: "",
       hideData: true,
+      hideEmail: true,
     },
   });
   const { control } = form;
@@ -81,7 +84,7 @@ export default function EmailSignatureTemplate(props: {
 
   const emailId = searchParams.get("email");
   const fullName = searchParams.get("name");
-  const phoneNumber = searchParams.get("phone");
+  const phoneNumber = searchParams.get("phone") || "";
   const role = searchParams.get("role");
 
   const [urls, setUrls] = useState<any>({
@@ -233,7 +236,7 @@ export default function EmailSignatureTemplate(props: {
               </td>
             </tr>
                   ${
-                    urls.emailId || urls.phoneNumber
+                    hideEmail && urls.emailId
                       ? `
               <tr>
                 <td width="320px" style="vertical-align:middle; height:24px; text-align:left;">
@@ -317,12 +320,15 @@ export default function EmailSignatureTemplate(props: {
   return (
     <div className="flex flex-col md:max-w-7xl w-full md:flex-row py-16 justify-center gap-6 lg:gap-32">
       <div className="w-1/2 bg-white py-16 px-16 rounded-lg shadow-md flex flex-col">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">
+        One-Time Gmail Signature Setup
+      </h2>
         <Form {...form}>
           <FormField
             control={control}
             name="hideData"
             render={({ field }) => (
-              <FormItem className="flex items-center gap-2 p-4 mb-8 bg-[#f9f1fe] rounded-md text-[#7820bc]">
+              <FormItem className="flex items-center gap-2 p-4 mb-4 bg-[#f9f1fe] rounded-md text-[#7820bc]">
                 <FormControl>
                   <Checkbox
                     checked={hideData}
@@ -338,6 +344,49 @@ export default function EmailSignatureTemplate(props: {
               </FormItem>
             )}
           />
+          {urls?.emailId && (
+            <>
+              <FormField
+                control={control}
+                name="emailId"
+                render={({ field: formField }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...formField}
+                        placeholder="Enter your email"
+                        disabled
+                        value={urls.emailId || ""}
+                      />
+                    </FormControl>
+                    <FormDescription />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={control}
+                name="hideEmail"
+                render={({ field }) => (
+                  <FormItem className="flex items-center gap-2 pb-6">
+                    <FormControl>
+                      <Checkbox
+                        checked={hideEmail}
+                        onCheckedChange={(checked: any) => {
+                          field.onChange(checked);
+                          setHideEmail(checked);
+                        }}
+                      />
+                    </FormControl>
+                    <FormLabel className="font-normal !mt-0">
+                      Show Email ID in signature
+                    </FormLabel>
+                  </FormItem>
+                )}
+              />
+            </>
+          )}
           {formFields?.map((field: any, i: number) => (
             <FormField
               key={`${field.key}-${i}`}
@@ -368,12 +417,14 @@ export default function EmailSignatureTemplate(props: {
           ))}
         </Form>
       </div>
-      <div className="flex flex-col w-1/2 bg-white h-fit p-6 rounded-lg shadow-md">
-        <div className="w-1/2 flex flex-col reset-tw">
-          <div
-            ref={hiddenDivRef}
-            dangerouslySetInnerHTML={{ __html: signatureHtml }}
-          ></div>
+      <div className="flex flex-col w-1/2">
+        <div className="flex mb-2 bg-white h-fit p-6 rounded-lg shadow-md">
+          <div className="reset-tw">
+            <div
+              ref={hiddenDivRef}
+              dangerouslySetInnerHTML={{ __html: signatureHtml }}
+            ></div>
+          </div>
         </div>
         <div className="flex pt-6 gap-3 flex-col relative">
           <Button
@@ -387,10 +438,9 @@ export default function EmailSignatureTemplate(props: {
             {" "}
             Copy Signature
           </Button>
-          <div className="flex w-full absolute -bottom-6">
-            {copySuccess}
-          </div>
+          <div className="flex w-full absolute -bottom-6">{copySuccess}</div>
         </div>
+        <SetupForSignature/>
       </div>
     </div>
   );
