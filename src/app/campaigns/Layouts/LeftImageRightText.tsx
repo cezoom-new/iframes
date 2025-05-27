@@ -53,9 +53,13 @@ export default function LeftImageRightText({
             /> */}
             {campaign?.structure?.campaignvideoUrl ? (
               <div className="items-center max-w-[500px] hidden lg:block flex-1 rounded-xl overflow-hidden">
-                <VideoPlayer
-                  videoData={campaign?.structure?.campaignvideoUrl}
-                  campaignImage={campaign?.campaignImage?.url}
+                 <Image
+                  src={campaign?.structure?.campaignvideoUrl}
+                  alt="Campaign GIF"
+                  width={500}
+                  height={300}
+                  unoptimized // Required because it's an external GIF
+                  priority
                 />
               </div>
             ) : (

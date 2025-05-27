@@ -65,7 +65,17 @@ export default function RightImageLeftText({
               components={campaign?.structure?.components}
               className="flex flex-col max-w-xl xl:max-w-2xl"
             />
-            <CampaignImageArea
+             {campaign?.structure?.campaignvideoUrl ? (
+              <div className="items-center max-w-[500px] hidden lg:block flex-1 rounded-xl overflow-hidden">
+                 <Image
+                  src={campaign?.structure?.campaignvideoUrl}
+                  alt="Campaign GIF"
+                  width={500}
+                  height={300}
+                />
+              </div>
+            ) : (
+              <CampaignImageArea
               campaignImage={campaign}
               className="items-center max-w-[500px] hidden lg:block flex-1"
               isCarousal={
@@ -74,6 +84,8 @@ export default function RightImageLeftText({
                   : false
               }
             />
+            )}
+            
           </div>
         </Container>
       </div>
