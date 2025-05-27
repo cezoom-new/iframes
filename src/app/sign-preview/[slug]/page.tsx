@@ -30,7 +30,7 @@ export default async function emailSignature({ params }: { params: any }) {
 
 
   return(
-    <div>
+    <div className="flex items-center justify-center w-full min-h-screen bg-[#fafafa]">
        <EmailSignatureTemplate link={link} redirectUrl={url} />
     </div>
   );

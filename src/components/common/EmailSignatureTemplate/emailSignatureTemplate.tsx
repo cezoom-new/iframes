@@ -1,6 +1,19 @@
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+  FormDescription,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input"; // assuming you're using this Input component from shadcn/ui
+import { useForm } from "react-hook-form";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const copySearchParams = (sourceUrl: string, destUrl: string): string => {
   try {
@@ -17,7 +30,7 @@ const copySearchParams = (sourceUrl: string, destUrl: string): string => {
   }
 };
 
-const mergeUrls = (baseUrl:string, extraUrl:string) => {
+const mergeUrls = (baseUrl: string, extraUrl: string) => {
   const base = new URL(baseUrl);
   const extra = new URL(extraUrl);
 
@@ -25,13 +38,12 @@ const mergeUrls = (baseUrl:string, extraUrl:string) => {
   const email = extra.searchParams.get("email");
 
   if (email) {
-      // Append the email parameter to the base URL
-      base.searchParams.set("email", email);
+    // Append the email parameter to the base URL
+    base.searchParams.set("email", email);
   }
 
   return base.toString();
-}
-
+};
 
 export default function EmailSignatureTemplate(props: {
   link?: string;
@@ -44,8 +56,23 @@ export default function EmailSignatureTemplate(props: {
   const [hideData, setHideData] = useState<boolean>(true);
 
   const searchParams = useSearchParams();
+  const form = useForm({
+    defaultValues: {
+      fullName: searchParams.get("name") || "",
+      emailId: searchParams.get("email") || "",
+      phoneNumber: searchParams.get("phone") || "",
+      role: searchParams.get("role") || "",
+      websiteUrl: "",
+      linkedinUrl: "",
+      facebook: "",
+      youtubeUrl: "",
+      instagramUrl: "",
+      hideData: true,
+    },
+  });
+  const { control } = form;
 
-  function ensureHttps(url:any) {
+  function ensureHttps(url: any) {
     if (!/^https?:\/\//i.test(url)) {
       return `https://${url}`;
     }
@@ -68,7 +95,6 @@ export default function EmailSignatureTemplate(props: {
     youtubeUrl: "",
     instagramUrl: "",
   });
-
 
   const formFields = [
     {
@@ -122,15 +148,11 @@ export default function EmailSignatureTemplate(props: {
     }));
   };
 
-
-
   useEffect(() => {
     if (typeof window !== "undefined") {
       const currentUrl = window.location.href;
-      console.log(currentUrl,props.link, props.redirectUrl)
-      setUpdatedLink(
-        props?.link ? mergeUrls(props.link,currentUrl) : ""
-      );
+      console.log(currentUrl, props.link, props.redirectUrl);
+      setUpdatedLink(props?.link ? mergeUrls(props.link, currentUrl) : "");
 
       if (props?.redirectUrl) {
         const encodedRedirectUrl = copySearchParams(
@@ -147,10 +169,10 @@ export default function EmailSignatureTemplate(props: {
   const handleInputChange = (key: any, value: any, label: string) => {
     // const searchParams = [emailId, fullName, phoneNumber, designation];
     const nonUrlField = key.includes(searchParams);
-      setUrls((prevUrls: any) => ({
-        ...prevUrls,
-        [key]: value
-      }));
+    setUrls((prevUrls: any) => ({
+      ...prevUrls,
+      [key]: value,
+    }));
   };
 
   const copyToClipboard = async () => {
@@ -182,18 +204,26 @@ export default function EmailSignatureTemplate(props: {
         ${
           hideData
             ? ` 
-             ${urls.fullName ? `
+             ${
+               urls.fullName
+                 ? `
               <tr>
                 <td colspan="2">
                   <b>${urls.fullName}</b>
                 </td>
               </tr>
-            ` : ''}
-                  ${urls.role ? `
+            `
+                 : ""
+             }
+                  ${
+                    urls.role
+                      ? `
               <tr>
                 <td colspan="2" style="color:#331455;">${urls.role}</td>
               </tr>
-            ` : ''}
+            `
+                      : ""
+                  }
           
                   <tr>
               <td colspan="2">
@@ -202,48 +232,80 @@ export default function EmailSignatureTemplate(props: {
                 </a>
               </td>
             </tr>
-                  ${(urls.emailId || urls.phoneNumber) ? `
+                  ${
+                    urls.emailId || urls.phoneNumber
+                      ? `
               <tr>
                 <td width="320px" style="vertical-align:middle; height:24px; text-align:left;">
-                  ${urls.emailId ? `
+                  ${
+                    urls.emailId
+                      ? `
                     <span style="vertical-align:middle; color:#331455;">
                       <a href="mailto:${urls.emailId}">${urls.emailId}</a>
                     </span>
-                  ` : ''}
+                  `
+                      : ""
+                  }
 
-                  ${(urls.phoneNumber) && (urls.emailId) ? `
+                  ${
+                    urls.phoneNumber && urls.emailId
+                      ? `
                     <span style="margin-right:4px; margin-left:4px;">•</span>
-                  ` : ''}
+                  `
+                      : ""
+                  }
 
-                  ${urls.phoneNumber ? `
+                  ${
+                    urls.phoneNumber
+                      ? `
                     <span style="vertical-align:middle; color:#331455;">
                       <a href="tel:${urls.phoneNumber}">${urls.phoneNumber}</a>
                     </span>
-                  ` : ''}
+                  `
+                      : ""
+                  }
                 </td>
               </tr>
-            ` : ''}
-                    ${(urls.websiteUrl || urls.linkedinUrl || urls.facebook || urls.youtubeUrl) ? `
+            `
+                      : ""
+                  }
+                    ${
+                      urls.websiteUrl ||
+                      urls.linkedinUrl ||
+                      urls.facebook ||
+                      urls.youtubeUrl ||
+                      urls.instagramUrl
+                        ? `
               <tr>
                 <td colspan="2">
-                  ${urls.websiteUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.websiteUrl)}" target="_blank">Website</a></span>` : ''}
-                  ${urls.linkedinUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.linkedinUrl)}" target="_blank">Linkedin</a></span>` : ''}
-                  ${urls.facebook ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.facebook)}" target="_blank">Facebook</a></span>` : ''}
-                  ${urls.youtubeUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.youtubeUrl)}" target="_blank">Youtube</a></span>` : ''}
+                  ${urls.websiteUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.websiteUrl)}" target="_blank">Website</a></span>` : ""}
+                  ${urls.linkedinUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.linkedinUrl)}" target="_blank">Linkedin</a></span>` : ""}
+                  ${urls.facebook ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.facebook)}" target="_blank">Facebook</a></span>` : ""}
+                  ${urls.youtubeUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.youtubeUrl)}" target="_blank">Youtube</a></span>` : ""}
+                  ${urls.instagramUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.instagramUrl)}" target="_blank">Instagram</a></span>` : ""}
                 </td>
               </tr>
-            ` : ''}
-          ` : ''}
+            `
+                        : ""
+                    }
+          `
+            : ""
+        }
 
-                    ${updatedLink && updatedRedirectUrl ? `
+                    ${
+                      updatedLink && updatedRedirectUrl
+                        ? `
             <tr>
               <td colspan="2">
                 <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
                   <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none; width:100%; max-width:420px; margin-top:8px;" />
                 </a>
               </td>
+            
             </tr>
-          ` : ''}
+          `
+                        : ""
+                    }
         </tbody>
       </table>
     `
@@ -253,64 +315,79 @@ export default function EmailSignatureTemplate(props: {
 `;
 
   return (
-    <div className="flex flex-col md:flex-row h-screen p-6 justify-center gap-6 lg:gap-32 bg-slate-200">
-      <div className="max-w-[500px] w-full bg-white p-6 rounded-lg shadow-md flex flex-col">
-        <h6 className="text-lg font-semibold pb-8 text-center">Email Signature Form</h6>
-        <label> 
-          <input
-            type="checkbox"
-            checked={hideData}
-            onChange={(e) => setHideData(e.target.checked)}
-            style={{
-              width: "20px",
-              height: "20px",
-              marginRight: "10px",
-               marginBottom: "20px",
-            }}
+    <div className="flex flex-col md:max-w-7xl w-full md:flex-row py-16 justify-center gap-6 lg:gap-32">
+      <div className="w-1/2 bg-white py-16 px-16 rounded-lg shadow-md flex flex-col">
+        <Form {...form}>
+          <FormField
+            control={control}
+            name="hideData"
+            render={({ field }) => (
+              <FormItem className="flex items-center gap-2 p-4 mb-8 bg-[#f9f1fe] rounded-md text-[#7820bc]">
+                <FormControl>
+                  <Checkbox
+                    checked={hideData}
+                    onCheckedChange={(checked: any) => {
+                      field.onChange(checked);
+                      setHideData(checked);
+                    }}
+                  />
+                </FormControl>
+                <FormLabel className="font-normal !mt-0">
+                  Use Detail in Signature
+                </FormLabel>
+              </FormItem>
+            )}
           />
-          Use Detail in Signature
-        </label>
-        <br />
-        {formFields?.map((field: any, i) => (
-          <label key={`${field.key} + ${i}`}>
-            {field.label}
-            <input
-              type="text"
-              value={urls[`${field?.key}`] ?? ""}
-              onChange={(e) =>
-                handleInputChange(field.key, e.target.value, field.label)
-              }
-              placeholder={field.placeholder}
-              style={{
-                border: "1px solid #ccc",
-                padding: "5px",
-                width: "100%",
-                marginBottom: "20px",
-                backgroundColor: "#f9f9f9",
-                borderRadius: "4px",
-                marginTop: "5px",
-              }}
+          {formFields?.map((field: any, i: number) => (
+            <FormField
+              key={`${field.key}-${i}`}
+              control={control}
+              name={field.key}
+              render={({ field: formField }) => (
+                <FormItem>
+                  <FormLabel>{field.label}</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...formField}
+                      placeholder={field.placeholder}
+                      onChange={(e) => {
+                        formField.onChange(e);
+                        handleInputChange(
+                          field.key,
+                          e.target.value,
+                          field.label
+                        );
+                      }}
+                    />
+                  </FormControl>
+                  <FormDescription />
+                  <FormMessage />
+                </FormItem>
+              )}
             />
-          </label>
-        ))}
+          ))}
+        </Form>
       </div>
-      <div className="w-1/2 flex flex-col reset-tw">
-        <div
-          ref={hiddenDivRef}
-          dangerouslySetInnerHTML={{ __html: signatureHtml }}
-        ></div>
+      <div className="flex flex-col w-1/2 bg-white h-fit p-6 rounded-lg shadow-md">
+        <div className="w-1/2 flex flex-col reset-tw">
+          <div
+            ref={hiddenDivRef}
+            dangerouslySetInnerHTML={{ __html: signatureHtml }}
+          ></div>
+        </div>
         <div className="flex pt-6 gap-3 flex-col relative">
-          <button
-          style={{backgroundColor: "#43A047", borderRadius: "10px", color: "#ffffff", padding: "12px 16px",  border: "none"}}
+          <Button
+            className="w-fit"
             onClick={(e: any) => {
               e.preventDefault();
               e.stopPropagation();
               copyToClipboard();
             }}
           >
+            {" "}
             Copy Signature
-          </button>
-          <div className="flex w-full absolute -bottom-8 text-center justify-center">
+          </Button>
+          <div className="flex w-full absolute -bottom-6">
             {copySuccess}
           </div>
         </div>
