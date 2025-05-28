@@ -238,7 +238,7 @@ export default function EmailSignatureTemplate(props: {
               <tr>
                 <td width="320px" style="vertical-align:middle; height:24px; text-align:left;">
                   ${
-                   hideEmail && urls.emailId
+                    hideEmail && urls.emailId
                       ? `
                     <span style="vertical-align:middle; color:#331455;">
                       <a href="mailto:${urls.emailId}">${urls.emailId}</a>
@@ -413,17 +413,24 @@ export default function EmailSignatureTemplate(props: {
         </Form>
       </div>
       <div className="flex flex-col w-1/2">
-        <div className="flex mb-2 bg-white h-fit p-6 rounded-lg shadow-md">
-          <div className="reset-tw">
-            <div
-              ref={hiddenDivRef}
-              dangerouslySetInnerHTML={{ __html: signatureHtml }}
-            ></div>
+        <div className="flex flex-col bg-white h-fit p-6 rounded-lg">
+          <div className="flex items-center gap-2 p-2 mb-4 bg-[#f9f1fe] rounded-md ">
+            <h2 className="text-base font-medium text-[#7820bc]">
+              Signature Preview
+            </h2>
+          </div>
+          <div className="border border-gray-200 rounded-md p-4">
+            <div className="reset-tw">
+              <div
+                ref={hiddenDivRef}
+                dangerouslySetInnerHTML={{ __html: signatureHtml }}
+              ></div>
+            </div>
           </div>
         </div>
-        <div className="flex pt-8 gap-3 flex-col relative">
+        <div className="flex py-6 gap-3 flex-col relative">
           <Button
-            className="w-fit"
+            className="rounded-full bg-blue-600 hover:bg-blue-800"
             onClick={(e: any) => {
               e.preventDefault();
               e.stopPropagation();
@@ -431,7 +438,23 @@ export default function EmailSignatureTemplate(props: {
             }}
           >
             {" "}
-            Copy Signature
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M15.75 17.25V20.625C15.75 21.246 15.246 21.75 14.625 21.75H4.875C4.57663 21.75 4.29048 21.6315 4.0795 21.4205C3.86853 21.2095 3.75 20.9234 3.75 20.625V7.875C3.75 7.254 4.254 6.75 4.875 6.75H6.75C7.25257 6.74966 7.7543 6.79114 8.25 6.874M15.75 17.25H19.125C19.746 17.25 20.25 16.746 20.25 16.125V11.25C20.25 6.79 17.007 3.089 12.75 2.374C12.2543 2.29114 11.7526 2.24966 11.25 2.25H9.375C8.754 2.25 8.25 2.754 8.25 3.375V6.874M15.75 17.25H9.375C9.07663 17.25 8.79048 17.1315 8.5795 16.9205C8.36853 16.7095 8.25 16.4234 8.25 16.125V6.874M20.25 13.5V11.625C20.25 10.7299 19.8944 9.87145 19.2615 9.23852C18.6286 8.60558 17.7701 8.25 16.875 8.25H15.375C15.0766 8.25 14.7905 8.13148 14.5795 7.9205C14.3685 7.70952 14.25 7.42337 14.25 7.125V5.625C14.25 5.18179 14.1627 4.74292 13.9931 4.33345C13.8235 3.92397 13.5749 3.55191 13.2615 3.23852C12.9481 2.92512 12.576 2.67652 12.1666 2.50691C11.7571 2.3373 11.3182 2.25 10.875 2.25H9.75"
+              stroke="#EFF6FF"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span> Copy Signature</span>
+           
           </Button>
           <div className="flex w-full absolute -bottom-6">{copySuccess}</div>
         </div>
