@@ -441,10 +441,10 @@ export default function EmailSignatureTemplate(props: {
           <SetupForSignature />
         </div>
       </div>
-      <div className="fixed bottom-0 bg-white w-full h-16 text-center align-center flex items-center justify-center" style={{boxShadow: "0 -4px 18px -1px rgba(0, 0, 0, 0.05)"}}>
+      <div className="fixed bottom-0 bg-white w-full py-6 text-center align-center flex items-center justify-center" style={{boxShadow: "0 -4px 18px -1px rgba(0, 0, 0, 0.05)"}}>
         {" "}
         <Button
-          className="rounded-full bg-blue-600 hover:bg-blue-800 px-12"
+          className="rounded-full bg-blue-600 hover:bg-blue-800 px-12 py-3"
           onClick={(e: any) => {
             e.preventDefault();
             e.stopPropagation();
