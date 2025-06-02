@@ -189,7 +189,7 @@ export default function EmailSignatureTemplate(props: {
 
       await navigator.clipboard.write([clipboardItem]);
 
-      setCopySuccess("Copied!");
+      setCopySuccess("Signature copied!");
       setTimeout(() => setCopySuccess(""), 3000);
     } catch (err) {
       console.error("Failed to copy:", err);
@@ -313,9 +313,9 @@ export default function EmailSignatureTemplate(props: {
 `;
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-[#fafafa]">
+    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-white">
       <div className="flex flex-col md:max-w-7xl w-full md:flex-row py-16 justify-center gap-6 lg:gap-32 mb-16">
-        <div className="w-1/2 bg-white py-16 px-16 rounded-lg shadow-md flex flex-col">
+        <div className="w-1/2 py-16 px-16 flex flex-col border-r">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
             One-Time Gmail Signature Setup
           </h2>
@@ -414,21 +414,21 @@ export default function EmailSignatureTemplate(props: {
           </Form>
         </div>
         <div className="flex flex-col w-1/2">
-          <div className="flex flex-col bg-white h-fit rounded-lg">
-            <div className="flex items-center justify-between bg-gray-100 rounded-t-xl px-4 py-2">
+          <div className="flex flex-col bg-white h-fit rounded-md border border-gray-200">
+            <div className="flex items-center bg-gray-200 rounded-t-md px-4 py-2">
               <div className="flex space-x-2">
                 <span className="w-3 h-3 bg-red-500 rounded-full"></span>
                 <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
                 <span className="w-3 h-3 bg-green-500 rounded-full"></span>
               </div>
-              <span className="text-sm font-semibold text-[#7820bc]">
+              <span className="text-sm ml-4 font-semibold text-gray-700">
                 {" "}
                 Signature Preview
               </span>
               <div />
             </div>
             <div className="flex flex-col p-6">
-              <div className="border border-gray-200 rounded-md p-4">
+              <div className=" p-4">
                 <div className="reset-tw">
                   <div
                     ref={hiddenDivRef}
@@ -437,19 +437,11 @@ export default function EmailSignatureTemplate(props: {
                 </div>
               </div>
             </div>
-            {/* <div className="flex items-center gap-2 p-2 mb-4 bg-[#f9f1fe] rounded-md ">
-            <h2 className="text-base font-medium text-[#7820bc]">
-              Signature Preview
-            </h2>
-          </div> */}
-          </div>
-          <div className="flex py-6 gap-3 flex-col relative">
-            <div className="flex w-full absolute -bottom-6">{copySuccess}</div>
           </div>
           <SetupForSignature />
         </div>
       </div>
-      <div className="fixed bottom-0 bg-white w-full h-16 shadow-xl text-center align-center flex items-center justify-center">
+      <div className="fixed bottom-0 bg-white w-full h-16 text-center align-center flex items-center justify-center" style={{boxShadow: "0 -4px 18px -1px rgba(0, 0, 0, 0.05)"}}>
         {" "}
         <Button
           className="rounded-full bg-blue-600 hover:bg-blue-800 px-12"
@@ -477,6 +469,9 @@ export default function EmailSignatureTemplate(props: {
           </svg>
           <span> Copy Signature</span>
         </Button>
+         <div className="flex py-6 gap-3 flex-col relative justify-center">
+            <div className="flex w-auto absolute left-4 bottom-2 min-w-64 text-sm">{copySuccess}</div>
+          </div>
       </div>
     </div>
   );
