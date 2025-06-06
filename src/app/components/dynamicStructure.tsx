@@ -99,22 +99,27 @@ const DynamicComponents = ({
   };
 
   const paragraphComponents: any = {
-    block: {
-      normal: ({ children }: any) => (
-        <p
-          style={{ color: colors?.paragraphColor }}
-          className="xl:text-lg pb-3"
-        >
-          {children}
-        </p>
-      ),
-    },
-    marks: {
-      highlight: ({ children }: any) => (
-        <span style={{ color: colors?.highlightColor }}>{children}</span>
-      ),
-    },
-  };
+  block: {
+    normal: ({ children }: any) => (
+      <p
+        style={{ color: colors?.paragraphColor }}
+        className="xl:text-lg pb-3 whitespace-pre-wrap"
+      >
+        {children}
+      </p>
+    ),
+  },
+  marks: {
+    highlight: ({ children }: any) => (
+      <span
+        style={{ color: colors?.highlightColor }}
+        className="whitespace-pre-wrap"
+      >
+        {children}
+      </span>
+    ),
+  },
+};
 
   const listComponents: any = (listIcon: any) => ({
     list: {
@@ -142,6 +147,35 @@ const DynamicComponents = ({
       ),
     },
   });
+
+  const disclaimerComponents: any = {
+    block: {
+      normal: ({ children }: any) => (
+        <p style={{color: colors?.paragraphColor}} className="pt-3 text-base" >
+          {children}
+        </p>
+      ),
+    },
+    marks: {
+      highlight: ({ children }: any) => (
+        <span style={{ color: colors?.highlightColor }}>{children}</span>
+      ),
+      "large-text": ({ children }: any) => (
+        <span className="text-2xl">{children}</span>
+      ),
+      "strike-through": ({ children }: any) => (
+        <span className="text-sm ml-1 relative opacity-70">
+          {" "}
+          <span>{children}</span>
+          <span
+            className="absolute inset-2 w-full h-0.5 bg-red-500"
+            style={{ transform: "rotate(-10deg)", transformOrigin: "center" }}
+          ></span>
+        </span>
+      ),
+    },
+  };
+
   return (
     <div
       className={`${className} ${
@@ -354,9 +388,11 @@ const DynamicComponents = ({
 
           case "noteComponent":
             return (
-              <p className="pt-3 text-base" key={`disclaimer-${index}`}>
-                {component?.disclaimer}
-              </p>
+              <PortableText
+                key={`disclaimer-${index}`}
+                value={component?.disclaimer}
+                components={disclaimerComponents} 
+              />
             );
 
           default:
