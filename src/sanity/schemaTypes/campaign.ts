@@ -444,6 +444,7 @@ export const campaign = defineType({
                           { title: "Black", value: "#000000" },
                           { title: "Dark Blue", value: "#181F32" },
                           { title: "Green 50", value: "#30A063" },
+                          { title: "Lime 500", value: "#84BD00" },
                         ],
                         layout: "dropdown",
                       },
@@ -637,7 +638,7 @@ export const campaign = defineType({
                 {
                   name: "disclaimer",
                   title: "Disclaimer",
-                  type: "text",
+                  type: "blockContent",
                 },
               ],
               preview: {
