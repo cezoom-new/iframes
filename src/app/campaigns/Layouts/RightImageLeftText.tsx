@@ -77,7 +77,7 @@ export default function RightImageLeftText({
             ) : (
               <CampaignImageArea
               campaignImage={campaign}
-              className="items-center max-w-[500px] hidden lg:block flex-1"
+              className="items-center max-w-[500px] hidden lg:block flex-1 rounded-xl overflow-hidden"
               isCarousal={
                 campaign?.structure?.campaignCarousalImage?.length >= 1
                   ? true
