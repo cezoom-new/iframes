@@ -11,7 +11,7 @@ const getIframeUrl = (videoPlatform: string, videoId: string) => {
     case "vimeo":
       return `https://player.vimeo.com/video/${videoId}`;
     case "vidyard":
-      return `https://play.vidyard.com/${videoId}`;
+      return `https://play.vidyard.com/${videoId}?viral_sharing=0&embed_button=0&hidden_controls=1`;
     case "youtube":
       return `https://www.youtube.com/embed/${videoId}`;
     default:
