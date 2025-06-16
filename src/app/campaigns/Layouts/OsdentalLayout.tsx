@@ -11,6 +11,7 @@ import { PortableText } from "next-sanity";
 import CTAButton from "@/components/common/CTAButton";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
+import VideoIframe from "@/app/components/videoFrame";
 
 export interface Color {
   h1Color: string;
@@ -77,7 +78,6 @@ export default function OSDentalLayout({
           }}
         />
       )}
-      {cookies && <CookieShow cookie={cookies} campaign={campaign} />}
       <div className="">
         <div
           className={`flex flex-col gap-3  ${banner?.isFullScreen ? "flex-1" : ""}`}
@@ -99,12 +99,9 @@ export default function OSDentalLayout({
                   className="flex flex-col xl:max-w-[450px] max-w-[350px]"
                   layout="osdental"
                 />
-                {campaign?.structure?.campaignvideoUrl ? (
+                {campaign?.structure?.campaignVideo ? (
                   <div className="items-center block flex-1 rounded-xl overflow-hidden aspect-video justify-items-end min-w-[300px]">
-                    <VideoPlayer
-                      videoData={campaign?.structure?.campaignvideoUrl}
-                      campaignImage={campaign?.campaignImage?.url}
-                    />
+                          <VideoIframe videoPlatform={campaign?.structure?.campaignVideo?.videoPlatform} videoId={campaign?.structure?.campaignVideo?.videoId}/>
                   </div>
                 ) : (
                   <CampaignImageArea
@@ -119,37 +116,10 @@ export default function OSDentalLayout({
                 )}
               </div>
             </div>
-            {/* <CTAButton
-                ctaText={campaign?.structure?.popupButton?.ctaBtnText}
-                ctaBtnColor={campaign?.structure?.popupButton?.ctaBtnColor}
-                themeMode={campaign?.themeMode}
-                ctaBtnTextColor={
-                  campaign?.structure?.popupButton?.ctaBtnTextColor
-                }
-                ctaBtnLink={campaign?.structure?.popupButton?.ctaBtnLink}
-                campaignName={campaign?.name}
-                className="text-lg px-24"
-              /> */}
-            {/* <div className="flex text-center justify-center gap-2">
-                <Image
-                  src={urlFor(campaign?.structure?.popupText?.notifyIcon).url()}
-                  alt="icon"
-                  width={28}
-                  height={28}
-                />
-                <PortableText
-                  value={campaign?.structure?.popupText?.notificationText}
-                  components={popupComponent(
-                    campaign?.structure?.frameTextColor
-                  )}
-                />
-              </div> */}
+          
           </div>
         </div>
       </div>
-      {banner && (
-        <Banner className="" banner={banner} campaignName={campaign?.name} />
-      )}
     </Section>
   );
 }
