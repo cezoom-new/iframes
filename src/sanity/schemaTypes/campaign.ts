@@ -170,6 +170,10 @@ export const campaign = defineType({
             title: "OSDental Layout",
             value: "osdental",
           },
+          {
+            title: "Learn Banner Layout",
+            value: "learnbanner",
+          },
         ],
       },
       group: "template",
@@ -412,7 +416,7 @@ export const campaign = defineType({
                 },
                 {
                   name: "ctaBtn",
-                  title: "Primary Button",
+                  title: "Primary Buttons",
                   type: "object",
                   options: {
                     collapsed: true,
@@ -467,6 +471,8 @@ export const campaign = defineType({
                         layout: "radio",
                       },
                     },
+
+
                   ],
                 },
               ],
@@ -539,6 +545,19 @@ export const campaign = defineType({
                         layout: "radio",
                       },
                     },
+
+                    {
+                      name: "ctaBtnPostMessageKey",
+                      title: "Post Message Key",
+                      type: "string",
+                      description: "Key to be used in postMessage for communication",
+                    },
+                    {
+                      name: "ctaBtnPostData",
+                      title: "Post Data",
+                      type: "string",
+                      description: "Data to be sent with postMessage",
+                    }
                   ],
                 },
                 {

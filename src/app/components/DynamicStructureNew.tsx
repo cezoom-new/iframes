@@ -9,7 +9,7 @@ import CTAButton from "@/components/common/CTAButton";
 import SecondaryCTABtn from "@/components/common/SecondaryCTABtn";
 const builder = urlBuilder(client);
 
-const DynamicComponents = ({
+const DynamicStructureNew = ({
   campaign,
   components,
   className,
@@ -405,7 +405,4 @@ const DynamicComponents = ({
   );
 };
 
-export default DynamicComponents;
-function rotate(arg0: number, deg: any) {
-  throw new Error("Function not implemented.");
-}
+export default DynamicStructureNew;

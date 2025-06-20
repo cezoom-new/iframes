@@ -13,6 +13,7 @@ import {
 import { ipAddress } from "@vercel/edge";
 import RightVideoLeftText from "./Layouts/RightVideoLeftText";
 import OSDentalLayout from "./Layouts/OsdentalLayout";
+import LearnBannerLayout from "./Layouts/LearnBannerLayout";
 
 const setCookie = (name: string, value: number) => {
   document.cookie = `${name}=${value}; path=/; SameSite=None; Secure`;
@@ -143,6 +144,18 @@ function Campaign({
     console.log(campaigns[campaignIdx],'TprintTYPE')
     return (
       <OSDentalLayout
+        campaign={campaigns[campaignIdx]}
+        banner={banner && banner[0]}
+        cookies={cookies && cookies[0]}
+           colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? "defaultColor"}
+      />
+    );
+  }
+
+     if (campaigns[campaignIdx]?.selectedLayout == "learnbanner") {
+    console.log(campaigns[campaignIdx],'TprintTYPE')
+    return (
+      <LearnBannerLayout
         campaign={campaigns[campaignIdx]}
         banner={banner && banner[0]}
         cookies={cookies && cookies[0]}
