@@ -2,11 +2,11 @@ import Banner from "@/components/common/Banner/Banner";
 import Container from "@/components/common/structure/Container";
 import Section from "@/components/common/structure/Section";
 import React from "react";
-import CampaignImageArea from "../../components/CampaignImageArea";
+import CampaignImageAreaLearn from "@/app/components/learn/CampaignImageAreaLearn";
 import CookieShow from "@/components/common/cookieShow/cookieShow";
 import DynamicStructure from "@/app/components/dynamicStructure";
 import Image from "next/image";
-import DynamicStructureNew from "@/app/components/DynamicStructureNew";
+import DynamicStructureNew from "@/app/components/learn/DynamicStructureLearn";
 
 export interface Color {
   h1Color: string;
@@ -81,9 +81,9 @@ export default function RightImageLeftText({
                 />
               </div>
             ) : (
-              <CampaignImageArea
+              <CampaignImageAreaLearn
               campaignImage={campaign}
-              className="items-center max-w-[500px]"
+              className="flex justify-end items-center max-h-[320px] h-[320px] w-full"
               isCarousal={
                 campaign?.structure?.campaignCarousalImage?.length >= 1
                   ? true

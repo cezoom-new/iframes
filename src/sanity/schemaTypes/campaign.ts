@@ -649,6 +649,106 @@ export const campaign = defineType({
                 },
               },
             },
+
+            // Learn CTA Component
+
+
+            {
+              type: "object",
+              name: "learnCTAButton",
+              title: "Learn CTA",
+              fields: [
+                {
+                  name: "ctaBtn",
+                  title: "Learn Primary Button",
+                  type: "object",
+                  options: {
+                    collapsed: true,
+                    collapsible: true,
+                  },
+                  fields: [
+                    {
+                      name: "ctaBtnText",
+                      title: "CTA Button Text",
+                      type: "string",
+                    },
+                    {
+                      name: "ctaBtnLink",
+                      title: "CTA Button Link",
+                      type: "url",
+                    },
+                                        {
+                      name: "ctaBtnPostMessageKey",
+                      title: "Post Message Key",
+                      type: "string",
+                      description: "Key to be used in postMessage for communication",
+                    },
+                    {
+                      name: "ctaBtnPostData",
+                      title: "Post Data",
+                      type: "string",
+                      description: "Data to be sent with postMessage",
+                    },
+                    {
+                      name: "ctaBtnColor",
+                      title: "CTA Button Color",
+                      type: "string",
+                      options: {
+                        list: [
+                          { title: "Red", value: "#FF5733" },
+                          { title: "Green", value: "#26A363" },
+                          { title: "Blue", value: "#007bff" },
+                          { title: "Yellow", value: "#FFEB3B" },
+                          { title: "Purple", value: "#6f42c1" },
+                          { title: "White", value: "#fff" },
+                          { title: "Black", value: "#000000" },
+                          { title: "Dark Blue", value: "#181F32" },
+                          { title: "T Blue", value: "#02024A" },
+                        ],
+                        layout: "dropdown",
+                      },
+                    },
+                    {
+                      name: "ctaBtnTextColor",
+                      title: "CTA Button Text Color",
+                      type: "string",
+                      options: {
+                        list: [
+                          {
+                            title: "White text",
+                            value: "whiteMode",
+                          },
+                          {
+                            title: "Black text",
+                            value: "blackMode",
+                          },
+                        ],
+                        layout: "radio",
+                      },
+                    },
+
+
+                  ],
+                },
+                
+                {
+                  name: "note",
+                  title: "Note",
+                  type: "blockContent",
+                },
+              ],
+              preview: {
+                select: {},
+                prepare() {
+                  return {
+                    title: "Learn CTA Component",
+                  };
+                },
+              },
+            },
+
+            // End Learn CTA Component
+            
             {
               type: "object",
               name: "noteComponent",
