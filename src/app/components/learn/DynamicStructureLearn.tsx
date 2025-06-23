@@ -104,7 +104,7 @@ const DynamicStructureNew = ({
     normal: ({ children }: any) => (
       <p
         style={{ color: colors?.paragraphColor }}
-        className="xl:text-lg pb-3 whitespace-pre-wrap"
+        className="md:text-base whitespace-pre-wrap line-clamp-3"
       >
         {children}
       </p>

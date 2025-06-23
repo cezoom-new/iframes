@@ -55,13 +55,13 @@ export default function RightImageLeftText({
         />
       )}
       {cookies && <CookieShow cookie={cookies} campaign={campaign} />}
-      <div className="">
+      
         <Container
-          className={`max-w-full flex flex-col z-10  gap-3 `}
+          className={`max-w-full flex flex-col z-10 gap-3 `}
         >
           <div className="flex items-center justify-between w-full gap-32">
 
-            <div className="flex flex-col gap-4 max-w-1/3 pl-16">
+            <div className="flex flex-col gap-4 max-w-1/3 pl-8">
             <DynamicStructureNew
               colors={colors}
               campaign={campaign}
@@ -83,7 +83,7 @@ export default function RightImageLeftText({
             ) : (
               <CampaignImageAreaLearn
               campaignImage={campaign}
-              className="flex justify-end items-center max-h-[320px] h-[320px] w-full"
+              className="flex justify-end items-center max-h-[250px] h-[250px] w-full"
               isCarousal={
                 campaign?.structure?.campaignCarousalImage?.length >= 1
                   ? true
@@ -96,7 +96,7 @@ export default function RightImageLeftText({
             
           </div>
         </Container>
-      </div>
+    
       {banner && (
         <Banner className="" banner={banner} campaignName={campaign?.name} />
       )}

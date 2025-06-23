@@ -30,8 +30,8 @@ function CampaignImageArea({
             campaignImage?.campaignImage?.metadata?.altText || "campaign Image"
           }
           src={campaignImage?.campaignImage?.url}
-          width={320}
-          height={320}
+          width={250}
+          height={250}
         />
       )}
 
