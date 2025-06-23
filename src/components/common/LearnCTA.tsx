@@ -35,7 +35,7 @@ export default function LearnCTA({
     dataPost[`${ctaBtnPostMessageKey}`] = { detail: { videoId: ctaBtnPostData } };
 
     if (ctaBtnPostMessageKey && ctaBtnPostData) {
-      window.postMessage({ ...dataPost }, "*");
+      window.parent.postMessage({ ...dataPost }, "*");
     }
   }
 
