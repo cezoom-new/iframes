@@ -174,6 +174,11 @@ export const campaign = defineType({
             title: "Learn Banner Layout",
             value: "learnbanner",
           },
+
+          {
+            title: "Right Image with Popup",
+            value: "imageWithPopup",
+          },
         ],
       },
       group: "template",
@@ -777,6 +782,15 @@ export const campaign = defineType({
           title: "Campaign Image",
           type: "image",
         }),
+
+        defineField({
+          name: "imageButtonColor",
+          title: "Overlay Button Color",
+          type: "string",
+        }),
+
+
+        
         defineField({
           name: "campaignvideoUrl",
           title: "Campaign Video URL",
@@ -836,6 +850,8 @@ export const campaign = defineType({
           title: "Frame Title",
           type: "string",
         }),
+
+        
       ],
     }),
   ],
