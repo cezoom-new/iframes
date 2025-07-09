@@ -179,6 +179,11 @@ export const campaign = defineType({
             title: "Right Image with Popup",
             value: "imageWithPopup",
           },
+
+          {
+            title: "Custom Layout",
+            value: "customLayout",
+          },
         ],
       },
       group: "template",
@@ -454,6 +459,7 @@ export const campaign = defineType({
                           { title: "Dark Blue", value: "#181F32" },
                           { title: "Green 50", value: "#30A063" },
                           { title: "Lime 500", value: "#84BD00" },
+                          
                         ],
                         layout: "dropdown",
                       },

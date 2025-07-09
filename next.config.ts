@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    remotePatterns: [{ hostname: "cdn.sanity.io" }],
+    remotePatterns: [{ hostname: "cdn.sanity.io" }, { hostname: "cdn.vidyard.com" }],
     dangerouslyAllowSVG: true,
   },
   // experimental: {

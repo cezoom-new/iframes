@@ -2,6 +2,9 @@
   "colors": [
       "",
       "black",
+      "#42BA78",
+      "#64748B",
+      "#1A2D48",
       "#0F172A",
       "#A16207",
       "#374151",
@@ -345,6 +348,34 @@
         "red",
         "#09b895",
         "#0F172A",
+        "#FFF"
+      ]
+    },
+
+    {
+      "title": "Custom Theme",
+      "id": "12",
+      "value": "#f5f7fb",
+      "ParagraphColor": [
+        "",
+        "#64748B",
+        "#1A2D48",
+        "#FFF"
+      ],
+      "highlightColor": [
+        "",
+        "#42BA78",
+        "#FFF"
+      ],
+      "h1Color": [
+        "",
+        "#1A2D48",
+        "#FFF"
+      ],
+      "subtitleText": [
+        "",
+        "red",
+        "#1A2D48",
         "#FFF"
       ]
     },
