@@ -6,6 +6,7 @@ interface VideoPlayerProps {
   refer?: any;
   isMobile?: boolean;
   campaignImage?: any;
+  loop:boolean;
 }
 
 export default function VideoPlayer({
@@ -13,6 +14,7 @@ export default function VideoPlayer({
   className = '',
   refer = null,
   isMobile,
+  loop = false,
   campaignImage
 }: VideoPlayerProps) {
   const movFile = isMobile
@@ -32,7 +34,7 @@ export default function VideoPlayer({
       className={`w-full h-full ${className} `}
       style={{ backgroundColor: 'transparent', objectFit: 'cover' }}
       autoPlay
-      loop
+      loop={loop}
       muted
       playsInline
       poster={campaignImage}

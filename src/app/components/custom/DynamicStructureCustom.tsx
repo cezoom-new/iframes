@@ -44,7 +44,7 @@ const DynamicStructureCustom = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.subtitleText }}
-          className={`${layout == "osdental" ? "text-lg xl:text-xl font-bold" : "text-4xl font-semibold"} pb-3 !leading-snug font-manrope`}
+          className={`${layout == "osdental" ? "text-lg xl:text-xl font-bold" : "text-4xl font-semibold"} pb-5 !leading-snug font-manrope`}
         >
           {children}
         </p>

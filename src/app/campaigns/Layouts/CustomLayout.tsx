@@ -75,7 +75,7 @@ export default function RightImageLeftText({
                   height={300}
                 /> */}
 
-                <VideoPlayer videoData={campaign?.structure?.campaignvideoUrl}>
+                <VideoPlayer loop={true} videoData={campaign?.structure?.campaignvideoUrl}>
 
                 </VideoPlayer>
               </div>
