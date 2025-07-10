@@ -24,7 +24,7 @@ const DynamicStructureCustom = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.h1Color}}
-          className={`${layout == "osdental" ? "text-sm" : "md:text-5xl lg:text-6xl text-4xl"} font-semibold py-3 !leading-tighter font-manrope`}
+          className={`${layout == "osdental" ? "text-sm" : "md:text-5xl lg:text-7xl text-5xl"} font-semibold pb-2 pt-3 !leading-tighter font-manrope`}
         >
           {children}
           {/* {campaign?.headingUnderline && <div style={{background: campaign?.headingUnderline}} className="w-full h-[3px] mt-3"></div>} */}
@@ -44,7 +44,7 @@ const DynamicStructureCustom = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.subtitleText }}
-          className={`${layout == "osdental" ? "text-lg xl:text-xl font-bold" : "text-xl font-semibold"} pb-3 !leading-snug`}
+          className={`${layout == "osdental" ? "text-lg xl:text-xl font-bold" : "text-4xl font-semibold"} pb-3 !leading-snug font-manrope`}
         >
           {children}
         </p>
