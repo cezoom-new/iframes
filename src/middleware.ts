@@ -61,7 +61,7 @@ export async function middleware(request: NextRequest) {
       url.pathname = `${product}-${country}/${customer}`;
     }
 
-    if(customer == "sspdentalpartners")
+    if(customer == "sppdentalpartners")
         return NextResponse.error();
     
     const response = NextResponse.rewrite(url);
