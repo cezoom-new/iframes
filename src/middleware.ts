@@ -60,6 +60,10 @@ export async function middleware(request: NextRequest) {
     if (product && country && customer) {
       url.pathname = `${product}-${country}/${customer}`;
     }
+
+    if(customer == "sspdentalpartners")
+        return NextResponse.error();
+    
     const response = NextResponse.rewrite(url);
     console.log("Middleware executed successfully");
     return response;
