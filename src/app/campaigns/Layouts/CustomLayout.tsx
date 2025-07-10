@@ -6,6 +6,7 @@ import CampaignImageArea from "../../components/CampaignImageArea";
 import CookieShow from "@/components/common/cookieShow/cookieShow";
 import DynamicStructureCustom from "@/app/components/custom/DynamicStructureCustom";
 import Image from "next/image";
+import VideoPlayer from "@/app/components/VideoPlayer";
 
 export interface Color {
   h1Color: string;
@@ -63,21 +64,25 @@ export default function RightImageLeftText({
               colors={colors}
               campaign={campaign}
               components={campaign?.structure?.components}
-              className="flex flex-col w-1/2 xl:w-1/2 "
+              className="flex flex-col xmd:w-1/2 w-2/3 xl:w-1/2 "
             />
              {campaign?.structure?.campaignvideoUrl ? (
-              <div className="items-center max-w-[500px] hidden lg:block flex-1 rounded-xl overflow-hidden">
-                 <Image
+              <div className="items-center max-w-[500px] hidden xmd:block flex-1 rounded-xl overflow-hidden">
+                 {/* <Image
                   src={campaign?.structure?.campaignvideoUrl}
                   alt="Campaign GIF"
                   width={500}
                   height={300}
-                />
+                /> */}
+
+                <VideoPlayer videoData={campaign?.structure?.campaignvideoUrl}>
+
+                </VideoPlayer>
               </div>
             ) : (
               <CampaignImageArea
               campaignImage={campaign}
-              className="items-center w-1/2 hidden lg:block flex-1 rounded-xl overflow-hidden"
+              className="items-center w-1/2 hidden xmd:block flex-1 rounded-xl overflow-hidden"
               isCarousal={
                 campaign?.structure?.campaignCarousalImage?.length >= 1
                   ? true
