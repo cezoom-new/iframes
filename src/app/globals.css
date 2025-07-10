@@ -113,5 +113,12 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+
+  video {
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    isolation: isolate;
+  }
 }
 
