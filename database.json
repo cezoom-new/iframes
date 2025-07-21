@@ -347,6 +347,64 @@
         "locations": 1,
         "region": "US"
     },
+    "pullenvaledental": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
+    },
     "stardentalgroup": {
         "subscriptions": [
             {
@@ -3769,6 +3827,64 @@
         "locations": 2,
         "region": "US"
     },
+    "momentumdentalcare": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "US"
+    },
     "thrivekids": {
         "subscriptions": [
             {
@@ -4755,6 +4871,122 @@
         "locations": 1,
         "region": "US"
     },
+    "cdstuart": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "US"
+    },
+    "platinumdental": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
+    },
     "mahakkagadmd": {
         "subscriptions": [
             {
@@ -5393,6 +5625,64 @@
         "locations": 1,
         "region": "US"
     },
+    "norwich": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
+    },
     "centraldental": {
         "subscriptions": [
             {
@@ -5739,6 +6029,64 @@
             }
         ],
         "locations": 2,
+        "region": "US"
+    },
+    "periocp": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
         "region": "US"
     },
     "milligansmiles": {
@@ -6261,6 +6609,64 @@
             }
         ],
         "locations": 1,
+        "region": "US"
+    },
+    "ooperio": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
         "region": "US"
     },
     "churchvilledental": {
@@ -6901,6 +7307,64 @@
         "locations": 1,
         "region": "US"
     },
+    "acdentistry": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
+    },
     "svds": {
         "subscriptions": [
             {
@@ -7133,6 +7597,64 @@
         "locations": 1,
         "region": "US"
     },
+    "toothbank": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
+    },
     "tb": {
         "subscriptions": [
             {
@@ -7189,6 +7711,64 @@
             }
         ],
         "locations": 2,
+        "region": "US"
+    },
+    "tbpd": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": true
+            }
+        ],
+        "locations": 0,
         "region": "US"
     },
     "comprehensivedental": {
@@ -8815,6 +9395,64 @@
         "locations": 1,
         "region": "US"
     },
+    "dentaladvance": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
+    },
     "enabledental": {
         "subscriptions": [
             {
@@ -8872,6 +9510,64 @@
         ],
         "locations": 29,
         "region": "US"
+    },
+    "bradleyandpartners": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
     },
     "ccdc": {
         "subscriptions": [
@@ -10555,6 +11251,64 @@
         "locations": 1,
         "region": "US"
     },
+    "clifty": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 3,
+        "region": "US"
+    },
     "artisandentalstudio": {
         "subscriptions": [
             {
@@ -11251,6 +12005,64 @@
         "locations": 1,
         "region": "US"
     },
+    "bdios": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "US"
+    },
     "sdaonmain": {
         "subscriptions": [
             {
@@ -11599,6 +12411,64 @@
         "locations": 14,
         "region": "US"
     },
+    "wdc": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
+    },
     "jbdds": {
         "subscriptions": [
             {
@@ -11888,6 +12758,64 @@
         ],
         "locations": 2,
         "region": "US"
+    },
+    "clarindaclinic": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
     },
     "infinitysmilesnc": {
         "subscriptions": [
@@ -13165,6 +14093,64 @@
         "locations": 1,
         "region": "US"
     },
+    "smilestudio": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
+    },
     "jcdental": {
         "subscriptions": [
             {
@@ -13512,6 +14498,64 @@
         ],
         "locations": 1,
         "region": "US"
+    },
+    "claritydentalbendigo": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
     },
     "pcpd": {
         "subscriptions": [
@@ -16645,6 +17689,64 @@
         "locations": 8,
         "region": "US"
     },
+    "dentalatjoondalup": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
+    },
     "uchicagopoh": {
         "subscriptions": [
             {
@@ -17803,6 +18905,64 @@
             }
         ],
         "locations": 1,
+        "region": "US"
+    },
+    "adexcellence": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
         "region": "US"
     },
     "thrivingsmiles": {
@@ -19023,6 +20183,64 @@
         "locations": 1,
         "region": "US"
     },
+    "psny": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "US"
+    },
     "goodwin": {
         "subscriptions": [
             {
@@ -19080,6 +20298,64 @@
         ],
         "locations": 1,
         "region": "US"
+    },
+    "nsleicester": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
     },
     "evident": {
         "subscriptions": [
@@ -19195,6 +20471,64 @@
             }
         ],
         "locations": 1,
+        "region": "US"
+    },
+    "cobb": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
         "region": "US"
     },
     "dd": {
@@ -19486,6 +20820,64 @@
         ],
         "locations": 1,
         "region": "US"
+    },
+    "thrivedentalcare": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
     },
     "adatmj": {
         "subscriptions": [
@@ -21111,64 +22503,6 @@
         "locations": 1,
         "region": "US"
     },
-    "clifty": {
-        "subscriptions": [
-            {
-                "adjacencyName": "us-pms",
-                "subscriptionStatus": true
-            },
-            {
-                "adjacencyName": "uk-pms",
-                "subscriptionStatus": false
-            },
-            {
-                "adjacencyName": "aus-pms",
-                "subscriptionStatus": false
-            },
-            {
-                "adjacencyName": "voicestack-us",
-                "subscriptionStatus": false
-            },
-            {
-                "adjacencyName": "voicestack-uk",
-                "subscriptionStatus": false
-            },
-            {
-                "adjacencyName": "voicestack-aus",
-                "subscriptionStatus": false
-            },
-            {
-                "adjacencyName": "cs-pay",
-                "subscriptionStatus": true
-            },
-            {
-                "adjacencyName": "cs-conversation",
-                "subscriptionStatus": true
-            },
-            {
-                "adjacencyName": "cs-conversation-uk",
-                "subscriptionStatus": false
-            },
-            {
-                "adjacencyName": "cs-conversation-aus",
-                "subscriptionStatus": false
-            },
-            {
-                "adjacencyName": "rcm",
-                "subscriptionStatus": false
-            },
-            {
-                "adjacencyName": "virtual-assistant",
-                "subscriptionStatus": false
-            },
-            {
-                "adjacencyName": "mango",
-                "subscriptionStatus": false
-            }
-        ],
-        "locations": 3,
-        "region": "US"
-    },
     "mdom": {
         "subscriptions": [
             {
@@ -22095,6 +23429,64 @@
             }
         ],
         "locations": 2,
+        "region": "US"
+    },
+    "lakeview": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
         "region": "US"
     },
     "mvd": {
@@ -23779,6 +25171,64 @@
         "locations": 1,
         "region": "US"
     },
+    "vcdp": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
+    },
     "laldds": {
         "subscriptions": [
             {
@@ -24010,6 +25460,64 @@
         ],
         "locations": 10,
         "region": "US"
+    },
+    "w12": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
     },
     "mdrnmuse": {
         "subscriptions": [
@@ -24823,6 +26331,64 @@
         "locations": 1,
         "region": "US"
     },
+    "settvalley": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
+    },
     "tmpd": {
         "subscriptions": [
             {
@@ -24880,6 +26446,64 @@
         ],
         "locations": 3,
         "region": "US"
+    },
+    "lethbridgedental": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
     },
     "sfdental": {
         "subscriptions": [
@@ -24996,6 +26620,64 @@
         ],
         "locations": 1,
         "region": "US"
+    },
+    "minersdentalclinic": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
     },
     "celebration": {
         "subscriptions": [
@@ -25287,6 +26969,64 @@
         "locations": 9,
         "region": "US"
     },
+    "delightdentalspa": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
+    },
     "morrisondental": {
         "subscriptions": [
             {
@@ -25518,6 +27258,64 @@
         ],
         "locations": 1,
         "region": "US"
+    },
+    "superior": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
     },
     "wisdomtooth": {
         "subscriptions": [
@@ -26505,6 +28303,64 @@
         "locations": 1,
         "region": "US"
     },
+    "veralis": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
+    },
     "wholedental": {
         "subscriptions": [
             {
@@ -26735,6 +28591,64 @@
             }
         ],
         "locations": 5,
+        "region": "US"
+    },
+    "test": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
         "region": "US"
     },
     "plumdental": {
@@ -27259,6 +29173,64 @@
         "locations": 1,
         "region": "US"
     },
+    "lwd": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "US"
+    },
     "csd": {
         "subscriptions": [
             {
@@ -27374,6 +29346,64 @@
         ],
         "locations": 2,
         "region": "US"
+    },
+    "hda": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "GB"
     },
     "saycheezdental": {
         "subscriptions": [
@@ -27605,6 +29635,64 @@
             }
         ],
         "locations": 9,
+        "region": "US"
+    },
+    "providence": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
         "region": "US"
     },
     "gsd": {
@@ -28243,6 +30331,64 @@
             }
         ],
         "locations": 284,
+        "region": "US"
+    },
+    "bkd": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
         "region": "US"
     },
     "oasisperio": {
@@ -30449,6 +32595,64 @@
         "locations": 1,
         "region": "US"
     },
+    "dunstandental": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
+    },
     "tedwards": {
         "subscriptions": [
             {
@@ -32653,6 +34857,122 @@
         "locations": 1,
         "region": "US"
     },
+    "khananidental": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "US"
+    },
+    "novadentalgroup": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "AU"
+    },
     "brimhalldental": {
         "subscriptions": [
             {
@@ -32883,6 +35203,64 @@
             }
         ],
         "locations": 1,
+        "region": "US"
+    },
+    "apexoralsurgery": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
         "region": "US"
     },
     "capitoldental": {
@@ -33233,6 +35611,64 @@
         "locations": 7,
         "region": "US"
     },
+    "hite": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
+        "region": "US"
+    },
     "hartedental": {
         "subscriptions": [
             {
@@ -33521,6 +35957,64 @@
             }
         ],
         "locations": 3,
+        "region": "US"
+    },
+    "hkdds": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 0,
         "region": "US"
     },
     "seaofsmiles": {

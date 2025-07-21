@@ -19,17 +19,22 @@ const DynamicStructureCustom = ({
 }: any) => {
   const urlBuilder: any = (source: any) => builder?.image(source);
 
+  const headingSize: string = campaign?.structure?.components?.filter((a: any) => a._type == "headingComponent")[0].size || "md:text-5xl lg:text-7xl text-5xl";
+  const subTitleSize: string = campaign?.structure?.components?.filter((a: any) => a._type == "subHeadingComponent")[0].size || "text-4xl md:text-3xl text-2xl font-semibold";
+
   const titleComponent: any = {
     block: {
       normal: ({ children }: any) => (
-        <p
-          style={{ color: colors?.h1Color}}
-          className={`${layout == "osdental" ? "text-sm" : "md:text-5xl lg:text-7xl text-5xl"} font-semibold pb-2 pt-3 !leading-tighter font-manrope`}
+        <div
+          style={{ color: colors?.h1Color }}
+          className={`
+            ${headingSize ? headingSize : "md:text-5xl lg:text-7xl text-4xl"} font-semibold pb-2 pt-3 !leading-tighter font-manrope`}
         >
+
           {children}
           {/* {campaign?.headingUnderline && <div style={{background: campaign?.headingUnderline}} className="w-full h-[3px] mt-3"></div>} */}
-          
-        </p>
+
+        </div>
       ),
     },
     marks: {
@@ -44,8 +49,12 @@ const DynamicStructureCustom = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.subtitleText }}
-          className={`${layout == "osdental" ? "text-lg xl:text-xl font-bold" : "text-4xl font-semibold"} pb-5 !leading-snug font-manrope`}
-        >
+          // className={`${layout == "osdental" ? "text-lg xl:text-xl font-bold" : "text-4xl md:text-3xl text-2xl font-semibold"} !leading-snug font-manrope`}
+          className={`
+            ${subTitleSize ? subTitleSize : "text-lg xl:text-xl font-bold"} font-semibold !leading-snug font-manrope`}
+       
+       
+       >
           {children}
         </p>
       ),
@@ -100,32 +109,32 @@ const DynamicStructureCustom = ({
   };
 
   const paragraphComponents: any = {
-  block: {
-    normal: ({ children }: any) => (
-      <p
-        style={{ color: colors?.paragraphColor }}
-        className="md:text-lg text-md whitespace-pre-wrap line-clamp-3 font-manrope font-medium" 
-      >
-        {children}
-      </p>
-    ),
-  },
-  marks: {
-    highlight: ({ children }: any) => (
-      <span
-        style={{ color: colors?.highlightColor }}
-        className="whitespace-pre-wrap"
-      >
-        {children}
-      </span>
-    ),
-  },
-};
+    block: {
+      normal: ({ children }: any) => (
+        <p
+          style={{ color: colors?.paragraphColor }}
+          className="md:text-lg text-md whitespace-pre-wrap line-clamp-3 font-manrope font-medium mt-5"
+        >
+          {children}
+        </p>
+      ),
+    },
+    marks: {
+      highlight: ({ children }: any) => (
+        <span
+          style={{ color: colors?.highlightColor }}
+          className="whitespace-pre-wrap"
+        >
+          {children}
+        </span>
+      ),
+    },
+  };
 
   const listComponents: any = (listIcon: any) => ({
     list: {
       bullet: ({ children }: { children: React.ReactNode }) => (
-        <ul className="md:text-lg text-md gap-2 flex flex-col my-4 font-manrope font-medium">
+        <ul className="md:text-lg text-md gap-2 flex flex-col my-4 font-manrope font-medium mt-5">
           {children}
         </ul>
       ),
@@ -143,7 +152,7 @@ const DynamicStructureCustom = ({
               />
             )}
           </div>
-          <div style={{ color: colors?.paragraphColor}} className="flex-1">{children}</div>
+          <div style={{ color: colors?.paragraphColor }} className="flex-1">{children}</div>
         </li>
       ),
     },
@@ -152,7 +161,7 @@ const DynamicStructureCustom = ({
   const disclaimerComponents: any = {
     block: {
       normal: ({ children }: any) => (
-        <p style={{color: colors?.paragraphColor}} className="pt-3 text-base" >
+        <p style={{ color: colors?.paragraphColor }} className="py-3 text-base" >
           {children}
         </p>
       ),
@@ -179,11 +188,10 @@ const DynamicStructureCustom = ({
 
   return (
     <div
-      className={`${className} ${
-        campaign?.themeMode == "lightMode"
+      className={`${className} ${campaign?.themeMode == "lightMode"
           ? "text-[#000000B2]"
           : "text-[#FFFFFFB2]"
-      }`}
+        }`}
     >
       {components?.map((component: any, index: number) => {
         switch (component._type) {
@@ -191,7 +199,7 @@ const DynamicStructureCustom = ({
             return (
               <div key={`topTemplateLogo-${index}`} className="mt-2">
                 {campaign?.templateLogos?.components[0]?.templateLogos?.length >
-                1 ? (
+                  1 ? (
                   <div className="flex gap-6 flex-wrap items-center justify-start">
                     {campaign?.templateLogos?.components[0]?.templateLogos?.map(
                       (item: any, i: number) => {
@@ -297,49 +305,49 @@ const DynamicStructureCustom = ({
               />
             );
 
-                    case "buttonComponents":
-                      return (
-                        <div
-                          key={`buttonComponents-${index}`}
-                          className="flex gap-6 py-3 items-center"
-                        >
-                          {component?.ctaBtn?.ctaBtnText && (
-                            <CTAButton
-                              ctaText={component?.ctaBtn?.ctaBtnText}
-                              ctaBtnColor={component?.ctaBtn?.ctaBtnColor}
-                              themeMode={campaign?.themeMode}
-                              ctaBtnTextColor={component?.ctaBtn?.ctaBtnTextColor}
-                              ctaBtnLink={component?.ctaBtn?.ctaBtnLink}
-                              ctaBtnPostData={component?.ctaBtn?.ctaBtnPostData}
-                              ctaBtnPostMessageKey={component?.ctaBtn?.ctaBtnPostMessageKey}
-                              campaignName={campaign?.name}
-                              className={`${layout == "osdental" ? 'w-full': ''}`}
-                            />
-                          )}
-                          {component?.secondaryBtnComponent?.secondaryBtnText && (
-                            <SecondaryCTABtn
-                              ctaText={component?.secondaryBtnComponent?.secondaryBtnText}
-                              themeMode={campaign?.themeMode}
-                              isSecondaryBtn={true}
-                              ctaBtnTextColor={
-                                component?.secondaryBtnComponent?.ctaBtnTextColor
-                              }
-                              ctaBtnColor={component?.secondaryBtnComponent?.ctaBtnColor}
-                              videoDetails={
-                                component?.secondaryBtnComponent?.videoDetails
-                              }
-                              campaignName={campaign?.name}
-                            />
-                          )}
-                          {component?.note && (
-                            <PortableText
-                              value={component?.note}
-                              components={noteComponents}
-                            />
-                          )}
-                        </div>
-                      );
-          
+          case "buttonComponents":
+            return (
+              <div
+                key={`buttonComponents-${index}`}
+                className="flex gap-6 py-3 items-center"
+              >
+                {component?.ctaBtn?.ctaBtnText && (
+                  <CTAButton
+                    ctaText={component?.ctaBtn?.ctaBtnText}
+                    ctaBtnColor={component?.ctaBtn?.ctaBtnColor}
+                    themeMode={campaign?.themeMode}
+                    ctaBtnTextColor={component?.ctaBtn?.ctaBtnTextColor}
+                    ctaBtnLink={component?.ctaBtn?.ctaBtnLink}
+                    ctaBtnPostData={component?.ctaBtn?.ctaBtnPostData}
+                    ctaBtnPostMessageKey={component?.ctaBtn?.ctaBtnPostMessageKey}
+                    campaignName={campaign?.name}
+                    className={`${layout == "osdental" ? 'w-full' : ''}`}
+                  />
+                )}
+                {component?.secondaryBtnComponent?.secondaryBtnText && (
+                  <SecondaryCTABtn
+                    ctaText={component?.secondaryBtnComponent?.secondaryBtnText}
+                    themeMode={campaign?.themeMode}
+                    isSecondaryBtn={true}
+                    ctaBtnTextColor={
+                      component?.secondaryBtnComponent?.ctaBtnTextColor
+                    }
+                    ctaBtnColor={component?.secondaryBtnComponent?.ctaBtnColor}
+                    videoDetails={
+                      component?.secondaryBtnComponent?.videoDetails
+                    }
+                    campaignName={campaign?.name}
+                  />
+                )}
+                {component?.note && (
+                  <PortableText
+                    value={component?.note}
+                    components={noteComponents}
+                  />
+                )}
+              </div>
+            );
+
           case "learnCTAButton":
             return (
               <div
@@ -356,7 +364,7 @@ const DynamicStructureCustom = ({
                     ctaBtnPostData={component?.ctaBtn?.ctaBtnPostData}
                     ctaBtnPostMessageKey={component?.ctaBtn?.ctaBtnPostMessageKey}
                     campaignName={campaign?.name}
-                    className={`${layout == "osdental" ? 'w-full': ''}`}
+                    className={`${layout == "osdental" ? 'w-full' : ''}`}
                   />
                 )}
                 {component?.secondaryBtnComponent?.secondaryBtnText && (
@@ -437,7 +445,7 @@ const DynamicStructureCustom = ({
               <PortableText
                 key={`disclaimer-${index}`}
                 value={component?.disclaimer}
-                components={disclaimerComponents} 
+                components={disclaimerComponents}
               />
             );
 

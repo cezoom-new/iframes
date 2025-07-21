@@ -314,6 +314,21 @@ export const campaign = defineType({
                   title: "Heading",
                   type: "blockContent",
                 },
+                {
+                  name: "size",
+                  title: "Heading Size",
+                  type: "string",
+                  initialValue: "md:text-5xl lg:text-7xl text-5xl",
+                  options: {
+                    list: [
+                      { title: "Very Large (7xl)", value: "lg:text-7xl md:text-5xl  text-4xl" },
+                      { title: "Xtra Large (6xl)", value: "lg:text-6xl md:text-5xl text-4xl" },
+                      { title: "Large (5xl)", value: "lg:text-5xl md:text-4xl  text-3xl" },
+                      { title: "Not so Large (4xl)", value: "lg:text-4xl md:text-3xl  text-2xl" },                      
+                    ],
+                  }
+                  
+                },
               ],
               preview: {
                 select: {
@@ -337,6 +352,22 @@ export const campaign = defineType({
                   name: "subTitle",
                   title: "Sub Heading",
                   type: "blockContent",
+                },
+
+                {
+                  name: "size",
+                  title: "Subt Title Size",
+                  type: "string",
+                  initialValue: "lg:text-4xl md:text-3xl text-2xl font-semibold",
+                  options: {
+                    list: [
+                      { title: "Very Large (4xl)", value: "lg:text-4xl md:text-3xl text-2xl font-semibold" },
+                      { title: "Xtra Large (3xl)", value: "lg:text-3xl md:text-2xl text-xl font-semibold" },
+                      { title: "Large (2xl)", value: "lg:text-2xl md:text-xl text-lg font-semibold" },
+                      { title: "Not so Large (xl)", value: "lg:text-xl md:text-lg text-base font-semibold" },                      
+                    ],
+                  }
+                  
                 },
               ],
               preview: {
