@@ -144,7 +144,7 @@ export async function getCampaigns(
       );
 
     const totalCampaignPool: any = getTotalCampaignPool(
-      adjacencyOrientedCampaigns.filter((a:any)=> a.audience == "include"),
+      adjacencyOrientedCampaigns,
       viewportData.additionalCampaigns?.map((campaign: any) => {
         return { _id: campaign._ref };
       }),
