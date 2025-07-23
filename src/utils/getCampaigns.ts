@@ -27,8 +27,10 @@ async function getEligibleAdjacencyCampaignsIds(
           customerType
         );
         
+        
         // filter the campaigns which is show on the viewport
         return campaign.filter((campaign: any) => {
+          
           
           if (campaign?.excludeAudienceLists?.includes(customer)) {
             return false;
@@ -38,13 +40,15 @@ async function getEligibleAdjacencyCampaignsIds(
             return true;
           }
 
+
+
           return (
             (adjacency.subscriptionStatus == false &&
               campaign.audience == "exclude") ||
             (adjacency.subscriptionStatus == true &&
               campaign.audience == "include") 
               &&
-              campaign?.filterAudienceList?.includes(customer)
+              (campaign.filterAudienceLists ? campaign?.filterAudienceLists?.includes(customer) : true)
           );
         });
       })
