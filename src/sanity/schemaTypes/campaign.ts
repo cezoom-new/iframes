@@ -96,6 +96,71 @@ export const campaign = defineType({
       type: "string",
       group: "basic",
     }),
+
+    defineField({
+      title: "Additional Adjacencies",
+      name: "addAdjacencies",
+      type: "array",
+      of: [{type: 'string'}],
+      group: "basic",
+      options: {
+        list: [
+          {
+            title: "CareStack US",
+            value: "us-pms",
+          },
+          {
+            title: "CareStack UK",
+            value: "uk-pms",
+          },
+          {
+            title: "CareStack ANZ",
+            value: "aus-pms",
+          },
+          {
+            title: "VoiceStack US",
+            value: "voicestack-us",
+          },
+          {
+            title: "VoiceStack UK",
+            value: "voicestack-uk",
+          },
+          {
+            title: "VoiceStack ANZ",
+            value: "voicestack-aus",
+          },
+          {
+            title: "CS Converstations US",
+            value: "cs-conversation",
+          },
+          {
+            title: "CS Converstations UK",
+            value: "cs-conversation-uk",
+          },
+          {
+            title: "CS Converstations ANZ",
+            value: "cs-conversation-aus",
+          },
+          {
+            title: "RCM",
+            value: "rcm",
+          },
+          {
+            title: "CS Pay",
+            value: "cs-pay",
+          },
+          {
+            title: "Virtual Assistant",
+            value: "virtual-assistant",
+          },
+          {
+            title: "Mango",
+            value: "mango",
+          },
+          
+        ],
+      },
+    }),
     defineField({
       title: "Campaign Audience",
       name: "audience",
@@ -127,6 +192,17 @@ export const campaign = defineType({
       name: "excludeAudienceList",
       type: "array",
       title: "Exclude Audience List",
+      group: "basic",
+      of: [{ type: "reference", to: [{ type: "audienceList" }] }],
+      validation: (Rule) =>
+        Rule.length(1).error("You can only select one item."),
+    }),
+
+    defineField({
+      name: "filterAudienceList",
+      type: "array",
+      title: "Filter Audience List",
+      description:"This list will be used as the final list and rest of the logic",
       group: "basic",
       of: [{ type: "reference", to: [{ type: "audienceList" }] }],
       validation: (Rule) =>

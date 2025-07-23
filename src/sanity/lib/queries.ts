@@ -9,11 +9,12 @@ const getViewPortByProductRegion = () => {
 };
 
 const getCampaignIdsByAdjacency = () => {
-  return groq`*[_type == "campaign" && campaignType == "adjacencyOriented" && adjacencyName == $adjacency && _id in $campaignIds && customerType == $customerType ]
+  return groq`*[_type == "campaign" && campaignType == "adjacencyOriented" && ( adjacencyName == $adjacency || $adjacency in addAdjacencies) && _id in $campaignIds && customerType == $customerType ]
   {
     ...,
   "includeAudienceLists": includeAudienceList[0]->audienceNameList,
-  "excludeAudienceLists":  excludeAudienceList[0]->audienceNameList
+  "excludeAudienceLists":  excludeAudienceList[0]->audienceNameList,
+  "filterAudienceLists":  filterAudienceList[0]->audienceNameList
   }`;
 };
 

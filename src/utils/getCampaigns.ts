@@ -26,8 +26,10 @@ async function getEligibleAdjacencyCampaignsIds(
           campaigns?.map((campaign: any) => campaign._ref),
           customerType
         );
+        
         // filter the campaigns which is show on the viewport
         return campaign.filter((campaign: any) => {
+          
           if (campaign?.excludeAudienceLists?.includes(customer)) {
             return false;
           }
@@ -40,7 +42,9 @@ async function getEligibleAdjacencyCampaignsIds(
             (adjacency.subscriptionStatus == false &&
               campaign.audience == "exclude") ||
             (adjacency.subscriptionStatus == true &&
-              campaign.audience == "include")
+              campaign.audience == "include") 
+              &&
+              campaign?.filterAudienceList?.includes(customer)
           );
         });
       })
@@ -136,7 +140,7 @@ export async function getCampaigns(
       );
 
     const totalCampaignPool: any = getTotalCampaignPool(
-      adjacencyOrientedCampaigns,
+      adjacencyOrientedCampaigns.filter((a:any)=> a.audience == "include"),
       viewportData.additionalCampaigns?.map((campaign: any) => {
         return { _id: campaign._ref };
       }),

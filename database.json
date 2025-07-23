@@ -28645,7 +28645,7 @@
             },
             {
                 "adjacencyName": "mango",
-                "subscriptionStatus": false
+                "subscriptionStatus": true
             }
         ],
         "locations": 0,
