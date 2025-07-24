@@ -36190,5 +36190,63 @@
         ],
         "locations": 1,
         "region": "US"
+    },
+    "4m": {
+        "subscriptions": [
+            {
+                "adjacencyName": "us-pms",
+                "subscriptionStatus": true
+            },
+            {
+                "adjacencyName": "uk-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "aus-pms",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-us",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "voicestack-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-pay",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-uk",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "cs-conversation-aus",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "rcm",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "virtual-assistant",
+                "subscriptionStatus": false
+            },
+            {
+                "adjacencyName": "mango",
+                "subscriptionStatus": false
+            }
+        ],
+        "locations": 2,
+        "region": "US"
     }
 }
