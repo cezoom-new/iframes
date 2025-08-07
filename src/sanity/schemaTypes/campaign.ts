@@ -260,6 +260,11 @@ export const campaign = defineType({
             title: "Custom Layout",
             value: "customLayout",
           },
+
+          {
+          title: "Webinar Layout",
+          value: "webinarLayout",
+          },
         ],
       },
       group: "template",
@@ -567,6 +572,7 @@ export const campaign = defineType({
                           { title: "Green 50", value: "#30A063" },
                           { title: "Lime 500", value: "#84BD00" },
                           
+                          
                         ],
                         layout: "dropdown",
                       },
@@ -641,6 +647,8 @@ export const campaign = defineType({
                           { title: "Black", value: "#000000" },
                           { title: "Dark Blue", value: "#181F32" },
                           { title: "T Blue", value: "#02024A" },
+                          {title:"IndigoBlue",value:"#4A3CE1"},
+                          { title:"blueGradient",value:'linear-gradient(90deg, #2563EB 0%, #1E40AF 100%)'}
                         ],
                         layout: "dropdown",
                       },

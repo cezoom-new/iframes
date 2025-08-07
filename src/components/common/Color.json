@@ -30,8 +30,12 @@
       "#EAB308",
       "#ff5733",
       "#404040",
-      "#000000"
+      "#000000",
+      "linear-gradient(90deg, #009FFF 0%, #2EBF91 100%)"
     ],
+    "buttonColors" :["", "linear-gradient(90deg, #2563EB 0%, #1E40AF 100%)"],
+    
+
   "themes": [
     {
       "title": "Golden Yellow",
@@ -2277,6 +2281,35 @@
       "title": "black",
       "id": "51",	
       "value": "#000000"
-    }
+    },
+    {
+      "title": "electricBlueBlack",
+      "id": "52",
+      "value": "linear-gradient(324deg, #111827 60.85%, #1E3A8A 102.37%)",
+      "ParagraphColor": ["#FFFFFF"],
+      "highlightColor": ["90deg, #2563EB 0%, #1E40AF 100%"],
+      "buttonColor": ["linear-gradient(90deg, #2563EB 0%, #1E40AF 100%)"],
+      "h1Color": ["#FFFFFF"],
+      "subtitleText": ["#0F172A", "#374151", "#FFFFFF"]
+    },
+      {
+    "title": "electricPurpleBlack",
+    "id": "52",
+    "value": "linear-gradient(324deg, #000 60.85%, #2B2382 102.37%)",
+    "ParagraphColor": [
+      "#FFFFFF"
+    ],
+    "highlightColor": [
+     "90deg, #2563EB 0%, #1E40AF 100%"
+    ],
+    "h1Color": [
+      "#FFFFFF"
+    ],
+    "subtitleText": [
+      "#0F172A",
+      "#374151",
+      "#FFFFFF"
+    ]
+  }
   ]
 }

@@ -1,3 +1,4 @@
+import { Geist } from "next/font/google";
 import type { Config } from "tailwindcss";
 
 export default {
@@ -59,7 +60,8 @@ export default {
   			manrope: [
   				'Manrope',
   				'sans-serif'
-  			]
+  			],
+			geist: ['Geist', 'sans-serif']
   		},
   		screens: {
   			xs: '450px',
