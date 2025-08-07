@@ -146,8 +146,7 @@ const DynamicStructureWebinar = ({
         <li className="flex gap-2 text-[#404040] items-start font-medium text-xs xl:text-sm">
           <div className="w-4 flex-shrink-0">
             {listIcon && (
-              <Image
-                src={urlBuilder(listIcon).url()}
+              <Image  src={urlBuilder(listIcon).url()}
                 alt="icon"
                 width={28}
                 height={28}
@@ -234,7 +233,7 @@ const DynamicStructureWebinar = ({
                         ?.asset?.url
                     }
                     alt={"sampleText"}
-                    // className="max-h-full"
+                    className="pb-6"
                     width={
                       campaign?.templateLogos?.components[0]?.templateLogos[0]
                         ?.asset?.metadata?.dimensions?.width || 200
