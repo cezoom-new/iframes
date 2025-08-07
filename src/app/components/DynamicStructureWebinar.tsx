@@ -311,7 +311,7 @@ const DynamicStructureWebinar = ({
             return (
               <div
                 key={`buttonComponents-${index}`}
-                className="flex gap-6 py-3 items-center"
+                className="flex gap-6 mt-6 items-center"
               >
                 {component?.ctaBtn?.ctaBtnText && (
                   <CTAButton
