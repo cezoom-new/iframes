@@ -46,7 +46,7 @@ const DynamicStructureWebinar = ({
         <p
           style={{ color: colors?.subtitleText }}
           className={
-            "text-[48px]  font-medium pb-3 !leading-[118%] font-geist"
+            "text-[48px]  font-medium !leading-[118%] font-geist lg:max-w-[514px]"
           }
         >
           {children}
