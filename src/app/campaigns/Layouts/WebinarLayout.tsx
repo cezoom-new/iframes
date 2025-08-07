@@ -63,7 +63,7 @@ export default function WebinarLayout({
               colors={colors}
               campaign={campaign}
               components={campaign?.structure?.components}
-              className="flex flex-col max-w-xl xl:max-w-2xl"
+              className="flex flex-col max-w-xl xl:max-w-[514px]"
             />
             {campaign?.structure?.campaignvideoUrl ? (
               <div className="items-center max-w-[500px] hidden lg:block flex-1 rounded-xl overflow-hidden">
