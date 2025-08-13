@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input"; // assuming you're using this Inp
 import { useForm } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
 import SetupForSignature from "./SetupForSignature";
+import Link from "next/link";
 
 const copySearchParams = (sourceUrl: string, destUrl: string): string => {
   try {
@@ -99,50 +100,23 @@ export default function EmailSignatureTemplate(props: {
     instagramUrl: "",
   });
 
-  const formFields = [
+  const [formFields, setFormFields] = useState([
     {
       label: "Full Name",
       key: "fullName",
-      placeholder: fullName,
+      placeholder: fullName || "",
     },
     {
       label: "Phone Number",
       key: "phoneNumber",
-      placeholder: phoneNumber,
+      placeholder: phoneNumber || "",
     },
     {
       label: "Role",
       key: "role",
-      placeholder: role,
+      placeholder: role || "",
     },
-
-    {
-      label: "Website",
-      key: "websiteUrl",
-      placeholder: "Enter website URL",
-    },
-
-    {
-      label: "LinkedIn",
-      key: "linkedinUrl",
-      placeholder: "Enter LinkedIn URL",
-    },
-    {
-      label: "Facebook",
-      key: "facebook",
-      placeholder: "Enter Twitter URL",
-    },
-    {
-      label: "YouTube",
-      key: "youtubeUrl",
-      placeholder: "Enter YouTube URL",
-    },
-    {
-      label: "Instagram",
-      key: "instagramUrl",
-      placeholder: "Enter Instagram URL",
-    },
-  ];
+  ]);
 
   const transformUrl = (url: string, key: string) => {
     setUrls((prevUrls: any) => ({
@@ -162,7 +136,7 @@ export default function EmailSignatureTemplate(props: {
           currentUrl,
           props.redirectUrl
         );
-        setUpdatedRedirectUrl(encodeURI(encodedRedirectUrl)); // Ensure it's properly encoded
+        setUpdatedRedirectUrl(encodeURI(encodedRedirectUrl));
       } else {
         setUpdatedRedirectUrl("");
       }
@@ -188,9 +162,15 @@ export default function EmailSignatureTemplate(props: {
       });
 
       await navigator.clipboard.write([clipboardItem]);
-
       setCopySuccess("Signature copied!");
-      setTimeout(() => setCopySuccess(""), 3000);
+
+      setTimeout(() => {
+        // window.open(
+        //   "https://mail.google.com/mail/u/0/#settings/general:~:text=signature",
+        //   "_blank" // open in new tab
+        // );
+        setCopySuccess("");
+      }, 2000);
     } catch (err) {
       console.error("Failed to copy:", err);
       setCopySuccess("Failed to copy");
@@ -267,25 +247,28 @@ export default function EmailSignatureTemplate(props: {
                 </td>
               </tr>
                       
-                    ${
-                      urls.websiteUrl ||
-                      urls.linkedinUrl ||
-                      urls.facebook ||
-                      urls.youtubeUrl ||
-                      urls.instagramUrl
-                        ? `
-              <tr>
-                <td colspan="2">
-                  ${urls.websiteUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.websiteUrl)}" target="_blank">Website</a></span>` : ""}
-                  ${urls.linkedinUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.linkedinUrl)}" target="_blank">Linkedin</a></span>` : ""}
-                  ${urls.facebook ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.facebook)}" target="_blank">Facebook</a></span>` : ""}
-                  ${urls.youtubeUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.youtubeUrl)}" target="_blank">Youtube</a></span>` : ""}
-                  ${urls.instagramUrl ? `<span style="margin-right:4px;"><a href="${ensureHttps(urls.instagramUrl)}" target="_blank">Instagram</a></span>` : ""}
-                </td>
-              </tr>
-            `
-                        : ""
-                    }
+          ${(() => {
+            const links = Object.entries(urls)
+              .filter(
+                ([key]) =>
+                  !["fullName", "emailId", "phoneNumber", "role"].includes(key)
+              )
+              .filter(([_, value]) => value) // keep only non-empty
+              .map(
+                ([key, value]) =>
+                  `<span style="margin-right:6px;"><a href="${ensureHttps(value)}" target="_blank">${key}</a></span>`
+              );
+
+            return links.length
+              ? `
+                  <tr>
+                    <td colspan="2" style="color:#331455;">
+                      ${links.join("")}
+                    </td>
+                  </tr>
+                `
+              : "";
+          })()}
           `
             : ""
         }
@@ -311,6 +294,43 @@ export default function EmailSignatureTemplate(props: {
     }
   </div>
 `;
+
+  const [additionalFields, setAdditionalFields] = useState<
+    { name: string; value: string }[]
+  >([]);
+
+  const handleAddField = () => {
+    setAdditionalFields((prev) => [...prev, { name: "", value: "" }]);
+  };
+
+  const handleRemoveField = (index: number) => {
+    setAdditionalFields((prev) => prev.filter((_, i) => i !== index));
+
+    // Also remove from urls state if the name was filled in
+    setUrls((prev: any) => {
+      const updated = { ...prev };
+      delete updated[additionalFields[index].name];
+      return updated;
+    });
+  };
+
+  const handleChangeField = (
+    index: number,
+    key: "name" | "value",
+    value: string
+  ) => {
+    const updated = [...additionalFields];
+    updated[index][key] = value;
+    setAdditionalFields(updated);
+
+    // Save to urls state when both name & value exist
+    if (updated[index].name.trim() && updated[index].value.trim()) {
+      setUrls((prev: any) => ({
+        ...prev,
+        [updated[index].name]: updated[index].value,
+      }));
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen bg-white">
@@ -411,6 +431,80 @@ export default function EmailSignatureTemplate(props: {
                 )}
               />
             ))}
+            <div className="space-y-3  mt-3">
+              {additionalFields.length > 0 &&
+              <span>Additional Details</span>
+              }
+              {additionalFields.map((field, index) => (
+                <div
+                key={index}
+                className="flex items-end gap-4 p-3 border rounded"
+                >
+                  <div className="flex-1">
+                    <FormItem>
+                      {/* <FormLabel>Field Name</FormLabel> */}
+                      <FormControl>
+                        <Input
+                          placeholder="Enter field name"
+                          value={field.name}
+                          onChange={(e) =>
+                            handleChangeField(index, "name", e.target.value)
+                          }
+                        />
+                      </FormControl>
+                    </FormItem>
+                  </div>
+
+                  <div className="flex-1">
+                    <FormItem>
+                      {/* <FormLabel>Value</FormLabel> */}
+                      <FormControl>
+                        <Input
+                          placeholder="Enter value"
+                          value={field.value}
+                          onChange={(e) =>
+                            handleChangeField(index, "value", e.target.value)
+                          }
+                        />
+                      </FormControl>
+                    </FormItem>
+                  </div>
+
+                  {index === additionalFields.length - 1 ? (
+                    <Button
+                      type="button"
+                      variant="primaryBlue"
+                      size="sm"
+                      onClick={handleAddField}
+                    >
+                      Add
+                    </Button>
+                  ) : (
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => handleRemoveField(index)}
+                    >
+                      Remove
+                    </Button>
+                  )}
+                </div>
+              ))}
+
+              {additionalFields.length === 0 && (
+                <Button
+                  className="rounded-full bg-blue-600 hover:bg-blue-800 px-12 py-3 mt-3"
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    handleAddField();
+                  }}
+                >
+                  {" "}
+                  Add Additional Detail
+                </Button>
+              )}
+            </div>
           </Form>
         </div>
         <div className="flex flex-col w-1/2">
@@ -441,7 +535,10 @@ export default function EmailSignatureTemplate(props: {
           <SetupForSignature />
         </div>
       </div>
-      <div className="fixed bottom-0 bg-white w-full py-6 text-center align-center flex items-center justify-center" style={{boxShadow: "0 -4px 18px -1px rgba(0, 0, 0, 0.05)"}}>
+      <div
+        className="fixed bottom-0 bg-white w-full py-6 text-center align-center flex items-center justify-center"
+        style={{ boxShadow: "0 -4px 18px -1px rgba(0, 0, 0, 0.05)" }}
+      >
         {" "}
         <Button
           className="rounded-full bg-blue-600 hover:bg-blue-800 px-12 py-3"
@@ -469,9 +566,16 @@ export default function EmailSignatureTemplate(props: {
           </svg>
           <span> Copy Signature</span>
         </Button>
-         <div className="flex py-6 gap-3 flex-col relative justify-center">
-            <div className="flex w-auto absolute left-4 bottom-2 min-w-64 text-sm">{copySuccess}</div>
+        <Button className="rounded-full bg-blue-600 hover:bg-blue-800 px-12 py-3 ml-4">
+          <Link href="https://mail.google.com/mail/u/0/#settings/general:~:text=signature" target="_blank" rel="noopener noreferrer">
+            Go To Signature
+          </Link>
+        </Button>
+        <div className="flex py-6 gap-3 flex-col relative justify-center">
+          <div className="flex w-auto absolute left-4 bottom-2 min-w-64 text-sm">
+            {copySuccess}
           </div>
+        </div>
       </div>
     </div>
   );
