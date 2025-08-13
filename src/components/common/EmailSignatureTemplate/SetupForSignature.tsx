@@ -1,15 +1,15 @@
 export default function SetupForSignature() {
   return (
     <div className="max-w-2xl mx-auto pt-6">
-      <h2 className="text-xl font-bold text-gray-800">
+      <h2 className="text-base font-bold text-gray-800">
        Instructions to Set Up Your Email Signature
       </h2>
 
       <div className="pt-4">
-        <h3 className="text-lg font-semibold text-gray-700">
+        <h3 className="text-base font-semibold text-gray-900">
           Step 1: Copy Your Signature
         </h3>
-        <ul className="list-disc list-inside text-gray-600 mt-2 space-y-1">
+        <ul className="list-disc list-inside text-gray-700 mt-2 space-y-1">
           <li>Fill in your details if needed.</li>
           <li>
             Click <strong>"Copy Signature"</strong>.
@@ -18,10 +18,10 @@ export default function SetupForSignature() {
       </div>
 
       <div className="pt-4">
-        <h3 className="text-lg font-semibold text-gray-700">
+        <h3 className="text-base font-semibold text-gray-900">
           Step 2: Open Gmail Settings
         </h3>
-        <ul className="list-disc list-inside text-gray-600 mt-2 space-y-1">
+        <ul className="list-disc list-inside text-gray-700 mt-2 space-y-1">
           <li>Open Gmail.</li>
           <li>
             Click the ⚙️ <strong>Settings</strong> icon &gt;{" "}
@@ -34,10 +34,10 @@ export default function SetupForSignature() {
       </div>
 
       <div className="pt-4">
-        <h3 className="text-lg font-semibold text-gray-700">
+        <h3 className="text-base font-semibold text-gray-900">
           Step 3: Paste Your Signature
         </h3>
-        <ul className="list-disc list-inside text-gray-600 mt-2 space-y-1">
+        <ul className="list-disc list-inside text-gray-700 mt-2 space-y-1">
           <li>
             Click <strong>"Create new"</strong> and give it a name (e.g.{" "}
             <em>"Work"</em>).

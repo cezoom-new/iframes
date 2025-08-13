@@ -363,15 +363,15 @@ export default function EmailSignatureTemplate(props: {
                     <FormControl>
                       <div className="flex items-center gap-3">
                         <Checkbox
-                          id="terms"
+                          id="showdata"
                           checked={hideData}
                           onCheckedChange={(checked: any) => {
                             field.onChange(checked);
                             setHideData(checked);
                           }}
                         />
-                        <FormLabel htmlFor="terms">
-                          Accept terms and conditions
+                        <FormLabel htmlFor="showdata">
+                          Show data in Email Signature
                         </FormLabel>
                       </div>
                     </FormControl>
