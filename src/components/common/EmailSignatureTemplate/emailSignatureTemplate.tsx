@@ -340,40 +340,106 @@ export default function EmailSignatureTemplate(props: {
             One-Time Gmail Signature Setup
           </h2>
           <Form {...form}>
-            <FormField
-              control={control}
-              name="hideData"
-              render={({ field }) => (
-                <FormItem className="flex items-center gap-2 p-4 mb-4 bg-[#f9f1fe] rounded-md text-[#7820bc]">
-                  <FormControl>
-                    <Checkbox
-                      checked={hideData}
-                      onCheckedChange={(checked: any) => {
-                        field.onChange(checked);
-                        setHideData(checked);
-                      }}
-                    />
-                  </FormControl>
-                  <FormLabel className="font-normal !mt-0">
+            <form className="space-y-8">
+              <FormField
+                control={control}
+                name="hideData"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <div className="flex items-center gap-3">
+                        <Checkbox
+                          id="terms"
+                          checked={hideData}
+                          onCheckedChange={(checked: any) => {
+                            field.onChange(checked);
+                            setHideData(checked);
+                          }}
+                        />
+                        <FormLabel htmlFor="terms">
+                          Accept terms and conditions
+                        </FormLabel>
+                      </div>
+                    </FormControl>
+                    {/* <FormLabel className="font-normal !mt-0">
                     Use Detail in Signature
-                  </FormLabel>
-                </FormItem>
+                  </FormLabel> */}
+                  </FormItem>
+                )}
+              />
+              {urls?.emailId && (
+                <>
+                  <FormField
+                    control={control}
+                    name="emailId"
+                    render={({ field: formField }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...formField}
+                            placeholder="Enter your email"
+                            onChange={(e) => {
+                              formField.onChange(e);
+                              handleInputChange(
+                                "emailId",
+                                e.target.value,
+                                "emailId"
+                              );
+                            }}
+                            value={urls.emailId || ""}
+                          />
+                        </FormControl>
+                        <FormDescription />
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={control}
+                    name="hideData"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormControl>
+                          <div className="flex items-center gap-3">
+                            <Checkbox
+                              checked={hideEmail}
+                              onCheckedChange={(checked: any) => {
+                                field.onChange(checked);
+                                setHideEmail(checked);
+                              }}
+                            />
+                            <FormLabel>Show Email ID in signature</FormLabel>
+                          </div>
+                        </FormControl>
+                        {/* <FormLabel className="font-normal !mt-0">
+                    Use Detail in Signature
+                  </FormLabel> */}
+                      </FormItem>
+                    )}
+                  />
+                </>
               )}
-            />
-            {urls?.emailId && (
-              <>
+              {formFields?.map((field: any, i: number) => (
                 <FormField
+                  key={`${field.key}-${i}`}
                   control={control}
-                  name="emailId"
+                  name={field.key}
                   render={({ field: formField }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel>{field.label}</FormLabel>
                       <FormControl>
                         <Input
                           {...formField}
-                          placeholder="Enter your email"
-                          disabled
-                          value={urls.emailId || ""}
+                          placeholder={field.placeholder}
+                          onChange={(e) => {
+                            formField.onChange(e);
+                            handleInputChange(
+                              field.key,
+                              e.target.value,
+                              field.label
+                            );
+                          }}
                         />
                       </FormControl>
                       <FormDescription />
@@ -381,83 +447,76 @@ export default function EmailSignatureTemplate(props: {
                     </FormItem>
                   )}
                 />
-                <FormField
-                  control={control}
-                  name="hideEmail"
-                  render={({ field }) => (
-                    <FormItem className="flex items-center gap-2 pb-6">
-                      <FormControl>
-                        <Checkbox
-                          checked={hideEmail}
-                          onCheckedChange={(checked: any) => {
-                            field.onChange(checked);
-                            setHideEmail(checked);
-                          }}
-                        />
-                      </FormControl>
-                      <FormLabel className="font-normal !mt-0">
-                        Show Email ID in signature
-                      </FormLabel>
-                    </FormItem>
-                  )}
-                />
-              </>
-            )}
-            {formFields?.map((field: any, i: number) => (
-              <FormField
-                key={`${field.key}-${i}`}
-                control={control}
-                name={field.key}
-                render={({ field: formField }) => (
-                  <FormItem>
-                    <FormLabel>{field.label}</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...formField}
-                        placeholder={field.placeholder}
-                        onChange={(e) => {
-                          formField.onChange(e);
-                          handleInputChange(
-                            field.key,
-                            e.target.value,
-                            field.label
-                          );
-                        }}
-                      />
-                    </FormControl>
-                    <FormDescription />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            ))}
-            <div className="space-y-3  mt-3">
-              {additionalFields.length > 0 &&
-              <span>Additional Details</span>
-              }
-              {additionalFields.map((field, index) => (
-                <div
-                key={index}
-                className="flex items-end gap-4 p-3 border rounded"
-                >
-                  <div className="flex-1">
+              ))}
+              <div>
+                {additionalFields.length > 0 && <span className="text-lg font-medium">Social Links</span>}
+                {additionalFields.map((field: any, index) => (
+                  <div key={index} className="flex gap-4 items-center mt-3">
+                    {/* <div className="flex-1">
                     <FormItem>
-                      {/* <FormLabel>Field Name</FormLabel> */}
+                      <FormLabel>Field Name</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Enter field name"
+                        
                           value={field.name}
                           onChange={(e) =>
                             handleChangeField(index, "name", e.target.value)
-                          }
+                          }  placeholder="Enter field name"
                         />
                       </FormControl>
                     </FormItem>
-                  </div>
-
-                  <div className="flex-1">
+                  </div> */}
+                    <FormField
+                      key={`1-${index}`}
+                      control={control}
+                      name={field?.name}
+                      render={({ field: formField }) => (
+                        <FormItem>
+                          <FormLabel>Field Name</FormLabel>
+                          <FormControl>
+                            <Input
+                              {...formField}
+                              placeholder="Enter field name"
+                              value={field.name}
+                              onChange={(e) =>
+                                handleChangeField(index, "name", e.target.value)
+                              }
+                            />
+                          </FormControl>
+                          <FormDescription />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      key={`2-${index}`}
+                      control={control}
+                      name={field?.value}
+                      render={({ field: formField }) => (
+                        <FormItem>
+                          <FormLabel>Value</FormLabel>
+                          <FormControl>
+                            <Input
+                              {...formField}
+                              placeholder="Enter value"
+                              value={field.value}
+                              onChange={(e) =>
+                                handleChangeField(
+                                  index,
+                                  "value",
+                                  e.target.value
+                                )
+                              }
+                            />
+                          </FormControl>
+                          <FormDescription />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    {/* <div className="flex-1">
                     <FormItem>
-                      {/* <FormLabel>Value</FormLabel> */}
+                      <FormLabel>Value</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Enter value"
@@ -468,43 +527,36 @@ export default function EmailSignatureTemplate(props: {
                         />
                       </FormControl>
                     </FormItem>
+                  </div> */}
+
+                    {index === additionalFields.length - 1 ? (
+                      <Button onClick={handleAddField}>Add</Button>
+                    ) : (
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        // size="sm"
+                        onClick={() => handleRemoveField(index)}
+                      >
+                        Remove
+                      </Button>
+                    )}
                   </div>
+                ))}
 
-                  {index === additionalFields.length - 1 ? (
-                    <Button
-                      type="button"
-                      variant="primaryBlue"
-                      size="sm"
-                      onClick={handleAddField}
-                    >
-                      Add
-                    </Button>
-                  ) : (
-                    <Button
-                      type="button"
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => handleRemoveField(index)}
-                    >
-                      Remove
-                    </Button>
-                  )}
-                </div>
-              ))}
-
-              {additionalFields.length === 0 && (
-                <Button
-                  className="rounded-full bg-blue-600 hover:bg-blue-800 px-12 py-3 mt-3"
-                  onClick={(e: any) => {
-                    e.preventDefault();
-                    handleAddField();
-                  }}
-                >
-                  {" "}
-                  Add Additional Detail
-                </Button>
-              )}
-            </div>
+                {additionalFields.length === 0 && (
+                  <Button
+                    onClick={(e: any) => {
+                      e.preventDefault();
+                      handleAddField();
+                    }}
+                  >
+                    {" "}
+                    Add Additional Detail
+                  </Button>
+                )}
+              </div>
+            </form>
           </Form>
         </div>
         <div className="flex flex-col w-1/2">
@@ -536,12 +588,11 @@ export default function EmailSignatureTemplate(props: {
         </div>
       </div>
       <div
-        className="fixed bottom-0 bg-white w-full py-6 text-center align-center flex items-center justify-center"
+        className="fixed gap-4 bottom-0 bg-white w-full py-6 text-center align-center flex items-center justify-center"
         style={{ boxShadow: "0 -4px 18px -1px rgba(0, 0, 0, 0.05)" }}
       >
         {" "}
         <Button
-          className="rounded-full bg-blue-600 hover:bg-blue-800 px-12 py-3"
           onClick={(e: any) => {
             e.preventDefault();
             e.stopPropagation();
@@ -566,9 +617,13 @@ export default function EmailSignatureTemplate(props: {
           </svg>
           <span> Copy Signature</span>
         </Button>
-        <Button className="rounded-full bg-blue-600 hover:bg-blue-800 px-12 py-3 ml-4">
-          <Link href="https://mail.google.com/mail/u/0/#settings/general:~:text=signature" target="_blank" rel="noopener noreferrer">
-            Go To Signature
+        <Button variant="outline">
+          <Link
+            href="https://mail.google.com/mail/u/0/#settings/general:~:text=signature"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Gmail Settings
           </Link>
         </Button>
         <div className="flex py-6 gap-3 flex-col relative justify-center">
