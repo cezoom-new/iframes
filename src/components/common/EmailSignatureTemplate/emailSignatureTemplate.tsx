@@ -314,23 +314,37 @@ export default function EmailSignatureTemplate(props: {
     });
   };
 
-  const handleChangeField = (
-    index: number,
-    key: "name" | "value",
-    value: string
-  ) => {
-    const updated = [...additionalFields];
-    updated[index][key] = value;
-    setAdditionalFields(updated);
+ const handleChangeField = (
+  index: number,
+  key: "name" | "value",
+  value: string
+) => {
+  setAdditionalFields((prev) => {
+    const updated = [...prev];
+    const prevName = updated[index].name; // store old key name
+    updated[index] = { ...updated[index], [key]: value };
 
-    // Save to urls state when both name & value exist
-    if (updated[index].name.trim() && updated[index].value.trim()) {
-      setUrls((prev: any) => ({
-        ...prev,
-        [updated[index].name]: updated[index].value,
-      }));
-    }
-  };
+    // Update urls immediately
+    setUrls((prevUrls: any) => {
+      const newUrls = { ...prevUrls };
+
+      // If name is changing, remove the old key
+      if (key === "name" && prevName && prevName !== value) {
+        delete newUrls[prevName];
+      }
+
+      // Only add new key if it has a name
+      if (updated[index].name.trim()) {
+        newUrls[updated[index].name] = updated[index].value;
+      }
+
+      return newUrls;
+    });
+
+    return updated;
+  });
+};
+
 
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen bg-white">
