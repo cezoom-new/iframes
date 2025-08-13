@@ -587,6 +587,7 @@ export default function EmailSignatureTemplate(props: {
           <SetupForSignature />
         </div>
       </div>
+      
       <div
         className="fixed gap-4 bottom-0 bg-white w-full py-6 text-center align-center flex items-center justify-center"
         style={{ boxShadow: "0 -4px 18px -1px rgba(0, 0, 0, 0.05)" }}
