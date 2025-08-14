@@ -9,7 +9,7 @@ type Props = {
 export default function Container(props: Props) {
   return (
     <div
-      className={`w-full max-w-7xl m-auto flex justify-self-center ${props.className}`}
+      className={`w-full max-w-6xl m-auto flex justify-self-center ${props.className}`}
       style={props?.style}
     >
       {props.children}

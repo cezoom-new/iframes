@@ -324,7 +324,7 @@ const DynamicStructureWebinar = ({
                     ctaBtnPostData={component?.ctaBtn?.ctaBtnPostData}
                     ctaBtnPostMessageKey={component?.ctaBtn?.ctaBtnPostMessageKey}
                     campaignName={campaign?.name}
-                    className={`${layout == "osdental" ? 'w-full': ''}`}
+                    className={`${layout == "osdental" ? 'w-full': ''} mt-2`}
                   />
                 )}
                 {component?.secondaryBtnComponent?.secondaryBtnText && (
