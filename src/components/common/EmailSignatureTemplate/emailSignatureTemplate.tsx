@@ -16,6 +16,16 @@ import { useForm } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
 import SetupForSignature from "./SetupForSignature";
 import Link from "next/link";
+import Image from "next/image";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import ShareIcon from "@/app/icons/shareIcon";
+import EyeIcon from "@/app/icons/eye";
+import InfoIcon from "@/app/icons/infoIcon";
+import DeleteIcon from "@/app/icons/deleteIcon";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { title } from "process";
 
 const copySearchParams = (sourceUrl: string, destUrl: string): string => {
   try {
@@ -57,6 +67,7 @@ export default function EmailSignatureTemplate(props: {
   const [updatedRedirectUrl, setUpdatedRedirectUrl] = useState<string>("");
   const [hideData, setHideData] = useState<boolean>(true);
   const [hideEmail, setHideEmail] = useState<boolean>(true);
+  const [hideDisclaimer, setHideDisclaimer] = useState<boolean>(true);
 
   const searchParams = useSearchParams();
   const form = useForm({
@@ -65,13 +76,12 @@ export default function EmailSignatureTemplate(props: {
       emailId: searchParams.get("email") || "",
       phoneNumber: searchParams.get("phone") || "",
       role: searchParams.get("role") || "",
-      websiteUrl: "",
-      linkedinUrl: "",
-      facebook: "",
-      youtubeUrl: "",
-      instagramUrl: "",
+      note: "",
+      title: "",
+      description: "",
       hideData: true,
       hideEmail: true,
+      hideDisclaimer: true,
     },
   });
   const { control } = form;
@@ -93,11 +103,9 @@ export default function EmailSignatureTemplate(props: {
     emailId: emailId,
     phoneNumber: phoneNumber,
     role: role,
-    websiteUrl: "",
-    linkedinUrl: "",
-    facebook: "",
-    youtubeUrl: "",
-    instagramUrl: "",
+    note: "",
+    title: "",
+    description: "",
   });
 
   const [formFields, setFormFields] = useState([
@@ -115,6 +123,23 @@ export default function EmailSignatureTemplate(props: {
       label: "Role",
       key: "role",
       placeholder: role || "",
+    },
+  ]);
+  const [disclaimerFormFields, setDisclaimerFormFields] = useState([
+    {
+      label: "Note",
+      key: "note",
+      placeholder: "Type your note here",
+    },
+    {
+      label: "Title",
+      key: "title",
+      placeholder: "Type your title here",
+    },
+    {
+      label: "Description",
+      key: "description",
+      placeholder: "Type your message here",
     },
   ]);
 
@@ -165,10 +190,6 @@ export default function EmailSignatureTemplate(props: {
       setCopySuccess("Signature copied!");
 
       setTimeout(() => {
-        // window.open(
-        //   "https://mail.google.com/mail/u/0/#settings/general:~:text=signature",
-        //   "_blank" // open in new tab
-        // );
         setCopySuccess("");
       }, 2000);
     } catch (err) {
@@ -251,7 +272,15 @@ export default function EmailSignatureTemplate(props: {
             const links = Object.entries(urls)
               .filter(
                 ([key]) =>
-                  !["fullName", "emailId", "phoneNumber", "role"].includes(key)
+                  ![
+                    "fullName",
+                    "emailId",
+                    "phoneNumber",
+                    "role",
+                    "note",
+                    "title",
+                    "description",
+                  ].includes(key)
               )
               .filter(([_, value]) => value) // keep only non-empty
               .map(
@@ -287,10 +316,48 @@ export default function EmailSignatureTemplate(props: {
           `
                         : ""
                     }
+                 
         </tbody>
       </table>
     `
         : ""
+    }
+    ${hideDisclaimer ?
+      urls?.note || urls?.title || urls?.description
+        ? `<table cellpadding="0" style="border-spacing:0px; font-size:12px; padding-top: 24px;" cellspacing="0" >
+         <tbody>
+            ${
+              urls.note
+                ? `
+              <tr>
+                <td style="color:#4B5563;">${urls.note}</td>
+              </tr>
+            `
+                : ""
+            }
+                  ${
+                    urls.title
+                      ? `
+              <tr>
+                <td style="color:#4B5563; font-weight: 700; padding:12px 0 4px;">${urls.title}</td>
+              </tr>
+            `
+                      : ""
+                  }
+                  ${
+                    urls.description
+                      ? `
+              <tr>
+                <td style="color:#6B7280;">${urls.description}</td>
+              </tr>
+            `
+                      : ""
+                  }
+         </tbody>
+         </table>
+         `
+        : ""
+        :""
     }
   </div>
 `;
@@ -314,296 +381,386 @@ export default function EmailSignatureTemplate(props: {
     });
   };
 
- const handleChangeField = (
-  index: number,
-  key: "name" | "value",
-  value: string
-) => {
-  setAdditionalFields((prev) => {
-    const updated = [...prev];
-    const prevName = updated[index].name; // store old key name
-    updated[index] = { ...updated[index], [key]: value };
+  const handleChangeField = (
+    index: number,
+    key: "name" | "value",
+    value: string
+  ) => {
+    setAdditionalFields((prev) => {
+      const updated = [...prev];
+      const prevName = updated[index].name; // store old key name
+      updated[index] = { ...updated[index], [key]: value };
 
-    // Update urls immediately
-    setUrls((prevUrls: any) => {
-      const newUrls = { ...prevUrls };
+      // Update urls immediately
+      setUrls((prevUrls: any) => {
+        const newUrls = { ...prevUrls };
 
-      // If name is changing, remove the old key
-      if (key === "name" && prevName && prevName !== value) {
-        delete newUrls[prevName];
-      }
+        // If name is changing, remove the old key
+        if (key === "name" && prevName && prevName !== value) {
+          delete newUrls[prevName];
+        }
 
-      // Only add new key if it has a name
-      if (updated[index].name.trim()) {
-        newUrls[updated[index].name] = updated[index].value;
-      }
+        // Only add new key if it has a name
+        if (updated[index].name.trim()) {
+          newUrls[updated[index].name] = updated[index].value;
+        }
 
-      return newUrls;
+        return newUrls;
+      });
+
+      return updated;
     });
-
-    return updated;
-  });
-};
-
+  };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-white">
-      <div className="flex flex-col md:max-w-7xl w-full md:flex-row py-16 justify-center gap-6 lg:gap-32 mb-16">
-        <div className="w-1/2 py-16 px-16 flex flex-col border-r">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            One-Time Gmail Signature Setup
-          </h2>
-          <Form {...form}>
-            <form className="space-y-8">
-              <FormField
-                control={control}
-                name="hideData"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <div className="flex items-center gap-3">
-                        <Checkbox
-                          id="showdata"
-                          checked={hideData}
-                          onCheckedChange={(checked: any) => {
-                            field.onChange(checked);
-                            setHideData(checked);
-                          }}
-                        />
-                        <FormLabel htmlFor="showdata">
-                          Show data in Email Signature
-                        </FormLabel>
-                      </div>
-                    </FormControl>
-                    {/* <FormLabel className="font-normal !mt-0">
-                    Use Detail in Signature
-                  </FormLabel> */}
-                  </FormItem>
-                )}
-              />
-              {urls?.emailId && (
-                <>
-                  <FormField
-                    control={control}
-                    name="emailId"
-                    render={({ field: formField }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            {...formField}
-                            placeholder="Enter your email"
-                            onChange={(e) => {
-                              formField.onChange(e);
-                              handleInputChange(
-                                "emailId",
-                                e.target.value,
-                                "emailId"
-                              );
-                            }}
-                            value={urls.emailId || ""}
-                          />
-                        </FormControl>
-                        <FormDescription />
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={control}
-                    name="hideData"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <div className="flex items-center gap-3">
-                            <Checkbox
-                              checked={hideEmail}
-                              onCheckedChange={(checked: any) => {
-                                field.onChange(checked);
-                                setHideEmail(checked);
-                              }}
-                            />
-                            <FormLabel>Show Email ID in signature</FormLabel>
-                          </div>
-                        </FormControl>
-                        {/* <FormLabel className="font-normal !mt-0">
-                    Use Detail in Signature
-                  </FormLabel> */}
-                      </FormItem>
-                    )}
-                  />
-                </>
-              )}
-              {formFields?.map((field: any, i: number) => (
-                <FormField
-                  key={`${field.key}-${i}`}
-                  control={control}
-                  name={field.key}
-                  render={({ field: formField }) => (
-                    <FormItem>
-                      <FormLabel>{field.label}</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...formField}
-                          placeholder={field.placeholder}
-                          onChange={(e) => {
-                            formField.onChange(e);
-                            handleInputChange(
-                              field.key,
-                              e.target.value,
-                              field.label
-                            );
-                          }}
-                        />
-                      </FormControl>
-                      <FormDescription />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              ))}
-              <div>
-                {additionalFields.length > 0 && <span className="text-lg font-medium">Social Links</span>}
-                {additionalFields.map((field: any, index) => (
-                  <div key={index} className="flex gap-4 items-center mt-3">
-                    {/* <div className="flex-1">
-                    <FormItem>
-                      <FormLabel>Field Name</FormLabel>
-                      <FormControl>
-                        <Input
-                        
-                          value={field.name}
-                          onChange={(e) =>
-                            handleChangeField(index, "name", e.target.value)
-                          }  placeholder="Enter field name"
-                        />
-                      </FormControl>
-                    </FormItem>
-                  </div> */}
-                    <FormField
-                      key={`1-${index}`}
-                      control={control}
-                      name={field?.name}
-                      render={({ field: formField }) => (
-                        <FormItem>
-                          <FormLabel>Field Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...formField}
-                              placeholder="Enter field name"
-                              value={field.name}
-                              onChange={(e) =>
-                                handleChangeField(index, "name", e.target.value)
-                              }
-                            />
-                          </FormControl>
-                          <FormDescription />
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      key={`2-${index}`}
-                      control={control}
-                      name={field?.value}
-                      render={({ field: formField }) => (
-                        <FormItem>
-                          <FormLabel>Value</FormLabel>
-                          <FormControl>
-                            <Input
-                              {...formField}
-                              placeholder="Enter value"
-                              value={field.value}
-                              onChange={(e) =>
-                                handleChangeField(
-                                  index,
-                                  "value",
-                                  e.target.value
-                                )
-                              }
-                            />
-                          </FormControl>
-                          <FormDescription />
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    {/* <div className="flex-1">
-                    <FormItem>
-                      <FormLabel>Value</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Enter value"
-                          value={field.value}
-                          onChange={(e) =>
-                            handleChangeField(index, "value", e.target.value)
-                          }
-                        />
-                      </FormControl>
-                    </FormItem>
-                  </div> */}
-
-                    {index === additionalFields.length - 1 ? (
-                      <Button onClick={handleAddField}>Add</Button>
-                    ) : (
-                      <Button
-                        type="button"
-                        variant="destructive"
-                        // size="sm"
-                        onClick={() => handleRemoveField(index)}
-                      >
-                        Remove
-                      </Button>
-                    )}
-                  </div>
-                ))}
-
-                {additionalFields.length === 0 && (
-                  <Button
-                    onClick={(e: any) => {
-                      e.preventDefault();
-                      handleAddField();
-                    }}
-                  >
-                    {" "}
-                    Add Additional Detail
-                  </Button>
-                )}
-              </div>
-            </form>
-          </Form>
-        </div>
-        <div className="flex flex-col w-1/2">
-          <div className="flex flex-col bg-white h-fit rounded-md border border-gray-200">
-            <div className="flex items-center bg-gray-200 rounded-t-md px-4 py-2">
-              <div className="flex space-x-2">
-                <span className="w-3 h-3 bg-red-500 rounded-full"></span>
-                <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
-                <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-              </div>
-              <span className="text-sm ml-4 font-semibold text-gray-700">
-                {" "}
-                Signature Preview
-              </span>
-              <div />
+    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-slate-50">
+      <div className="max-w-7xl w-full h-full mb-24">
+        <div className="px-4 md:px-5 py-0 md:py-6">
+          <div className="flex flex-col md:flex-row flex-start w-full gap-3 md:gap-8 py-6 border-b">
+            <div className="flex flex-col flex-1">
+              <h2 className="text-2xl font-bold text-gray-800">
+                Email Signature Setup
+              </h2>
+              <p className="text-slate-600 text-sm">
+                Configuring Your Gmail Signature in a Single Step.
+              </p>
             </div>
-            <div className="flex flex-col p-6">
-              <div className=" p-4">
-                <div className="reset-tw">
-                  <div
-                    ref={hiddenDivRef}
-                    dangerouslySetInnerHTML={{ __html: signatureHtml }}
-                  ></div>
-                </div>
-              </div>
+            <Image
+              className="w-[132px] h-4"
+              src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"
+              alt={"carestack logo"}
+              width={132}
+              height={16}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row justify-center gap-6 lg:gap-24 p-6">
+          <div className="md:w-1/2 w-full flex flex-col ">
+            <Card>
+              <CardContent className="p-6">
+                <Form {...form}>
+                  <form className="space-y-4">
+                    <FormField
+                      control={control}
+                      name="hideData"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-center justify-between">
+                          <FormLabel className="text-lg">Personal Details</FormLabel>
+
+                          <FormControl>
+                            <div className="flex items-center gap-3">
+                              <Switch
+                                id="terms"
+                                checked={hideData}
+                                onCheckedChange={(checked: any) => {
+                                  field.onChange(checked);
+                                  setHideData(checked);
+                                }}
+                              />
+                              <FormLabel htmlFor="terms">
+                                Show Details
+                              </FormLabel>
+                            </div>
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    {urls?.emailId && (
+                      <>
+                        <FormField
+                          control={control}
+                          name="emailId"
+                          render={({ field: formField }) => (
+                            <FormItem>
+                              <FormLabel>Email</FormLabel>
+                              <FormControl>
+                                <Input
+                                  {...formField}
+                                  placeholder="Enter your email"
+                                  onChange={(e) => {
+                                    formField.onChange(e);
+                                    handleInputChange(
+                                      "emailId",
+                                      e.target.value,
+                                      "emailId"
+                                    );
+                                  }}
+                                  value={urls.emailId || ""}
+                                />
+                              </FormControl>
+                              <FormDescription />
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={control}
+                          name="hideData"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <div className="flex items-center gap-3">
+                                  <Checkbox
+                                    checked={hideEmail}
+                                    onCheckedChange={(checked: any) => {
+                                      field.onChange(checked);
+                                      setHideEmail(checked);
+                                    }}
+                                  />
+                                  <FormLabel>
+                                    Show Email ID in signature
+                                  </FormLabel>
+                                </div>
+                              </FormControl>
+
+                              <Separator className="my-4" />
+                            </FormItem>
+                          )}
+                        />
+                      </>
+                    )}
+
+                    {formFields?.map((field: any, i: number) => (
+                      <FormField
+                        key={`${field.key}-${i}`}
+                        control={control}
+                        name={field.key}
+                        render={({ field: formField }) => (
+                          <FormItem>
+                            <FormLabel>{field.label}</FormLabel>
+                            <FormControl>
+                              <Input
+                                {...formField}
+                                placeholder={field.placeholder}
+                                onChange={(e) => {
+                                  formField.onChange(e);
+                                  handleInputChange(
+                                    field.key,
+                                    e.target.value,
+                                    field.label
+                                  );
+                                }}
+                              />
+                            </FormControl>
+                            <FormDescription />
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    ))}
+                    <div>
+                      {additionalFields.length > 0 && (
+                        <span className="text-lg font-medium">
+                          Social Links
+                        </span>
+                      )}
+                      {additionalFields.map((field: any, index) => (
+                        <div key={index} className="flex gap-4 items-end  mt-3">
+                          <FormField
+                            key={`1-${index}`}
+                            control={control}
+                            name={field?.name}
+                            render={({ field: formField }) => (
+                              <FormItem>
+                                <FormLabel>Link #{index + 1}</FormLabel>
+                                <FormControl>
+                                  <Input
+                                    {...formField}
+                                    placeholder="Enter field name"
+                                    value={field.name}
+                                    onChange={(e) =>
+                                      handleChangeField(
+                                        index,
+                                        "name",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </FormControl>
+                                <FormDescription />
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <FormField
+                            key={`2-${index}`}
+                            control={control}
+                            name={field?.value}
+                            render={({ field: formField }) => (
+                              <FormItem>
+                                {/* <FormLabel>{""}</FormLabel> */}
+                                <FormControl>
+                                  <Input
+                                    {...formField}
+                                    placeholder="Enter value"
+                                    value={field.value}
+                                    onChange={(e) =>
+                                      handleChangeField(
+                                        index,
+                                        "value",
+                                        e.target.value
+                                      )
+                                    }
+                                  />
+                                </FormControl>
+                                <FormDescription />
+                                <FormMessage />
+                              </FormItem>
+                            )}
+                          />
+                          <Button
+                            type="button"
+                            className="flex p-3 mb-2 justify-center items-center gap-2 rounded-[6px] border border-red-200 bg-white"
+                            variant="outline"
+                            onClick={() => handleRemoveField(index)}
+                          >
+                            <DeleteIcon />
+                          </Button>
+                        </div>
+                      ))}
+
+                      {/* {additionalFields.length === 0 && ( */}
+                      <Button
+                        variant="link"
+                        className="px-0"
+                        onClick={(e: any) => {
+                          e.preventDefault();
+                          handleAddField();
+                        }}
+                      >
+                        <span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="19"
+                            height="18"
+                            viewBox="0 0 19 18"
+                            fill="none"
+                          >
+                            <path
+                              d="M9.5 16.5C13.6421 16.5 17 13.1421 17 9C17 4.85786 13.6421 1.5 9.5 1.5C5.35786 1.5 2 4.85786 2 9C2 13.1421 5.35786 16.5 9.5 16.5Z"
+                              stroke="#2563EB"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M9.5 6V12"
+                              stroke="#2563EB"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <path
+                              d="M6.5 9H12.5"
+                              stroke="#2563EB"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </span>
+                        <span className="text-blue-600">
+                          {" "}
+                          Add social links{" "}
+                        </span>
+                      </Button>
+                      {/* )} */}
+                    </div>
+                    <Separator className="my-4" />
+                    <FormField
+                      control={control}
+                      name="hideDisclaimer"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-row items-center justify-between">
+                          <FormLabel className="text-lg" >Disclaimer</FormLabel>
+
+                          <FormControl>
+                            <div className="flex items-center gap-3">
+                              <Switch
+                                id="disclaimer"
+                                checked={hideDisclaimer}
+                                onCheckedChange={(checked: any) => {
+                                  field.onChange(checked);
+                                  setHideDisclaimer(checked);
+                                }}
+                              />
+                              <FormLabel htmlFor="disclaimer">
+                                Show Disclaimer
+                              </FormLabel>
+                            </div>
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                    {disclaimerFormFields?.map((field: any, i: number) => (
+                      <FormField
+                        key={`${field.key}-${i}`}
+                        control={control}
+                        name={field.key}
+                        render={({ field: formField }) => (
+                          <FormItem>
+                            <FormLabel>{field.label}</FormLabel>
+                            <FormControl>
+                              <Input
+                                {...formField}
+                                placeholder={field.placeholder}
+                                onChange={(e) => {
+                                  formField.onChange(e);
+                                  handleInputChange(
+                                    field.key,
+                                    e.target.value,
+                                    field.label
+                                  );
+                                }}
+                              />
+                            </FormControl>
+                            <FormDescription />
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    ))}
+                  </form>
+                </Form>
+              </CardContent>
+            </Card>
+            <SetupForSignature id="instruction" />
+          </div>
+          <div className="flex flex-col md:w-1/2 w-full bg-slate-50">
+            <div id="preview" className="flex flex-col">
+              <Card>
+                <CardHeader className=" bg-slate-100 p-3">
+                  <CardTitle className="flex">
+                    <span className="flex space-x-2 items-center">
+                      <span className="w-3 h-3 bg-red-500 rounded-full"></span>
+                      <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
+                      <span className="w-3 h-3 bg-green-500 rounded-full"></span>
+                    </span>
+                    <span className="ml-4  text-gray-700">
+                      Signature Preview
+                    </span>
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {/* <div className="flex items-center bg-slate-100 rounded-t-md p-3"> */}
+                  {/* </div> */}
+                  <div className="flex flex-col pt-6">
+                    <div className="reset-tw">
+                      <div
+                        ref={hiddenDivRef}
+                        dangerouslySetInnerHTML={{ __html: signatureHtml }}
+                      ></div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
-          <SetupForSignature />
         </div>
       </div>
       
       <div
-        className="fixed gap-4 bottom-0 bg-white w-full py-6 text-center align-center flex items-center justify-center"
+        className="fixed gap-4 bottom-0 bg-white w-full p-6 text-center align-center flex flex-col md:flex-row items-center justify-center"
         style={{ boxShadow: "0 -4px 18px -1px rgba(0, 0, 0, 0.05)" }}
       >
         {" "}
@@ -613,6 +770,7 @@ export default function EmailSignatureTemplate(props: {
             e.stopPropagation();
             copyToClipboard();
           }}
+          className="bg-blue-600 hover:bg-blue-700 md:w-fit w-full"
         >
           {" "}
           <svg
@@ -632,17 +790,56 @@ export default function EmailSignatureTemplate(props: {
           </svg>
           <span> Copy Signature</span>
         </Button>
-        <Button variant="outline">
+        <Link
+          href="https://mail.google.com/mail/u/0/#settings/general:~:text=signature"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:block"
+        >
+          <Button
+            variant="outline"
+            className="bg-blue-100 hover:bg-blue-200 text-blue-700"
+          >
+            <ShareIcon />
+            Open Gmail Settings
+          </Button>
+        </Link>
+        <div className="flex md:hidden gap-3 w-full">
           <Link
             href="https://mail.google.com/mail/u/0/#settings/general:~:text=signature"
             target="_blank"
             rel="noopener noreferrer"
+            className="flex-1"
           >
-            Open Gmail Settings
+            <Button
+              variant="outline"
+              className="bg-blue-100 hover:bg-blue-200 text-blue-700 w-full"
+            >
+              <ShareIcon />
+              Open Gmail Settings
+            </Button>
           </Link>
-        </Button>
-        <div className="flex py-6 gap-3 flex-col relative justify-center">
-          <div className="flex w-auto absolute left-4 bottom-2 min-w-64 text-sm">
+          <Link href="#preview">
+            <Button
+              className="border border-slate-200 p-3 bg-white"
+              variant="secondary"
+              size="icon"
+            >
+              <EyeIcon />
+            </Button>
+          </Link>
+          <Link href="#instruction">
+            <Button
+              className="border border-slate-200 p-3 bg-white"
+              variant="secondary"
+              size="icon"
+            >
+              <InfoIcon />
+            </Button>
+          </Link>
+        </div>
+        <div className="flex py-2 md:py-6 gap-3 flex-col relative w-full md:w-fit">
+          <div className="flex md:w-auto absolute left-4 bottom-2 w-full md:min-w-64 text-sm justify-center">
             {copySuccess}
           </div>
         </div>
