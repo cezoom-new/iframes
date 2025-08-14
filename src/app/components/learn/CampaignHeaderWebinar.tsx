@@ -38,7 +38,7 @@ export default function CampaignHeaderWebinar({
   return (
     <>
       {(templateHeader || eventType || eventDate) && (
-        <div className="flex items-center gap-2 text-sm mt-6">
+        <div className="flex items-center gap-2 text-sm mb-6">
           {templateHeader && (
             <h2 className="text-green-700 font-semibold uppercase">
               {templateHeader}
@@ -54,7 +54,7 @@ export default function CampaignHeaderWebinar({
           )}
           {eventDate && (
             <div
-              className="text-white flex flex-row text-[18px] font-manrope pb-6 font-medium leading-[100%] gap-3"
+              className="text-white flex flex-row text-[18px] font-manrope font-medium gap-3"
             >
              <CalenderIcon/> <span>{eventDate.replace(/\s*\|\s*/g, "\u00A0 |  \u00A0")}</span>
  <span> {eventLocation? "  |  " : ""} </span>  {eventLocation}

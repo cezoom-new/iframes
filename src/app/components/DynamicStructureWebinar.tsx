@@ -46,7 +46,7 @@ const DynamicStructureWebinar = ({
         <p
           style={{ color: colors?.subtitleText }}
           className={
-            "text-[48px]  font-medium !leading-[118%] font-geist lg:max-w-[514px]"
+            "text-[48px] font-medium !leading-[118%] font-geist lg:max-w-[514px] mb-6"
           }
         >
           {children}
@@ -58,7 +58,7 @@ const DynamicStructureWebinar = ({
         <span
           style={
             btncolor === "gradient"
-              ? { background: colors?.highlightColor,backgroundClip: "text", WebkitTextFillColor: "transparent", fontWeight:"800", fontFamily:"Manrope", fontSize:"60px",lineHeight:"90%", letterSpacing:"-0.6px"}
+              ? { background: colors?.highlightColor,backgroundClip: "text", WebkitTextFillColor: "transparent", letterSpacing:"-0.6px"}
               : { color: colors?.highlightColor } 
           }
         >
@@ -115,7 +115,7 @@ const DynamicStructureWebinar = ({
     normal: ({ children }: any) => (
       <p
         style={{ color: colors?.paragraphColor }}
-        className="text-[18px] font-light whitespace-pre-wrap font-geist  leading-[162.5%]"
+        className="text-[18px] font-light whitespace-pre-wrap font-geist mb-6 leading-[162.5%]"
       >
         {children}
       </p>
@@ -233,7 +233,7 @@ const DynamicStructureWebinar = ({
                         ?.asset?.url
                     }
                     alt={"sampleText"}
-                    className="pb-6"
+                    className="mb-6"
                     width={
                       campaign?.templateLogos?.components[0]?.templateLogos[0]
                         ?.asset?.metadata?.dimensions?.width || 200
@@ -311,7 +311,7 @@ const DynamicStructureWebinar = ({
             return (
               <div
                 key={`buttonComponents-${index}`}
-                className="flex gap-6 mt-6 items-center"
+                className="flex gap-6 items-center mb-6"
               >
                 {component?.ctaBtn?.ctaBtnText && (
                   <CTAButton
