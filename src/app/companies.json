@@ -1,0 +1,14 @@
+[
+  {
+    "value": "carestack",
+    "label": "CareStack",
+    "url":"/carestack.svg",
+    "link":"https://carestack.com/"
+  },
+  {
+    "value": "carerevenue",
+    "label": "CareRevenue",
+    "url":"/carerevenue.svg",
+    "link":"https://carerevenue.com/"
+  }
+]

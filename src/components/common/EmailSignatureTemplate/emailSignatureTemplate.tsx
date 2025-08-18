@@ -26,6 +26,9 @@ import DeleteIcon from "@/app/icons/deleteIcon";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { title } from "process";
+import CopyIcon from "@/app/icons/copyIcon";
+import CompanyList from "./companyList";
+import Companies from "@/app/companies.json";
 
 const copySearchParams = (sourceUrl: string, destUrl: string): string => {
   try {
@@ -67,7 +70,7 @@ export default function EmailSignatureTemplate(props: {
   const [updatedRedirectUrl, setUpdatedRedirectUrl] = useState<string>("");
   const [hideData, setHideData] = useState<boolean>(true);
   const [hideEmail, setHideEmail] = useState<boolean>(true);
-  const [hideDisclaimer, setHideDisclaimer] = useState<boolean>(true);
+  const [hideDisclaimer, setHideDisclaimer] = useState<boolean>(false);
 
   const searchParams = useSearchParams();
   const form = useForm({
@@ -76,12 +79,14 @@ export default function EmailSignatureTemplate(props: {
       emailId: searchParams.get("email") || "",
       phoneNumber: searchParams.get("phone") || "",
       role: searchParams.get("role") || "",
-      note: "",
-      title: "",
-      description: "",
+      org: searchParams.get("org") || "",
+      note: "Please consider the environment before printing this e-mail.",
+      title: "​Disclaimer",
+      description:
+        "This message May contain confidential information and  is intended only for the individual(s) Or entities  named above. Any review, retransmission, dissemination, distribution, copying or other use of  this information by persons or entities other than the intended recipient is prohibited. Please notify the sender immediately by e-mail if you have received this e-mail by mistake and delete this e-mail from any and all computers it May be stored on. No liability is accepted for any errors or omissions  in the contents of this message which arise as a result of e-mail transmission. If verification is required, please request a hard-copy version. No liability is accepted for any damage caused by any virus transmitted by this e-mail. The recipient should check this e-mail and any attachments for the presence of viruses.",
       hideData: true,
       hideEmail: true,
-      hideDisclaimer: true,
+      hideDisclaimer: false,
     },
   });
   const { control } = form;
@@ -97,15 +102,17 @@ export default function EmailSignatureTemplate(props: {
   const fullName = searchParams.get("name");
   const phoneNumber = searchParams.get("phone") || "";
   const role = searchParams.get("role");
+  const org = searchParams.get("org");
 
   const [urls, setUrls] = useState<any>({
     fullName: fullName,
     emailId: emailId,
     phoneNumber: phoneNumber,
     role: role,
-    note: "",
-    title: "",
-    description: "",
+    org: org,
+    note: form.getValues("note"),
+    title: form.getValues("title"),
+    description: form.getValues("description"),
   });
 
   const [formFields, setFormFields] = useState([
@@ -132,7 +139,7 @@ export default function EmailSignatureTemplate(props: {
       placeholder: "Type your note here",
     },
     {
-      label: "Title",
+      label: "Disclaimer Title",
       key: "title",
       placeholder: "Type your title here",
     },
@@ -197,11 +204,15 @@ export default function EmailSignatureTemplate(props: {
       setCopySuccess("Failed to copy");
     }
   };
+  const [companyValue, setCompValue] = React.useState(
+    searchParams.get("org") || ""
+  );
+  const selectedCompany = Companies.find((c) => c.value === companyValue);
 
   const signatureHtml: string = `
   <div>
     ${
-      updatedLink && updatedRedirectUrl
+      updatedLink && updatedRedirectUrl && hideData
         ? `
       <table cellpadding="0px" style="border-spacing:0px" cellspacing="0px" width="420px">
         <tbody>
@@ -231,8 +242,8 @@ export default function EmailSignatureTemplate(props: {
           
                   <tr>
               <td colspan="2">
-                <a href="https://carestack.com" target="_blank" rel="noopener noreferrer">
-                  <img style="width:110px; vertical-align:middle;" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png" />
+                <a href=${selectedCompany?.link} target="_blank" rel="noopener noreferrer">
+                  <img style="width:110px; vertical-align:middle;" src="${selectedCompany?.url}" />
                 </a>
               </td>
             </tr>
@@ -278,6 +289,7 @@ export default function EmailSignatureTemplate(props: {
                     "phoneNumber",
                     "role",
                     "note",
+                    "org",
                     "title",
                     "description",
                   ].includes(key)
@@ -322,9 +334,10 @@ export default function EmailSignatureTemplate(props: {
     `
         : ""
     }
-    ${hideDisclaimer ?
-      urls?.note || urls?.title || urls?.description
-        ? `<table cellpadding="0" style="border-spacing:0px; font-size:12px; padding-top: 24px;" cellspacing="0" >
+    ${
+      hideDisclaimer
+        ? urls?.note || urls?.title || urls?.description
+          ? `<table cellpadding="0" style="border-spacing:0px; font-size:12px; padding-top: 24px;" cellspacing="0" >
          <tbody>
             ${
               urls.note
@@ -356,8 +369,8 @@ export default function EmailSignatureTemplate(props: {
          </tbody>
          </table>
          `
+          : ""
         : ""
-        :""
     }
   </div>
 `;
@@ -412,22 +425,51 @@ export default function EmailSignatureTemplate(props: {
     });
   };
 
+  // const setCompanyValue = (key: any, value: any, label: string) => {
+  //   // debugger
+  //   setCompValue(value)
+  //   const nonUrlField = key.includes(searchParams);
+  //   setUrls((prevUrls: any) => ({
+  //     ...prevUrls,
+  //     [key]: value,
+  //   }));
+  // };
+  const setCompanyValue = (key: string, value: string, label: string) => {
+    // update local state
+    setCompValue(value);
+
+    // update urls object
+    setUrls((prevUrls: any) => ({
+      ...prevUrls,
+      [key]: value,
+    }));
+
+    // update query string
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+
+    // avoid history clutter
+    // router.replace(`?${params.toString()}`, { scroll: false });
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-slate-50">
+    <div className="flex flex-col items-center justify-center w-full min-h-screen bg-slate-50 special-theme ">
       <div className="max-w-7xl w-full h-full mb-24">
         <div className="px-4 md:px-5 py-0 md:py-6">
           <div className="flex flex-col md:flex-row flex-start w-full gap-3 md:gap-8 py-6 border-b">
             <div className="flex flex-col flex-1">
-              <h2 className="text-2xl font-bold text-gray-800">
-                Email Signature Setup
-              </h2>
+              <h2 className="text-2xl font-bold ">Email Signature Setup</h2>
               <p className="text-slate-600 text-sm">
                 Configuring Your Gmail Signature in a Single Step.
               </p>
             </div>
             <Image
               className="w-[132px] h-4"
-              src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"
+              src={selectedCompany?.url || ""}
               alt={"carestack logo"}
               width={132}
               height={16}
@@ -445,7 +487,9 @@ export default function EmailSignatureTemplate(props: {
                       name="hideData"
                       render={({ field }) => (
                         <FormItem className="flex flex-row items-center justify-between">
-                          <FormLabel className="text-lg">Personal Details</FormLabel>
+                          <FormLabel className="text-lg">
+                            Personal Details
+                          </FormLabel>
 
                           <FormControl>
                             <div className="flex items-center gap-3">
@@ -548,6 +592,25 @@ export default function EmailSignatureTemplate(props: {
                         )}
                       />
                     ))}
+                    <FormField
+                      key="org"
+                      control={control}
+                      name="org"
+                      render={({ field: formField }) => (
+                        <FormItem>
+                          <FormLabel>Organisation</FormLabel>
+                          <FormControl>
+                            <CompanyList
+                              Companies={Companies}
+                              value={companyValue}
+                              setValue={setCompanyValue}
+                            />
+                          </FormControl>
+                          <FormDescription />
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                     <div>
                       {additionalFields.length > 0 && (
                         <span className="text-lg font-medium">
@@ -659,10 +722,7 @@ export default function EmailSignatureTemplate(props: {
                             />
                           </svg>
                         </span>
-                        <span className="text-blue-600">
-                          {" "}
-                          Add social links{" "}
-                        </span>
+                        <span className=""> Add social links </span>
                       </Button>
                       {/* )} */}
                     </div>
@@ -672,7 +732,7 @@ export default function EmailSignatureTemplate(props: {
                       name="hideDisclaimer"
                       render={({ field }) => (
                         <FormItem className="flex flex-row items-center justify-between">
-                          <FormLabel className="text-lg" >Disclaimer</FormLabel>
+                          <FormLabel className="text-lg">Disclaimer</FormLabel>
 
                           <FormControl>
                             <div className="flex items-center gap-3">
@@ -736,9 +796,7 @@ export default function EmailSignatureTemplate(props: {
                       <span className="w-3 h-3 bg-yellow-500 rounded-full"></span>
                       <span className="w-3 h-3 bg-green-500 rounded-full"></span>
                     </span>
-                    <span className="ml-4  text-gray-700">
-                      Signature Preview
-                    </span>
+                    <span className="ml-4">Signature Preview</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -758,52 +816,54 @@ export default function EmailSignatureTemplate(props: {
           </div>
         </div>
       </div>
-      
+
       <div
         className="fixed gap-4 bottom-0 bg-white w-full p-6 text-center align-center flex flex-col md:flex-row items-center justify-center"
         style={{ boxShadow: "0 -4px 18px -1px rgba(0, 0, 0, 0.05)" }}
       >
         {" "}
-        <Button
-          onClick={(e: any) => {
-            e.preventDefault();
-            e.stopPropagation();
-            copyToClipboard();
-          }}
-          className="bg-blue-600 hover:bg-blue-700 md:w-fit w-full"
-        >
-          {" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <path
-              d="M15.75 17.25V20.625C15.75 21.246 15.246 21.75 14.625 21.75H4.875C4.57663 21.75 4.29048 21.6315 4.0795 21.4205C3.86853 21.2095 3.75 20.9234 3.75 20.625V7.875C3.75 7.254 4.254 6.75 4.875 6.75H6.75C7.25257 6.74966 7.7543 6.79114 8.25 6.874M15.75 17.25H19.125C19.746 17.25 20.25 16.746 20.25 16.125V11.25C20.25 6.79 17.007 3.089 12.75 2.374C12.2543 2.29114 11.7526 2.24966 11.25 2.25H9.375C8.754 2.25 8.25 2.754 8.25 3.375V6.874M15.75 17.25H9.375C9.07663 17.25 8.79048 17.1315 8.5795 16.9205C8.36853 16.7095 8.25 16.4234 8.25 16.125V6.874M20.25 13.5V11.625C20.25 10.7299 19.8944 9.87145 19.2615 9.23852C18.6286 8.60558 17.7701 8.25 16.875 8.25H15.375C15.0766 8.25 14.7905 8.13148 14.5795 7.9205C14.3685 7.70952 14.25 7.42337 14.25 7.125V5.625C14.25 5.18179 14.1627 4.74292 13.9931 4.33345C13.8235 3.92397 13.5749 3.55191 13.2615 3.23852C12.9481 2.92512 12.576 2.67652 12.1666 2.50691C11.7571 2.3373 11.3182 2.25 10.875 2.25H9.75"
-              stroke="#EFF6FF"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <span> Copy Signature</span>
-        </Button>
-        <Link
-          href="https://mail.google.com/mail/u/0/#settings/general:~:text=signature"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:block"
-        >
-          <Button
-            variant="outline"
-            className="bg-blue-100 hover:bg-blue-200 text-blue-700"
-          >
-            <ShareIcon />
-            Open Gmail Settings
-          </Button>
-        </Link>
+        <div className="flex items-center justify-between w-full px-6">
+          {/* Center group */}
+          <div className="flex justify-center gap-3 flex-1">
+            <Button
+              variant="default"
+              onClick={(e: any) => {
+                e.preventDefault();
+                e.stopPropagation();
+                copyToClipboard();
+              }}
+              className="md:w-fit w-full"
+            >
+              <CopyIcon />
+              <span> Copy Signature</span>
+            </Button>
+
+            <Link
+              href="https://mail.google.com/mail/u/0/#settings/general:~:text=signature"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:block"
+            >
+              <Button variant="outline">
+                <ShareIcon />
+                Open Gmail Settings
+              </Button>
+            </Link>
+            <div className="flex py-2 md:py-6 gap-3 flex-col relative w-full md:w-fit">
+              <div className="flex md:w-auto absolute left-0 bottom-4 w-full md:min-w-64 text-sm justify-center">
+                {copySuccess}
+              </div>
+            </div>
+          </div>
+
+          {/* Right button */}
+          <Link href="#instruction" className="hidden md:block">
+            <Button variant="outline">
+              <InfoIcon />
+              <span>Read Instruction</span>
+            </Button>
+          </Link>
+        </div>
         <div className="flex md:hidden gap-3 w-full">
           <Link
             href="https://mail.google.com/mail/u/0/#settings/general:~:text=signature"
@@ -811,20 +871,13 @@ export default function EmailSignatureTemplate(props: {
             rel="noopener noreferrer"
             className="flex-1"
           >
-            <Button
-              variant="outline"
-              className="bg-blue-100 hover:bg-blue-200 text-blue-700 w-full"
-            >
+            <Button variant="outline" className="w-full">
               <ShareIcon />
               Open Gmail Settings
             </Button>
           </Link>
           <Link href="#preview">
-            <Button
-              className="border border-slate-200 p-3 bg-white"
-              variant="secondary"
-              size="icon"
-            >
+            <Button variant="outline">
               <EyeIcon />
             </Button>
           </Link>
@@ -837,11 +890,6 @@ export default function EmailSignatureTemplate(props: {
               <InfoIcon />
             </Button>
           </Link>
-        </div>
-        <div className="flex py-2 md:py-6 gap-3 flex-col relative w-full md:w-fit">
-          <div className="flex md:w-auto absolute left-4 bottom-2 w-full md:min-w-64 text-sm justify-center">
-            {copySuccess}
-          </div>
         </div>
       </div>
     </div>

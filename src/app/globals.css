@@ -122,3 +122,19 @@ body {
   }
 }
 
+.special-theme {
+   --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+
+  /* primary (blue) */
+  --primary: 217 91% 60%;
+  --primary-foreground: 210 40% 98%;
+
+  /* secondary */
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+
+  /* border, ring, etc. */
+  --border: 214.3 31.8% 91.4%;
+  --ring: 217 91% 60%;
+}
