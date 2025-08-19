@@ -63,3 +63,9 @@ export const formatCustomDate = (dateString: string): string => {
 
   return date.toLocaleString("en-US", options);
 };
+
+
+export function parseBoolean(value: string | null, defaultValue = false): boolean {
+  if (value === null) return defaultValue;
+  return value.toLowerCase() === "true" || value === "1";
+}

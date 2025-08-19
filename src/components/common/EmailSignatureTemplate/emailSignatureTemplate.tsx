@@ -29,6 +29,7 @@ import { title } from "process";
 import CopyIcon from "@/app/icons/copyIcon";
 import CompanyList from "./companyList";
 import Companies from "@/app/companies.json";
+import { parseBoolean } from "@/utils/page";
 
 const copySearchParams = (sourceUrl: string, destUrl: string): string => {
   try {
@@ -70,9 +71,12 @@ export default function EmailSignatureTemplate(props: {
   const [updatedRedirectUrl, setUpdatedRedirectUrl] = useState<string>("");
   const [hideData, setHideData] = useState<boolean>(true);
   const [hideEmail, setHideEmail] = useState<boolean>(true);
-  const [hideDisclaimer, setHideDisclaimer] = useState<boolean>(false);
+  // const [hideDisclaimer, setHideDisclaimer] = useState<boolean>(false);
 
   const searchParams = useSearchParams();
+  const [hideDisclaimer, setHideDisclaimer] = useState<boolean>(
+    parseBoolean(searchParams.get("disclaimer"), false)
+  );
   const form = useForm({
     defaultValues: {
       fullName: searchParams.get("name") || "",
@@ -86,7 +90,7 @@ export default function EmailSignatureTemplate(props: {
         "This message May contain confidential information and  is intended only for the individual(s) Or entities  named above. Any review, retransmission, dissemination, distribution, copying or other use of  this information by persons or entities other than the intended recipient is prohibited. Please notify the sender immediately by e-mail if you have received this e-mail by mistake and delete this e-mail from any and all computers it May be stored on. No liability is accepted for any errors or omissions  in the contents of this message which arise as a result of e-mail transmission. If verification is required, please request a hard-copy version. No liability is accepted for any damage caused by any virus transmitted by this e-mail. The recipient should check this e-mail and any attachments for the presence of viruses.",
       hideData: true,
       hideEmail: true,
-      hideDisclaimer: false,
+      hideDisclaimer: parseBoolean(searchParams.get("disclaimer"), false),
     },
   });
   const { control } = form;
@@ -103,6 +107,7 @@ export default function EmailSignatureTemplate(props: {
   const phoneNumber = searchParams.get("phone") || "";
   const role = searchParams.get("role");
   const org = searchParams.get("org");
+  const disclaimer = searchParams.get("disclaimer");
 
   const [urls, setUrls] = useState<any>({
     fullName: fullName,
@@ -113,6 +118,7 @@ export default function EmailSignatureTemplate(props: {
     note: form.getValues("note"),
     title: form.getValues("title"),
     description: form.getValues("description"),
+    disclaimer: disclaimer,
   });
 
   const [formFields, setFormFields] = useState([
@@ -292,6 +298,7 @@ export default function EmailSignatureTemplate(props: {
                     "org",
                     "title",
                     "description",
+                    "disclaimer",
                   ].includes(key)
               )
               .filter(([_, value]) => value) // keep only non-empty
