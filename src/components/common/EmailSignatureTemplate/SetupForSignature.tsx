@@ -62,7 +62,7 @@ export default function SetupForSignature({ id }: { id: string }) {
                 </ul>
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-3" className="border-none">
+            <AccordionItem value="item-4" className="border-none">
               <AccordionTrigger> Step 4: You're done! ✅</AccordionTrigger>
               <AccordionContent>
                 <small className="text-sm leading-none font-medium">
