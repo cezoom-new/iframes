@@ -162,23 +162,33 @@ export default function EmailSignatureTemplate(props: {
       [key]: url,
     }));
   };
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    const currentUrl = new URL(window.location.href);
+    const email = currentUrl.searchParams.get("email"); // get only email
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const currentUrl = window.location.href;
-      setUpdatedLink(props?.link ? mergeUrls(props.link, currentUrl) : "");
-
-      if (props?.redirectUrl) {
-        const encodedRedirectUrl = copySearchParams(
-          currentUrl,
-          props.redirectUrl
-        );
-        setUpdatedRedirectUrl(encodeURI(encodedRedirectUrl));
-      } else {
-        setUpdatedRedirectUrl("");
+    if (props?.link) {
+      const url = new URL(props.link);
+      if (email) {
+        url.searchParams.set("email", email); // add only email param
       }
+      setUpdatedLink(url.toString());
+    } else {
+      setUpdatedLink("");
     }
-  }, [props.link, props.redirectUrl]);
+
+    if (props?.redirectUrl) {
+      const redirectUrl = new URL(props.redirectUrl);
+      if (email) {
+        redirectUrl.searchParams.set("email", email);
+      }
+      setUpdatedRedirectUrl(redirectUrl.toString());
+    } else {
+      setUpdatedRedirectUrl("");
+    }
+  }
+}, [props.link, props.redirectUrl]);
+
 
   const handleInputChange = (key: any, value: any, label: string) => {
     // const searchParams = [emailId, fullName, phoneNumber, designation];
@@ -248,7 +258,12 @@ export default function EmailSignatureTemplate(props: {
                   <tr>
               <td colspan="2">
                 <a href=${selectedCompany?.link} target="_blank" rel="noopener noreferrer">
-                  <img style="width:auto; vertical-align:middle; height: 16px" src="${selectedCompany?.url}" />
+                ${selectedCompany?.url ?
+                  ` <img style="width:auto; vertical-align:middle; height: 16px" src="${selectedCompany?.url}" />`
+                  :
+                  ` <img style="width:auto; vertical-align:middle; height: 16px" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png" />`
+                }
+                 
                 </a>
               </td>
             </tr>
@@ -475,7 +490,7 @@ export default function EmailSignatureTemplate(props: {
             </div>
             <Image
               className="h-4 w-auto"
-              src={selectedCompany?.url || ""}
+              src={selectedCompany?.url || "https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"}
               alt={"carestack logo"}
               width={250}
               height={50}

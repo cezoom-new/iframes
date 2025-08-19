@@ -39,7 +39,7 @@ export async function GET(req: NextRequest, { params }: any) {
       status: 200,
       statusText: "OK",
       headers: {
-        "Content-Type": "image/jpeg",
+        "Content-Type": "image/gif",
         "Cache-Control":
         "public, max-age=3600, s-maxage=3600, stale-while-revalidate=3600",
       },
