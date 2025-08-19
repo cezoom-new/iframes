@@ -166,7 +166,6 @@ export default function EmailSignatureTemplate(props: {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const currentUrl = window.location.href;
-      console.log(currentUrl, props.link, props.redirectUrl);
       setUpdatedLink(props?.link ? mergeUrls(props.link, currentUrl) : "");
 
       if (props?.redirectUrl) {
@@ -249,7 +248,7 @@ export default function EmailSignatureTemplate(props: {
                   <tr>
               <td colspan="2">
                 <a href=${selectedCompany?.link} target="_blank" rel="noopener noreferrer">
-                  <img style="width:110px; vertical-align:middle;" src="${selectedCompany?.url}" />
+                  <img style="width:auto; vertical-align:middle; height: 16px" src="${selectedCompany?.url}" />
                 </a>
               </td>
             </tr>
@@ -475,11 +474,11 @@ export default function EmailSignatureTemplate(props: {
               </p>
             </div>
             <Image
-              className="w-[132px] h-4"
+              className="h-4 w-auto"
               src={selectedCompany?.url || ""}
               alt={"carestack logo"}
-              width={132}
-              height={16}
+              width={250}
+              height={50}
             />
           </div>
         </div>
