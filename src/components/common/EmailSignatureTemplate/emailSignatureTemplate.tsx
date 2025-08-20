@@ -276,7 +276,7 @@ export default function EmailSignatureTemplate(props: {
       return updated;
     });
   };
-    // const setCompanyValue = (key: any, value: any, label: string) => {
+  // const setCompanyValue = (key: any, value: any, label: string) => {
   //   // debugger
   //   setCompValue(value)
   //   const nonUrlField = key.includes(searchParams);
@@ -480,13 +480,13 @@ export default function EmailSignatureTemplate(props: {
               </p>
             </div>
             <Image
-              className="h-4 w-auto"
+              className="md:h-4 md:w-auto"
               src={
                 selectedCompany?.url ||
                 "https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"
               }
               alt={"carestack logo"}
-              width={250}
+              width={200}
               height={50}
             />
           </div>
@@ -833,78 +833,80 @@ export default function EmailSignatureTemplate(props: {
       </div>
 
       <div
-        className="fixed gap-4 bottom-0 bg-white w-full p-6 text-center align-center flex flex-col md:flex-row items-center justify-center"
+        className="fixed bottom-0 bg-white w-full p-6  "
         style={{ boxShadow: "0 -4px 18px -1px rgba(0, 0, 0, 0.05)" }}
       >
         {" "}
-        <div className="flex items-center justify-between w-full px-6">
-          {/* Center group */}
-          <div className="flex justify-center gap-3 flex-1">
-            <Button
-              variant="default"
-              onClick={(e: any) => {
-                e.preventDefault();
-                e.stopPropagation();
-                copyToClipboard();
-              }}
-              className="md:w-fit w-full"
-            >
-              <CopyIcon />
-              <span> Copy Signature</span>
-            </Button>
+        <div className="max-w-7xl w-full m-auto flex flex-col md:flex-row gap-4 ">
+          <div className="flex items-center justify-between w-full md:px-6">
+            {/* Center group */}
+            <div className="flex gap-3 flex-1">
+              <Button
+                variant="default"
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  copyToClipboard();
+                }}
+                className="md:w-fit w-full"
+              >
+                <CopyIcon />
+                <span> Copy Signature</span>
+              </Button>
 
+              <Link
+                href="https://mail.google.com/mail/u/0/#settings/general:~:text=signature"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:block"
+              >
+                <Button variant="outline">
+                  <ShareIcon />
+                  Open Gmail Settings
+                </Button>
+              </Link>
+              <div className="flex py-2 md:py-6 gap-3 flex-col relative w-full md:w-fit">
+                <div className="flex md:w-auto absolute left-0 bottom-4 w-full md:min-w-64 text-sm justify-center">
+                  {copySuccess}
+                </div>
+              </div>
+            </div>
+
+            {/* Right button */}
+            <Link href="#instruction" className="hidden md:block">
+              <Button variant="outline">
+                <InfoIcon />
+                <span>Read Instruction</span>
+              </Button>
+            </Link>
+          </div>
+          <div className="flex md:hidden gap-3 w-full">
             <Link
               href="https://mail.google.com/mail/u/0/#settings/general:~:text=signature"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:block"
+              className="flex-1"
             >
-              <Button variant="outline">
+              <Button variant="outline" className="w-full">
                 <ShareIcon />
                 Open Gmail Settings
               </Button>
             </Link>
-            <div className="flex py-2 md:py-6 gap-3 flex-col relative w-full md:w-fit">
-              <div className="flex md:w-auto absolute left-0 bottom-4 w-full md:min-w-64 text-sm justify-center">
-                {copySuccess}
-              </div>
-            </div>
+            <Link href="#preview">
+              <Button variant="outline">
+                <EyeIcon />
+              </Button>
+            </Link>
+            <Link href="#instruction">
+              <Button
+                className="border border-slate-200 p-3 bg-white"
+                variant="secondary"
+                size="icon"
+              >
+                <InfoIcon />
+              </Button>
+            </Link>
           </div>
-
-          {/* Right button */}
-          <Link href="#instruction" className="hidden md:block">
-            <Button variant="outline">
-              <InfoIcon />
-              <span>Read Instruction</span>
-            </Button>
-          </Link>
-        </div>
-        <div className="flex md:hidden gap-3 w-full">
-          <Link
-            href="https://mail.google.com/mail/u/0/#settings/general:~:text=signature"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex-1"
-          >
-            <Button variant="outline" className="w-full">
-              <ShareIcon />
-              Open Gmail Settings
-            </Button>
-          </Link>
-          <Link href="#preview">
-            <Button variant="outline">
-              <EyeIcon />
-            </Button>
-          </Link>
-          <Link href="#instruction">
-            <Button
-              className="border border-slate-200 p-3 bg-white"
-              variant="secondary"
-              size="icon"
-            >
-              <InfoIcon />
-            </Button>
-          </Link>
         </div>
       </div>
     </div>
