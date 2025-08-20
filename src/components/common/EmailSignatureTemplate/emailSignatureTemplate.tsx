@@ -163,7 +163,7 @@ export default function EmailSignatureTemplate(props: {
     }));
   };
 
-    useEffect(() => {
+  useEffect(() => {
     if (typeof window !== "undefined") {
       const currentUrl = new URL(window.location.href);
       const email = currentUrl.searchParams.get("email"); // get only email
@@ -180,19 +180,18 @@ export default function EmailSignatureTemplate(props: {
 
       if (props?.redirectUrl) {
         const redirectUrl = new URL(props.redirectUrl);
-      if (email) {
         if (email) {
-        redirectUrl.searchParams.set("email", email);
-          redirectUrl.searchParams.set("email", email);
+          if (email) {
+            redirectUrl.searchParams.set("email", email);
+            redirectUrl.searchParams.set("email", email);
+          }
+          setUpdatedRedirectUrl(redirectUrl.toString());
+        } else {
+          setUpdatedRedirectUrl("");
         }
-        setUpdatedRedirectUrl(redirectUrl.toString());
-      } else {
-        setUpdatedRedirectUrl("");
-      }
       }
     }
   }, [props.link, props.redirectUrl]);
-
 
   const handleInputChange = (key: any, value: any, label: string) => {
     // const searchParams = [emailId, fullName, phoneNumber, designation];
@@ -227,6 +226,86 @@ export default function EmailSignatureTemplate(props: {
     searchParams.get("org") || ""
   );
   const selectedCompany = Companies.find((c) => c.value === companyValue);
+
+  const [additionalFields, setAdditionalFields] = useState<
+    { name: string; value: string }[]
+  >([]);
+
+  const handleAddField = () => {
+    setAdditionalFields((prev) => [...prev, { name: "", value: "" }]);
+  };
+
+  const handleRemoveField = (index: number) => {
+    setAdditionalFields((prev) => prev.filter((_, i) => i !== index));
+
+    // Also remove from urls state if the name was filled in
+    setUrls((prev: any) => {
+      const updated = { ...prev };
+      delete updated[additionalFields[index].name];
+      return updated;
+    });
+  };
+
+  const handleChangeField = (
+    index: number,
+    key: "name" | "value",
+    value: string
+  ) => {
+    setAdditionalFields((prev) => {
+      const updated = [...prev];
+      const prevName = updated[index].name; // store old key name
+      updated[index] = { ...updated[index], [key]: value };
+
+      // Update urls immediately
+      setUrls((prevUrls: any) => {
+        const newUrls = { ...prevUrls };
+
+        // If name is changing, remove the old key
+        if (key === "name" && prevName && prevName !== value) {
+          delete newUrls[prevName];
+        }
+
+        // Only add new key if it has a name
+        if (updated[index].name.trim()) {
+          newUrls[updated[index].name] = updated[index].value;
+        }
+
+        return newUrls;
+      });
+
+      return updated;
+    });
+  };
+    // const setCompanyValue = (key: any, value: any, label: string) => {
+  //   // debugger
+  //   setCompValue(value)
+  //   const nonUrlField = key.includes(searchParams);
+  //   setUrls((prevUrls: any) => ({
+  //     ...prevUrls,
+  //     [key]: value,
+  //   }));
+  // };
+  const setCompanyValue = (key: string, value: string, label: string) => {
+    // update local state
+    setCompValue(value);
+
+    // update urls object
+    setUrls((prevUrls: any) => ({
+      ...prevUrls,
+      [key]: value,
+    }));
+
+    // update query string
+    const params = new URLSearchParams(searchParams.toString());
+    if (value) {
+      params.set(key, value);
+    } else {
+      params.delete(key);
+    }
+
+    // avoid history clutter
+    // router.replace(`?${params.toString()}`, { scroll: false });
+  };
 
   const signatureHtml: string = `
   <div>
@@ -303,38 +382,27 @@ export default function EmailSignatureTemplate(props: {
                 </td>
               </tr>
                       
-          ${(() => {
-            const links = Object.entries(urls)
-              .filter(
-                ([key]) =>
-                  ![
-                    "fullName",
-                    "emailId",
-                    "phoneNumber",
-                    "role",
-                    "note",
-                    "org",
-                    "title",
-                    "description",
-                    "disclaimer",
-                  ].includes(key)
-              )
-              .filter(([_, value]) => value) // keep only non-empty
-              .map(
-                ([key, value]) =>
-                  `<span style="margin-right:6px;"><a href="${ensureHttps(value)}" target="_blank">${key}</a></span>`
-              );
+         ${(() => {
+           const links = additionalFields
+             .filter((f) => f.name.trim() && f.value.trim())
+             .map(
+               (f) =>
+                 `<span style="margin-right:6px;">
+          <a href="${ensureHttps(f.value)}" target="_blank">${f.name}</a>
+        </span>`
+             );
 
-            return links.length
-              ? `
-                  <tr>
-                    <td colspan="2" style="color:#331455;">
-                      ${links.join("")}
-                    </td>
-                  </tr>
-                `
-              : "";
-          })()}
+           return links.length
+             ? `
+        <tr>
+          <td colspan="2" style="color:#331455;">
+            ${links.join("")}
+          </td>
+        </tr>
+      `
+             : "";
+         })()}
+
           `
             : ""
         }
@@ -345,7 +413,7 @@ export default function EmailSignatureTemplate(props: {
             <tr>
               <td colspan="2">
                 <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
-                  <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none; width:100%; max-width:420px; margin-top:8px;" />
+                  <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none;  max-width:100%; margin-top:8px;" />
                 </a>
               </td>
             
@@ -399,87 +467,6 @@ export default function EmailSignatureTemplate(props: {
     }
   </div>
 `;
-
-  const [additionalFields, setAdditionalFields] = useState<
-    { name: string; value: string }[]
-  >([]);
-
-  const handleAddField = () => {
-    setAdditionalFields((prev) => [...prev, { name: "", value: "" }]);
-  };
-
-  const handleRemoveField = (index: number) => {
-    setAdditionalFields((prev) => prev.filter((_, i) => i !== index));
-
-    // Also remove from urls state if the name was filled in
-    setUrls((prev: any) => {
-      const updated = { ...prev };
-      delete updated[additionalFields[index].name];
-      return updated;
-    });
-  };
-
-  const handleChangeField = (
-    index: number,
-    key: "name" | "value",
-    value: string
-  ) => {
-    setAdditionalFields((prev) => {
-      const updated = [...prev];
-      const prevName = updated[index].name; // store old key name
-      updated[index] = { ...updated[index], [key]: value };
-
-      // Update urls immediately
-      setUrls((prevUrls: any) => {
-        const newUrls = { ...prevUrls };
-
-        // If name is changing, remove the old key
-        if (key === "name" && prevName && prevName !== value) {
-          delete newUrls[prevName];
-        }
-
-        // Only add new key if it has a name
-        if (updated[index].name.trim()) {
-          newUrls[updated[index].name] = updated[index].value;
-        }
-
-        return newUrls;
-      });
-
-      return updated;
-    });
-  };
-
-  // const setCompanyValue = (key: any, value: any, label: string) => {
-  //   // debugger
-  //   setCompValue(value)
-  //   const nonUrlField = key.includes(searchParams);
-  //   setUrls((prevUrls: any) => ({
-  //     ...prevUrls,
-  //     [key]: value,
-  //   }));
-  // };
-  const setCompanyValue = (key: string, value: string, label: string) => {
-    // update local state
-    setCompValue(value);
-
-    // update urls object
-    setUrls((prevUrls: any) => ({
-      ...prevUrls,
-      [key]: value,
-    }));
-
-    // update query string
-    const params = new URLSearchParams(searchParams.toString());
-    if (value) {
-      params.set(key, value);
-    } else {
-      params.delete(key);
-    }
-
-    // avoid history clutter
-    // router.replace(`?${params.toString()}`, { scroll: false });
-  };
 
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen bg-slate-50 special-theme ">
