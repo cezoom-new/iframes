@@ -310,7 +310,7 @@ export default function EmailSignatureTemplate(props: {
   const signatureHtml: string = `
   <div>
     ${
-      updatedLink && updatedRedirectUrl && hideData
+      updatedLink && updatedRedirectUrl 
         ? `
       <table cellpadding="0px" style="border-spacing:0px" cellspacing="0px" width="420px">
         <tbody>
