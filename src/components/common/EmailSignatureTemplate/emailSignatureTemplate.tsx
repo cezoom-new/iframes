@@ -321,7 +321,7 @@ export default function EmailSignatureTemplate(props: {
                urls.fullName
                  ? `
               <tr>
-                <td colspan="2">
+                <td colspan="2" >
                   <b>${urls.fullName}</b>
                 </td>
               </tr>
@@ -332,14 +332,14 @@ export default function EmailSignatureTemplate(props: {
                     urls.role
                       ? `
               <tr>
-                <td colspan="2" style="color:#331455;">${urls.role}</td>
+                <td colspan="2" style="color:#000000; padding-top:2px; padding-bottom:2px;;">${urls.role}</td>
               </tr>
             `
                       : ""
                   }
           
                   <tr>
-              <td colspan="2">
+              <td colspan="2" style="padding-top:2px; padding-bottom:2px;">
                 <a href=${selectedCompany?.link} target="_blank" rel="noopener noreferrer">
                 ${
                   selectedCompany?.url
@@ -351,11 +351,11 @@ export default function EmailSignatureTemplate(props: {
               </td>
             </tr>
               <tr>
-                <td width="320px" style="vertical-align:middle; height:24px; text-align:left;">
+                <td width="320px" style="vertical-align:middle; height:24px; text-align:left; padding-top:2px; padding-bottom:2px;">
                   ${
                     hideEmail && urls.emailId
                       ? `
-                    <span style="vertical-align:middle; color:#331455;">
+                    <span style="vertical-align:middle; color:#000000;">
                       <a href="mailto:${urls.emailId}">${urls.emailId}</a>
                     </span>
                   `
@@ -373,7 +373,7 @@ export default function EmailSignatureTemplate(props: {
                   ${
                     urls.phoneNumber
                       ? `
-                    <span style="vertical-align:middle; color:#331455;">
+                    <span style="vertical-align:middle; color:#000000;">
                       <a href="tel:${urls.phoneNumber}">${urls.phoneNumber}</a>
                     </span>
                   `
@@ -395,7 +395,7 @@ export default function EmailSignatureTemplate(props: {
            return links.length
              ? `
         <tr>
-          <td colspan="2" style="color:#331455;">
+          <td colspan="2" style="color:#000000; padding-top:2px; padding-bottom:2px;">
             ${links.join("")}
           </td>
         </tr>
@@ -411,7 +411,7 @@ export default function EmailSignatureTemplate(props: {
                       updatedLink && updatedRedirectUrl
                         ? `
             <tr>
-              <td colspan="2">
+              <td colspan="2" style="padding-top:2px; padding-bottom:2px;">
                 <a href="${updatedLink}" target="_blank" rel="noopener noreferrer">
                   <img src="${updatedRedirectUrl}" alt="Email Signature Image" style="border: none;  max-width:100%; margin-top:8px;" />
                 </a>
