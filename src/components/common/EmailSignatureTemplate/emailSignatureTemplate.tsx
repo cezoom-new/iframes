@@ -688,7 +688,7 @@ export default function EmailSignatureTemplate(props: {
                           />
                           <Button
                             type="button"
-                            className="flex p-3 mb-2 justify-center items-center gap-2 rounded-[6px] border border-red-200 bg-white"
+                            className="mb-2 border border-red-200 bg-white hover:bg-red-100"
                             variant="outline"
                             onClick={() => handleRemoveField(index)}
                           >
