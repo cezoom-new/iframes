@@ -2,13 +2,57 @@
   {
     "value": "carestack",
     "label": "CareStack",
-    "url":"/logos/carestack.png",
-    "link":"https://carestack.com/"
+    "url": "/logos/carestack.png",
+    "link": "https://carestack.com/",
+    "height": "16"
   },
   {
     "value": "carerevenue",
     "label": "CareRevenue",
-    "url":"/logos/carerevenue.png",
-    "link":"https://carerevenue.com/"
+    "url": "/logos/carerevenue.png",
+    "link": "https://carerevenue.com/",
+    "height": "16px"
+  },
+  {
+    "value": "acedsn",
+    "label": "ACEDSN",
+    "url": "/logos/acedsn.png",
+    "link": "https://acedsn.com/",
+    "height": "16px"
+  },
+  {
+    "value": "aeka",
+    "label": "AEKA",
+    "url": "/logos/aeka.png",
+    "link": "https://aeka.ai/",
+    "height": "16px"
+  },
+  {
+    "value": "cspay",
+    "label": "CS Pay",
+    "url": "/logos/cspay.png",
+    "link": "https://carestack.com/dental-software/cspay",
+    "height": "30px"
+  },
+  {
+    "value": "osdental",
+    "label": "OS DENTAL",
+    "url": "/logos/osdental.png",
+    "link": "https://osdental.io/",
+    "height": "30px"
+  },
+  {
+    "value": "prodent",
+    "label": "Prodent",
+    "url": "/logos/prodent.png",
+    "link": "https://www.prodentpartners.com/",
+    "height": "30px"
+  },
+  {
+    "value": "voicestack",
+    "label": "Voicestack",
+    "url": "/logos/voicestack.png",
+    "link": "https://voicestack.com/",
+    "height": "30px"
   }
 ]

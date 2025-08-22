@@ -310,7 +310,7 @@ export default function EmailSignatureTemplate(props: {
   const signatureHtml: string = `
   <div>
     ${
-      updatedLink  
+      updatedLink
         ? `
       <table cellpadding="0px" style="border-spacing:0px" cellspacing="0px" width="420px">
         <tbody>
@@ -343,7 +343,7 @@ export default function EmailSignatureTemplate(props: {
                 <a href=${selectedCompany?.link} target="_blank" rel="noopener noreferrer">
                 ${
                   selectedCompany?.url
-                    ? ` <img style="width:auto; vertical-align:middle; height: 16px" src="${selectedCompany?.url}" />`
+                    ? ` <img style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}" src="${selectedCompany?.url}" />`
                     : ` <img style="width:auto; vertical-align:middle; height: 16px" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png" />`
                 }
                  
@@ -408,7 +408,7 @@ export default function EmailSignatureTemplate(props: {
         }
 
                     ${
-                      updatedLink 
+                      updatedLink
                         ? `
             <tr>
               <td colspan="2" style="padding-top:2px; padding-bottom:2px;">
@@ -467,7 +467,7 @@ export default function EmailSignatureTemplate(props: {
     }
   </div>
 `;
-
+  console.log("sel", selectedCompany);
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen bg-slate-50 special-theme ">
       <div className="max-w-7xl w-full h-full mb-24">
@@ -479,16 +479,30 @@ export default function EmailSignatureTemplate(props: {
                 Configuring Your Gmail Signature in a Single Step.
               </p>
             </div>
-            <Image
-              className="md:h-4 md:w-auto"
-              src={
-                selectedCompany?.url ||
-                "https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"
-              }
-              alt={"carestack logo"}
-              width={200}
-              height={50}
-            />
+            {selectedCompany?.url ? (
+              <Image
+                className="md:w-auto"
+                src={
+                  selectedCompany?.url ||
+                  "https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"
+                }
+                alt="carestack logo"
+                width={200}
+                height={50} // keep default for optimization
+                style={{ height: selectedCompany?.height || "50px" }}
+              />
+            ) : (
+              <Image
+                className="md:h-4 md:w-auto"
+                src={
+                  selectedCompany?.url ||
+                  "https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"
+                }
+                alt="carestack logo"
+                width={200}
+                height={50}
+              />
+            )}
           </div>
         </div>
         <div className="flex flex-col md:flex-row justify-center gap-6 lg:gap-24 p-6">
