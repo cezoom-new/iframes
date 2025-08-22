@@ -187,7 +187,7 @@ export default function EmailSignatureTemplate(props: {
           }
           setUpdatedRedirectUrl(redirectUrl.toString());
         } else {
-          setUpdatedRedirectUrl("");
+          setUpdatedRedirectUrl(redirectUrl.toString());
         }
       }
     }
@@ -310,7 +310,7 @@ export default function EmailSignatureTemplate(props: {
   const signatureHtml: string = `
   <div>
     ${
-      updatedLink && updatedRedirectUrl 
+      updatedLink  
         ? `
       <table cellpadding="0px" style="border-spacing:0px" cellspacing="0px" width="420px">
         <tbody>
@@ -408,7 +408,7 @@ export default function EmailSignatureTemplate(props: {
         }
 
                     ${
-                      updatedLink && updatedRedirectUrl
+                      updatedLink 
                         ? `
             <tr>
               <td colspan="2" style="padding-top:2px; padding-bottom:2px;">
