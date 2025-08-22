@@ -15,28 +15,28 @@
   },
   {
     "value": "acedsn",
-    "label": "ACEDSN",
+    "label": "ACE DSN",
     "url": "/logos/acedsn.png",
     "link": "https://acedsn.com/",
     "height": "16px"
   },
   {
     "value": "aeka",
-    "label": "AEKA",
+    "label": "Aeka",
     "url": "/logos/aeka.png",
     "link": "https://aeka.ai/",
-    "height": "16px"
+    "height": "20px"
   },
   {
     "value": "cspay",
     "label": "CS Pay",
     "url": "/logos/cspay.png",
     "link": "https://carestack.com/dental-software/cspay",
-    "height": "30px"
+    "height": "26px"
   },
   {
     "value": "osdental",
-    "label": "OS DENTAL",
+    "label": "OS Dental",
     "url": "/logos/osdental.png",
     "link": "https://osdental.io/",
     "height": "30px"
@@ -50,7 +50,7 @@
   },
   {
     "value": "voicestack",
-    "label": "Voicestack",
+    "label": "VoiceStack",
     "url": "/logos/voicestack.png",
     "link": "https://voicestack.com/",
     "height": "30px"
