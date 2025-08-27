@@ -332,7 +332,7 @@ export default function EmailSignatureTemplate(props: {
                     urls.role
                       ? `
               <tr>
-                <td colspan="2" style="color:#000000; padding-top:2px; padding-bottom:2px;;">${urls.role}</td>
+                <td colspan="2" style="color:#000000; padding-top:2px; padding-bottom:2px;">${urls.role}</td>
               </tr>
             `
                       : ""
@@ -482,10 +482,7 @@ export default function EmailSignatureTemplate(props: {
             {selectedCompany?.url ? (
               <Image
                 className="md:w-auto"
-                src={
-                  selectedCompany?.url ||
-                  "https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"
-                }
+                src={selectedCompany?.url}
                 alt="carestack logo"
                 width={200}
                 height={50} // keep default for optimization
@@ -495,7 +492,6 @@ export default function EmailSignatureTemplate(props: {
               <Image
                 className="md:h-4 md:w-auto"
                 src={
-                  selectedCompany?.url ||
                   "https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"
                 }
                 alt="carestack logo"

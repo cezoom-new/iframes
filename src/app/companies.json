@@ -4,7 +4,7 @@
     "label": "CareStack",
     "url": "/logos/carestack.png",
     "link": "https://carestack.com/",
-    "height": "16"
+    "height": "16px"
   },
   {
     "value": "carerevenue",
@@ -46,7 +46,7 @@
     "label": "Prodent",
     "url": "/logos/prodent.png",
     "link": "https://www.prodentpartners.com/",
-    "height": "30px"
+    "height": "32px"
   },
   {
     "value": "voicestack",
