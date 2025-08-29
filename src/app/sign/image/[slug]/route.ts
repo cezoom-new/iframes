@@ -11,7 +11,7 @@ export async function GET(req: NextRequest, { params }: any) {
   const email = url.get("email");
 
   // 1px transparent GIF
-  const pixelGif = "R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+  const pixelGif = "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAIAAAD91JpzAAAADklEQVR42mP8z/CfAQAFgwJ/l2bC+QAAAABJRU5ErkJggg==";
   const pixelResponse = new NextResponse(Buffer.from(pixelGif, "base64"), {
     status: 200,
     statusText: "OK",
