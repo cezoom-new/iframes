@@ -11,7 +11,7 @@ export async function GET(req: NextRequest, { params }: any) {
   const email = url.get("email");
 
   // Horizontal gray line GIF (100x5px, gray-300 color, 1px line with 2px padding)
-  const pixelGif = "R0lGODlhZAAFAIAAANHV2////yH5BAEAAAEALAAAAABkAAUAAAIKjI+py+0Po5y0BQA7";
+  const pixelGif = "iVBORw0KGgoAAAANSUhEUgAAAJYAAAALCAYAAACd+XR/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkSURBVHgB7cABDQAwCAOw3b/CqTk6CG0CAACs8Nr+AAAAcNMA+5IDjBpkqqkAAAAASUVORK5CYII=";
   const pixelResponse = new NextResponse(Buffer.from(pixelGif, "base64"), {
     status: 200,
     statusText: "OK",
