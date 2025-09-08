@@ -7,6 +7,8 @@ import { urlFor } from "@/sanity/lib/image";
 import { client } from "@/sanity/lib/client";
 import CTAButton from "@/components/common/CTAButton";
 import SecondaryCTABtn from "@/components/common/SecondaryCTABtn";
+import { Pill } from "lucide-react";
+import PillElementWithText from "@/app/components/PillWithText";
 const builder = urlBuilder(client);
 
 const DynamicComponents = ({
@@ -175,7 +177,7 @@ const DynamicComponents = ({
       ),
     },
   };
-
+console.log("components", components);
   return (
     <div
       className={`${className} ${
@@ -295,7 +297,15 @@ const DynamicComponents = ({
                 components={listComponents(component?.listIcon)}
               />
             );
-
+  case "pillElementWithText":
+            return (
+              <PillElementWithText
+                key={`pillElementWithText-${index}`}
+                logoUrl={component?.templateLogo?.url}
+                templateHeader={component?.subTitleText}
+                eventType={component?.templateEventTypeText}
+              />
+            );
           case "buttonComponents":
             return (
               <div
@@ -406,6 +416,3 @@ const DynamicComponents = ({
 };
 
 export default DynamicComponents;
-function rotate(arg0: number, deg: any) {
-  throw new Error("Function not implemented.");
-}

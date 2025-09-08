@@ -31,6 +31,15 @@ export const campaign = defineType({
         collapsed: true,
       },
     },
+     {
+      name: "pillElementWithText",
+      title: "Pill Element With Text Element",
+      options: {
+        collapsible: true,
+        collapsed: true,
+      },
+    },
+    
   ],
   fields: [
     defineField({
@@ -350,6 +359,7 @@ export const campaign = defineType({
                 },
               },
             },
+            
             {
               type: "object",
               name: "pillElement",
@@ -380,6 +390,32 @@ export const campaign = defineType({
                 prepare() {
                   return {
                     title: `Top Pills Component`,
+                  };
+                },
+              },
+            },
+
+             {
+              type: "object",
+              name: "pillElementWithText",
+              title: "Pills with Text",
+              fields: [
+                {
+                  name: "subTitleText",
+                  title: "Sub Title",
+                  type: "string",
+                },
+                {
+                  name: "templateEventTypeText",
+                  title: "Pill Text",
+                  type: "string",
+                },
+              
+              ],
+              preview: {
+                prepare() {
+                  return {
+                    title: `Pills With Text`,
                   };
                 },
               },

@@ -8,6 +8,7 @@ import CTAButton from "@/components/common/CTAButton";
 import SecondaryCTABtn from "@/components/common/SecondaryCTABtn";
 import { detectColorType } from "@/components/common/Common";
 import CampaignHeaderWebinar from "./learn/CampaignHeaderWebinar";
+import PillElementWithText from "./PillWithText";
 const builder = urlBuilder(client);
 
 const DynamicStructureWebinar = ({
@@ -18,18 +19,24 @@ const DynamicStructureWebinar = ({
   layout,
 }: any) => {
   const urlBuilder: any = (source: any) => builder?.image(source);
-  const [btncolor, setBtnColor] = React.useState(detectColorType(colors?.highlightColor));
+  const [btncolor, setBtnColor] = React.useState(
+    detectColorType(colors?.highlightColor)
+  );
 
   const titleComponent: any = {
     block: {
       normal: ({ children }: any) => (
         <p
-          style={{ color: colors?.h1Color}}
+          style={{ color: colors?.h1Color }}
           className={`${layout == "osdental" ? "text-sm" : "text-3xl lg:text-5xl"} font-extrabold py-3 !leading-tight font-manrope`}
         >
           {children}
-          {campaign?.headingUnderline && <div style={{background: campaign?.headingUnderline}} className="w-full h-[3px] mt-3"></div>}
-          
+          {campaign?.headingUnderline && (
+            <div
+              style={{ background: campaign?.headingUnderline }}
+              className="w-full h-[3px] mt-3"
+            ></div>
+          )}
         </p>
       ),
     },
@@ -58,8 +65,13 @@ const DynamicStructureWebinar = ({
         <span
           style={
             btncolor === "gradient"
-              ? { background: colors?.highlightColor,backgroundClip: "text", WebkitTextFillColor: "transparent", letterSpacing:"-0.6px"}
-              : { color: colors?.highlightColor } 
+              ? {
+                  background: colors?.highlightColor,
+                  backgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  letterSpacing: "-0.6px",
+                }
+              : { color: colors?.highlightColor }
           }
         >
           {children}
@@ -111,27 +123,27 @@ const DynamicStructureWebinar = ({
   };
 
   const paragraphComponents: any = {
-  block: {
-    normal: ({ children }: any) => (
-      <p
-        style={{ color: colors?.paragraphColor }}
-        className="text-[18px] font-light whitespace-pre-wrap font-geist mb-6 leading-[162.5%]"
-      >
-        {children}
-      </p>
-    ),
-  },
-  marks: {
-    highlight: ({ children }: any) => (
-      <span
-        style={{ color: colors?.highlightColor }}
-        className="whitespace-pre-wrap"
-      >
-        {children}
-      </span>
-    ),
-  },
-};
+    block: {
+      normal: ({ children }: any) => (
+        <p
+          style={{ color: colors?.paragraphColor }}
+          className="text-[18px] font-light whitespace-pre-wrap font-geist mb-6 leading-[162.5%]"
+        >
+          {children}
+        </p>
+      ),
+    },
+    marks: {
+      highlight: ({ children }: any) => (
+        <span
+          style={{ color: colors?.highlightColor }}
+          className="whitespace-pre-wrap"
+        >
+          {children}
+        </span>
+      ),
+    },
+  };
 
   const listComponents: any = (listIcon: any) => ({
     list: {
@@ -146,7 +158,8 @@ const DynamicStructureWebinar = ({
         <li className="flex gap-2 text-[#404040] items-start font-medium text-xs xl:text-sm">
           <div className="w-4 flex-shrink-0">
             {listIcon && (
-              <Image  src={urlBuilder(listIcon).url()}
+              <Image
+                src={urlBuilder(listIcon).url()}
                 alt="icon"
                 width={28}
                 height={28}
@@ -162,7 +175,7 @@ const DynamicStructureWebinar = ({
   const disclaimerComponents: any = {
     block: {
       normal: ({ children }: any) => (
-        <p style={{color: colors?.paragraphColor}} className="pt-3 text-base" >
+        <p style={{ color: colors?.paragraphColor }} className="pt-3 text-base">
           {children}
         </p>
       ),
@@ -306,6 +319,15 @@ const DynamicStructureWebinar = ({
                 components={listComponents(component?.listIcon)}
               />
             );
+          case "pillElementWithText":
+            return (
+              <PillElementWithText
+                key={`pillElementWithText-${index}`}
+                logoUrl={component?.templateLogo?.url}
+                templateHeader={component?.subTitleText}
+                eventType={component?.templateEventTypeText}
+              />
+            );
 
           case "buttonComponents":
             return (
@@ -322,9 +344,11 @@ const DynamicStructureWebinar = ({
                     ctaBtnTextColor={component?.ctaBtn?.ctaBtnTextColor}
                     ctaBtnLink={component?.ctaBtn?.ctaBtnLink}
                     ctaBtnPostData={component?.ctaBtn?.ctaBtnPostData}
-                    ctaBtnPostMessageKey={component?.ctaBtn?.ctaBtnPostMessageKey}
+                    ctaBtnPostMessageKey={
+                      component?.ctaBtn?.ctaBtnPostMessageKey
+                    }
                     campaignName={campaign?.name}
-                    className={`${layout == "osdental" ? 'w-full': ''} mt-2`}
+                    className={`${layout == "osdental" ? "w-full" : ""} mt-2`}
                   />
                 )}
                 {component?.secondaryBtnComponent?.secondaryBtnText && (
@@ -405,7 +429,7 @@ const DynamicStructureWebinar = ({
               <PortableText
                 key={`disclaimer-${index}`}
                 value={component?.disclaimer}
-                components={disclaimerComponents} 
+                components={disclaimerComponents}
               />
             );
 
