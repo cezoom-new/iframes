@@ -15,17 +15,17 @@ export default function PillElementWithText({
   return (
     <>
       {(templateHeader || eventType) && (
-        <div className="flex items-center gap-2 text-sm mt-6">
+        <div className="flex items-center gap-4  mb-6">
          {eventType && (
             <div
-              className="font-medium px-2.5 py-1.5 rounded uppercase text-white"
+              className="font-medium px-2.5 py-1 rounded uppercase text-white leading-[150%] text-sm"
               style={{ backgroundColor: "#FFFFFF29" }}
             >
               {eventType}
             </div>
           )}
          {templateHeader && (
-            <h2 className="text-white font-normal text-lg">
+            <h2 className="text-white font-normal text-[20px] leading-[120%]">
               {templateHeader}
             </h2>
           )}
