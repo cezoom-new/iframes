@@ -308,6 +308,7 @@ export default function EmailSignatureTemplate(props: {
   };
 
   const signatureHtml: string = `
+
   <div>
     ${
       updatedLink
@@ -343,8 +344,10 @@ export default function EmailSignatureTemplate(props: {
                 <a href=${selectedCompany?.link} target="_blank" rel="noopener noreferrer">
                 ${
                   selectedCompany?.url
-                    ? ` <img style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}" src="${selectedCompany?.url}" />`
-                    : ` <img style="width:auto; vertical-align:middle; height: 16px" src="https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png" />`
+                    ? ` <img class="light-img" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}" src="/logos/${selectedCompany?.value}.png" />
+                    <img class="dark-img" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}" src="/logos/dark/${selectedCompany?.value}.png" />`
+                    : ` <img class="light-img" style="width:auto; vertical-align:middle; height: 16px" src="/logos/carestack.png" />
+                    <img class="dark-img" style="width:auto; vertical-align:middle; height: 16px" src="/logos/dark/carestack.png" />`
                 }
                  
                 </a>
@@ -466,8 +469,18 @@ export default function EmailSignatureTemplate(props: {
         : ""
     }
   </div>
+    <style>
+  /* Default (light mode) */
+  .dark-img { display: none !important; }
+  .light-img { display: block !important; }
+
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    .dark-img { display: block !important; }
+    .light-img { display: none !important; }
+  }
+</style>
 `;
-  console.log("sel", selectedCompany);
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen bg-slate-50 special-theme ">
       <div className="max-w-7xl w-full h-full mb-24">
@@ -491,9 +504,7 @@ export default function EmailSignatureTemplate(props: {
             ) : (
               <Image
                 className="md:h-4 md:w-auto"
-                src={
-                  "https://cdn.sanity.io/images/bgk0i4de/dev/561ab8280087f35957078d6c8d51db5b8c479dbc-166x20.png"
-                }
+                src="/logos/carestack.png"
                 alt="carestack logo"
                 width={200}
                 height={50}
