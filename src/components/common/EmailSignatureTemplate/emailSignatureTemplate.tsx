@@ -308,7 +308,7 @@ export default function EmailSignatureTemplate(props: {
   };
 
   const signatureHtml: string = `
-
+<div>
   <div>
     ${
       updatedLink
@@ -343,7 +343,7 @@ export default function EmailSignatureTemplate(props: {
               <td colspan="2" style="padding-top:2px; padding-bottom:2px;">
                 <a href=${selectedCompany?.link} target="_blank" rel="noopener noreferrer">
                 ${
-                  selectedCompany?.url
+                  selectedCompany?.value
                     ? ` <img class="light-img" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}" src="/logos/${selectedCompany?.value}.png" />
                     <img class="dark-img" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}" src="/logos/dark/${selectedCompany?.value}.png" />`
                     : ` <img class="light-img" style="width:auto; vertical-align:middle; height: 16px" src="/logos/carestack.png" />
@@ -480,6 +480,7 @@ export default function EmailSignatureTemplate(props: {
     .light-img { display: none !important; }
   }
 </style>
+</div>
 `;
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen bg-slate-50 special-theme ">
