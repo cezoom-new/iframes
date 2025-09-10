@@ -348,10 +348,20 @@ export default function EmailSignatureTemplate(props: {
               <td colspan="2" style="padding-top:2px; padding-bottom:2px;">
                 <a href=${selectedCompany?.link} target="_blank" rel="noopener noreferrer">
                 ${selectedCompany?.value
-                    ? `<img class="light-logo" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}; display:block !important; max-width:100%;" src="/logos/${selectedCompany?.value}.png" />
-                    <img class="dark-logo" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}; display:none !important; max-width:100%;" src="/logos/dark/${selectedCompany?.value}.png" />`
-                    : `<img class="light-logo" style="width:auto; vertical-align:middle; height: 16px; display:block !important; max-width:100%;" src="/logos/carestack.png" />
-                    <img class="dark-logo" style="width:auto; vertical-align:middle; height: 16px; display:none !important; max-width:100%;" src="/logos/dark/carestack.png" />`
+                    ? `<!--[if !mso]><!-->
+                    <img class="light-logo" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}; display:block !important; max-width:100%;" src="/logos/${selectedCompany?.value}.png" />
+                    <img class="dark-logo" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}; display:none !important; max-width:100%;" src="/logos/dark/${selectedCompany?.value}.png" />
+                    <!--<![endif]-->
+                    <!--[if mso]>
+                    <img style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}; max-width:100%;" src="/logos/${selectedCompany?.value}.png" />
+                    <![endif]-->`
+                    : `<!--[if !mso]><!-->
+                    <img class="light-logo" style="width:auto; vertical-align:middle; height: 16px; display:block !important; max-width:100%;" src="/logos/carestack.png" />
+                    <img class="dark-logo" style="width:auto; vertical-align:middle; height: 16px; display:none !important; max-width:100%;" src="/logos/dark/carestack.png" />
+                    <!--<![endif]-->
+                    <!--[if mso]>
+                    <img style="width:auto; vertical-align:middle; height: 16px; max-width:100%;" src="/logos/carestack.png" />
+                    <![endif]-->`
                 }
                 </a>
               </td>
@@ -465,17 +475,17 @@ export default function EmailSignatureTemplate(props: {
     }
   </div>
   <style>
-    /* Default light mode */
+    /* Default light mode - show light logo */
     .light-logo { display: block !important; }
     .dark-logo { display: none !important; }
     
-    /* Dark mode detection - multiple approaches for better compatibility */
+    /* Dark mode detection for email clients */
     @media (prefers-color-scheme: dark) {
       .light-logo { display: none !important; }
       .dark-logo { display: block !important; }
     }
     
-    /* Gmail dark mode */
+    /* Gmail dark mode support */
     @media screen and (prefers-color-scheme: dark) {
       .light-logo { display: none !important; }
       .dark-logo { display: block !important; }
@@ -505,6 +515,24 @@ export default function EmailSignatureTemplate(props: {
     
     /* Apple Mail dark mode */
     @media (prefers-color-scheme: dark) and (-webkit-min-device-pixel-ratio: 1) {
+      .light-logo { display: none !important; }
+      .dark-logo { display: block !important; }
+    }
+    
+    /* Additional dark mode support for various email clients */
+    @media (prefers-color-scheme: dark) and (max-width: 600px) {
+      .light-logo { display: none !important; }
+      .dark-logo { display: block !important; }
+    }
+    
+    /* Samsung Email dark mode */
+    @media screen and (prefers-color-scheme: dark) and (-webkit-min-device-pixel-ratio: 1.5) {
+      .light-logo { display: none !important; }
+      .dark-logo { display: block !important; }
+    }
+    
+    /* Thunderbird dark mode */
+    @media (prefers-color-scheme: dark) {
       .light-logo { display: none !important; }
       .dark-logo { display: block !important; }
     }
