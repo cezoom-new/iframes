@@ -205,10 +205,11 @@ export default function EmailSignatureTemplate(props: {
   const copyToClipboard = async () => {
     if (!hiddenDivRef.current) return;
 
-    const htmlToCopy = hiddenDivRef.current.innerHTML.trim(); // Trim to avoid duplicate spacing
+    // Get the full HTML including the style tag
+    const fullHtml = signatureHtml;
     try {
       const clipboardItem = new ClipboardItem({
-        "text/html": new Blob([htmlToCopy], { type: "text/html" }),
+        "text/html": new Blob([fullHtml], { type: "text/html" }),
       });
 
       await navigator.clipboard.write([clipboardItem]);
@@ -318,19 +319,19 @@ export default function EmailSignatureTemplate(props: {
   };
 
   const signatureHtml: string = cleanHtml(`
-<div>
-  <div>
+<div style="font-size: 13px;">
+  <div style="font-size: 13px;">
     ${
       updatedLink
         ? `
-      <table cellpadding="0px" style="border-spacing:0px" cellspacing="0px" width="420px">
+      <table cellpadding="0px" style="border-spacing:0px; font-size: 13px;" cellspacing="0px" width="420px">
         <tbody>
         ${
           hideData
             ? `${urls.fullName
                  ? `
               <tr>
-                <td colspan="2" >
+                <td colspan="2" style="font-size: 13px;">
                   <b>${urls.fullName}</b>
                 </td>
               </tr>
@@ -339,7 +340,7 @@ export default function EmailSignatureTemplate(props: {
              }${urls.role
                       ? `
               <tr>
-                <td colspan="2" style="color:#000000; padding-top:2px; padding-bottom:2px;">${urls.role}</td>
+                <td colspan="2" style="color:#000000; padding-top:2px; padding-bottom:2px; font-size: 13px;">${urls.role}</td>
               </tr>
             `
                       : ""
@@ -367,23 +368,23 @@ export default function EmailSignatureTemplate(props: {
               </td>
             </tr>
               <tr>
-                <td width="320px" style="vertical-align:middle; text-align:left; padding-top:2px; padding-bottom:2px;">
+                <td width="320px" style="vertical-align:middle; text-align:left; padding-top:2px; padding-bottom:2px; font-size: 13px;">
                   ${hideEmail && urls.emailId
                       ? `
-                    <span style="vertical-align:middle; color:#000000;">
-                      <a href="mailto:${urls.emailId}">${urls.emailId}</a>
+                    <span style="vertical-align:middle; color:#000000; font-size: 13px;">
+                      <a href="mailto:${urls.emailId}" style="font-size: 13px;">${urls.emailId}</a>
                     </span>
                   `
                       : ""
                   }${hideEmail && urls.phoneNumber && urls.emailId
                       ? `
-                    <span style="margin-right:4px; margin-left:4px;">•</span>
+                    <span style="margin-right:4px; margin-left:4px; font-size: 13px;">•</span>
                   `
                       : ""
                   }${urls.phoneNumber
                       ? `
-                    <span style="vertical-align:middle; color:#000000;">
-                      <a href="tel:${urls.phoneNumber}">${urls.phoneNumber}</a>
+                    <span style="vertical-align:middle; color:#000000; font-size: 13px;">
+                      <a href="tel:${urls.phoneNumber}" style="font-size: 13px;">${urls.phoneNumber}</a>
                     </span>
                   `
                       : ""
@@ -395,15 +396,15 @@ export default function EmailSignatureTemplate(props: {
              .filter((f) => f.name.trim() && f.value.trim())
              .map(
                (f) =>
-                 `<span style="margin-right:6px;">
-          <a href="${ensureHttps(f.value)}" target="_blank">${f.name}</a>
+                 `<span style="margin-right:6px; font-size: 13px;">
+          <a href="${ensureHttps(f.value)}" target="_blank" style="font-size: 13px;">${f.name}</a>
         </span>`
              );
 
            return links.length
              ? `
         <tr>
-          <td colspan="2" style="color:#000000; padding-top:2px; padding-bottom:2px;">
+          <td colspan="2" style="color:#000000; padding-top:2px; padding-bottom:2px; font-size: 13px;">
             ${links.join("")}
           </td>
         </tr>
@@ -438,13 +439,13 @@ export default function EmailSignatureTemplate(props: {
     ${
       hideDisclaimer
         ? urls?.note || urls?.title || urls?.description
-          ? `<table cellpadding="0" style="border-spacing:0px; font-size:12px; padding-top: 24px;" cellspacing="0" >
+          ? `<table cellpadding="0" style="border-spacing:0px; font-size:11px; padding-top: 24px;" cellspacing="0" >
          <tbody>
             ${
               urls.note
                 ? `
               <tr>
-                <td style="color:#4B5563;">${urls.note}</td>
+                <td style="color:#4B5563; font-size: 11px;">${urls.note}</td>
               </tr>
             `
                 : ""
@@ -453,7 +454,7 @@ export default function EmailSignatureTemplate(props: {
                     urls.title
                       ? `
               <tr>
-                <td style="color:#4B5563; font-weight: 700; padding:12px 0 4px;">${urls.title}</td>
+                <td style="color:#4B5563; font-weight: 700; padding:12px 0 4px; font-size: 11px;">${urls.title}</td>
               </tr>
             `
                       : ""
@@ -462,7 +463,7 @@ export default function EmailSignatureTemplate(props: {
                     urls.description
                       ? `
               <tr>
-                <td style="color:#6B7280;">${urls.description}</td>
+                <td style="color:#6B7280; font-size: 11px;">${urls.description}</td>
               </tr>
             `
                       : ""
@@ -475,6 +476,7 @@ export default function EmailSignatureTemplate(props: {
     }
   </div>
   <style>
+    
     /* Default light mode - show light logo */
     .light-logo { display: block !important; }
     .dark-logo { display: none !important; }
@@ -897,7 +899,7 @@ export default function EmailSignatureTemplate(props: {
                   {/* <div className="flex items-center bg-slate-100 rounded-t-md p-3"> */}
                   {/* </div> */}
                   <div className="flex flex-col pt-6">
-                    <div className="reset-tw">
+                    <div className="reset-tw !text-[13px]">
                       <div
                         ref={hiddenDivRef}
                         dangerouslySetInnerHTML={{ __html: signatureHtml }}
