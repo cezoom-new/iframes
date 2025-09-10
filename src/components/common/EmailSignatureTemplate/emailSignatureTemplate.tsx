@@ -348,10 +348,10 @@ export default function EmailSignatureTemplate(props: {
               <td colspan="2" style="padding-top:2px; padding-bottom:2px;">
                 <a href=${selectedCompany?.link} target="_blank" rel="noopener noreferrer">
                 ${selectedCompany?.value
-                    ? `<img class="light-logo" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}; display:block;" src="/logos/${selectedCompany?.value}.png" />
-                    <img class="dark-logo" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}; display:none;" src="/logos/dark/${selectedCompany?.value}.png" />`
-                    : `<img class="light-logo" style="width:auto; vertical-align:middle; height: 16px; display:block;" src="/logos/carestack.png" />
-                    <img class="dark-logo" style="width:auto; vertical-align:middle; height: 16px; display:none;" src="/logos/dark/carestack.png" />`
+                    ? `<img class="light-logo" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}; display:block !important; max-width:100%;" src="/logos/${selectedCompany?.value}.png" />
+                    <img class="dark-logo" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}; display:none !important; max-width:100%;" src="/logos/dark/${selectedCompany?.value}.png" />`
+                    : `<img class="light-logo" style="width:auto; vertical-align:middle; height: 16px; display:block !important; max-width:100%;" src="/logos/carestack.png" />
+                    <img class="dark-logo" style="width:auto; vertical-align:middle; height: 16px; display:none !important; max-width:100%;" src="/logos/dark/carestack.png" />`
                 }
                 </a>
               </td>
@@ -465,30 +465,46 @@ export default function EmailSignatureTemplate(props: {
     }
   </div>
   <style>
-    /* Mobile email client dark mode support */
+    /* Default light mode */
     .light-logo { display: block !important; }
     .dark-logo { display: none !important; }
     
-    /* iOS Mail dark mode */
+    /* Dark mode detection - multiple approaches for better compatibility */
     @media (prefers-color-scheme: dark) {
       .light-logo { display: none !important; }
       .dark-logo { display: block !important; }
     }
     
-    /* Gmail mobile dark mode */
+    /* Gmail dark mode */
+    @media screen and (prefers-color-scheme: dark) {
+      .light-logo { display: none !important; }
+      .dark-logo { display: block !important; }
+    }
+    
+    /* iOS Mail dark mode */
+    @media screen and (-webkit-min-device-pixel-ratio: 2) and (prefers-color-scheme: dark) {
+      .light-logo { display: none !important; }
+      .dark-logo { display: block !important; }
+    }
+    
+    /* Android Gmail dark mode */
     @media screen and (max-width: 600px) and (prefers-color-scheme: dark) {
       .light-logo { display: none !important; }
       .dark-logo { display: block !important; }
     }
     
-    /* Outlook mobile dark mode */
-    @media screen and (max-width: 600px) and (-webkit-min-device-pixel-ratio: 2) and (prefers-color-scheme: dark) {
+    /* Outlook dark mode */
+    [data-ogsc] .light-logo { display: none !important; }
+    [data-ogsc] .dark-logo { display: block !important; }
+    
+    /* Yahoo Mail dark mode */
+    @media (prefers-color-scheme: dark) and (max-width: 600px) {
       .light-logo { display: none !important; }
       .dark-logo { display: block !important; }
     }
     
-    /* Samsung Email dark mode */
-    @media screen and (max-width: 600px) and (prefers-color-scheme: dark) and (-webkit-min-device-pixel-ratio: 1.5) {
+    /* Apple Mail dark mode */
+    @media (prefers-color-scheme: dark) and (-webkit-min-device-pixel-ratio: 1) {
       .light-logo { display: none !important; }
       .dark-logo { display: block !important; }
     }
@@ -947,3 +963,4 @@ export default function EmailSignatureTemplate(props: {
     </div>
   );
 }
+
