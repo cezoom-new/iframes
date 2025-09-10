@@ -348,10 +348,20 @@ export default function EmailSignatureTemplate(props: {
               <td colspan="2" style="padding-top:2px; padding-bottom:2px;">
                 <a href=${selectedCompany?.link} target="_blank" rel="noopener noreferrer">
                 ${selectedCompany?.value
-                    ? `<img class="light-img" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}" src="/logos/${selectedCompany?.value}.png" />
-                    <img class="dark-img" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}" src="/logos/dark/${selectedCompany?.value}.png" />`
-                    : `<img class="light-img" style="width:auto; vertical-align:middle; height: 16px" src="/logos/carestack.png" />
-                    <img class="dark-img" style="width:auto; vertical-align:middle; height: 16px" src="/logos/dark/carestack.png" />`
+                    ? `<!--[if !mso]><!-->
+                    <img class="light-img" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}; display:block;" src="/logos/${selectedCompany?.value}.png" />
+                    <img class="dark-img" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}; display:none;" src="/logos/dark/${selectedCompany?.value}.png" />
+                    <!--<![endif]-->
+                    <!--[if mso]>
+                    <img style="width:auto; vertical-align:middle; height: ${selectedCompany?.height};" src="/logos/${selectedCompany?.value}.png" />
+                    <![endif]-->`
+                    : `<!--[if !mso]><!-->
+                    <img class="light-img" style="width:auto; vertical-align:middle; height: 16px; display:block;" src="/logos/carestack.png" />
+                    <img class="dark-img" style="width:auto; vertical-align:middle; height: 16px; display:none;" src="/logos/dark/carestack.png" />
+                    <!--<![endif]-->
+                    <!--[if mso]>
+                    <img style="width:auto; vertical-align:middle; height: 16px;" src="/logos/carestack.png" />
+                    <![endif]-->`
                 }
                 </a>
               </td>
@@ -465,14 +475,36 @@ export default function EmailSignatureTemplate(props: {
     }
   </div>
     <style>
-  /* Default (light mode) - works in most email clients */
-  .dark-img { display: none !important; }
+  /* Default light mode - inline styles take precedence */
   .light-img { display: block !important; }
-
-  /* Dark mode - enhanced support for email clients */
+  .dark-img { display: none !important; }
+  
+  /* Dark mode detection for modern email clients */
   @media (prefers-color-scheme: dark) {
-    .dark-img { display: block !important; }
     .light-img { display: none !important; }
+    .dark-img { display: block !important; }
+  }
+  
+  /* Gmail specific dark mode */
+  @media screen and (-webkit-min-device-pixel-ratio: 0) and (prefers-color-scheme: dark) {
+    .light-img { display: none !important; }
+    .dark-img { display: block !important; }
+  }
+  
+  /* Outlook dark mode */
+  [data-ogsc] .light-img { display: none !important; }
+  [data-ogsc] .dark-img { display: block !important; }
+  
+  /* Apple Mail dark mode */
+  @media (prefers-color-scheme: dark) and (-webkit-min-device-pixel-ratio: 1) {
+    .light-img { display: none !important; }
+    .dark-img { display: block !important; }
+  }
+  
+  /* Yahoo Mail dark mode */
+  @media (prefers-color-scheme: dark) and (max-width: 600px) {
+    .light-img { display: none !important; }
+    .dark-img { display: block !important; }
   }
   
   /* Alternative dark mode detection for email clients */
