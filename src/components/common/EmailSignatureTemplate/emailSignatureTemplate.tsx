@@ -307,7 +307,17 @@ export default function EmailSignatureTemplate(props: {
     // router.replace(`?${params.toString()}`, { scroll: false });
   };
 
-  const signatureHtml: string = `
+  // Function to clean up HTML by removing extra whitespace
+  const cleanHtml = (html: string): string => {
+    return html
+      .replace(/\s+/g, ' ') // Replace multiple spaces with single space
+      .replace(/>\s+</g, '><') // Remove spaces between tags
+      .replace(/\s+>/g, '>') // Remove spaces before closing tags
+      .replace(/>\s+/g, '>') // Remove spaces after opening tags
+      .trim(); // Remove leading/trailing whitespace
+  };
+
+  const signatureHtml: string = cleanHtml(`
 <div>
   <div>
     ${
@@ -317,9 +327,7 @@ export default function EmailSignatureTemplate(props: {
         <tbody>
         ${
           hideData
-            ? ` 
-             ${
-               urls.fullName
+            ? `${urls.fullName
                  ? `
               <tr>
                 <td colspan="2" >
@@ -328,9 +336,7 @@ export default function EmailSignatureTemplate(props: {
               </tr>
             `
                  : ""
-             }
-                  ${
-                    urls.role
+             }${urls.role
                       ? `
               <tr>
                 <td colspan="2" style="color:#000000; padding-top:2px; padding-bottom:2px;">${urls.role}</td>
@@ -338,43 +344,33 @@ export default function EmailSignatureTemplate(props: {
             `
                       : ""
                   }
-          
                   <tr>
               <td colspan="2" style="padding-top:2px; padding-bottom:2px;">
                 <a href=${selectedCompany?.link} target="_blank" rel="noopener noreferrer">
-                ${
-                  selectedCompany?.value
-                    ? ` <img class="light-img" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}" src="/logos/${selectedCompany?.value}.png" />
+                ${selectedCompany?.value
+                    ? `<img class="light-img" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}" src="/logos/${selectedCompany?.value}.png" />
                     <img class="dark-img" style="width:auto; vertical-align:middle; height: ${selectedCompany?.height}" src="/logos/dark/${selectedCompany?.value}.png" />`
-                    : ` <img class="light-img" style="width:auto; vertical-align:middle; height: 16px" src="/logos/carestack.png" />
+                    : `<img class="light-img" style="width:auto; vertical-align:middle; height: 16px" src="/logos/carestack.png" />
                     <img class="dark-img" style="width:auto; vertical-align:middle; height: 16px" src="/logos/dark/carestack.png" />`
                 }
-                 
                 </a>
               </td>
             </tr>
               <tr>
-                <td width="320px" style="vertical-align:middle; height:24px; text-align:left; padding-top:2px; padding-bottom:2px;">
-                  ${
-                    hideEmail && urls.emailId
+                <td width="320px" style="vertical-align:middle; text-align:left; padding-top:2px; padding-bottom:2px;">
+                  ${hideEmail && urls.emailId
                       ? `
                     <span style="vertical-align:middle; color:#000000;">
                       <a href="mailto:${urls.emailId}">${urls.emailId}</a>
                     </span>
                   `
                       : ""
-                  }
-
-                  ${
-                    hideEmail && urls.phoneNumber && urls.emailId
+                  }${hideEmail && urls.phoneNumber && urls.emailId
                       ? `
                     <span style="margin-right:4px; margin-left:4px;">•</span>
                   `
                       : ""
-                  }
-
-                  ${
-                    urls.phoneNumber
+                  }${urls.phoneNumber
                       ? `
                     <span style="vertical-align:middle; color:#000000;">
                       <a href="tel:${urls.phoneNumber}">${urls.phoneNumber}</a>
@@ -384,7 +380,6 @@ export default function EmailSignatureTemplate(props: {
                   }
                 </td>
               </tr>
-                      
          ${(() => {
            const links = additionalFields
              .filter((f) => f.name.trim() && f.value.trim())
@@ -470,18 +465,54 @@ export default function EmailSignatureTemplate(props: {
     }
   </div>
     <style>
-  /* Default (light mode) */
+  /* Default (light mode) - works in most email clients */
   .dark-img { display: none !important; }
   .light-img { display: block !important; }
 
-  /* Dark mode */
+  /* Dark mode - enhanced support for email clients */
   @media (prefers-color-scheme: dark) {
     .dark-img { display: block !important; }
     .light-img { display: none !important; }
   }
+  
+  /* Alternative dark mode detection for email clients */
+  @media (prefers-color-scheme: dark) and (-webkit-min-device-pixel-ratio: 1) {
+    .dark-img { display: block !important; }
+    .light-img { display: none !important; }
+  }
+  
+  /* Fallback for Outlook and other clients */
+  [data-ogsc] .dark-img { display: block !important; }
+  [data-ogsc] .light-img { display: none !important; }
 </style>
+<script>
+  // JavaScript fallback for dark mode detection
+  (function() {
+    function updateImages() {
+      const isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const lightImages = document.querySelectorAll('.light-img');
+      const darkImages = document.querySelectorAll('.dark-img');
+      
+      if (isDark) {
+        lightImages.forEach(img => img.style.display = 'none');
+        darkImages.forEach(img => img.style.display = 'block');
+      } else {
+        lightImages.forEach(img => img.style.display = 'block');
+        darkImages.forEach(img => img.style.display = 'none');
+      }
+    }
+    
+    // Run on load
+    updateImages();
+    
+    // Listen for changes
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(updateImages);
+    }
+  })();
+</script>
 </div>
-`;
+`);
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen bg-slate-50 special-theme ">
       <div className="max-w-7xl w-full h-full mb-24">
