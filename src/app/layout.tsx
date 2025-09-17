@@ -1,16 +1,23 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter, Manrope } from 'next/font/google';
+import { Inter, Manrope, Geist } from 'next/font/google';
 
 const manrope = Manrope({
   subsets: ['latin'],
   weight: ['200', '300', '400', '500', '600', '700', '800'],
   display: 'swap',
+  variable: '--font-manrope',
 });
 const inter = Inter({
   subsets: ['latin'],
   weight: ['200', '300', '400', '500', '600', '700', '800','900'],
   display: 'swap',
+});
+const geist = Geist({
+  subsets: ['latin'],
+  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
+  display: 'swap',
+  variable: '--font-geist',
 });
 
 export const metadata: Metadata = {
@@ -26,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased text-black`}
+        className={`${inter.className} ${manrope.variable} ${geist.variable} antialiased text-black`}
       >
         {children}
       </body>
