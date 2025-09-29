@@ -34,11 +34,11 @@ export default function CTAButton({
         width="12"
         height="12"
         viewBox="0 0 12 12"
-        fill="none"
+        fill={`${themeMode === "darkMode" ? "text-black " : "text-white"}`}
       >
         <path
           d="M6.54537 11.3011L5.52264 10.2898L9.07378 6.73863H0.15332V5.26135H9.07378L5.52264 1.7159L6.54537 0.698853L11.8465 5.99999L6.54537 11.3011Z"
-          fill="white"
+          fill={`${themeMode === "darkMode" ? "text-black " : "text-white"}`}
         />
       </svg>
     );
