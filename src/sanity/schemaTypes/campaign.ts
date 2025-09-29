@@ -607,8 +607,8 @@ export const campaign = defineType({
                           { title: "Dark Blue", value: "#181F32" },
                           { title: "Green 50", value: "#30A063" },
                           { title: "Lime 500", value: "#84BD00" },
-                          
-                          
+                          { title: "acedsnYellow1", value: "linear-gradient(90deg, #F3B300 0%, #FFD251 100%)" },
+
                         ],
                         layout: "dropdown",
                       },
