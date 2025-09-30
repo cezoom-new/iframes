@@ -38,7 +38,13 @@ export default function CTAButton({
       >
         <path
           d="M6.54537 11.3011L5.52264 10.2898L9.07378 6.73863H0.15332V5.26135H9.07378L5.52264 1.7159L6.54537 0.698853L11.8465 5.99999L6.54537 11.3011Z"
-          fill={`${themeMode === "darkMode" ? "text-black " : "text-white"}`}
+          fill={`${
+            ctaBtnTextColor === "blackMode"
+              ? "#000000"
+              : ctaBtnTextColor === "whiteMode"
+                ? "#ffffff"
+                : ""
+          }`}
         />
       </svg>
     );
@@ -46,17 +52,22 @@ export default function CTAButton({
 
   const onClickHandler = (e: any) => {
     const dataPost: { [key: string]: any } = {};
-    dataPost[`${ctaBtnPostMessageKey}`] = { detail: { videoId: ctaBtnPostData } };
+    dataPost[`${ctaBtnPostMessageKey}`] = {
+      detail: { videoId: ctaBtnPostData },
+    };
 
     if (ctaBtnPostMessageKey && ctaBtnPostData) {
       window.postMessage({ ...dataPost }, "*");
     }
-  }
-
+  };
 
   return (
     <div className={className} onClick={onClickHandler}>
-      <Link href={ctaBtnLink ? ctaBtnLink : "#"} target={!ctaBtnLink ? "" :"_blank"} passHref>
+      <Link
+        href={ctaBtnLink ? ctaBtnLink : "#"}
+        target={!ctaBtnLink ? "" : "_blank"}
+        passHref
+      >
         <Anchor
           className={`${className} font-semibold text-center py-3 px-8 rounded-lg whitespace-nowrap
             ${themeMode === "darkMode" ? "text-black " : "text-white"}`}
@@ -78,7 +89,7 @@ export default function CTAButton({
         >
           {type == "webinarLayout" ? (
             <span className="flex items-center gap-3">
-             {ctaText}   <ArrowIcon />
+              {ctaText} <ArrowIcon />
             </span>
           ) : (
             <span>{ctaText}</span>
