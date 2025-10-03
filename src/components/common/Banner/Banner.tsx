@@ -112,7 +112,7 @@ export default function Banner({ className, banner, campaignName }: any) {
             className=""
             style={{ padding: banner?.containerPadding }}
           >
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 xl:gap-28 relative">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 xl:gap-28 relative">
               <div>
 
               {banner?.banner?.map((component: any, index: number) => {
@@ -174,7 +174,7 @@ export default function Banner({ className, banner, campaignName }: any) {
                 }
               })}
               </div>
-              <div>
+              <div className="h-full flex flex-col justify-end items-stretch">
               {banner?.banner?.map((component: any, index: number) => {                
                 return (
                   component._type == "buttonComponents" ?
