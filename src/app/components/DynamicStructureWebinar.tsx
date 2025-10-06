@@ -52,9 +52,7 @@ const DynamicStructureWebinar = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.subtitleText }}
-          className={
-            "text-[48px] font-medium !leading-[118%] font-geist lg:max-w-[514px] mb-6"
-          }
+          className={`${campaign?.size ? campaign?.size : "text-[48px]"} font-medium !leading-[118%] font-geist lg:max-w-[514px] mb-6`}
         >
           {children}
         </p>
@@ -290,18 +288,33 @@ const DynamicStructureWebinar = ({
               </div>
             );
 
-          case "subHeadingComponent":
+          case "subHeadingComponent": {
+            const sizeClass = component?.size
+              ? component?.size
+              : campaign?.size
+              ? campaign?.size
+              : "text-[48px]";
+
+            const subTitleComponentsFor = {
+              block: {
+                normal: ({ children }: any) => (
+                  <p
+                    style={{ color: colors?.subtitleText }}
+                    className={`${sizeClass} font-medium !leading-[118%] font-geist lg:max-w-[514px] mb-6`}
+                  >
+                    {children}
+                  </p>
+                ),
+              },
+              marks: subTitleComponent.marks,
+            };
+
             return (
-              <div
-                key={`subHeadingComponent-${index}`}
-                className="flex items-center gap-10"
-              >
-                <PortableText
-                  value={component?.subTitle}
-                  components={subTitleComponent}
-                />
+              <div key={`subHeadingComponent-${index}`} className="flex items-center gap-10">
+                <PortableText value={component?.subTitle} components={subTitleComponentsFor} />
               </div>
             );
+          }
 
           case "paragraphComponent":
             return (

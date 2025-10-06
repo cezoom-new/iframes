@@ -478,6 +478,7 @@ export const campaign = defineType({
                   // initialValue: "lg:text-4xl md:text-3xl text-2xl font-semibold",
                   options: {
                     list: [
+                       { title: "Very Large (5xl)", value: "lg:text-5xl md:text-4xl text-3xl font-semibold" },
                       { title: "Very Large (4xl)", value: "lg:text-4xl md:text-3xl text-2xl font-semibold" },
                       { title: "Xtra Large (3xl)", value: "lg:text-3xl md:text-2xl text-xl font-semibold" },
                       { title: "Large (2xl)", value: "lg:text-2xl md:text-xl text-lg font-semibold" },
