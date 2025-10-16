@@ -20,7 +20,7 @@ export default function CampaignHeader({
   return (
     <>
       {(templateHeader || eventType || eventDate) && (
-        <div className="flex items-center gap-2 text-sm mt-6">
+        <div className="flex items-center gap-2 text-sm mb-6">
           {templateHeader && (
             <h2 className="text-green-700 font-semibold uppercase">
               {templateHeader}

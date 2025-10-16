@@ -116,7 +116,7 @@ const DynamicStructureCustom = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.paragraphColor }}
-          className="md:text-lg text-md whitespace-pre-wrap line-clamp-3 font-manrope font-medium mt-5"
+          className="md:text-lg text-md whitespace-pre-wrap line-clamp-3 font-sans font-medium mt-5"
         >
           {children}
         </p>
@@ -136,7 +136,7 @@ const DynamicStructureCustom = ({
       bullet: ({ children }: any) => (
         <ul 
           style={{ color: colors?.paragraphColor }}
-          className="my-6"
+          className="mt-6 mb-2"
         >
           {children}
         </ul>
@@ -145,7 +145,7 @@ const DynamicStructureCustom = ({
     listItem: {
       
       bullet: ({ children }: any) => (
-        <li className="text-white font-sans font-medium gap-5 flex py-2">
+        <li className="md:text-lg text-md whitespace-pre-wrap line-clamp-3 font-sans font-medium gap-5 flex py-2">
           {colors?.iconSvgCode && <span dangerouslySetInnerHTML={{ __html: colors?.iconSvgCode }} />}
           {children}
         </li>
