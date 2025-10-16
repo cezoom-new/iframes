@@ -125,6 +125,11 @@ export const BackgroundColor = defineType({
       title: "Popup Text Color",
       type: "string",
     }),
+    defineField({
+      name: "iconSvgCode",
+      title: "Icon SVG Code",
+      type: "text",
+    }),
   ],
   preview: {
     select: {

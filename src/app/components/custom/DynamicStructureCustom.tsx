@@ -19,8 +19,11 @@ const DynamicStructureCustom = ({
 }: any) => {
   const urlBuilder: any = (source: any) => builder?.image(source);
 
-  const headingSize: string = campaign?.structure?.components?.filter((a: any) => a._type == "headingComponent")[0].size || "md:text-5xl lg:text-7xl text-5xl";
-  const subTitleSize: string = campaign?.structure?.components?.filter((a: any) => a._type == "subHeadingComponent")[0].size || "text-4xl md:text-3xl text-2xl font-semibold";
+  const headingComponent = campaign?.structure?.components?.filter((a: any) => a._type == "headingComponent")?.[0];
+  const subHeadingComponent = campaign?.structure?.components?.filter((a: any) => a._type == "subHeadingComponent")?.[0];
+  
+  const headingSize: string = headingComponent?.size || "md:text-5xl lg:text-7xl text-5xl";
+  const subTitleSize: string = subHeadingComponent?.size || "text-4xl md:text-3xl text-2xl font-semibold";
 
   const titleComponent: any = {
     block: {
@@ -127,6 +130,25 @@ const DynamicStructureCustom = ({
         >
           {children}
         </span>
+      ),
+    },
+    list: {
+      bullet: ({ children }: any) => (
+        <ul 
+          style={{ color: colors?.paragraphColor }}
+          className="my-6"
+        >
+          {children}
+        </ul>
+      ),
+    },
+    listItem: {
+      
+      bullet: ({ children }: any) => (
+        <li className="text-white font-sans font-medium gap-5 flex py-2">
+          {colors?.iconSvgCode && <span dangerouslySetInnerHTML={{ __html: colors?.iconSvgCode }} />}
+          {children}
+        </li>
       ),
     },
   };
