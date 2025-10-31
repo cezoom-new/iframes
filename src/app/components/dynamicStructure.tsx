@@ -199,7 +199,7 @@ console.log("components", components);
                         return (
                           <div
                             key={item?.asset?._id}
-                            className="w-24 flex items-center"
+                            className="flex items-center"
                           >
                             <Image
                               className="w-full max-h-[100px] object-contain"

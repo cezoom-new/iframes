@@ -346,7 +346,7 @@ const DynamicStructureNew = ({
                 key={`learnCTAButton-${index}`}
                 className="flex gap-6 py-3 items-center"
               >
-                {component?.ctaBtn?.ctaBtnText && (
+                {(component?.ctaBtn?.ctaBtnText && component?.ctaBtn?.ctaBtnPostData) && (
                   <LearnCTA
                     ctaText={component?.ctaBtn?.ctaBtnText}
                     ctaBtnColor={component?.ctaBtn?.ctaBtnColor}
