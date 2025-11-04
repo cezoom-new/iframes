@@ -202,7 +202,7 @@ console.log("components", components);
                             className="flex items-center"
                           >
                             <Image
-                              className="w-full max-h-[90px] object-contain"
+                              className="w-auto max-h-[90px] "
                               src={item?.asset?.url}
                               width={
                                 item?.asset?.metadata?.dimensions?.width || 200
