@@ -274,6 +274,10 @@ export const campaign = defineType({
           title: "Webinar Layout",
           value: "webinarLayout",
           },
+          {
+            title: "Voicestack Layout",
+            value: "voicestackLayout",
+          },
         ],
       },
       group: "template",
@@ -685,6 +689,7 @@ export const campaign = defineType({
                           { title: "Dark Blue", value: "#181F32" },
                           { title: "Green 50", value: "#30A063" },
                           { title: "Lime 500", value: "#84BD00" },
+                          { title: "Royal Blue", value: "#4A3CE1" },
                           { title: "acedsnYellow1", value: "linear-gradient(90deg, #F3B300 0%, #FFD251 100%)" },
 
                         ],
@@ -774,6 +779,7 @@ export const campaign = defineType({
                           { title: "White", value: "#fff" },
                           { title: "Black", value: "#000000" },
                           { title: "Transparent", value: "transparent" },
+                          { title: "Royal Blue", value: "#4A3CE1" },
                         ],
                         layout: "dropdown",
                       },

@@ -28,6 +28,12 @@ export const blockContent = defineType({
             icon: () => <span style={{ fontWeight: 'bold' }}>H</span>,
             component: (props: any) => <span style={{ backgroundColor: 'yellow' }}>{props.children}</span>,
           },
+          {
+            title: 'Highlight Bg',
+            value: 'highlight-bg',
+            icon: () => <span style={{ fontWeight: 'bold', backgroundColor: '#4A3CE1', color: '#ffffff', padding: '2px 4px', borderRadius: '2px' }}>HB</span>,
+            component: (props: any) => <span style={{ backgroundColor: '#4A3CE1', color: '#ffffff' }}>{props.children}</span>,
+          },
         ],
         annotations: [
           { type: 'textColor' },

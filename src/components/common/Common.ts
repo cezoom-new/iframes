@@ -10,7 +10,7 @@ export function debounce(callback: any, delay: number) {
     export function detectColorType(
       input: string
     ): "hex" | "gradient" | "string" | "unknown" {
-      const trimmed = input.trim();
+      const trimmed = input?.trim() || "";
 
       const hexRegex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i;
       const gradientRegex = /^linear-gradient\((.+)\)$/i;
