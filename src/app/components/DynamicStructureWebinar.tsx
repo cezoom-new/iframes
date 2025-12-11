@@ -153,8 +153,8 @@ const DynamicStructureWebinar = ({
     },
     listItem: {
       bullet: ({ children }: any) => (
-        <li style={{ color: colors?.paragraphColor }} className="flex gap-2 text-[#404040] items-start font-medium text-base xl:text-lg">
-          <div className="w-4 flex-shrink-0">
+        <li style={{ color: colors?.paragraphColor }} className="flex gap-5 text-[#404040] items-start font-medium text-base xl:text-lg">
+          <div className="w-7 flex-shrink-0">
             {listIcon && (
               <Image
                 src={urlBuilder(listIcon).url()}
