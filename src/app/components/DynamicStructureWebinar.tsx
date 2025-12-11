@@ -146,14 +146,14 @@ const DynamicStructureWebinar = ({
   const listComponents: any = (listIcon: any) => ({
     list: {
       bullet: ({ children }: { children: React.ReactNode }) => (
-        <ul style={{ color: colors?.paragraphColor }} className="text-xs xl:text-sm text-[#404040] gap-3 flex flex-col mb-3">
+        <ul style={{ color: colors?.paragraphColor }} className="text-base xl:text-lg text-[#404040] gap-3 flex flex-col mb-3">
           {children}
         </ul>
       ),
     },
     listItem: {
       bullet: ({ children }: any) => (
-        <li style={{ color: colors?.paragraphColor }} className="flex gap-2 text-[#404040] items-start font-medium text-xs xl:text-sm">
+        <li style={{ color: colors?.paragraphColor }} className="flex gap-2 text-[#404040] items-start font-medium text-base xl:text-lg">
           <div className="w-4 flex-shrink-0">
             {listIcon && (
               <Image
