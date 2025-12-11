@@ -33,7 +33,8 @@
       "#000000",
       "#4A3CE1",
       "linear-gradient(90deg, #009FFF 0%, #2EBF91 100%)",
-      "linear-gradient(324deg, #111827 60.85%, #1E3A8A 102.37%)"
+      "linear-gradient(324deg, #111827 60.85%, #1E3A8A 102.37%)",
+      " linear-gradient(77deg, #221C65 0%, #131127 98.41%), linear-gradient(77deg, #15803D 0%, #111827 98.41%), linear-gradient(0deg, #0F172A 0%, #0F172A 100%), linear-gradient(77deg, #334155 0%, #111827 98.41%), linear-gradient(77deg, #3B82F6 0%, #111827 98.41%)"
     ],
     "buttonColors" :["", "linear-gradient(90deg, #2563EB 0%, #1E40AF 100%)"],
     
@@ -2331,6 +2332,27 @@
       "#374151",
       "#FFFFFF"
     ]
+  },
+  {
+    "title": "voiceGradientDark",
+    "id": "54",
+    "value": " linear-gradient(77deg, #221C65 0%, #131127 98.41%), linear-gradient(77deg, #15803D 0%, #111827 98.41%), linear-gradient(0deg, #0F172A 0%, #0F172A 100%), linear-gradient(77deg, #334155 0%, #111827 98.41%), linear-gradient(77deg, #3B82F6 0%, #111827 98.41%)",
+    "ParagraphColor": [
+      "#FFFFFF"
+    ],
+    "highlightColor": [
+     "90deg, #FF0099 65.38%, #493240 100%"
+    ],
+    "h1Color": [
+      "#FFFFFF"
+    ],
+    "subtitleText": [
+      "#0F172A",
+      "#374151",
+      "#FFFFFF"
+    ]
   }
+
+
   ]
 }
