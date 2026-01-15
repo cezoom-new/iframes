@@ -278,6 +278,10 @@ export const campaign = defineType({
             title: "Voicestack Layout",
             value: "voicestackLayout",
           },
+          {
+            title: "Right Image Left Center Text",
+            value: "riltc",
+          }
         ],
       },
       group: "template",

@@ -18,6 +18,7 @@ import RighImageWithPopup from "./Layouts/RightImageWithPopup";
 import CustomLayout from "./Layouts/CustomLayout";
 import WebinarLayout from "./Layouts/WebinarLayout";
 import VoicestackLayout from "./Layouts/VoicestackLayout";
+import RightImageLeftCenterText from "./Layouts/RightImageLeftCenterText ";
 
 const setCookie = (name: string, value: number) => {
   document.cookie = `${name}=${value}; path=/; SameSite=None; Secure`;
@@ -204,6 +205,16 @@ function Campaign({
   if (campaigns[campaignIdx]?.selectedLayout == "voicestackLayout") {
     return (
       <VoicestackLayout
+        campaign={campaigns[campaignIdx]}
+        banner={banner && banner[0]}
+        cookies={cookies && cookies[0]}
+        colors={campaigns[campaignIdx]?.colorTemplate1?.[0] ?? "defaultColor"}
+      />
+    );
+  }
+  if (campaigns[campaignIdx]?.selectedLayout == "riltc") {
+    return (
+      <RightImageLeftCenterText
         campaign={campaigns[campaignIdx]}
         banner={banner && banner[0]}
         cookies={cookies && cookies[0]}
