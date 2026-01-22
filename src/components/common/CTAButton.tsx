@@ -61,41 +61,46 @@ export default function CTAButton({
     }
   };
 
+  const buttonContent = (
+    <Anchor
+      className={`${className} font-semibold text-center py-3 px-8 rounded-lg whitespace-nowrap
+        ${themeMode === "darkMode" ? "text-black " : "text-white"}
+        ${ctaBtnLink ? "cursor-pointer" : "cursor-default"}`}
+      style={{
+        background: ctaBtnColor
+          ? ctaBtnColor
+          : themeMode === "darkMode"
+            ? "#ffffff"
+            : "#000000",
+        color:
+          ctaBtnTextColor === "blackMode"
+            ? "#000000"
+            : ctaBtnTextColor === "whiteMode"
+              ? "#ffffff"
+              : "",
+      }}
+      ctaBtnLink={ctaBtnLink}
+      campaignName={campaignName}
+    >
+      {type == "webinarLayout" ? (
+        <span className="flex items-center gap-3">
+          {ctaText} <ArrowIcon />
+        </span>
+      ) : (
+        <span>{ctaText}</span>
+      )}
+    </Anchor>
+  );
+
   return (
     <div className={className} onClick={onClickHandler}>
-      <Link
-        href={ctaBtnLink ? ctaBtnLink : "#"}
-        target={!ctaBtnLink ? "" : "_blank"}
-        passHref
-      >
-        <Anchor
-          className={`${className} font-semibold text-center py-3 px-8 rounded-lg whitespace-nowrap
-            ${themeMode === "darkMode" ? "text-black " : "text-white"}`}
-          style={{
-            background: ctaBtnColor
-              ? ctaBtnColor
-              : themeMode === "darkMode"
-                ? "#ffffff"
-                : "#000000",
-            color:
-              ctaBtnTextColor === "blackMode"
-                ? "#000000"
-                : ctaBtnTextColor === "whiteMode"
-                  ? "#ffffff"
-                  : "",
-          }}
-          ctaBtnLink={ctaBtnLink}
-          campaignName={campaignName}
-        >
-          {type == "webinarLayout" ? (
-            <span className="flex items-center gap-3">
-              {ctaText} <ArrowIcon />
-            </span>
-          ) : (
-            <span>{ctaText}</span>
-          )}
-        </Anchor>
-      </Link>
+      {ctaBtnLink ? (
+        <Link href={ctaBtnLink} target="_blank" passHref>
+          {buttonContent}
+        </Link>
+      ) : (
+        buttonContent
+      )}
     </div>
   );
 }
