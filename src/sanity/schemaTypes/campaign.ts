@@ -695,6 +695,7 @@ export const campaign = defineType({
                           { title: "Lime 500", value: "#84BD00" },
                           { title: "Royal Blue", value: "#4A3CE1" },
                           { title: "acedsnYellow1", value: "linear-gradient(90deg, #F3B300 0%, #FFD251 100%)" },
+                          { title: "limeDullGreen", value: "#374C08" },
 
                         ],
                         layout: "dropdown",
@@ -784,6 +785,7 @@ export const campaign = defineType({
                           { title: "Black", value: "#000000" },
                           { title: "Transparent", value: "transparent" },
                           { title: "Royal Blue", value: "#4A3CE1" },
+                          { title: "limeDullGreen", value: "#374C08" },
                         ],
                         layout: "dropdown",
                       },
