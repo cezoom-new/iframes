@@ -39,13 +39,17 @@ const DynamicComponents = ({
       ),
     },
   };
+  const defaultSubTitleSize =
+    layout === "osdental"
+      ? "text-xl xl:text-3xl font-bold"
+      : "text-2xl lg:text-3xl font-semibold";
 
-  const subTitleComponent: any = {
+  const getSubTitleComponent = (subTitleSize?: string) => ({
     block: {
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.subtitleText }}
-          className={`${layout == "osdental" ? "text-xl xl:text-3xl font-bold" : "text-2xl lg:text-3xl font-semibold"} pb-3 !leading-snug`}
+          className={`${subTitleSize || defaultSubTitleSize} pb-3 !leading-snug`}
         >
           {children}
         </p>
@@ -56,7 +60,7 @@ const DynamicComponents = ({
         <span style={{ color: colors?.highlightColor }}>{children}</span>
       ),
     },
-  };
+  });
 
   const promoComponent: any = {
     block: {
@@ -177,7 +181,6 @@ const DynamicComponents = ({
       ),
     },
   };
-console.log("components", components);
   return (
     <div
       className={`${className} ${
@@ -276,7 +279,7 @@ console.log("components", components);
               >
                 <PortableText
                   value={component?.subTitle}
-                  components={subTitleComponent}
+                  components={getSubTitleComponent(component?.size)}
                 />
               </div>
             );
@@ -351,7 +354,7 @@ console.log("components", components);
 
           case "promocodeButton":
             return (
-              <div className="flex gap-6 mt-4" key={`promocodeButton-${index}`}>
+              <div className="flex gap-6 mt-4 relative" key={`promocodeButton-${index}`}>
                 {component?.ctaBtn?.ctaBtnText && (
                   <CTAButton
                     ctaText={component?.ctaBtn?.ctaBtnText}
@@ -362,7 +365,7 @@ console.log("components", components);
                     campaignName={campaign?.name}
                   />
                 )}
-                <div className="flex flex-col text-white gap-0.5">
+                <div className="flex flex-col text-white gap-0.5 absolute left-[105%] top-[50%] translate-y-[-50%]">
                   <div className="flex gap-1 text-xs">
                     {/* <span>USE PROMO CODE</span> */}
                     <span className="">
@@ -372,7 +375,7 @@ console.log("components", components);
                       />
                     </span>
                   </div>
-                  <div className="flex gap-2 relative">
+                  <div className="flex gap-1 relative">
                     <span className="font-semibold text-3xl">
                       {component?.discountPrice}
                       <span className="text-white font-normal text-base align-super">
@@ -380,7 +383,7 @@ console.log("components", components);
                       </span>
                     </span>
 
-                    <span className="text-sm ml-1 relative">
+                    <span className="text-sm relative">
                       {" "}
                       <span className="opacity-70">
                         {component?.originalPrice}
