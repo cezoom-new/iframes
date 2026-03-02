@@ -20,16 +20,18 @@ const DynamicComponents = ({
 }: any) => {
   const urlBuilder: any = (source: any) => builder?.image(source);
 
-  const titleComponent: any = {
+  const defaultTitleSize =
+    layout === "osdental" ? "text-sm" : "text-3xl lg:text-5xl";
+
+  const getTitleComponent = (titleSize?: string) => ({
     block: {
       normal: ({ children }: any) => (
         <p
-          style={{ color: colors?.h1Color}}
-          className={`${layout == "osdental" ? "text-sm" : "text-3xl lg:text-5xl"} font-extrabold py-3 !leading-tight font-manrope`}
+          style={{ color: colors?.h1Color }}
+          className={`${titleSize || defaultTitleSize} font-extrabold py-3 !leading-tight font-manrope`}
         >
           {children}
-          {campaign?.headingUnderline && <div style={{background: campaign?.headingUnderline}} className="w-full h-[3px] mt-3"></div>}
-          
+          {campaign?.headingUnderline && <div style={{ background: campaign?.headingUnderline }} className="w-full h-[3px] mt-3"></div>}
         </p>
       ),
     },
@@ -38,7 +40,8 @@ const DynamicComponents = ({
         <span style={{ color: colors?.highlightColor }}>{children}</span>
       ),
     },
-  };
+  });
+
   const defaultSubTitleSize =
     layout === "osdental"
       ? "text-xl xl:text-3xl font-bold"
@@ -266,7 +269,7 @@ const DynamicComponents = ({
                 <PortableText
                   key={`headingComponent-${index}`}
                   value={component?.title}
-                  components={titleComponent}
+                  components={getTitleComponent(component?.size)}
                 />
               </div>
             );

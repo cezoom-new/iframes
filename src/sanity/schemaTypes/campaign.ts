@@ -1,6 +1,7 @@
 import { UserIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
 import customerData from "../../../database.json";
+import { CtaButtonColorInput } from "../components/CtaButtonColorInput";
 
 export const campaign = defineType({
   name: "campaign",
@@ -604,6 +605,7 @@ export const campaign = defineType({
                       name: "ctaBtnColor",
                       title: "CTA Button Color",
                       type: "string",
+                      components: { input: CtaButtonColorInput },
                       options: {
                         list: [
                           { title: "Red", value: "#FF5733" },
@@ -681,6 +683,7 @@ export const campaign = defineType({
                       name: "ctaBtnColor",
                       title: "CTA Button Color",
                       type: "string",
+                      components: { input: CtaButtonColorInput },
                       options: {
                         list: [
                           { title: "Red", value: "#FF5733" },
@@ -774,6 +777,7 @@ export const campaign = defineType({
                       name: "ctaBtnColor",
                       title: "CTA Button Color",
                       type: "string",
+                      components: { input: CtaButtonColorInput },
                       options: {
                         list: [
                           { title: "Red", value: "#FF5733" },
@@ -869,6 +873,7 @@ export const campaign = defineType({
                       name: "ctaBtnColor",
                       title: "CTA Button Color",
                       type: "string",
+                      components: { input: CtaButtonColorInput },
                       options: {
                         list: [
                           { title: "Red", value: "#FF5733" },
@@ -971,6 +976,10 @@ export const campaign = defineType({
           name: "campaignVideo",
           title: "Campaign Video",
           type: "object",
+          options: {
+            collapsible: true,
+            collapsed: true,
+          },
           fields: [
             {
               name: "videoPlatform",

@@ -23,12 +23,15 @@ const DynamicStructureWebinar = ({
     detectColorType(colors?.highlightColor)
   );
 
-  const titleComponent: any = {
+  const defaultTitleSize =
+    layout === "osdental" ? "text-sm" : "text-3xl lg:text-5xl";
+
+  const getTitleComponent = (titleSize?: string) => ({
     block: {
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.h1Color }}
-          className={`${layout == "osdental" ? "text-sm" : "text-3xl lg:text-5xl"} font-extrabold py-3 !leading-tight font-manrope`}
+          className={`${titleSize || defaultTitleSize} font-extrabold py-3 !leading-tight font-manrope`}
         >
           {children}
           {campaign?.headingUnderline && (
@@ -45,14 +48,16 @@ const DynamicStructureWebinar = ({
         <span style={{ color: colors?.highlightColor }}>{children}</span>
       ),
     },
-  };
+  });
 
-  const subTitleComponent: any = {
+  const defaultSubTitleSize = "text-[48px]";
+
+  const getSubTitleComponent = (subTitleSize?: string) => ({
     block: {
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.subtitleText }}
-          className={`${campaign?.size ? campaign?.size : "text-[48px]"} font-medium !leading-[118%] font-geist lg:max-w-[514px] mb-6`}
+          className={`${subTitleSize || defaultSubTitleSize} font-medium !leading-[118%] font-geist lg:max-w-[514px] mb-6`}
         >
           {children}
         </p>
@@ -76,7 +81,7 @@ const DynamicStructureWebinar = ({
         </span>
       ),
     },
-  };
+  });
 
   const promoComponent: any = {
     block: {
@@ -197,7 +202,6 @@ const DynamicStructureWebinar = ({
       ),
     },
   };
-
   return (
     <div
       className={`${className} ${
@@ -283,38 +287,20 @@ const DynamicStructureWebinar = ({
                 <PortableText
                   key={`headingComponent-${index}`}
                   value={component?.title}
-                  components={titleComponent}
+                  components={getTitleComponent(component?.size)}
                 />
               </div>
             );
 
-          case "subHeadingComponent": {
-            const sizeClass = component?.size
-              ? component?.size
-              : campaign?.size
-              ? campaign?.size
-              : "text-[48px]";
-
-            const subTitleComponentsFor = {
-              block: {
-                normal: ({ children }: any) => (
-                  <p
-                    style={{ color: colors?.subtitleText }}
-                    className={`${sizeClass} font-medium !leading-[118%] font-geist lg:max-w-[514px] mb-6`}
-                  >
-                    {children}
-                  </p>
-                ),
-              },
-              marks: subTitleComponent.marks,
-            };
-
+          case "subHeadingComponent":
             return (
               <div key={`subHeadingComponent-${index}`} className="flex items-center gap-10">
-                <PortableText value={component?.subTitle} components={subTitleComponentsFor} />
+                <PortableText
+                  value={component?.subTitle}
+                  components={getSubTitleComponent(component?.size ?? campaign?.size)}
+                />
               </div>
             );
-          }
 
           case "paragraphComponent":
             return (

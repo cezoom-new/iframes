@@ -50,6 +50,13 @@ const getCampaignByIDs = () => {
           popupTitleBgColor,
           popupTextColor
         },
+        "structure": structure {
+          ...,
+          "components": components[] {
+            ...,
+            size
+          }
+        },
         "templateLogos":
         structure {
           components[ _type == "topTemplateLogo"] {
