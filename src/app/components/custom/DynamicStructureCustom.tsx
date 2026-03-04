@@ -5,9 +5,9 @@ import Image from "next/image";
 import urlBuilder from "@sanity/image-url";
 import { urlFor } from "@/sanity/lib/image";
 import { client } from "@/sanity/lib/client";
-import CTAButton from "@/components/common/CTAButton";
 import LearnCTA from "@/components/common/LearnCTA";
 import SecondaryCTABtn from "@/components/common/SecondaryCTABtn";
+import CTAButton from "@/components/common/CTAButton";
 const builder = urlBuilder(client);
 
 const DynamicStructureCustom = ({
@@ -31,7 +31,7 @@ const DynamicStructureCustom = ({
         <div
           style={{ color: colors?.h1Color }}
           className={`
-            ${headingSize ? headingSize : "md:text-5xl lg:text-7xl text-4xl"} font-semibold pb-2 pt-3 !leading-tighter font-manrope`}
+            ${headingSize ? headingSize : "md:text-5xl lg:text-7xl text-4xl"} font-semibold pb-2 pt-3 !leading-[120%] font-manrope`}
         >
 
           {children}
@@ -116,7 +116,7 @@ const DynamicStructureCustom = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.paragraphColor }}
-          className="md:text-lg text-md whitespace-pre-wrap line-clamp-3 font-sans font-medium mt-5"
+          className="md:text-2xl text-md whitespace-pre-wrap line-clamp-3 font-sans font-medium mt-5"
         >
           {children}
         </p>
@@ -163,8 +163,8 @@ const DynamicStructureCustom = ({
     },
     listItem: {
       bullet: ({ children }: any) => (
-        <li className="flex gap-2 items-center md:text-lg text-md font-manrope font-medium">
-          <div className="w-4 flex-shrink-0">
+        <li className="flex gap-2 md:text-lg text-md font-manrope font-medium">
+          <div className="w-4 flex-shrink-0 mt-[6px]">
             {listIcon && (
               <Image
                 src={urlBuilder(listIcon).url()}
@@ -335,6 +335,7 @@ const DynamicStructureCustom = ({
               >
                 {component?.ctaBtn?.ctaBtnText && (
                   <CTAButton
+                    type="webinarLayout"
                     ctaText={component?.ctaBtn?.ctaBtnText}
                     ctaBtnColor={component?.ctaBtn?.ctaBtnColor}
                     themeMode={campaign?.themeMode}
