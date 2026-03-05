@@ -520,6 +520,20 @@ export const campaign = defineType({
                   title: "Paragraph",
                   type: "blockContent",
                 },
+                {
+                  name: "size",
+                  title: "Paragraph Size",
+                  type: "string",
+                  options: {
+                    list: [
+                      { title: "Very Large (2xl)", value: "lg:text-3xl md:text-2xl text-xl" },
+                      { title: "Large (xl)", value: "lg:text-2xl md:text-xl text-lg" },
+                      { title: "Not so Large (lg)", value: "lg:text-lg md:text-base text-sm" }, 
+                      { title: "Very Small (base)", value: "text-base" },
+                    ],
+                  }
+                  
+                },
               ],
               preview: {
                 select: {

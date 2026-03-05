@@ -125,12 +125,14 @@ const DynamicStructureWebinar = ({
     },
   };
 
-  const paragraphComponents: any = {
+  const defaultParagraphSize = "text-[18px]";
+
+  const getParagraphComponent = (paragraphSize?: string) => ({
     block: {
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.paragraphColor }}
-          className="text-[18px] font-light whitespace-pre-wrap font-geist mb-6 leading-[162.5%]"
+          className={`${paragraphSize || defaultParagraphSize} font-light whitespace-pre-wrap font-geist mb-6 leading-[162.5%]`}
         >
           {children}
         </p>
@@ -146,7 +148,7 @@ const DynamicStructureWebinar = ({
         </span>
       ),
     },
-  };
+  });
 
   const listComponents: any = (listIcon: any) => ({
     list: {
@@ -307,7 +309,7 @@ const DynamicStructureWebinar = ({
               <PortableText
                 key={`paragraphComponent-${index}`}
                 value={component?.paragraph}
-                components={paragraphComponents}
+                components={getParagraphComponent(component?.size)}
               />
             );
           case "listComponent":

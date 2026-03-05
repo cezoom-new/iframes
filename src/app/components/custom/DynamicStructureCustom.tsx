@@ -21,9 +21,11 @@ const DynamicStructureCustom = ({
 
   const headingComponent = campaign?.structure?.components?.filter((a: any) => a._type == "headingComponent")?.[0];
   const subHeadingComponent = campaign?.structure?.components?.filter((a: any) => a._type == "subHeadingComponent")?.[0];
+  const paragraphComponent = campaign?.structure?.components?.filter((a: any) => a._type == "paragraphComponent")?.[0];
   
   const headingSize: string = headingComponent?.size || "md:text-5xl lg:text-7xl text-5xl";
   const subTitleSize: string = subHeadingComponent?.size || "text-4xl md:text-3xl text-2xl font-semibold";
+  const paragraphSize: string = paragraphComponent?.size || "text-lg";
 
   const titleComponent: any = {
     block: {
@@ -116,7 +118,7 @@ const DynamicStructureCustom = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.paragraphColor }}
-          className="md:text-2xl text-md whitespace-pre-wrap line-clamp-3 font-sans font-medium mt-5"
+          className={`${paragraphSize ? paragraphSize : "text-lg"} whitespace-pre-wrap line-clamp-3 font-sans font-medium mt-5`}
         >
           {children}
         </p>
