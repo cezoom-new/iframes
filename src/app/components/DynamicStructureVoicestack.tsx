@@ -244,7 +244,7 @@ const DynamicStructureVoicestack = ({
                         ?.asset?.url
                     }
                     alt={"sampleText"}
-                    className="mb-6"
+                    className=""
                     width={
                       campaign?.templateLogos?.components[0]?.templateLogos[0]
                         ?.asset?.metadata?.dimensions?.width || 200
