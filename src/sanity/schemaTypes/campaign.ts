@@ -788,6 +788,11 @@ export const campaign = defineType({
                       ],
                     },
                     {
+                      name: "ctaBtnLink",
+                      title: "CTA Button Link",
+                      type: "url",
+                    },
+                    {
                       name: "ctaBtnColor",
                       title: "CTA Button Color",
                       type: "string",

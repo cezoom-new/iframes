@@ -382,6 +382,7 @@ const DynamicStructureVoicestack = ({
                       component?.secondaryBtnComponent?.videoDetails
                     }
                     campaignName={campaign?.name}
+                     ctaBtnLink={component?.secondaryBtnComponent?.ctaBtnLink}
                   />
                 )}
                 {component?.note && (
