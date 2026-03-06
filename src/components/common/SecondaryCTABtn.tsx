@@ -21,6 +21,7 @@ export interface CtaBtnProps {
   campaignName?: string;
   ctaBtnLink?: string;
 }
+
 export default function SecondaryCTABtn({
   ctaText,
   themeMode,
@@ -33,88 +34,65 @@ export default function SecondaryCTABtn({
 }: CtaBtnProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-console.log(ctaBtnLink, "ctaBtnLink");
+
+  const isVideoMode = Boolean(videoDetails && isSecondaryBtn);
+  const isLinkMode = Boolean(ctaBtnLink);
+
+  const anchorClassName = `font-semibold text-center flex justify-center border items-center py-3 rounded-lg ${
+    themeMode !== "darkMode" ? "text-black border-black" : "text-white border-white"
+  } ${videoDetails ? "pl-3 pr-6" : "px-8"}`;
+  const anchorStyle = {
+    backgroundColor: ctaBtnColor ?? "",
+    color: ctaBtnTextColor === "blackMode" ? "#000000" : "#fff",
+    borderColor: ctaBtnColor ?? "",
+  };
+  const displayText = ctaText ?? "";
+
+  const anchorContent = isVideoMode ? (
+    <>
+      <PlayButton
+        className="mr-2"
+        color={ctaBtnTextColor === "blackMode" ? "#000000" : "#fff"}
+      />
+      {displayText}
+    </>
+  ) : (
+    displayText
+  );
+
+  const anchor = (
+    <Anchor
+      className={anchorClassName}
+      style={anchorStyle}
+      campaignName={campaignName}
+      text={displayText}
+      ctaBtnLink={ctaBtnLink}
+      onHandleClick={isVideoMode ? () => setIsOpen(!isOpen) : undefined}
+    >
+      {anchorContent}
+    </Anchor>
+  );
+
   return (
     <div>
-
-      {(videoDetails && isSecondaryBtn) ? (
-        <>
-          <Anchor
-            className={`font-semibold text-center flex justify-center border items-center py-3  rounded-lg ${themeMode !== "darkMode"
-              ? "text-black border-black"
-              : "text-white border-white"
-              } ${videoDetails ? "pl-3 pr-6" : "px-8"}`}
-            style={{
-              backgroundColor: ctaBtnColor ? ctaBtnColor : "",
-              color: ctaBtnTextColor === "blackMode" ? "#000000" : "#fff",
-
-              borderColor: ctaBtnColor ? ctaBtnColor : "",
-            }}
-            onHandleClick={() => setIsOpen(!isOpen)}
-            campaignName={campaignName}
-            text={ctaText ?? ""}
-          >
-            <PlayButton
-              className="mr-2"
-              color={ctaBtnTextColor === "blackMode" ? "#000000" : "#fff"}
-            />
-            {ctaText ?? ""}
-          </Anchor>
-          {isOpen && (
-            <VideoRender
-              isPopup={true}
-              videoDetails={videoDetails}
-              className={`pt-9 flex items-start`}
-              onClose={() => setIsOpen(false)}
-              openForm={() => setOpenForm(true)}
-              hasDemoBanner={true}
-              campaignName={campaignName}
-            />
-          )}
-        </>
-
+      {isLinkMode ? (
+        <Link href={ctaBtnLink!} target="_blank" rel="noopener noreferrer">
+          {anchor}
+        </Link>
       ) : (
-        ctaBtnLink ? (
-          <Link href={ctaBtnLink} target="_blank" rel="noopener noreferrer">
-            <Anchor
-              className={`font-semibold text-center flex justify-center border items-center py-3  rounded-lg ${themeMode !== "darkMode"
-                ? "text-black border-black"
-                : "text-white border-white"
-                } ${videoDetails ? "pl-3 pr-6" : "px-8"}`}
-              style={{
-                backgroundColor: ctaBtnColor ? ctaBtnColor : "",
-                color: ctaBtnTextColor === "blackMode" ? "#000000" : "#fff",
-                borderColor: ctaBtnColor ? ctaBtnColor : "",
-              }}
-              ctaBtnLink={ctaBtnLink}
-              campaignName={campaignName}
-              text={ctaText ?? ""}
-            >
-              {ctaText ?? ""}
-            </Anchor>
-          </Link>
-        ) : (
-          <Anchor
-            className={`font-semibold text-center flex justify-center border items-center py-3  rounded-lg ${themeMode !== "darkMode"
-              ? "text-black border-black"
-              : "text-white border-white"
-              } ${videoDetails ? "pl-3 pr-6" : "px-8"}`}
-            style={{
-              backgroundColor: ctaBtnColor ? ctaBtnColor : "",
-              color: ctaBtnTextColor === "blackMode" ? "#000000" : "#fff",
-              borderColor: ctaBtnColor ? ctaBtnColor : "",
-            }}
-            ctaBtnLink={ctaBtnLink}
-            campaignName={campaignName}
-            text={ctaText ?? ""}
-          >
-            {ctaText ?? ""}
-          </Anchor>
-        )
+        anchor
       )}
-
-
-
+      {isVideoMode && isOpen && (
+        <VideoRender
+          isPopup={true}
+          videoDetails={videoDetails!}
+          className="pt-9 flex items-start"
+          onClose={() => setIsOpen(false)}
+          openForm={() => setOpenForm(true)}
+          hasDemoBanner={true}
+          campaignName={campaignName}
+        />
+      )}
     </div>
   );
 }
