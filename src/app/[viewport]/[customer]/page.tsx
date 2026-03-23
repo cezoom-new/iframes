@@ -2,30 +2,35 @@ import { getCampaigns } from "@/utils/getCampaigns";
 import Campaign from "../../campaigns/Campaign";
 import customerDB from "../../../../database.json";
 import NotFound from "@/app/not-found";
+import { runQuery } from "@/sanity/lib/client";
+import { getViewPorts } from "@/sanity/lib/queries";
 
 export const dynamicParams = true;
-const sanityUrl: string | undefined = process.env.PROJECT_URL;
 
-const fetchAllViewports = async () => {
-  try {
-    const res = await fetch(`${sanityUrl}/api/viewports`, {
-      method: "GET",
-      headers: {
-      "authorization": `Bearer ${process.env.REVALIDATE_SECRET}`,
-        "Content-Type": "application/json",
-      },
-    });
-    if (!res?.ok) {
-      throw new Error(`Error ${res.status}: ${res.statusText}`);
-    } else {
-      const data = await res.json();
-      return data?.data ?? null;
-    }
-  } catch (error: any) {
-    console.error({ error });
-    throw new Error(error);
+/** Avoid localhost PROJECT_URL during Vercel build/SSR — there is no server on 127.0.0.1 there. */
+function getAppBaseUrl(): string {
+  const project = process.env.PROJECT_URL?.replace(/\/$/, "") ?? "";
+  const isLocal =
+    !project ||
+    project.includes("127.0.0.1") ||
+    project.includes("localhost");
+
+  if (isLocal && process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
   }
-};
+  if (project && !isLocal) {
+    return project;
+  }
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+  if (project) {
+    return project;
+  }
+  return "http://localhost:3000";
+}
+
+const sanityUrl = getAppBaseUrl();
 
 const fetchViewportByDimensionValue = async (
   viewport: string,
@@ -130,8 +135,12 @@ const fetchCookieSettings = async (viewport: string, customer: string) => {
 };
 
 export async function generateStaticParams() {
-  const viewports = await fetchAllViewports();
+  const viewports = await runQuery(getViewPorts());
   const allParams: any = [];
+
+  if (!viewports || !Array.isArray(viewports)) {
+    return [];
+  }
 
     for (const port of viewports) {
       const customers = Object.keys(customerDB);
