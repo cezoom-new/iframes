@@ -31,7 +31,7 @@ const DynamicStructureWebinar = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.h1Color }}
-          className={`${titleSize || defaultTitleSize} font-extrabold py-3 !leading-tight font-manrope`}
+          className={`${titleSize || defaultTitleSize} font-extrabold py-3 !leading-tightt font-manrope text-balance`}
         >
           {children}
           {campaign?.headingUnderline && (
@@ -57,7 +57,7 @@ const DynamicStructureWebinar = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.subtitleText }}
-          className={`${subTitleSize || defaultSubTitleSize} font-medium !leading-[118%] font-geist lg:max-w-[514px] mb-6`}
+          className={`${subTitleSize || defaultSubTitleSize} font-medium !leading-[118%] font-geist lg:max-w-[514px] mb-6 text-balance`}
         >
           {children}
         </p>
@@ -132,7 +132,7 @@ const DynamicStructureWebinar = ({
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.paragraphColor }}
-          className={`${paragraphSize || defaultParagraphSize} font-light whitespace-pre-wrap font-geist mb-6 leading-[162.5%]`}
+          className={`${paragraphSize || defaultParagraphSize} font-light whitespace-pre-wrap font-geist mb-6 leading-[162.5%] text-balance mt-4`}
         >
           {children}
         </p>
