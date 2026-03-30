@@ -21,8 +21,21 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "CS Layout",
-  description: "CS Layout App",
+  title: {
+    default: "CE Zoom Layout",
+    template: "%s | CE Zoom Layout",
+  },
+  description: "CE Zoom Layout",
+  openGraph: {
+    title: "CE Zoom Layout",
+    description: "CE Zoom Layout",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CE Zoom Layout",
+    description: "CE Zoom Layout",
+  },
 };
 
 export default function RootLayout({
