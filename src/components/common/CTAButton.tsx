@@ -65,7 +65,12 @@ export default function CTAButton({
     <Anchor
       className={`${className} font-semibold text-center py-3 px-8 rounded-lg whitespace-nowrap
         ${themeMode === "darkMode" ? "text-black " : "text-white"}
-        ${ctaBtnLink ? "cursor-pointer" : "cursor-default"}`}
+        ${ctaBtnLink ? "cursor-pointer" : "cursor-default"}
+        ${
+          type === "webinarLayout"
+            ? "inline-flex min-h-[48px] items-center justify-center"
+            : ""
+        }`}
       style={{
         background: ctaBtnColor
           ? ctaBtnColor
@@ -93,7 +98,10 @@ export default function CTAButton({
   );
 
   return (
-    <div className={className} onClick={onClickHandler}>
+    <div
+      className={`inline-flex shrink-0 items-center ${className ?? ""}`}
+      onClick={onClickHandler}
+    >
       {ctaBtnLink ? (
         <Link href={ctaBtnLink} target="_blank" passHref>
           {buttonContent}
