@@ -334,7 +334,7 @@ const DynamicStructureWebinar = ({
             return (
               <div
                 key={`buttonComponents-${index}`}
-                className="flex gap-6 items-center mb-6"
+                className="flex flex-wrap gap-6 items-center mb-6 mt-2"
               >
                 {component?.ctaBtn?.ctaBtnText && (
                   <CTAButton
@@ -349,7 +349,7 @@ const DynamicStructureWebinar = ({
                       component?.ctaBtn?.ctaBtnPostMessageKey
                     }
                     campaignName={campaign?.name}
-                    className={`${layout == "osdental" ? "w-full" : ""} mt-2`}
+                    className={layout == "osdental" ? "w-full" : ""}
                   />
                 )}
                 {component?.secondaryBtnComponent?.secondaryBtnText && (
@@ -361,6 +361,7 @@ const DynamicStructureWebinar = ({
                       component?.secondaryBtnComponent?.ctaBtnTextColor
                     }
                     ctaBtnColor={component?.secondaryBtnComponent?.ctaBtnColor}
+                    ctaBtnLink={component?.secondaryBtnComponent?.ctaBtnLink}
                     videoDetails={
                       component?.secondaryBtnComponent?.videoDetails
                     }

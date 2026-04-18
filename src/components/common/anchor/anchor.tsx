@@ -21,6 +21,8 @@ type ButtonProps = {
   onHandleClick?: () => void;
   campaignName?: string;
   text?: string;
+  /** Use inside `<Link>` so the control is not a nested `<button>` inside `<a>`. */
+  as?: "button" | "span";
 };
 
 export default function Anchor(button: ButtonProps) {
@@ -85,13 +87,29 @@ export default function Anchor(button: ButtonProps) {
       button.onHandleClick();
     }
   };
+  const onClick = () =>
+    debounce(handleButtonClick(buttonRef?.current?.innerText), 100);
+  if (button.as === "span") {
+    return (
+      <span
+        ref={buttonRef}
+        id={buttonId}
+        role="presentation"
+        className={`${button?.className ?? ""} inline-flex cursor-pointer`}
+        style={button?.style}
+        onClick={onClick}
+      >
+        {button?.children}
+      </span>
+    );
+  }
   return (
     <button
       ref={buttonRef}
       id={buttonId}
       className={button?.className}
       style={button?.style}
-      onClick={(e) => debounce(handleButtonClick(buttonRef?.current?.innerText), 100)}
+      onClick={onClick}
     >
       {button?.children}
     </button>

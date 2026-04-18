@@ -807,6 +807,10 @@ export const campaign = defineType({
                           { title: "White", value: "#fff" },
                           { title: "Black", value: "#000000" },
                           { title: "Transparent", value: "transparent" },
+                          {
+                            title: "Legend blue outline",
+                            value: "legendblueOutline",
+                          },
                           { title: "Royal Blue", value: "#4A3CE1" },
                           { title: "limeDullGreen", value: "#374C08" },
                         ],
