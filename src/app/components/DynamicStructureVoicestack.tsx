@@ -19,18 +19,59 @@ const DynamicStructureVoicestack = ({
   layout,
 }: any) => {
   const urlBuilder: any = (source: any) => builder?.image(source);
+  const renderTextWithHtmlBreaks = (content: React.ReactNode): React.ReactNode => {
+    if (typeof content === "string") {
+      const splitByBr = content.split(/<br\s*\/?>/gi);
+
+      return splitByBr.flatMap((segment, segmentIndex) => {
+        const lines = segment.split(/\r?\n/);
+        const nodes = lines.flatMap((line, lineIndex) => {
+          const lineNodes: React.ReactNode[] = [line];
+          if (lineIndex < lines.length - 1) {
+            lineNodes.push(<br key={`nl-${segmentIndex}-${lineIndex}`} />);
+          }
+          return lineNodes;
+        });
+
+        if (segmentIndex < splitByBr.length - 1) {
+          nodes.push(<br key={`br-${segmentIndex}`} />);
+        }
+
+        return nodes;
+      });
+    }
+
+    if (Array.isArray(content)) {
+      return content.map((item, index) => (
+        <React.Fragment key={`frag-${index}`}>
+          {renderTextWithHtmlBreaks(item)}
+        </React.Fragment>
+      ));
+    }
+
+    if (React.isValidElement(content) && (content as any).props?.children) {
+      return React.cloneElement(content as React.ReactElement, {
+        ...(content as any).props,
+        children: renderTextWithHtmlBreaks((content as any).props.children),
+      });
+    }
+
+    return content;
+  };
   const [btncolor, setBtnColor] = React.useState(
     detectColorType(colors?.highlightColor)
   );
 
-  const titleComponent: any = {
+  const getTitleComponent = (titleSize?: string, titleWeight?: string) => ({
     block: {
       normal: ({ children }: any) => (
         <p
           style={{ color: colors?.h1Color }}
-          className={`${layout == "osdental" ? "text-sm" : "text-3xl lg:text-5xl"} font-extrabold py-3 !leading-tight font-manrope`}
+          className={`${titleSize || (layout == "osdental" ? "text-sm" : "text-3xl lg:text-5xl")} ${
+            titleWeight || "font-bold"
+          } py-3 !leading-tight font-manrope`}
         >
-          {children}
+          {renderTextWithHtmlBreaks(children)}
           {campaign?.headingUnderline && (
             <div
               style={{ background: campaign?.headingUnderline }}
@@ -45,7 +86,7 @@ const DynamicStructureVoicestack = ({
         <span style={{ color: colors?.highlightColor }}>{children}</span>
       ),
     },
-  };
+  });
 
   const subTitleComponent: any = {
     block: {
@@ -283,7 +324,7 @@ const DynamicStructureVoicestack = ({
                 <PortableText
                   key={`headingComponent-${index}`}
                   value={component?.title}
-                  components={titleComponent}
+                  components={getTitleComponent(component?.size, component?.fontWeight)}
                 />
               </div>
             );

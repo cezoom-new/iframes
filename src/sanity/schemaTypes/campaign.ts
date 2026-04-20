@@ -455,6 +455,21 @@ export const campaign = defineType({
                   }
                   
                 },
+                {
+                  name: "fontWeight",
+                  title: "Heading Weight",
+                  type: "string",
+                  initialValue: "font-bold",
+                  options: {
+                    list: [
+                      { title: "Regular (400)", value: "font-normal" },
+                      { title: "Medium (500)", value: "font-medium" },
+                      { title: "Semibold (600)", value: "font-semibold" },
+                      { title: "Bold (700)", value: "font-bold" },
+                      { title: "Extrabold (800)", value: "font-extrabold" },
+                    ],
+                  },
+                },
               ],
               preview: {
                 select: {
