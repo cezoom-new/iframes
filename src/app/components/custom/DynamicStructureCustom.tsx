@@ -18,12 +18,52 @@ const DynamicStructureCustom = ({
   layout,
 }: any) => {
   const urlBuilder: any = (source: any) => builder?.image(source);
+  const renderTextWithHtmlBreaks = (content: React.ReactNode): React.ReactNode => {
+    if (typeof content === "string") {
+      const splitByBr = content.split(/<br\s*\/?>/gi);
+
+      return splitByBr.flatMap((segment, segmentIndex) => {
+        const lines = segment.split(/\r?\n/);
+        const nodes = lines.flatMap((line, lineIndex) => {
+          const lineNodes: React.ReactNode[] = [line];
+          if (lineIndex < lines.length - 1) {
+            lineNodes.push(<br key={`nl-${segmentIndex}-${lineIndex}`} />);
+          }
+          return lineNodes;
+        });
+
+        if (segmentIndex < splitByBr.length - 1) {
+          nodes.push(<br key={`br-${segmentIndex}`} />);
+        }
+
+        return nodes;
+      });
+    }
+
+    if (Array.isArray(content)) {
+      return content.map((item, index) => (
+        <React.Fragment key={`frag-${index}`}>
+          {renderTextWithHtmlBreaks(item)}
+        </React.Fragment>
+      ));
+    }
+
+    if (React.isValidElement(content) && (content as any).props?.children) {
+      return React.cloneElement(content as React.ReactElement, {
+        ...(content as any).props,
+        children: renderTextWithHtmlBreaks((content as any).props.children),
+      });
+    }
+
+    return content;
+  };
 
   const headingComponent = campaign?.structure?.components?.filter((a: any) => a._type == "headingComponent")?.[0];
   const subHeadingComponent = campaign?.structure?.components?.filter((a: any) => a._type == "subHeadingComponent")?.[0];
   const paragraphComponent = campaign?.structure?.components?.filter((a: any) => a._type == "paragraphComponent")?.[0];
   
   const headingSize: string = headingComponent?.size || "md:text-5xl lg:text-7xl text-5xl";
+  const headingWeight: string = headingComponent?.fontWeight || "font-bold";
   const subTitleSize: string = subHeadingComponent?.size || "text-4xl md:text-3xl text-2xl font-semibold";
   const paragraphSize: string = paragraphComponent?.size || "text-lg";
 
@@ -33,10 +73,10 @@ const DynamicStructureCustom = ({
         <div
           style={{ color: colors?.h1Color }}
           className={`
-            ${headingSize ? headingSize : "md:text-5xl lg:text-7xl text-4xl"} font-semibold pb-2 pt-3 !leading-[120%] font-manrope`}
+            ${headingSize ? headingSize : "md:text-5xl lg:text-7xl text-4xl"} ${headingWeight} pb-2 pt-3 !leading-[120%] font-manrope`}
         >
 
-          {children}
+          {renderTextWithHtmlBreaks(children)}
           {/* {campaign?.headingUnderline && <div style={{background: campaign?.headingUnderline}} className="w-full h-[3px] mt-3"></div>} */}
 
         </div>
